@@ -536,7 +536,7 @@ export default function ResourcesPage() {
         <footer style={{borderTop:'1px solid var(--border)',padding:'3rem 3.5rem',display:'grid',gridTemplateColumns:'1.5fr 1fr 1fr 1fr',gap:'2.5rem'}}>
           <div>
             <div onClick={()=>router.push('/')} style={{display:'flex',alignItems:'center',gap:'.6rem',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'.95rem',color:'#fff',marginBottom:'.65rem',cursor:'pointer'}}>
-              <div style={{width:'22px',height:'22px',borderRadius:'6px',background:'linear-gradient(135deg,#7b6cff,#c8f247)'}} />AEOvision
+              <div style={{width:'22px',height:'22px',borderRadius:'6px',background:'linear-gradient(135deg,#7b6cff,#c8f247)'}} />Notion Cue
             </div>
             <div style={{fontSize:'.8rem',color:'var(--muted)',lineHeight:1.6,maxWidth:'200px'}}>AI visibility intelligence for the next era of search.</div>
           </div>
