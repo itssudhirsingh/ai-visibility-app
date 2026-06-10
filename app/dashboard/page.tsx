@@ -143,7 +143,7 @@ function DashboardInner() {
         <aside style={{background:'rgba(5,10,17,.94)',borderRight:'1px solid var(--line)',backdropFilter:'blur(24px)',padding:'18px 14px',display:'flex',flexDirection:'column',gap:'8px',position:'sticky',top:0,height:'100vh',overflowY:'auto'}}>
           <div style={{height:'54px',display:'flex',alignItems:'center',gap:'10px',padding:'0 10px',fontFamily:'"Familjen Grotesk"',fontSize:'18px',fontWeight:700,cursor:'pointer'}} onClick={()=>router.push('/')}>
             <div style={{width:'32px',height:'32px',display:'grid',placeItems:'center',background:'var(--lime)',color:'#07100b',borderRadius:'7px',boxShadow:'0 0 34px rgba(202,255,69,.2)',fontSize:'14px',fontWeight:800}}>A</div>
-            AEOvision
+            Notion Cue
           </div>
           <div style={{margin:'6px 4px 12px',padding:'11px',border:'1px solid var(--line)',borderRadius:'7px',background:'rgba(255,255,255,.025)'}}>
             <div style={{fontFamily:'"JetBrains Mono"',fontSize:'9px',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--muted2)',marginBottom:'7px'}}>Active domain</div>

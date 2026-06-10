@@ -7,7 +7,7 @@ const MARQUEE = ['ChatGPT Citations','Perplexity Mentions','Gemini Visibility','
 const FAQS = [
   { q:'What exactly is AEO and why does it matter now?', a:'AEO (Answer Engine Optimisation) is the practice of making your content visible and citable within AI-generated answers from tools like ChatGPT, Gemini, and Perplexity. As more users skip Google and go straight to AI assistants for answers, being cited in those answers is becoming as important as ranking on page one.' },
   { q:'How do you check if an LLM has cited my site?', a:'We run thousands of relevant prompts across each LLM engine, spanning categories relevant to your niche. We record whether your domain appears in the response, the context it appears in, and the sentiment of the mention.' },
-  { q:'Is this different from tracking AI Overviews in Google Search Console?', a:"Yes. GSC tracks your visibility in Google's traditional search results. AEOvision tracks your visibility in standalone AI chat tools like ChatGPT, Perplexity, and Gemini that have hundreds of millions of direct users who never go near Google Search." },
+  { q:'Is this different from tracking AI Overviews in Google Search Console?', a:"Yes. GSC tracks your visibility in Google's traditional search results. Notion Cue tracks your visibility in standalone AI chat tools like ChatGPT, Perplexity, and Gemini that have hundreds of millions of direct users who never go near Google Search." },
   { q:'What is llms.txt and why should I care?', a:'llms.txt is an emerging standard (similar to robots.txt) that tells AI crawlers how to access and use your content. Sites with a well-structured llms.txt file signal authority and crawlability to LLM training pipelines.' },
   { q:'Can I track competitor domains on the free plan?', a:'Competitor tracking is available on Pro and Agency plans. The free plan allows you to scan your own domain and see how you compare to the industry average in your niche.' },
 ]
@@ -129,7 +129,7 @@ export default function LandingPage() {
         <nav style={{position:'fixed',top:0,left:0,right:0,zIndex:800,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'1.4rem 3.5rem',background:'rgba(4,3,12,0.85)',backdropFilter:'blur(20px)',borderBottom:'1px solid var(--border)'}}>
           <a href="/" style={{display:'flex',alignItems:'center',gap:'.6rem',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'1.05rem',color:'#fff'}}>
             <div style={{width:'28px',height:'28px',borderRadius:'7px',background:'linear-gradient(135deg,#7b6cff,#c8f247)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'.8rem',fontWeight:700,color:'#fff'}}>A</div>
-            AEOvision
+            Notion Cue
           </a>
           <div style={{display:'flex',gap:'2rem'}}>
             {[['How it works','#how-it-works'],['Features','#features'],['Pricing','#pricing']].map(([l,h])=>(
@@ -157,7 +157,7 @@ export default function LandingPage() {
               <span style={{color:'var(--accent)'}}>AI engines?</span>
             </h1>
             <p className="fu fu2" style={{fontSize:'clamp(.95rem,2vw,1.15rem)',color:'var(--muted)',lineHeight:1.75,maxWidth:'540px',margin:'0 auto 2.5rem'}}>
-              AEOvision tracks how often your website gets cited, mentioned, and recommended by large language models. Paste your URL and get your AI visibility score in seconds.
+              Notion Cue tracks how often your website gets cited, mentioned, and recommended by large language models. Paste your URL and get your AI visibility score in seconds.
             </p>
             <div className="fu fu3" style={{display:'flex',maxWidth:'620px',margin:'0 auto 1.25rem',background:'rgba(255,255,255,0.04)',border:'1px solid var(--border-h)',borderRadius:'100px',padding:'.35rem .35rem .35rem 1.4rem'}}>
               <input value={url} onChange={e=>setUrl(e.target.value)} onKeyDown={e=>e.key==='Enter'&&go(url)}
@@ -358,7 +358,7 @@ export default function LandingPage() {
         <footer style={{borderTop:'1px solid var(--border)',padding:'3rem 3.5rem',display:'grid',gridTemplateColumns:'1fr 1fr 1fr 1fr',gap:'2rem'}}>
           <div>
             <div style={{display:'flex',alignItems:'center',gap:'.6rem',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'1rem',color:'#fff',marginBottom:'.75rem'}}>
-              <div style={{width:'24px',height:'24px',borderRadius:'6px',background:'linear-gradient(135deg,#7b6cff,#c8f247)'}} />AEOvision
+              <div style={{width:'24px',height:'24px',borderRadius:'6px',background:'linear-gradient(135deg,#7b6cff,#c8f247)'}} />Notion Cue
             </div>
             <div style={{fontSize:'.82rem',color:'var(--muted)',lineHeight:1.6,maxWidth:'200px'}}>AI visibility intelligence for the next era of search.</div>
           </div>
@@ -376,7 +376,7 @@ export default function LandingPage() {
           ))}
         </footer>
         <div style={{borderTop:'1px solid var(--border)',padding:'1.5rem 3.5rem',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-          <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'var(--muted2)',letterSpacing:'.05em'}}>© 2026 <span style={{color:'var(--muted)'}}>AEOvision</span> — AI Visibility Intelligence Platform</span>
+          <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'var(--muted2)',letterSpacing:'.05em'}}>© 2026 <span style={{color:'var(--muted)'}}>Notion Cue</span> — AI Visibility Intelligence Platform</span>
           <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'var(--muted2)',letterSpacing:'.05em'}}>Built for the next era of search.</span>
         </div>
       </div>

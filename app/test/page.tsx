@@ -56,7 +56,7 @@ const PLANS = [
 const FAQS = [
   { q:'What exactly is AEO and why does it matter now?', a:'AEO (Answer Engine Optimisation) is the practice of making your content visible and citable within AI-generated answers from tools like ChatGPT, Gemini, and Perplexity. As more users skip Google and go straight to AI assistants for answers, being cited in those answers is becoming as important as ranking on page one.' },
   { q:'How do you check if an LLM has cited my site?', a:'We run thousands of relevant prompts across each LLM engine, spanning categories relevant to your niche. We record whether your domain appears in the response, the context it appears in, and the sentiment of the mention.' },
-  { q:'Is this different from tracking AI Overviews in Google Search Console?', a:"Yes. GSC tracks your visibility in Google's traditional search results. AEOvision tracks your visibility in standalone AI chat tools like ChatGPT, Perplexity, and Gemini that have hundreds of millions of direct users who never go near Google Search." },
+  { q:'Is this different from tracking AI Overviews in Google Search Console?', a:"Yes. GSC tracks your visibility in Google's traditional search results. Notion Cue tracks your visibility in standalone AI chat tools like ChatGPT, Perplexity, and Gemini that have hundreds of millions of direct users who never go near Google Search." },
   { q:'What is llms.txt and why should I care?', a:'llms.txt is an emerging standard (similar to robots.txt) that tells AI crawlers how to access and use your content. Sites with a well-structured llms.txt file signal authority and crawlability to LLM training pipelines.' },
   { q:'Can I track competitor domains on the free plan?', a:'Competitor tracking is available on Pro and Agency plans. The free plan allows you to scan your own domain and see how you compare to the industry average in your niche.' },
 ]
@@ -318,7 +318,7 @@ export default function LandingPage() {
         <nav style={{position:'fixed',top:0,left:0,right:0,zIndex:800,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'1.4rem 3.5rem',background:'rgba(255,255,255,.84)',backdropFilter:'blur(20px)',borderBottom:'1px solid var(--border)',boxShadow:'0 12px 36px rgba(48,70,100,.09)'}}>
           <a href="/" style={{display:'flex',alignItems:'center',gap:'.6rem',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'1.05rem',color:'var(--text)',textDecoration:'none'}}>
             <div style={{width:'28px',height:'28px',borderRadius:'7px',background:'linear-gradient(135deg,var(--violet),var(--accent))',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'.8rem',fontWeight:700,color:'#fff'}}>A</div>
-            AEOvision
+            Notion Cue
           </a>
           <ul className="nav-links-wrap" style={{display:'flex',gap:'2rem',listStyle:'none'}}>
             {[['How it works','#how'],['Features','#features'],['Dashboard','#dashboard'],['Matrix','#matrix'],['Results','#results'],['Pricing','#pricing']].map(([l,h])=>(
@@ -356,7 +356,7 @@ export default function LandingPage() {
             </h1>
 
             <p style={{fontSize:'clamp(.95rem,2vw,1.15rem)',color:'var(--muted)',lineHeight:1.75,maxWidth:'540px',margin:'0 auto 2.5rem'}}>
-              AEOvision tracks how often your website gets cited, mentioned, and recommended by large language models. Paste your URL and get your AI visibility score in seconds.
+              Notion Cue tracks how often your website gets cited, mentioned, and recommended by large language models. Paste your URL and get your AI visibility score in seconds.
             </p>
 
             {/* URL Input */}
@@ -443,7 +443,7 @@ export default function LandingPage() {
                   <div style={{display:'flex',gap:'.4rem'}}>
                     {['#ff5f57','#febc2e','#28c840'].map(c=><div key={c} style={{width:'9px',height:'9px',borderRadius:'50%',background:c}} />)}
                   </div>
-                  <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'var(--muted2)'}}>AEOvision — AI Visibility Report</div>
+                  <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'var(--muted2)'}}>Notion Cue — AI Visibility Report</div>
                 </div>
                 <div style={{padding:'1.25rem',background:'#fff'}}>
                   <div style={{background:'rgba(25,48,76,.035)',border:'1px solid var(--border)',borderRadius:'8px',padding:'.55rem 1rem',marginBottom:'1rem',fontFamily:"'JetBrains Mono',monospace",fontSize:'.7rem',color:'var(--muted)',display:'flex',alignItems:'center',gap:'.75rem'}}>
@@ -633,7 +633,7 @@ export default function LandingPage() {
           <div>
             <div style={{display:'flex',alignItems:'center',gap:'.6rem',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'1rem',color:'var(--text)',marginBottom:'.75rem'}}>
               <div style={{width:'24px',height:'24px',borderRadius:'6px',background:'linear-gradient(135deg,var(--violet),var(--accent))'}} />
-              AEOvision
+              Notion Cue
             </div>
             <div style={{fontSize:'.82rem',color:'var(--muted)',lineHeight:1.6,maxWidth:'200px'}}>AI visibility intelligence for the next era of search.</div>
           </div>
@@ -651,7 +651,7 @@ export default function LandingPage() {
           ))}
         </footer>
         <div style={{borderTop:'1px solid var(--border)',padding:'1.5rem 3.5rem',display:'flex',justifyContent:'space-between',alignItems:'center',background:'#eef3f8'}}>
-          <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'var(--muted2)',letterSpacing:'.05em'}}>© 2026 <span style={{color:'var(--muted)'}}>AEOvision</span> — AI Visibility Intelligence Platform</span>
+          <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'var(--muted2)',letterSpacing:'.05em'}}>© 2026 <span style={{color:'var(--muted)'}}>Notion Cue</span> — AI Visibility Intelligence Platform</span>
           <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'var(--muted2)',letterSpacing:'.05em'}}>Built for the next era of search.</span>
         </div>
 
