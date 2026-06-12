@@ -95,7 +95,7 @@ export default function ResourcesPage() {
       <div style={{background:'var(--bg)',minHeight:'100vh',color:'var(--text)',fontFamily:"'Epilogue',sans-serif"}}>
 
         {/* NAV */}
-       <sharedHeader />
+       <SharedHeader />
 
         {/* SUB-NAV */}
         <div style={{position:'sticky',top:'65px',zIndex:700,background:'rgba(4,3,12,.9)',backdropFilter:'blur(16px)',borderBottom:'1px solid var(--border)',padding:'.6rem 3.5rem',display:'flex',gap:0,overflowX:'auto'}}>
