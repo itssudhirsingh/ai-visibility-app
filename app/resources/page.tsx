@@ -1,6 +1,8 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import SharedHeader from '@/components/SharedHeader'
+import SharedFooter from '@/components/SharedFooter'
 
 type PageId = 'aeo-guide'|'llms-txt'|'bluf-templates'|'blog'|'changelog'|'about'|'privacy'|'terms'|'contact'
 
@@ -93,21 +95,7 @@ export default function ResourcesPage() {
       <div style={{background:'var(--bg)',minHeight:'100vh',color:'var(--text)',fontFamily:"'Epilogue',sans-serif"}}>
 
         {/* NAV */}
-        <nav style={{position:'fixed',top:0,left:0,right:0,zIndex:800,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'1.3rem 3.5rem',background:'rgba(4,3,12,.85)',backdropFilter:'blur(20px)',borderBottom:'1px solid var(--border)'}}>
-          <div onClick={()=>router.push('/')} style={{display:'flex',alignItems:'center',gap:'.6rem',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'1rem',color:'#fff',cursor:'pointer'}}>
-            <div style={{width:'26px',height:'26px',borderRadius:'7px',background:'linear-gradient(135deg,#7b6cff,#c8f247)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'.75rem',fontWeight:700,color:'#fff'}}>A</div>
-            Notion Cue
-          </div>
-          <div style={{display:'flex',gap:'1.75rem'}}>
-            {[{id:'aeo-guide' as PageId,l:'Resources'},{id:'blog' as PageId,l:'Blog'},{id:'about' as PageId,l:'Company'},{id:'contact' as PageId,l:'Contact'}].map(n=>(
-              <span key={n.id} onClick={()=>go(n.id)} className="nav-link" style={{fontSize:'.8rem',color:page===n.id?'var(--text)':'var(--muted)',cursor:'pointer',transition:'color .2s'}}>{n.l}</span>
-            ))}
-          </div>
-          <div style={{display:'flex',gap:'.65rem',alignItems:'center'}}>
-            <button onClick={()=>router.push('/dashboard')} style={{fontFamily:"'Familjen Grotesk',sans-serif",fontSize:'.78rem',fontWeight:600,padding:'.5rem 1.1rem',border:'1px solid var(--border)',borderRadius:'100px',background:'transparent',color:'var(--muted)',transition:'all .2s'}}>Log in</button>
-            <button onClick={()=>router.push('/dashboard')} style={{fontFamily:"'Familjen Grotesk',sans-serif",fontSize:'.78rem',fontWeight:700,padding:'.5rem 1.2rem',borderRadius:'100px',border:'none',background:'var(--accent)',color:'var(--bg)'}}>Start free</button>
-          </div>
-        </nav>
+       
 
         {/* SUB-NAV */}
         <div style={{position:'sticky',top:'65px',zIndex:700,background:'rgba(4,3,12,.9)',backdropFilter:'blur(16px)',borderBottom:'1px solid var(--border)',padding:'.6rem 3.5rem',display:'flex',gap:0,overflowX:'auto'}}>
@@ -533,26 +521,8 @@ export default function ResourcesPage() {
         </div>
 
         {/* FOOTER */}
-        <footer style={{borderTop:'1px solid var(--border)',padding:'3rem 3.5rem',display:'grid',gridTemplateColumns:'1.5fr 1fr 1fr 1fr',gap:'2.5rem'}}>
-          <div>
-            <div onClick={()=>router.push('/')} style={{display:'flex',alignItems:'center',gap:'.6rem',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'.95rem',color:'#fff',marginBottom:'.65rem',cursor:'pointer'}}>
-              <div style={{width:'22px',height:'22px',borderRadius:'6px',background:'linear-gradient(135deg,#7b6cff,#c8f247)'}} />Notion Cue
-            </div>
-            <div style={{fontSize:'.8rem',color:'var(--muted)',lineHeight:1.6,maxWidth:'200px'}}>AI visibility intelligence for the next era of search.</div>
-          </div>
-          {[{title:'Resources',links:[['aeo-guide','AEO Guide'],['llms-txt','llms.txt Generator'],['bluf-templates','BLUF Templates'],['blog','Blog'],['changelog','Changelog']] as [PageId,string][]},
-            {title:'Company',links:[['about','About'],['privacy','Privacy Policy'],['terms','Terms of Service'],['contact','Contact']] as [PageId,string][]},
-            {title:'Product',links:[] as [PageId,string][]},
-          ].map((col,i)=>(
-            <div key={i}>
-              <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.62rem',letterSpacing:'.12em',textTransform:'uppercase',color:'var(--muted2)',marginBottom:'.9rem'}}>{col.title}</div>
-              <ul style={{listStyle:'none',display:'flex',flexDirection:'column',gap:'.55rem'}}>
-                {col.links.map(([id,l])=><li key={id}><span onClick={()=>go(id)} style={{fontSize:'.8rem',color:'var(--muted)',cursor:'pointer',transition:'color .2s'}}>{l}</span></li>)}
-                {i===2&&[['Dashboard','/dashboard'],['Pricing','/#pricing']].map(([l,h])=><li key={l}><span onClick={()=>router.push(h)} style={{fontSize:'.8rem',color:'var(--muted)',cursor:'pointer'}}>{l}</span></li>)}
-              </ul>
-            </div>
-          ))}
-        </footer>
+        <SharedFooter />
+        
         <div style={{borderTop:'1px solid var(--border)',padding:'1.4rem 3.5rem',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
           <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.63rem',color:'var(--muted2)',letterSpacing:'.04em'}}>© 2026 <span style={{color:'var(--muted)'}}>Notion Cue</span> — AI Visibility Intelligence Platform</span>
           <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.63rem',color:'var(--muted2)',letterSpacing:'.04em'}}>Built for the next era of search.</span>

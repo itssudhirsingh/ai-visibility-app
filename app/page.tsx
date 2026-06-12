@@ -1,6 +1,8 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import SharedHeader from '@/components/SharedHeader'
+import SharedFooter from '@/components/SharedFooter'
 
 const MARQUEE = ['ChatGPT Citations','Perplexity Mentions','Gemini Visibility','Grok Indexing','Bing Copilot','Claude AI','AEO Score','BLUF Content','llms.txt','E-E-A-T Signals','Schema Validation','Citation Tracking']
 
@@ -126,22 +128,8 @@ export default function LandingPage() {
       <div style={{background:'var(--bg)',minHeight:'100vh',color:'var(--text)',fontFamily:"'Epilogue',sans-serif"}}>
 
         {/* NAV */}
-        <nav style={{position:'fixed',top:0,left:0,right:0,zIndex:800,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'1.4rem 3.5rem',background:'rgba(4,3,12,0.85)',backdropFilter:'blur(20px)',borderBottom:'1px solid var(--border)'}}>
-          <a href="/" style={{display:'flex',alignItems:'center',gap:'.6rem',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'1.05rem',color:'#fff'}}>
-            <div style={{width:'28px',height:'28px',borderRadius:'7px',background:'linear-gradient(135deg,#7b6cff,#c8f247)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'.8rem',fontWeight:700,color:'#fff'}}>A</div>
-            Notion Cue
-          </a>
-          <div style={{display:'flex',gap:'2rem'}}>
-            {[['How it works','#how-it-works'],['Features','#features'],['Pricing','#pricing']].map(([l,h])=>(
-              <a key={l} href={h} className="nav-link" style={{fontSize:'.82rem',color:'var(--muted)',transition:'color .2s'}}>{l}</a>
-            ))}
-          </div>
-          <div style={{display:'flex',gap:'.75rem',alignItems:'center'}}>
-            <button onClick={()=>router.push('/dashboard')} style={{fontFamily:"'Familjen Grotesk',sans-serif",fontSize:'.8rem',fontWeight:600,padding:'.55rem 1.2rem',border:'1px solid var(--border)',borderRadius:'100px',background:'transparent',color:'var(--muted)',transition:'all .2s'}}>Log in</button>
-            <button onClick={()=>router.push('/dashboard')} style={{fontFamily:"'Familjen Grotesk',sans-serif",fontSize:'.8rem',fontWeight:700,padding:'.55rem 1.3rem',borderRadius:'100px',border:'none',background:'var(--accent)',color:'var(--bg)'}}>Start free</button>
-          </div>
-        </nav>
-
+        <SharedHeader />
+    
         {/* HERO */}
         <section style={{minHeight:'100vh',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'8rem 2rem 5rem',position:'relative',overflow:'hidden',textAlign:'center'}}>
           <canvas ref={canvasRef} style={{position:'absolute',inset:0,width:'100%',height:'100%',pointerEvents:'none',zIndex:0,opacity:.6}} />
@@ -745,26 +733,8 @@ export default function LandingPage() {
         </div>
 
         {/* FOOTER */}
-        <footer style={{borderTop:'1px solid var(--border)',padding:'3rem 3.5rem',display:'grid',gridTemplateColumns:'1fr 1fr 1fr 1fr',gap:'2rem'}}>
-          <div>
-            <div style={{display:'flex',alignItems:'center',gap:'.6rem',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'1rem',color:'#fff',marginBottom:'.75rem'}}>
-              <div style={{width:'24px',height:'24px',borderRadius:'6px',background:'linear-gradient(135deg,#7b6cff,#c8f247)'}} />Notion Cue
-            </div>
-            <div style={{fontSize:'.82rem',color:'var(--muted)',lineHeight:1.6,maxWidth:'200px'}}>AI visibility intelligence for the next era of search.</div>
-          </div>
-          {[
-            {title:'Product',links:['How it works','Features','Dashboard','Pricing','API (coming soon)']},
-            {title:'Resources',links:['AEO Guide','llms.txt Generator','BLUF Content Templates','Blog','Changelog']},
-            {title:'Company',links:['About','Privacy Policy','Terms of Service','Contact']},
-          ].map(col=>(
-            <div key={col.title}>
-              <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',letterSpacing:'.12em',textTransform:'uppercase',color:'var(--muted2)',marginBottom:'1rem'}}>{col.title}</div>
-              <ul style={{listStyle:'none',display:'flex',flexDirection:'column',gap:'.6rem'}}>
-                {col.links.map(l=><li key={l}><a href="#" style={{fontSize:'.82rem',color:'var(--muted)'}}>{l}</a></li>)}
-              </ul>
-            </div>
-          ))}
-        </footer>
+        <SharedFooter />
+        
         <div style={{borderTop:'1px solid var(--border)',padding:'1.5rem 3.5rem',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
           <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'var(--muted2)',letterSpacing:'.05em'}}>© 2026 <span style={{color:'var(--muted)'}}>Notion Cue</span> — AI Visibility Intelligence Platform</span>
           <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'var(--muted2)',letterSpacing:'.05em'}}>Built for the next era of search.</span>
