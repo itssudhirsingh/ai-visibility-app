@@ -160,7 +160,7 @@ Return ONLY this exact JSON structure with real, specific analysis for "${url}":
 }`
           }
         ],
-        max_tokens: 2500,
+        max_tokens: 4000,
         temperature: 0.7
       })
     })
