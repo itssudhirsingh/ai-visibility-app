@@ -84,7 +84,7 @@ export default function SharedFooter() {
             <div style={{
               fontFamily: "'JetBrains Mono', monospace", fontSize: '.62rem',
               letterSpacing: '.12em', textTransform: 'uppercase',
-              color: 'rgba(237,233,255,0.22)', marginBottom: '.9rem',
+              color: 'rgba(255,255,255,0.4)', marginBottom: '.9rem',
             }}>{col.title}</div>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '.55rem' }}>
               {col.links.map(l => (
@@ -112,13 +112,13 @@ export default function SharedFooter() {
       }}>
         <span style={{
           fontFamily: "'JetBrains Mono', monospace", fontSize: '.63rem',
-          color: 'rgba(237,233,255,0.22)', letterSpacing: '.04em',
+          color: 'rgba(255,255,255,0.4)', letterSpacing: '.04em',
         }}>
           © 2026 <span style={{ color: 'rgba(255,255,255,0.75)' }}>Notion Cue</span> — AI Visibility Intelligence Platform
         </span>
         <span style={{
           fontFamily: "'JetBrains Mono', monospace", fontSize: '.63rem',
-          color: 'rgba(237,233,255,0.22)', letterSpacing: '.04em',
+          color: 'rgba(255,255,255,0.4)', letterSpacing: '.04em',
         }}>
           Built for the next era of search.
         </span>

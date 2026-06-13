@@ -56,7 +56,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         :root{
           --bg:#04030c;--card:#100e22;
           --border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.16);
-          --text:#ede9ff;--muted:rgba(255,255,255,0.75);--muted2:rgba(237,233,255,0.22);
+          --text:#ede9ff;--muted:rgba(255,255,255,0.75);--muted2:rgba(255,255,255,0.4);
           --accent:#c8f247;--violet:#7b6cff;--cyan:#22d3ee;--green:#4ade80;
         }
         html{scroll-behavior:smooth}
@@ -219,7 +219,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               {title:'Company',links:[['About','/resources/about'],['Contact','/resources/contact'],['Privacy','/resources/privacy'],['Terms','/resources/terms']]},
             ].map(col=>(
               <div key={col.title}>
-                <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.62rem',letterSpacing:'.12em',textTransform:'uppercase',color:'rgba(237,233,255,0.22)',marginBottom:'.9rem'}}>{col.title}</div>
+                <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.62rem',letterSpacing:'.12em',textTransform:'uppercase',color:'rgba(255,255,255,0.4)',marginBottom:'.9rem'}}>{col.title}</div>
                 <ul style={{listStyle:'none',display:'flex',flexDirection:'column',gap:'.55rem'}}>
                   {col.links.map(([l,h])=>(
                     <li key={l}><Link href={h} style={{fontSize:'.8rem',color:'rgba(255,255,255,0.75)'}}>{l}</Link></li>
@@ -229,8 +229,8 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             ))}
           </div>
           <div style={{borderTop:'1px solid var(--border)',padding:'1.4rem 3.5rem',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.63rem',color:'rgba(237,233,255,0.22)'}}>© 2026 Notion Cue — AI Visibility Intelligence Platform</span>
-            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.63rem',color:'rgba(237,233,255,0.22)'}}>Built for the next era of search.</span>
+            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.63rem',color:'rgba(255,255,255,0.4)'}}>© 2026 Notion Cue — AI Visibility Intelligence Platform</span>
+            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.63rem',color:'rgba(255,255,255,0.4)'}}>Built for the next era of search.</span>
           </div>
         </footer>
 
