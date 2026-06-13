@@ -97,7 +97,7 @@ export default function LandingPage() {
         :root{
           --bg:#04030c;--bg2:#070613;--card:#100e22;
           --border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.16);
-          --text:#ede9ff;--muted:rgba(237,233,255,0.44);--muted2:rgba(237,233,255,0.22);
+          --text:#ede9ff;--muted:rgba(255,255,255,0.75);--muted2:rgba(237,233,255,0.22);
           --accent:#c8f247;--violet:#7b6cff;--cyan:#22d3ee;
         }
         html{scroll-behavior:smooth}

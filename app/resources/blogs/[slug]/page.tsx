@@ -56,7 +56,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         :root{
           --bg:#04030c;--card:#100e22;
           --border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.16);
-          --text:#ede9ff;--muted:rgba(237,233,255,0.44);--muted2:rgba(237,233,255,0.22);
+          --text:#ede9ff;--muted:rgba(255,255,255,0.75);--muted2:rgba(237,233,255,0.22);
           --accent:#c8f247;--violet:#7b6cff;--cyan:#22d3ee;--green:#4ade80;
         }
         html{scroll-behavior:smooth}
@@ -211,7 +211,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 <div style={{width:'22px',height:'22px',borderRadius:'6px',background:'linear-gradient(135deg,#7b6cff,#c8f247)',flexShrink:0}} />
                 Notion Cue
               </Link>
-              <div style={{fontSize:'.8rem',color:'rgba(237,233,255,0.44)',lineHeight:1.6,maxWidth:'200px'}}>AI visibility intelligence for the next era of search.</div>
+              <div style={{fontSize:'.8rem',color:'rgba(255,255,255,0.75)',lineHeight:1.6,maxWidth:'200px'}}>AI visibility intelligence for the next era of search.</div>
             </div>
             {[
               {title:'Product',links:[['How it works','/#how-it-works'],['Features','/#features'],['Pricing','/#pricing'],['Dashboard','/dashboard']]},
@@ -222,7 +222,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.62rem',letterSpacing:'.12em',textTransform:'uppercase',color:'rgba(237,233,255,0.22)',marginBottom:'.9rem'}}>{col.title}</div>
                 <ul style={{listStyle:'none',display:'flex',flexDirection:'column',gap:'.55rem'}}>
                   {col.links.map(([l,h])=>(
-                    <li key={l}><Link href={h} style={{fontSize:'.8rem',color:'rgba(237,233,255,0.44)'}}>{l}</Link></li>
+                    <li key={l}><Link href={h} style={{fontSize:'.8rem',color:'rgba(255,255,255,0.75)'}}>{l}</Link></li>
                   ))}
                 </ul>
               </div>

@@ -67,7 +67,7 @@ export default function SharedFooter() {
             }} />
             Notion Cue
           </div>
-          <div style={{ fontSize: '.8rem', color: 'rgba(237,233,255,0.44)', lineHeight: 1.6, maxWidth: '200px' }}>
+          <div style={{ fontSize: '.8rem', color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, maxWidth: '200px' }}>
             AI visibility intelligence for the next era of search.
           </div>
           <button onClick={() => router.push('/dashboard')} style={{
@@ -90,11 +90,11 @@ export default function SharedFooter() {
               {col.links.map(l => (
                 <li key={l.label}>
                   <span onClick={() => navigate(l.href)} style={{
-                    fontSize: '.8rem', color: 'rgba(237,233,255,0.44)',
+                    fontSize: '.8rem', color: 'rgba(255,255,255,0.75)',
                     cursor: 'pointer', transition: 'color .2s',
                   }}
                   onMouseEnter={e => (e.currentTarget.style.color = '#ede9ff')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(237,233,255,0.44)')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.75)')}
                   >{l.label}</span>
                 </li>
               ))}
@@ -114,7 +114,7 @@ export default function SharedFooter() {
           fontFamily: "'JetBrains Mono', monospace", fontSize: '.63rem',
           color: 'rgba(237,233,255,0.22)', letterSpacing: '.04em',
         }}>
-          © 2026 <span style={{ color: 'rgba(237,233,255,0.44)' }}>Notion Cue</span> — AI Visibility Intelligence Platform
+          © 2026 <span style={{ color: 'rgba(255,255,255,0.75)' }}>Notion Cue</span> — AI Visibility Intelligence Platform
         </span>
         <span style={{
           fontFamily: "'JetBrains Mono', monospace", fontSize: '.63rem',

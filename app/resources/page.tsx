@@ -65,7 +65,7 @@ export default function ResourcesPage() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Epilogue:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-        :root{--bg:#04030c;--bg2:#070613;--card:#100e22;--border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.16);--text:#ede9ff;--muted:rgba(237,233,255,0.44);--muted2:rgba(237,233,255,0.22);--accent:#c8f247;--violet:#7b6cff;--cyan:#22d3ee;--rose:#f472b6;--green:#4ade80}
+        :root{--bg:#04030c;--bg2:#070613;--card:#100e22;--border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.16);--text:#ede9ff;--muted:rgba(255,255,255,0.75);--muted2:rgba(237,233,255,0.22);--accent:#c8f247;--violet:#7b6cff;--cyan:#22d3ee;--rose:#f472b6;--green:#4ade80}
         html{scroll-behavior:smooth}
         body{background:var(--bg);color:var(--text);font-family:'Epilogue',sans-serif;font-weight:300;overflow-x:hidden}
         button,input,textarea,select{font-family:inherit;cursor:pointer}
