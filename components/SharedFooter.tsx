@@ -5,35 +5,35 @@ export default function SharedFooter() {
   const router = useRouter()
 
   const cols = [
-    {
-      title: 'Product',
-      links: [
-        { label: 'How it works',      href: '/#how-it-works' },
-        { label: 'Features',          href: '/#features' },
-        { label: 'Pricing',           href: '/#pricing' },
-        { label: 'Dashboard',         href: '/dashboard' },
-      ],
-    },
-    {
-      title: 'Resources',
-      links: [
-        { label: 'AEO Guide',           href: '/resources#aeo-guide' },
-        { label: 'llms.txt Generator',  href: '/resources#llms-txt' },
-        { label: 'BLUF Templates',      href: '/resources#bluf-templates' },
-        { label: 'Blog',                href: '/resources#blog' },
-        { label: 'Changelog',           href: '/resources#changelog' },
-      ],
-    },
-    {
-      title: 'Company',
-      links: [
-        { label: 'About',           href: '/resources#about' },
-        { label: 'Contact',         href: '/resources#contact' },
-        { label: 'Privacy Policy',  href: '/resources#privacy' },
-        { label: 'Terms of Service',href: '/resources#terms' },
-      ],
-    },
-  ]
+  {
+    title: 'Product',
+    links: [
+      { label: 'How it works',  href: '/#how-it-works' },
+      { label: 'Features',      href: '/#features' },
+      { label: 'Pricing',       href: '/#pricing' },
+      { label: 'Dashboard',     href: '/dashboard' },
+    ],
+  },
+  {
+    title: 'Resources',
+    links: [
+      { label: 'AEO Guide',          href: '/resources/aeo-guide' },
+      { label: 'llms.txt Generator', href: '/llms-txt' },
+      { label: 'BLUF Templates',     href: '/bluf-templates' },
+      { label: 'Blog',               href: '/resources/blog' },
+      { label: 'Changelog',          href: '/changelog' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'About',            href: '/about' },
+      { label: 'Contact',          href: '/contact' },
+      { label: 'Privacy Policy',   href: '/privacy' },
+      { label: 'Terms of Service', href: '/terms' },
+    ],
+  },
+]
 
   function navigate(href: string) {
     if (href.includes('#')) {

@@ -6,13 +6,13 @@ export default function SharedHeader() {
   const path = usePathname()
 
   const navLinks = [
-    { label: 'How it works', href: '/#how-it-works' },
-    { label: 'Features',     href: '/#features' },
-    { label: 'Pricing',      href: '/#pricing' },
-    { label: 'Resources',    href: '/resources#aeo-guide' },
-    { label: 'Blog',         href: '/resources#blog' },
-    { label: 'Company',      href: '/resources#about' },
-  ]
+  { label: 'How it works', href: '/#how-it-works' },
+  { label: 'Features',     href: '/#features' },
+  { label: 'Pricing',      href: '/#pricing' },
+  { label: 'Resources',    href: '/resources/aeo-guide' },
+  { label: 'Blog',         href: '/resources/blog' },
+  { label: 'Company',      href: '/about' },
+]
 
   function navigate(href: string) {
     if (href.startsWith('/#')) {
