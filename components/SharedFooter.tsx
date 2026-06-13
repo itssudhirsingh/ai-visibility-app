@@ -17,7 +17,7 @@ export default function SharedFooter() {
   {
     title: 'Resources',
     links: [
-      { label: 'AEO Guide',          href: '/resources/aeo-guide' },
+      { label: 'AEO Guide',          href: '/aeo-guide' },
       { label: 'llms.txt Generator', href: '/llms-txt' },
       { label: 'BLUF Templates',     href: '/bluf-templates' },
       { label: 'Blog',               href: '/resources/blog' },

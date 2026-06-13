@@ -5,7 +5,7 @@ import SharedFooter from '@/components/SharedFooter'
 import { BLOG_POSTS } from '../posts'
 
 const SUB_NAV = [
-  { label: 'AEO Guide',          href: '/resources/aeo-guide' },
+  { label: 'AEO Guide',          href: '/aeo-guide' },
   { label: 'llms.txt Generator', href: '/resources/llms-txt' },
   { label: 'BLUF Templates',     href: '/resources/bluf-templates' },
   { label: 'Blog',               href: '/resources/blog' },

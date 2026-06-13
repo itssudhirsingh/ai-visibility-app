@@ -28,7 +28,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   if (!post) notFound()
 
   const SUB_NAV = [
-    { label: 'AEO Guide',          href: '/resources/aeo-guide' },
+    { label: 'AEO Guide',          href: '/aeo-guide' },
     { label: 'llms.txt Generator', href: '/resources/llms-txt' },
     { label: 'BLUF Templates',     href: '/resources/bluf-templates' },
     { label: 'Blog',               href: '/resources/blog' },
@@ -100,7 +100,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             Notion Cue
           </Link>
           <div style={{display:'flex',gap:'1.75rem',alignItems:'center'}}>
-            {[['How it works','/#how-it-works'],['Features','/#features'],['Pricing','/#pricing'],['Resources','/resources/aeo-guide'],['Blog','/resources/blog'],['Company','/resources/about']].map(([l,h])=>(
+            {[['How it works','/#how-it-works'],['Features','/#features'],['Pricing','/#pricing'],['Resources','/aeo-guide'],['Blog','/resources/blog'],['Company','/resources/about']].map(([l,h])=>(
               <Link key={l} href={h} style={{fontSize:'.8rem',color:'rgba(237,233,255,0.55)',transition:'color .2s'}}>{l}</Link>
             ))}
           </div>
@@ -215,7 +215,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             </div>
             {[
               {title:'Product',links:[['How it works','/#how-it-works'],['Features','/#features'],['Pricing','/#pricing'],['Dashboard','/dashboard']]},
-              {title:'Resources',links:[['AEO Guide','/resources/aeo-guide'],['llms.txt Generator','/resources/llms-txt'],['BLUF Templates','/resources/bluf-templates'],['Blog','/resources/blog'],['Changelog','/resources/changelog']]},
+              {title:'Resources',links:[['AEO Guide','/aeo-guide'],['llms.txt Generator','/resources/llms-txt'],['BLUF Templates','/resources/bluf-templates'],['Blog','/resources/blog'],['Changelog','/resources/changelog']]},
               {title:'Company',links:[['About','/resources/about'],['Contact','/resources/contact'],['Privacy','/resources/privacy'],['Terms','/resources/terms']]},
             ].map(col=>(
               <div key={col.title}>

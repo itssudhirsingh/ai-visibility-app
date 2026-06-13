@@ -9,7 +9,7 @@ export default function SharedHeader() {
   { label: 'How it works', href: '/#how-it-works' },
   { label: 'Features',     href: '/#features' },
   { label: 'Pricing',      href: '/#pricing' },
-  { label: 'Resources',    href: '/resources/aeo-guide' },
+  { label: 'Resources',    href: '/aeo-guide' },
   { label: 'Blog',         href: '/resources/blog' },
   { label: 'Company',      href: '/about' },
 ]
