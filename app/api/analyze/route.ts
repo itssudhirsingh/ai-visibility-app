@@ -3,18 +3,18 @@ export async function POST(req: Request) {
     const { url } = await req.json()
     if (!url) return Response.json({ error: 'URL is required' }, { status: 400 })
 
-    const apiKey = process.env.OPENAI_API_KEY
-    if (!apiKey) return Response.json({ error: 'Missing API key' }, { status: 500 })
+    const apiKey = process.env.NVIDIA_API_KEY
+if (!apiKey) return Response.json({ error: 'Missing API key' }, { status: 500 })
 
     console.log('Key exists:', !!apiKey)
     console.log('Key prefix:', apiKey.slice(0, 10))
 
     const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer $OPENAI_API_KEY`
-      },
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${apiKey}`  // ← curly braces + correct variable
+  },
       body: JSON.stringify({
         model: 'deepseek-ai/deepseek-v4-pro',
         messages: [
