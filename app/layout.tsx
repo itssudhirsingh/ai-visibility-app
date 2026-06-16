@@ -18,8 +18,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "NotionCue | Free AI Visibility Checker - Track Your Brand in AI",
   description: "The AI Brand Visibility tool is designed to analyze and compare how different AI models",
-  viewport: 'width=device-width, initial-scale=1',
 };
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
 
 export default function RootLayout({
   children,

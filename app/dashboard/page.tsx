@@ -124,7 +124,7 @@ function DashboardInner() {
   const [result, setResult] = useState<Result|null>(null)
   const [resultUrl, setResultUrl] = useState('')
   const [recentScans, setRecentScans] = useState([
-    {url:'stripe.com',score:91,time:'2h ago'},
+    {url:'stripe.com',score:81,time:'2h ago'},
     {url:'linear.app',score:78,time:'5h ago'},
     {url:'vercel.com',score:88,time:'1d ago'},
   ])
