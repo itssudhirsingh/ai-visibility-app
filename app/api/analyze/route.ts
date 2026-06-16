@@ -9,14 +9,14 @@ export async function POST(req: Request) {
     console.log('Key exists:', !!apiKey)
     console.log('Key prefix:', apiKey.slice(0, 10))
 
-    const response = await fetch('https://integrate.api.nvidia.com/v1/', {
+    const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
+        'Authorization': `Bearer $OPENAI_API_KEY`
       },
       body: JSON.stringify({
-        model: 'deepseek-ai/deepseek-v4-flash',
+        model: 'deepseek-ai/deepseek-v4-pro',
         messages: [
           {
             role: 'system',
