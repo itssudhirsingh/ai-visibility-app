@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     console.log('Key exists:', !!apiKey)
     console.log('Key prefix:', apiKey.slice(0, 10))
 
-    const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
+    const response = await fetch('https://integrate.api.nvidia.com/v1/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
