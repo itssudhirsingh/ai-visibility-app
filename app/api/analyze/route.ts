@@ -5,7 +5,7 @@ export async function POST(req: Request) {
 
     const apiKey = process.env.OPENAI_API_KEY
     if (!apiKey) return Response.json({ error: 'Missing OpenAI API key' }, { status: 500 })
-
+/*
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -13,7 +13,16 @@ export async function POST(req: Request) {
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
+        model: 'gpt-4o-mini',*/
+
+        const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${apiKey}`
+  },
+  body: JSON.stringify({
+    model: 'deepseek-ai/deepseek-v4-flash',
         messages: [
           {
             role: 'system',
