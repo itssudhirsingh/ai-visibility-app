@@ -176,6 +176,7 @@ Return ONLY this exact JSON structure with real, specific analysis for "${url}":
 
     const rawText = await response.text()
     console.log('OpenAI status:', response.status)
+    console.log('Raw response:', rawText.slice(0, 500))
 
     if (!response.ok) {
       return Response.json({ error: `OpenAI error: ${rawText}` }, { status: 500 })
