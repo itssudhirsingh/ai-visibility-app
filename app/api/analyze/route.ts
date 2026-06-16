@@ -16,7 +16,7 @@ if (!apiKey) return Response.json({ error: 'Missing API key' }, { status: 500 })
     'Authorization': `Bearer ${apiKey}`  // ← curly braces + correct variable
   },
       body: JSON.stringify({
-        model: 'deepseek-ai/deepseek-v4-pro',
+        model: 'meta/llama-3.1-8b-instruct',
         messages: [
           {
             role: 'system',
