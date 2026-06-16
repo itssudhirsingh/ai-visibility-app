@@ -128,3 +128,131 @@
     @apply font-sans;
   }
 }
+/* Add this to the BOTTOM of your existing app/globals.css */
+/* ─────────────────────────────────────────────────────── */
+
+/* Ensure viewport meta is respected */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Prevent horizontal overflow sitewide */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* ── TABLET (max 1024px) ── */
+@media (max-width: 1024px) {
+  nav {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+  section {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+/* ── MOBILE (max 768px) ── */
+@media (max-width: 768px) {
+
+  /* Nav — compact + hide middle links */
+  nav {
+    padding: 1rem 1.25rem !important;
+  }
+  nav > div:nth-child(2) {
+    display: none !important;
+  }
+
+  /* Sections */
+  section {
+    padding: 3.5rem 1.25rem !important;
+  }
+
+  /* Headings scale down */
+  h1 { font-size: clamp(2rem, 9vw, 3.5rem) !important; line-height: 1.05 !important; }
+  h2 { font-size: clamp(1.6rem, 7vw, 2.8rem) !important; }
+
+  /* ALL inline grid divs → single column */
+  div[style*="grid-template-columns"],
+  div[style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  /* Keep 2-col for stats and footer */
+  div[style*="repeat(4,1fr)"],
+  div[style*="repeat(4, 1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  footer > div {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Dashboard: hide sidebar, full width content */
+  aside {
+    display: none !important;
+  }
+  div[style*="gridTemplateColumns: '236px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Before/after comparison panels — stack */
+  div[style*="'1fr 60px 1fr'"] {
+    grid-template-columns: 1fr !important;
+  }
+  div[style*="'1fr 60px 1fr'"] > div:nth-child(2) {
+    display: none !important;
+  }
+
+  /* Large gaps — reduce */
+  div[style*="gap: '5rem'"] { gap: 2rem !important; }
+  div[style*="gap: '4rem'"] { gap: 1.5rem !important; }
+
+  /* Footer padding */
+  footer {
+    padding: 2rem 1.25rem !important;
+  }
+
+  /* Sub-nav on resource pages */
+  div[style*="top: '65px'"][style*="display: 'flex'"] {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* ── SMALL MOBILE (max 480px) ── */
+@media (max-width: 480px) {
+
+  /* Footer fully stacks */
+  footer > div {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Stats fully stack */
+  div[style*="repeat(4,1fr)"],
+  div[style*="repeat(4, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Hero input — stack button below input */
+  div[style*="borderRadius: '100px'"][style*="padding: '.35rem"] {
+    flex-direction: column !important;
+    border-radius: 14px !important;
+    padding: 0.75rem !important;
+    gap: 0.5rem !important;
+  }
+  div[style*="borderRadius: '100px'"][style*="padding: '.35rem"] > button {
+    width: 100% !important;
+    justify-content: center !important;
+    border-radius: 10px !important;
+  }
+
+  section {
+    padding: 2.5rem 1rem !important;
+  }
+
+  nav {
+    padding: 0.85rem 1rem !important;
+  }
+}

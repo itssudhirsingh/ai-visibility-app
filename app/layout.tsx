@@ -4,6 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -17,6 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "NotionCue | Free AI Visibility Checker - Track Your Brand in AI",
   description: "The AI Brand Visibility tool is designed to analyze and compare how different AI models",
+  viewport: 'width=device-width, initial-scale=1',
 };
 
 export default function RootLayout({
