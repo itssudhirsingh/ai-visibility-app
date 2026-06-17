@@ -3,7 +3,7 @@ import { NextRequest } from 'next/server'
 // app/api/generate-llms/route.ts
 
 export async function POST(req: NextRequest) {
-  const apiKey = process.env.NVIDIA_API_KEY
+  const apiKey = process.env.NEXT_NVIDIA_API_KEY
   if (!apiKey) return Response.json({ error: 'Missing API key' }, { status: 500 })
 
   console.log('Key exists:', !!apiKey)
@@ -50,7 +50,7 @@ Reply with ONLY this JSON object. Keep all values on ONE LINE — no line breaks
       'Authorization': `Bearer ${apiKey}`
     },
     body: JSON.stringify({
-      model: 'meta/llama-3.1-8b-instruct',
+      model: 'google/gemma-4-31b-it',
       messages: [
         {
           role: 'system',

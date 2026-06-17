@@ -9,9 +9,9 @@ const FOOTER_COLS = [
   {
     heading: 'Free Tools',
     links: [
-      { label: 'llms.txt Generator',  href: '/llms-txt-generator',      badge: 'FREE' },
-      { label: 'BLUF Templates',      href: '/bluf-templates', badge: 'FREE' },
-      { label: 'AEO Guide',           href: '/aeo-guide',                badge: 'FREE'   },
+      { label: 'llms.txt Generator',   href: '/llms-txt-generator',      badge: 'FREE' },
+      { label: 'BLUF Templates',       href: '/bluf-templates', badge: 'FREE' },
+      { label: 'AEO Guide',            href: '/aeo-guide',                badge: 'FREE'   },
       { label: 'Robots.txt Generator',   href: '/robots-txt-generator',                badge: 'FREE'   },
     ],
   },
@@ -157,7 +157,8 @@ export default function SharedFooter() {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {col.links.map((link, i) => (
-                  <div key={'${link.href}-${i}'} style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+                  /* ✅ FIXED: Corrected single quotes to template literal backticks */
+                  <div key={`${link.href}-${i}`} style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
                     <Link href={link.href}
                       style={{
                         fontFamily:    "'JetBrains Mono', monospace",

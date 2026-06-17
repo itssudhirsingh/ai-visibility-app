@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect, Suspense, Fragment } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import SharedHeader from '@/components/SharedHeader'
 import SharedFooter from '@/components/SharedFooter'
@@ -553,20 +553,35 @@ function DashboardInner() {
                         <thead><tr style={{borderBottom:'1px solid var(--line)'}}>
                           {['Domain','Score','vs You','Bar',''].map(h=>(<th key={h} style={{fontFamily:'"JetBrains Mono"',fontSize:'9px',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--muted2)',padding:'10px 14px',textAlign:'left',fontWeight:400}}>{h}</th>))}
                         </tr></thead>
-                        <tbody>
-                          {[{n:resultUrl,s:result.score,isYou:true,gap:''},...result.comps].map((c: any,i)=>(
-                            <>
-                              <tr key={`row-${c.n}`} onClick={()=>!c.isYou&&setOpenComp(openComp===i?null:i)} className="comp-row" style={{borderBottom:'1px solid rgba(255,255,255,.04)',transition:'.15s',cursor:c.isYou?'default':'pointer'}}>
-                                <td style={{padding:'10px 14px',fontFamily:'"JetBrains Mono"',fontSize:'11px',color:c.isYou?'var(--lime)':'var(--text)'}}>{c.n}{c.isYou&&<span style={{marginLeft:'6px',fontSize:'9px',color:'var(--lime)',background:'rgba(202,255,69,.1)',padding:'2px 5px',borderRadius:'3px'}}>YOU</span>}</td>
-                                <td style={{padding:'10px 14px',fontFamily:'"Familjen Grotesk"',fontSize:'14px',fontWeight:700,color:scolor(c.s)}}>{c.s}</td>
-                                <td style={{padding:'10px 14px',fontFamily:'"JetBrains Mono"',fontSize:'11px',color:c.isYou?'var(--muted2)':c.s>result.score?'var(--red)':'var(--green)'}}>{c.isYou?'—':(c.s>result.score?'+':'')+(c.s-result.score)}</td>
-                                <td style={{padding:'10px 14px',width:'30%'}}><div style={{height:'5px',background:'rgba(255,255,255,.06)',borderRadius:'9px',overflow:'hidden'}}><div style={{height:'100%',width:`${c.s}%`,background:c.isYou?'var(--lime)':scolor(c.s),borderRadius:'9px',transition:'width 1s'}} /></div></td>
-                                <td style={{padding:'10px 14px',fontSize:'10px',color:'var(--muted2)',fontFamily:'"JetBrains Mono"'}}>{!c.isYou&&(c.gap?<span style={{color:'var(--amber)'}}>{openComp===i?'▲ hide':'▼ gap'}</span>:'—')}</td>
-                              </tr>
-                              {openComp===i&&c.gap&&(<tr key={`gap-${c.n}`} style={{borderBottom:'1px solid rgba(255,255,255,.04)'}}><td colSpan={5} style={{padding:'0 14px 14px 50px'}}><div style={{padding:'10px 14px',background:'rgba(255,196,92,.04)',border:'1px solid rgba(255,196,92,.15)',borderLeft:'2px solid var(--amber)',borderRadius:'6px',fontSize:'10px',color:'var(--muted)',lineHeight:1.7}}><strong style={{color:'var(--amber)',fontFamily:'"JetBrains Mono"',fontSize:'9px',letterSpacing:'.06em'}}>CONTENT GAP — </strong>{c.gap}</div></td></tr>)}
-                            </>
-                          ))}
-                        </tbody>
+                       <tbody>
+  {[{n:resultUrl,s:result.score,isYou:true,gap:''},...result.comps].map((c: any, i) => (
+    /* ✅ FIXED: Outermost element now holds the unique key */
+    <Fragment key={`comp-block-${c.n || i}`}>
+      <tr 
+        onClick={() => !c.isYou && setOpenComp(openComp === i ? null : i)} 
+        className="comp-row" 
+        style={{ borderBottom: '1px solid rgba(255,255,255,.04)', transition: '.15s', cursor: c.isYou ? 'default' : 'pointer' }}
+      >
+        <td style={{ padding: '10px 14px', fontFamily: '"JetBrains Mono", analytics, monospace', fontSize: '11px', color: c.isYou ? 'var(--lime)' : 'var(--text)' }}>
+          {c.n}{c.isYou && <span style={{ marginLeft: '6px', fontSize: '9px', color: 'var(--lime)', background: 'rgba(202,255,69,.1)', padding: '2px 5px', borderRadius: '3px' }}>YOU</span>}
+        </td>
+        <td style={{ padding: '10px 14px', fontFamily: '"Familjen Grotesk"', fontSize: '14px', fontWeight: 700, color: scolor(c.s) }}>{c.s}</td>
+        <td style={{ padding: '10px 14px', fontFamily: '"JetBrains Mono"', fontSize: '11px', color: c.isYou ? 'var(--muted2)' : c.s > result.score ? 'var(--red)' : 'var(--green)' }}>{c.isYou ? '—' : (c.s > result.score ? '+' : '') + (c.s - result.score)}</td>
+        <td style={{ padding: '10px 14px', width: '30%' }}><div style={{ height: '5px', background: 'rgba(255,255,255,.06)', borderRadius: '9px', overflow: 'hidden' }}><div style={{ height: '100%', width: `${c.s}%`, background: c.isYou ? 'var(--lime)' : scolor(c.s), borderRadius: '9px', transition: 'width 1s' }} /></div></td>
+        <td style={{ padding: '10px 14px', fontSize: '10px', color: 'var(--muted2)', fontFamily: '"JetBrains Mono"' }}>{!c.isYou && (c.gap ? <span style={{ color: 'var(--amber)' }}>{openComp === i ? '▲ hide' : '▼ gap'}</span> : '—')}</td>
+      </tr>
+      {openComp === i && c.gap && (
+        <tr style={{ borderBottom: '1px solid rgba(255,255,255,.04)' }}>
+          <td colSpan={5} style={{ padding: '0 14px 14px 50px' }}>
+            <div style={{ padding: '10px 14px', background: 'rgba(255,196,92,.04)', border: '1px solid rgba(255,196,92,.15)', borderLeft: '2px solid var(--amber)', borderRadius: '6px', fontSize: '10px', color: 'var(--muted)', lineHeight: 1.7 }}>
+              <strong style={{ color: 'var(--amber)', fontFamily: '"JetBrains Mono"', fontSize: '9px', letterSpacing: '.06em' }}>CONTENT GAP — </strong>{c.gap}
+            </div>
+          </td>
+        </tr>
+      )}
+    </Fragment>
+  ))}
+</tbody>
                       </table>
                     </div>
                   </div>
