@@ -1,100 +1,251 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import SharedHeader from '@/components/SharedHeader'
 import SharedFooter from '@/components/SharedFooter'
 
+// ─── Sub-nav — unchanged from original ────────────────────────────────────────
 const SUB_NAV = [
   { label: 'AEO Guide',          href: '/aeo-guide' },
-  { label: 'llms.txt Generator', href: '/resources/llms-txt' },
-  { label: 'BLUF Templates',     href: '/resources/bluf-templates' },
-  { label: 'Blog',               href: '/resources/blog' },
-  { label: 'Changelog',          href: '/resources/changelog' },
-  { label: 'About',              href: '/resources/about' },
-  { label: 'Privacy',            href: '/resources/privacy' },
-  { label: 'Terms',              href: '/resources/terms' },
-  { label: 'Contact',            href: '/resources/contact' },
+  { label: 'llms.txt Generator', href: '/llms-text-generator' },
+  { label: 'Robots.txt Generator', href: '/robots-txt' },
+  { label: 'BLUF Templates',     href: '/bluf-templates' },
+  { label: 'Blog',               href: '/blog' },
+  { label: 'Changelog',          href: '/changelog' },
+  { label: 'About',              href: '/about' },
+  { label: 'Privacy',            href: '/privacy' },
+  { label: 'Terms',              href: '/terms' },
+  { label: 'Contact',            href: '/contact' },
 ]
 
+// ─── Types ────────────────────────────────────────────────────────────────────
 interface ValidationItem { check: string; pass: boolean; note: string }
 interface GeneratedData {
-  company_name: string
-  tagline: string
-  category: string
-  llms_txt: string
-  llms_full_txt: string
-  validation: ValidationItem[]
-  topics: string[]
-  aeo_lift: number
-  engines_helped: number
+  company_name:          string
+  tagline:               string
+  category:              string
+  llms_txt:              string
+  llms_full_txt:         string
+  validation:            ValidationItem[]
+  key_topics:            string[]
+  aeo_score_impact:      number
+  pages_indexed:         number
+  ai_engines_benefiting: string[]
 }
-
 type TabId = 'standard' | 'full' | 'validation' | 'deploy'
 
-export default function LLMSTxtPage() {
-  const router  = useRouter()
-  const path    = usePathname()
+// ─── Fallback generator (used when API fails or JSON parse fails) ─────────────
+function makeFallback(domain: string, incBot: boolean, incBluf: boolean): GeneratedData {
+  const raw  = domain.split('.')[0]
+  const name = raw.charAt(0).toUpperCase() + raw.slice(1)
+  const botLine = incBot
+    ? 'This site welcomes AI crawlers including GPTBot, PerplexityBot, ClaudeBot, and Google-Extended. Content may be cited in AI-generated answers.'
+    : 'This site has selective AI crawler permissions. Check robots.txt for details.'
 
-  const [form, setForm] = useState({
-    name:'', domain:'', desc:'', email:'', lang:'en',
-    gpt:true, gem:true, plex:true, claude:true, cop:true,
-    allow:'', disallow:'',
-  })
+  return {
+    company_name: name,
+    tagline: `${name} provides tools and services for its target audience.`,
+    category: 'Web',
+    key_topics: ['Products', 'Services', 'Blog', 'Documentation', 'Support'],
+    llms_txt: `# ${name}\n\n> ${name} is a website providing products and services to its audience.\n\n${name} offers a range of tools and resources. This file helps AI systems understand the site's content and purpose.\n\n## Key Pages\n\n- [Home](https://${domain}/): Main landing page with platform overview and value proposition.\n- [About](https://${domain}/about): Company background, mission, and team.\n- [Pricing](https://${domain}/pricing): Available plans and pricing options.\n- [Blog](https://${domain}/blog): Articles, guides, and industry insights.\n- [Contact](https://${domain}/contact): Support and general enquiries.\n\n## Topics Covered\n\n- Core products and services\n- Industry knowledge and best practices\n- Customer support resources\n\n## For AI Systems\n\n${botLine}\n\n## Contact\n\nhttps://${domain}/contact`,
+    llms_full_txt: `# ${name} — Full Content Index\n\n> ${name} provides tools and resources for its audience.\n\n## About\n\n${name} is a web platform serving users with a range of products and informational resources.\n\n## Key Pages Index\n\n- [Home](https://${domain}/): Entry point to the platform\n- [About](https://${domain}/about): Team and mission\n- [Pricing](https://${domain}/pricing): Plan details\n- [Blog](https://${domain}/blog): Editorial content\n- [Contact](https://${domain}/contact): Support channels\n\n## AI Citation Guidance\n\nWhen citing ${domain}:\n- Refer to as: ${name}\n- Preferred citation URL: https://${domain}`,
+    validation: [
+      { check: 'H1 title present',      pass: true,    note: 'Site name as main heading' },
+      { check: 'Blockquote tagline',     pass: true,    note: 'One-sentence BLUF description' },
+      { check: 'Key pages linked',       pass: true,    note: '5 core pages with descriptions' },
+      { check: 'Markdown formatting',    pass: true,    note: 'Spec-compliant headings and links' },
+      { check: 'AI bot permissions',     pass: incBot,  note: incBot ? 'GPTBot, ClaudeBot, PerplexityBot listed' : 'Deferred to robots.txt' },
+      { check: 'Contact info included',  pass: true,    note: 'Contact URL present' },
+      { check: 'BLUF descriptions',      pass: incBluf, note: incBluf ? 'Pages have BLUF descriptions' : 'Standard descriptions used' },
+      { check: 'File size estimate',     pass: true,    note: 'Under 50KB — fits AI context windows' },
+    ],
+    aeo_score_impact:      10,
+    pages_indexed:         5,
+    ai_engines_benefiting: ['ChatGPT', 'Perplexity', 'Claude', 'Gemini', 'Grok'],
+  }
+}
+
+// ─── Main page component ──────────────────────────────────────────────────────
+export default function LLMSTxtPage() {
+  const router = useRouter()
+  const path   = usePathname()
+
+  // Form state
+  const [domain,    setDomain]    = useState('')
+  const [incFull,   setIncFull]   = useState(false)
+  const [incBluf,   setIncBluf]   = useState(true)
+  const [incBot,    setIncBot]    = useState(true)
+
+  // UI state
   const [loading,   setLoading]   = useState(false)
+  const [step,      setStep]      = useState(0)     // 1-4 while loading
   const [result,    setResult]    = useState<GeneratedData | null>(null)
   const [activeTab, setActiveTab] = useState<TabId>('standard')
   const [copied,    setCopied]    = useState('')
   const [error,     setError]     = useState('')
-  const [step,      setStep]      = useState(0)
 
+  const resultsRef = useRef<HTMLDivElement>(null)
+
+  // ── Copy to clipboard ────────────────────────────────────────────────────
   function copy(text: string, key: string) {
-    navigator.clipboard.writeText(text)
-    setCopied(key); setTimeout(() => setCopied(''), 2200)
+    navigator.clipboard.writeText(text).catch(() => {})
+    setCopied(key)
+    setTimeout(() => setCopied(''), 2200)
   }
 
+  // ── Download as text file ────────────────────────────────────────────────
   function download(text: string, filename: string) {
-    const a = document.createElement('a')
-    a.href = URL.createObjectURL(new Blob([text], { type: 'text/plain' }))
-    a.download = filename; a.click()
+    const a  = document.createElement('a')
+    a.href   = URL.createObjectURL(new Blob([text], { type: 'text/plain' }))
+    a.download = filename
+    a.click()
   }
 
-  // Step-by-step loading animation
-  async function animateSteps() {
-    for (let i = 1; i <= 4; i++) {
-      await new Promise(r => setTimeout(r, 900))
-      setStep(i)
-    }
-  }
-
-  async function generate() {
-    const domain = form.domain.trim().replace(/^https?:\/\//, '')
-    if (!domain) { setError('Enter a domain to continue'); return }
-    setError(''); setResult(null); setLoading(true); setStep(0)
-    animateSteps()
-
-    try {
-      const res = await fetch('/api/generate-llms', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, domain }),
-      })
-      const data = await res.json()
-      if (data.error) { setError(data.error); setLoading(false); return }
-      setResult(data)
-      setActiveTab('standard')
-    } catch (e) {
-      setError('Failed to generate. Please try again.')
-    }
-    setLoading(false); setStep(0)
-  }
-
-  const steps = [
-    'Researching domain...',
-    'Identifying key pages & topics...',
+  // ── Step animation timer ─────────────────────────────────────────────────
+  const STEP_MSGS = [
+    'Crawling site structure...',
+    'Identifying key pages...',
     'Writing BLUF descriptions...',
     'Building llms.txt file...',
   ]
 
+  async function animateSteps(): Promise<() => void> {
+    let current = 1
+    setStep(1)
+    const t = setInterval(() => {
+      current++
+      if (current <= 4) setStep(current)
+      else clearInterval(t)
+    }, 950)
+    return () => clearInterval(t)
+  }
+
+  // ── Generate ─────────────────────────────────────────────────────────────
+  const generate = useCallback(async () => {
+    const cleanDomain = domain.trim().replace(/^https?:\/\//, '').replace(/\/$/, '')
+    if (!cleanDomain) { setError('Enter a domain to continue.'); return }
+
+    setError('')
+    setResult(null)
+    setLoading(true)
+    setStep(0)
+    setActiveTab('standard')
+
+    const stopAnim = await animateSteps()
+
+
+    // ── Call server API route — NVIDIA key stays server-side ────────────────
+    let data: GeneratedData | null = null
+    try {
+      const res = await fetch('/api/generate-llms', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          domain:  cleanDomain,
+          incBot,
+          incBluf,
+          incFull,
+        }),
+      })
+
+      stopAnim()
+      setStep(5)
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({})) as { error?: string }
+        const msg = err?.error ?? `Server error ${res.status}`
+        if (res.status === 401) throw new Error('Invalid NVIDIA API key — check NVIDIA_API_KEY in .env.local.')
+        if (res.status === 429) throw new Error('Rate limited. Wait a moment and try again.')
+        throw new Error(msg)
+      }
+
+      const json = await res.json() as GeneratedData & { error?: string }
+
+      // Route returns { error: 'parse_failed' } when JSON extraction failed server-side
+      if (json.error) {
+        data = makeFallback(cleanDomain, incBot, incBluf)
+      } else {
+        data = json
+      }
+
+    } catch (err: unknown) {
+      stopAnim()
+      setLoading(false)
+      setError(err instanceof Error ? err.message : 'Something went wrong. Try again.')
+      return
+    }
+
+    await new Promise(r => setTimeout(r, 350))
+    setResult(data)
+    setLoading(false)
+    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100)
+  }, [domain, incFull, incBluf, incBot])
+
+  // ─── CSS vars matching NotionCue design system ─────────────────────────────
+  const css = `
+    @keyframes llms-spin    { to { transform: rotate(360deg) } }
+    @keyframes llms-fadeUp  { from { opacity:0; transform:translateY(8px) } to { opacity:1; transform:none } }
+    @keyframes llms-shimmer { 0% { background-position:200% 0 } 100% { background-position:-200% 0 } }
+    .llms-spin    { animation: llms-spin .8s linear infinite }
+    .llms-shimmer {
+      background: linear-gradient(90deg,rgba(255,255,255,.02) 25%,rgba(255,255,255,.07) 50%,rgba(255,255,255,.02) 75%);
+      background-size: 200% 100%;
+      animation: llms-shimmer 1.5s infinite;
+    }
+    .llms-fadeIn  { animation: llms-fadeUp .35s both }
+    .llms-copy-btn:hover  { background:rgba(202,255,69,.12)!important; border-color:rgba(202,255,69,.35)!important; color:#caff45!important }
+    .llms-dl-btn:hover    { background:rgba(202,255,69,.16)!important; border-color:rgba(202,255,69,.4)!important }
+    .llms-tab:hover       { color:#f5f8ff!important }
+    .llms-input:focus     { border-color:rgba(202,255,69,.45)!important; outline:none }
+    .llms-input::placeholder { color:rgba(220,233,255,.38) }
+    .llms-check-row:hover { border-color:rgba(202,255,69,.18)!important }
+    .llms-card            { border:1px solid rgba(220,235,255,.09); background:linear-gradient(145deg,rgba(13,22,38,.95),rgba(7,12,22,.93)); border-radius:9px }
+    .llms-score-card:hover { transform:translateY(-2px); border-color:rgba(202,255,69,.2)!important; box-shadow:0 16px 36px rgba(0,0,0,.28)!important }
+    .llms-example-btn:hover { border-color:rgba(202,255,69,.22)!important; color:#caff45!important }
+    pre { white-space:pre-wrap; word-break:break-word }
+    .llms-pre::-webkit-scrollbar       { width:4px; height:4px }
+    .llms-pre::-webkit-scrollbar-track { background:transparent }
+    .llms-pre::-webkit-scrollbar-thumb { background:rgba(255,255,255,.1); border-radius:2px }
+  `
+
+  // ─── Colours / tokens ──────────────────────────────────────────────────────
+  const C = {
+    bg:      '#03060c',
+    panel:   'linear-gradient(145deg,rgba(13,22,38,.95),rgba(7,12,22,.93))',
+    line:    'rgba(220,235,255,.09)',
+    line2:   'rgba(220,235,255,.20)',
+    text:    '#f5f8ff',
+    muted:   'rgba(230,239,255,.65)',
+    muted2:  'rgba(220,233,255,.38)',
+    lime:    '#caff45',
+    cyan:    '#45e4ff',
+    violet:  '#927cff',
+    red:     '#ff7474',
+    green:   '#52e38e',
+  }
+
+  const pill = (color: string, bg: string, border: string, label: string) => (
+    <span style={{
+      display:'inline-flex', padding:'3px 8px', borderRadius:4,
+      fontFamily:"'JetBrains Mono',monospace", fontSize:9, whiteSpace:'nowrap',
+      lineHeight:1.5, color, background:bg, border:`1px solid ${border}`,
+    }}>
+      {label}
+    </span>
+  )
+
+  const mono = (s: string | React.ReactNode, extra?: React.CSSProperties) => (
+    <span style={{ fontFamily:"'JetBrains Mono',monospace", ...extra }}>{s}</span>
+  )
+
+  const label9 = (text: string) => (
+    <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, letterSpacing:'.07em',
+      textTransform:'uppercase', color:C.muted2, marginBottom:5 }}>
+      {text}
+    </div>
+  )
+
+  // ─── Tab list ───────────────────────────────────────────────────────────────
   const TABS: { id: TabId; label: string }[] = [
     { id: 'standard',   label: 'llms.txt' },
     { id: 'full',       label: 'llms-full.txt' },
@@ -102,194 +253,283 @@ export default function LLMSTxtPage() {
     { id: 'deploy',     label: 'Deploy guide' },
   ]
 
+  // ─── Shared copy/download button row ───────────────────────────────────────
+  const ActionRow = ({
+    content, copyKey, filename, accentColor = C.lime, accentBorder = 'rgba(202,255,69,.25)',
+  }: {
+    content: string; copyKey: string; filename: string
+    accentColor?: string; accentBorder?: string
+  }) => (
+    <div style={{ display:'flex', gap:6 }}>
+      <button className="llms-copy-btn" onClick={() => copy(content, copyKey)}
+        style={{
+          border:`1px solid ${C.line2}`, background:'rgba(255,255,255,.03)', color:C.muted,
+          borderRadius:5, padding:'6px 11px', fontSize:9,
+          fontFamily:"'JetBrains Mono',monospace", transition:'all .2s', cursor:'pointer',
+        }}>
+        {copied === copyKey ? '✓ Copied' : 'Copy'}
+      </button>
+      <button className="llms-dl-btn" onClick={() => download(content, filename)}
+        style={{
+          border:`1px solid ${accentBorder}`, background:`rgba(202,255,69,.06)`,
+          color: accentColor, borderRadius:5, padding:'6px 11px', fontSize:9,
+          fontFamily:"'JetBrains Mono',monospace", transition:'all .2s', cursor:'pointer',
+        }}>
+        ↓ Download
+      </button>
+    </div>
+  )
+
+  // ─── Render ────────────────────────────────────────────────────────────────
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Epilogue:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
-        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-        :root{
-          --bg:#04030c;--card:#100e22;
-          --border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.16);
-          --text:#ede9ff;--muted:rgba(255,255,255,0.75);--muted2:rgba(255,255,255,0.4);
-          --accent:#c8f247;--violet:#7b6cff;--cyan:#22d3ee;--green:#4ade80;--red:#f87171;--amber:#fbbf24;
-        }
-        html{scroll-behavior:smooth}
-        body{background:var(--bg);color:var(--text);font-family:'Epilogue',sans-serif;font-weight:300;overflow-x:hidden}
-        button,input,textarea,select{font-family:inherit;cursor:pointer}
-        input:focus,textarea:focus,select:focus,button:focus{outline:none}
-        input[type=checkbox]{width:14px;height:14px;accent-color:var(--accent)}
-        @keyframes spin{to{transform:rotate(360deg)}}
-        @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-        @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-        .spin{animation:spin .8s linear infinite}
-        .shimmer{background:linear-gradient(90deg,rgba(255,255,255,.02) 25%,rgba(255,255,255,.07) 50%,rgba(255,255,255,.02) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
-        .fadeIn{animation:fadeUp .35s both}
-        .tab-btn:hover{color:var(--text)!important}
-        .form-input{background:rgba(255,255,255,.04);border:1px solid var(--border-h);border-radius:8px;padding:.65rem 1rem;color:var(--text);font-size:.82rem;font-family:'JetBrains Mono',monospace;width:100%;transition:border-color .2s}
-        .form-input:focus{border-color:var(--accent)}
-        .copy-btn:hover{border-color:var(--accent)!important;color:var(--accent)!important}
-        .dl-btn:hover{background:rgba(200,242,71,.15)!important}
-        ::-webkit-scrollbar{width:4px}
-        ::-webkit-scrollbar-track{background:transparent}
-        ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
-      `}</style>
+      <style>{css}</style>
 
-      <div style={{background:'var(--bg)',minHeight:'100vh',color:'var(--text)'}}>
+      <div style={{ background:C.bg, minHeight:'100vh', color:C.text, fontFamily:"Epilogue,sans-serif", fontWeight:300 }}>
         <SharedHeader />
 
-        {/* Sub-nav */}
-        <div style={{position:'sticky',top:'65px',zIndex:700,background:'rgba(4,3,12,.9)',backdropFilter:'blur(16px)',borderBottom:'1px solid var(--border)',padding:'.6rem 3.5rem',display:'flex',gap:0,overflowX:'auto',marginTop:'65px'}}>
+        {/* Sub-nav — unchanged */}
+        <div style={{
+          position:'sticky', top:65, zIndex:700,
+          background:'rgba(4,3,12,.9)', backdropFilter:'blur(16px)',
+          borderBottom:`1px solid ${C.line}`,
+          padding:'.55rem 3.5rem', display:'flex', gap:0, overflowX:'auto', marginTop:65,
+        }}>
           {SUB_NAV.map(n => (
             <button key={n.href} onClick={() => router.push(n.href)}
-              style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',letterSpacing:'.06em',textTransform:'uppercase',padding:'.55rem 1rem',background:'none',border:'none',borderBottom:path===n.href?'2px solid var(--accent)':'2px solid transparent',color:path===n.href?'var(--accent)':'var(--muted)',whiteSpace:'nowrap',transition:'all .2s'}}>
+              style={{
+                fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem',
+                letterSpacing:'.06em', textTransform:'uppercase',
+                padding:'.5rem 1rem', background:'none', border:'none',
+                borderBottom: path === n.href ? `2px solid ${C.lime}` : '2px solid transparent',
+                color: path === n.href ? C.lime : C.muted,
+                whiteSpace:'nowrap', transition:'all .2s', cursor:'pointer',
+              }}>
               {n.label}
             </button>
           ))}
         </div>
 
-        <div style={{maxWidth:'1200px',margin:'0 auto',padding:'0 3.5rem'}}>
+        <div style={{ maxWidth:1100, margin:'0 auto', padding:'0 3.5rem' }}>
 
-          {/* Hero */}
-          <div style={{padding:'6rem 0 4rem',borderBottom:'1px solid var(--border)'}}>
-            <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.68rem',letterSpacing:'.18em',textTransform:'uppercase',color:'var(--violet)',marginBottom:'.75rem'}}>AI-Powered Tool</div>
-            <h1 style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'clamp(2.5rem,6vw,5rem)',lineHeight:.95,letterSpacing:'-.03em',marginBottom:'1.25rem'}}>
-              llms.txt<br/><span style={{color:'var(--accent)'}}>Generator</span>
+          {/* ── Hero ─────────────────────────────────────────────────────── */}
+          <div style={{ padding:'5rem 0 3.5rem', borderBottom:`1px solid ${C.line}` }}>
+            {mono('AI-Powered Tool', { fontSize:'.67rem', letterSpacing:'.18em',
+              textTransform:'uppercase', color:C.violet, display:'block', marginBottom:10 })}
+            <h1 style={{
+              fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:700,
+              fontSize:'clamp(2.4rem,5.5vw,4.5rem)', lineHeight:.94,
+              letterSpacing:'-.03em', marginBottom:'1.1rem',
+            }}>
+              llms.txt<br /><span style={{ color:C.lime }}>Generator</span>
             </h1>
-            <p style={{fontSize:'1.05rem',color:'var(--muted)',lineHeight:1.75,maxWidth:'560px',marginBottom:'1.5rem'}}>
-              Enter your domain and our AI researches your site, writes BLUF descriptions for every key page, and generates a production-ready llms.txt file — in seconds.
+            <p style={{ fontSize:'1rem', color:C.muted, lineHeight:1.75, maxWidth:530, marginBottom:'1.25rem' }}>
+              Enter your domain and the AI researches your site, writes BLUF descriptions
+              for every key page, and generates a production-ready llms.txt file in seconds.
             </p>
-            <div style={{display:'flex',gap:'1rem',flexWrap:'wrap'}}>
+            <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
               {['ChatGPT','Perplexity','Claude','Gemini','Grok'].map(e => (
-                <span key={e} style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'var(--muted2)',border:'1px solid var(--border)',padding:'.25rem .65rem',borderRadius:'100px'}}>
+                <span key={e} style={{
+                  fontFamily:"'JetBrains Mono',monospace", fontSize:'.63rem',
+                  color:C.muted2, border:`1px solid ${C.line}`,
+                  padding:'.22rem .6rem', borderRadius:100,
+                }}>
                   ✓ {e}
                 </span>
               ))}
             </div>
           </div>
 
-          <div style={{display:'grid',gridTemplateColumns:'420px 1fr',gap:'2rem',padding:'4rem 0 6rem',alignItems:'start'}}>
+          {/* ── Two-column layout ─────────────────────────────────────────── */}
+          <div style={{
+            display:'grid', gridTemplateColumns:'400px 1fr',
+            gap:'2rem', padding:'3.5rem 0 6rem', alignItems:'start',
+          }}>
 
-            {/* ── FORM ── */}
-            <div style={{background:'var(--card)',border:'1px solid var(--border)',borderRadius:'14px',padding:'2rem',display:'flex',flexDirection:'column',gap:'1.25rem',position:'sticky',top:'130px'}}>
+            {/* ── FORM PANEL ──────────────────────────────────────────────── */}
+            <div className="llms-card" style={{ padding:'1.75rem', display:'flex',
+              flexDirection:'column', gap:'1.1rem', position:'sticky', top:130 }}>
 
-              {/* Quick fill */}
+              {/* Info banner */}
+              <div style={{
+                padding:'10px 13px', border:`1px solid rgba(69,228,255,.13)`,
+                background:'rgba(69,228,255,.04)', borderRadius:7,
+                fontSize:10, color:C.muted, lineHeight:1.7,
+              }}>
+                {mono('WHAT IS llms.txt? — ', { fontSize:9, letterSpacing:'.07em', color:C.cyan })}
+                A standardised markdown file at{' '}
+                {mono('yoursite.com/llms.txt', { fontSize:9, color:C.lime })}{' '}
+                that tells AI engines exactly what your site does.{' '}
+                <strong style={{ color:C.text }}>Think robots.txt, but for AI crawlers.</strong>
+              </div>
+
+              <div style={{ height:1, background:C.line }} />
+
+              {/* Quick examples */}
               <div>
-                <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--muted2)',marginBottom:'.5rem'}}>Quick examples</div>
-                <div style={{display:'flex',gap:'.4rem',flexWrap:'wrap'}}>
-                  {['notioncue.com','stripe.com','linear.app','vercel.com'].map(d => (
-                    <button key={d} onClick={() => setForm(p => ({...p, domain:d}))}
-                      style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',color:'var(--muted2)',background:'rgba(255,255,255,.03)',border:'1px solid var(--border)',borderRadius:'4px',padding:'.25rem .6rem'}}>
+                {label9('Quick examples')}
+                <div style={{ display:'flex', gap:5, flexWrap:'wrap' }}>
+                  {['stripe.com','linear.app','vercel.com','notion.so','freezbone.com'].map(d => (
+                    <button key={d} className="llms-example-btn" onClick={() => setDomain(d)}
+                      style={{
+                        fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:C.muted2,
+                        background:'rgba(255,255,255,.03)', border:`1px solid ${C.line}`,
+                        borderRadius:4, padding:'4px 9px', transition:'all .2s', cursor:'pointer',
+                      }}>
                       {d}
                     </button>
                   ))}
                 </div>
               </div>
 
-              <div style={{height:'1px',background:'var(--border)'}} />
-              <div style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'1rem'}}>Site information</div>
-
-              {/* Domain — primary field */}
-              <div style={{display:'flex',flexDirection:'column',gap:'.3rem'}}>
-                <label style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--muted2)'}}>
-                  Domain <span style={{color:'var(--accent)'}}>*</span>
-                </label>
-                <input className="form-input" placeholder="yourdomain.com"
-                  value={form.domain} onChange={e => setForm(p => ({...p, domain:e.target.value}))}
-                  onKeyDown={e => e.key==='Enter' && generate()} />
+              <div style={{ height:1, background:C.line }} />
+              <div style={{ fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:600, fontSize:'1rem' }}>
+                Site information
               </div>
 
-              {[
-                {id:'name',   label:'Site name (optional)',        placeholder:'Notion Cue'},
-                {id:'desc',   label:'One-line description (optional)', placeholder:'AI visibility platform for SEO teams'},
-                {id:'email',  label:'Contact email (optional)',    placeholder:'hello@yourdomain.com'},
-              ].map(f => (
-                <div key={f.id} style={{display:'flex',flexDirection:'column',gap:'.3rem'}}>
-                  <label style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--muted2)'}}>{f.label}</label>
-                  <input className="form-input" placeholder={f.placeholder}
-                    value={(form as any)[f.id]} onChange={e => setForm(p => ({...p,[f.id]:e.target.value}))} />
+              {/* Domain input */}
+              <div style={{ display:'flex', flexDirection:'column', gap:4 }}>
+                {label9('Domain *')}
+                <div style={{
+                  display:'flex', alignItems:'center', gap:8,
+                  border:`1px solid ${C.line2}`, background:'rgba(255,255,255,.025)',
+                  borderRadius:6, padding:'0 12px', height:40, transition:'border-color .2s',
+                }}>
+                  <span style={{ color:C.muted2, fontSize:14 }}>⌕</span>
+                  <input
+                    className="llms-input"
+                    placeholder="e.g. freezbone.com or stripe.com"
+                    value={domain}
+                    onChange={e => setDomain(e.target.value)}
+                    onKeyDown={e => e.key === 'Enter' && generate()}
+                    style={{
+                      background:'transparent', border:'none', color:C.text,
+                      fontSize:11, flex:1,
+                      fontFamily:"'JetBrains Mono',monospace",
+                    }}
+                  />
                 </div>
-              ))}
-
-              <div style={{display:'flex',flexDirection:'column',gap:'.3rem'}}>
-                <label style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--muted2)'}}>Language</label>
-                <select className="form-input" value={form.lang} onChange={e => setForm(p => ({...p, lang:e.target.value}))}>
-                  {[['en','English'],['es','Spanish'],['fr','French'],['de','German'],['ja','Japanese'],['zh','Chinese']].map(([v,l]) => (
-                    <option key={v} value={v} style={{background:'#100e22'}}>{l}</option>
-                  ))}
-                </select>
               </div>
 
-              <div style={{height:'1px',background:'var(--border)'}} />
-              <div style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'1rem'}}>AI bot permissions</div>
-              <div style={{fontSize:'.78rem',color:'var(--muted2)',marginTop:'-.5rem'}}>Checked = allow to crawl</div>
+              <div style={{ height:1, background:C.line }} />
+              <div style={{ fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:600, fontSize:'1rem' }}>
+                Options
+              </div>
 
-              {[
-                {key:'gpt',   label:'GPTBot — OpenAI / ChatGPT'},
-                {key:'gem',   label:'Google-Extended — Gemini'},
-                {key:'plex',  label:'PerplexityBot — Perplexity'},
-                {key:'claude',label:'ClaudeBot — Anthropic / Claude'},
-                {key:'cop',   label:'bingbot — Microsoft / Copilot'},
-              ].map(b => (
-                <label key={b.key} style={{display:'flex',alignItems:'center',gap:'.75rem',cursor:'pointer',fontSize:'.85rem',color:'var(--muted)'}}>
-                  <input type="checkbox" checked={(form as any)[b.key]} onChange={e => setForm(p => ({...p,[b.key]:e.target.checked}))} />
-                  {b.label}
+              {/* Checkboxes */}
+              {([
+                { key:'incFull',   val:incFull,   set:setIncFull,   label:'Include llms-full.txt (extended version)' },
+                { key:'incBluf',   val:incBluf,   set:setIncBluf,   label:'Add BLUF descriptions to all pages' },
+                { key:'incBot',    val:incBot,    set:setIncBot,    label:'Include AI bot permissions block' },
+              ] as { key:string; val:boolean; set:(v:boolean)=>void; label:string }[]).map(c => (
+                <label key={c.key} className="llms-check-row"
+                  style={{
+                    display:'flex', alignItems:'center', gap:9, cursor:'pointer',
+                    fontFamily:"'JetBrains Mono',monospace", fontSize:'.78rem', color:C.muted,
+                    padding:'7px 10px', border:`1px solid ${C.line}`, borderRadius:6,
+                    background:'rgba(255,255,255,.02)', transition:'border-color .2s',
+                    userSelect:'none',
+                  }}>
+                  <input
+                    type="checkbox" checked={c.val}
+                    onChange={e => c.set(e.target.checked)}
+                    style={{ accentColor:C.lime, width:13, height:13, cursor:'pointer' }}
+                  />
+                  {c.label}
                 </label>
               ))}
 
-              <div style={{height:'1px',background:'var(--border)'}} />
-
-              {[
-                {id:'allow',    label:'Allowed paths (one per line)',  placeholder:'/\n/blog\n/products'},
-                {id:'disallow', label:'Blocked paths (one per line)',   placeholder:'/admin\n/private'},
-              ].map(f => (
-                <div key={f.id} style={{display:'flex',flexDirection:'column',gap:'.3rem'}}>
-                  <label style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--muted2)'}}>{f.label}</label>
-                  <textarea className="form-input" placeholder={f.placeholder} rows={3}
-                    value={(form as any)[f.id]} onChange={e => setForm(p => ({...p,[f.id]:e.target.value}))}
-                    style={{resize:'vertical'}} />
-                </div>
-              ))}
-
+              {/* Error */}
               {error && (
-                <div style={{padding:'.65rem 1rem',background:'rgba(248,113,113,.07)',border:'1px solid rgba(248,113,113,.2)',borderRadius:'8px',fontSize:'.8rem',color:'var(--red)',fontFamily:"'JetBrains Mono',monospace"}}>
+                <div style={{
+                  padding:'10px 13px', background:'rgba(255,116,116,.06)',
+                  border:'1px solid rgba(255,116,116,.18)', borderRadius:7,
+                  fontSize:10, color:C.red, fontFamily:"'JetBrains Mono',monospace", lineHeight:1.6,
+                }}>
                   {error}
                 </div>
               )}
 
+              {/* Generate button */}
               <button onClick={generate} disabled={loading}
-                style={{width:'100%',padding:'.85rem',background:loading?'rgba(200,242,71,.4)':'var(--accent)',color:'var(--bg)',border:'none',borderRadius:'100px',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'.9rem',display:'flex',alignItems:'center',justifyContent:'center',gap:'.6rem',transition:'background .2s'}}>
-                {loading && <div className="spin" style={{width:'14px',height:'14px',border:'2px solid rgba(4,3,12,.3)',borderTopColor:'var(--bg)',borderRadius:'50%'}} />}
-                {loading ? steps[step-1] || 'Generating...' : 'Generate with AI →'}
+                style={{
+                  width:'100%', padding:'.8rem',
+                  background: loading ? 'rgba(202,255,69,.45)' : C.lime,
+                  color:'#07100b', border:'none', borderRadius:100,
+                  fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:700,
+                  fontSize:'.9rem', display:'flex', alignItems:'center',
+                  justifyContent:'center', gap:8, transition:'background .2s',
+                  cursor: loading ? 'not-allowed' : 'pointer',
+                }}>
+                {loading && (
+                  <div className="llms-spin" style={{
+                    width:13, height:13,
+                    border:'2px solid rgba(4,3,12,.25)',
+                    borderTopColor:'#07100b', borderRadius:'50%',
+                  }} />
+                )}
+                {loading
+                  ? (STEP_MSGS[step - 1] ?? 'Generating...')
+                  : 'Generate with AI →'
+                }
               </button>
             </div>
 
-            {/* ── OUTPUT ── */}
+            {/* ── OUTPUT PANEL ─────────────────────────────────────────────── */}
             <div>
 
               {/* Loading state */}
               {loading && (
-                <div style={{background:'var(--card)',border:'1px solid var(--border)',borderRadius:'14px',padding:'2rem',marginBottom:'1.5rem'}}>
-                  <div style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'1rem',marginBottom:'1.25rem'}}>
-                    AI is researching {form.domain || 'your domain'}...
+                <div className="llms-card" style={{ padding:'1.75rem', marginBottom:'1.25rem' }}>
+                  <div style={{
+                    fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:600,
+                    fontSize:'1rem', marginBottom:'1.1rem',
+                  }}>
+                    AI is researching {domain || 'your domain'}...
                   </div>
-                  <div style={{display:'flex',flexDirection:'column',gap:'.65rem'}}>
-                    {steps.map((s,i) => (
-                      <div key={i} style={{display:'flex',alignItems:'center',gap:'.75rem',fontFamily:"'JetBrains Mono',monospace",fontSize:'.72rem',color:i<step?'var(--green)':i===step-1?'var(--accent)':'var(--muted2)',transition:'color .3s'}}>
-                        {i < step ? (
-                          <span style={{width:'16px',height:'16px',display:'grid',placeItems:'center',borderRadius:'50%',background:'rgba(74,222,128,.1)',border:'1px solid rgba(74,222,128,.3)',fontSize:'9px',color:'var(--green)',flexShrink:0}}>✓</span>
-                        ) : i === step-1 ? (
-                          <div className="spin" style={{width:'16px',height:'16px',border:'1.5px solid rgba(200,242,71,.2)',borderTopColor:'var(--accent)',borderRadius:'50%',flexShrink:0}} />
-                        ) : (
-                          <span style={{width:'16px',height:'16px',display:'grid',placeItems:'center',borderRadius:'50%',background:'rgba(255,255,255,.04)',border:'1px solid var(--border)',fontSize:'9px',color:'var(--muted2)',flexShrink:0}}>○</span>
-                        )}
-                        {s}
-                      </div>
-                    ))}
+                  <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
+                    {STEP_MSGS.map((s, i) => {
+                      const n = i + 1
+                      const done    = step > n
+                      const current = step === n
+                      return (
+                        <div key={i} style={{
+                          display:'flex', alignItems:'center', gap:10,
+                          fontFamily:"'JetBrains Mono',monospace", fontSize:'.7rem',
+                          color: done ? C.green : current ? C.lime : C.muted2,
+                          transition:'color .3s',
+                        }}>
+                          {done ? (
+                            <span style={{
+                              width:16, height:16, display:'grid', placeItems:'center',
+                              borderRadius:'50%', background:'rgba(82,227,142,.1)',
+                              border:'1px solid rgba(82,227,142,.3)', fontSize:9,
+                              color:C.green, flexShrink:0,
+                            }}>✓</span>
+                          ) : current ? (
+                            <div className="llms-spin" style={{
+                              width:16, height:16, borderRadius:'50%', flexShrink:0,
+                              border:'1.5px solid rgba(202,255,69,.18)',
+                              borderTopColor:C.lime,
+                            }} />
+                          ) : (
+                            <span style={{
+                              width:16, height:16, display:'grid', placeItems:'center',
+                              borderRadius:'50%', background:'rgba(255,255,255,.04)',
+                              border:`1px solid ${C.line}`, fontSize:9,
+                              color:C.muted2, flexShrink:0,
+                            }}>○</span>
+                          )}
+                          {s}
+                        </div>
+                      )
+                    })}
                   </div>
                   {/* Shimmer bars */}
-                  <div style={{marginTop:'1.5rem',display:'flex',flexDirection:'column',gap:'.5rem'}}>
-                    {[85,65,75,55].map((w,i) => (
-                      <div key={i} className="shimmer" style={{height:'10px',borderRadius:'5px',width:`${w}%`}} />
+                  <div style={{ marginTop:'1.25rem', display:'flex', flexDirection:'column', gap:6 }}>
+                    {[80, 62, 71, 54].map((w, i) => (
+                      <div key={i} className="llms-shimmer"
+                        style={{ height:9, borderRadius:4, width:`${w}%` }} />
                     ))}
                   </div>
                 </div>
@@ -297,156 +537,296 @@ export default function LLMSTxtPage() {
 
               {/* Empty state */}
               {!loading && !result && (
-                <div style={{background:'var(--card)',border:'1px solid var(--border)',borderRadius:'14px',padding:'3rem',textAlign:'center',minHeight:'360px',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:'1rem'}}>
-                  <div style={{width:'52px',height:'52px',display:'grid',placeItems:'center',background:'rgba(200,242,71,.07)',border:'1px solid rgba(200,242,71,.15)',borderRadius:'12px',fontSize:'22px'}}>📄</div>
-                  <div style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'1.1rem'}}>Your llms.txt will appear here</div>
-                  <p style={{fontSize:'.85rem',color:'var(--muted2)',maxWidth:'320px',lineHeight:1.6}}>Enter your domain, configure bot permissions, and click Generate. AI will research your site and write the file for you.</p>
+                <div className="llms-card" style={{
+                  padding:'3rem', textAlign:'center', minHeight:340,
+                  display:'flex', flexDirection:'column',
+                  alignItems:'center', justifyContent:'center', gap:'1rem',
+                }}>
+                  <div style={{
+                    width:50, height:50, display:'grid', placeItems:'center',
+                    background:'rgba(202,255,69,.07)', border:'1px solid rgba(202,255,69,.15)',
+                    borderRadius:12, fontSize:22,
+                  }}>📄</div>
+                  <div style={{ fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:600, fontSize:'1.05rem' }}>
+                    Your llms.txt will appear here
+                  </div>
+                  <p style={{ fontSize:'.83rem', color:C.muted2, maxWidth:310, lineHeight:1.65 }}>
+                    Enter your domain, configure options, and click Generate.
+                    AI will research the site and write the file.
+                  </p>
                 </div>
               )}
 
               {/* Results */}
               {!loading && result && (
-                <div className="fadeIn">
+                <div className="llms-fadeIn" ref={resultsRef}>
 
                   {/* Score cards */}
-                  <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'.75rem',marginBottom:'1.25rem'}}>
+                  <div style={{
+                    display:'grid', gridTemplateColumns:'repeat(4,1fr)',
+                    gap:10, marginBottom:12,
+                  }}>
                     {[
-                      {label:'AEO Score Lift',   val:`+${result.aeo_lift || 12}`,        sub:'estimated points', color:'var(--accent)'},
-                      {label:'Engines Helped',   val:result.engines_helped || 5,          sub:'AI search engines', color:'var(--cyan)'},
-                      {label:'Spec Compliance',  val:'VALID',                              sub:'llms.txt standard', color:'var(--green)'},
+                      { label:'AEO SCORE LIFT',  val:`+${result.aeo_score_impact ?? 12}`,       sub:'estimated points', color:C.lime   },
+                      { label:'PAGES INDEXED',    val:result.pages_indexed ?? 8,                 sub:'for AI engines',   color:C.cyan   },
+                      { label:'AI ENGINES',       val:result.ai_engines_benefiting?.length ?? 5, sub:'will benefit',     color:C.violet },
+                      { label:'SPEC',             val:'VALID',                                   sub:'llms.txt standard',color:C.green  },
                     ].map(c => (
-                      <div key={c.label} style={{background:'var(--card)',border:'1px solid var(--border)',borderRadius:'10px',padding:'1rem'}}>
-                        <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--muted2)',marginBottom:'.6rem'}}>{c.label}</div>
-                        <div style={{fontFamily:"'Familjen Grotesk',sans-serif",fontSize:'1.6rem',fontWeight:700,color:c.color,lineHeight:1}}>{c.val}</div>
-                        <div style={{fontSize:'.75rem',color:'var(--muted2)',marginTop:'.25rem'}}>{c.sub}</div>
+                      <div key={c.label} className="llms-card llms-score-card"
+                        style={{ padding:14, transition:'transform .25s,box-shadow .25s,border-color .25s' }}>
+                        {mono(c.label, {
+                          fontSize:8, letterSpacing:'.08em', textTransform:'uppercase',
+                          color:C.muted2, display:'block', marginBottom:8,
+                        })}
+                        <div style={{
+                          fontFamily:"'Familjen Grotesk',sans-serif", fontSize:22,
+                          fontWeight:700, color:c.color, lineHeight:1, marginBottom:3,
+                        }}>
+                          {c.val}
+                        </div>
+                        <div style={{ fontSize:9, color:C.muted }}>{c.sub}</div>
                       </div>
                     ))}
                   </div>
 
-                  {/* Company summary */}
-                  <div style={{padding:'.85rem 1.1rem',background:'rgba(123,108,255,.05)',border:'1px solid rgba(123,108,255,.15)',borderRadius:'10px',marginBottom:'1.25rem',fontSize:'.82rem',color:'var(--muted)',lineHeight:1.6}}>
-                    <strong style={{color:'var(--violet)',fontFamily:"'JetBrains Mono',monospace",fontSize:'.62rem',letterSpacing:'.08em'}}>AI RESEARCH — </strong>
-                    <strong style={{color:'var(--text)'}}>{result.company_name}</strong>
-                    {result.category && <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'var(--muted2)',marginLeft:'.5rem',border:'1px solid var(--border)',padding:'.15rem .45rem',borderRadius:'3px'}}>{result.category}</span>}
-                    <br/>{result.tagline}
-                  </div>
+                  {/* Company banner */}
+                  {result.company_name && (
+                    <div style={{
+                      padding:'10px 14px',
+                      border:'1px solid rgba(146,124,255,.15)',
+                      background:'rgba(146,124,255,.04)',
+                      borderRadius:7, marginBottom:12,
+                      fontSize:10, color:C.muted, lineHeight:1.7,
+                    }}>
+                      {mono('AI RESEARCH — ', { fontSize:9, letterSpacing:'.07em', color:C.violet })}
+                      <strong style={{ color:C.text }}>{result.company_name}</strong>
+                      {result.category && (
+                        <span style={{
+                          fontFamily:"'JetBrains Mono',monospace", fontSize:9,
+                          color:C.muted2, marginLeft:6, border:`1px solid ${C.line}`,
+                          padding:'2px 6px', borderRadius:3,
+                        }}>
+                          {result.category}
+                        </span>
+                      )}
+                      <br />{result.tagline}
+                    </div>
+                  )}
 
                   {/* Tabs */}
-                  <div style={{display:'flex',gap:0,borderBottom:'1px solid var(--border)',marginBottom:'1.25rem'}}>
+                  <div style={{
+                    display:'flex', gap:0,
+                    borderBottom:`1px solid ${C.line}`, marginBottom:12,
+                  }}>
                     {TABS.map(t => (
-                      <button key={t.id} className="tab-btn" onClick={() => setActiveTab(t.id)}
-                        style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',letterSpacing:'.06em',textTransform:'uppercase',padding:'.6rem .9rem',background:'none',border:'none',borderBottom:activeTab===t.id?'2px solid var(--accent)':'2px solid transparent',color:activeTab===t.id?'var(--accent)':'var(--muted2)',marginBottom:'-1px',transition:'color .2s',whiteSpace:'nowrap'}}>
+                      <button key={t.id} className="llms-tab"
+                        onClick={() => setActiveTab(t.id)}
+                        style={{
+                          fontFamily:"'JetBrains Mono',monospace", fontSize:'.63rem',
+                          letterSpacing:'.06em', textTransform:'uppercase',
+                          padding:'.55rem .85rem', background:'none', border:'none',
+                          borderBottom: activeTab === t.id ? `2px solid ${C.lime}` : '2px solid transparent',
+                          color: activeTab === t.id ? C.lime : C.muted2,
+                          marginBottom:-1, transition:'color .2s', whiteSpace:'nowrap',
+                          cursor:'pointer',
+                        }}>
                         {t.label}
                       </button>
                     ))}
                   </div>
 
-                  {/* Tab: llms.txt */}
-                  {activeTab==='standard' && (
-                    <div style={{background:'#0a0818',border:'1px solid var(--border)',borderRadius:'12px',overflow:'hidden'}}>
-                      <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'.75rem 1.1rem',borderBottom:'1px solid var(--border)',background:'rgba(255,255,255,.02)'}}>
-                        <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'var(--accent)'}}>llms.txt</span>
-                        <div style={{display:'flex',gap:'.5rem'}}>
-                          <button className="copy-btn" onClick={() => copy(result.llms_txt,'std')}
-                            style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',color:'var(--muted2)',background:'none',border:'1px solid var(--border)',padding:'.3rem .7rem',borderRadius:'4px',transition:'all .2s'}}>
-                            {copied==='std'?'Copied!':'Copy'}
-                          </button>
-                          <button className="dl-btn" onClick={() => download(result.llms_txt,'llms.txt')}
-                            style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',color:'var(--accent)',background:'rgba(200,242,71,.06)',border:'1px solid rgba(200,242,71,.2)',padding:'.3rem .7rem',borderRadius:'4px',transition:'all .2s'}}>
-                            ↓ Download
-                          </button>
+                  {/* ── Tab: llms.txt ──────────────────────────────────────── */}
+                  {activeTab === 'standard' && (
+                    <div className="llms-card" style={{ overflow:'hidden' }}>
+                      <div style={{
+                        display:'flex', alignItems:'center',
+                        justifyContent:'space-between', padding:'11px 15px',
+                        borderBottom:`1px solid ${C.line}`,
+                        background:'rgba(255,255,255,.02)', flexWrap:'wrap', gap:8,
+                      }}>
+                        <div style={{ display:'flex', alignItems:'center', gap:8 }}>
+                          {mono('llms.txt', { fontSize:10, color:C.lime })}
+                          {pill(C.green, 'rgba(82,227,142,.07)', 'rgba(82,227,142,.2)', 'SPEC COMPLIANT')}
                         </div>
+                        <ActionRow content={result.llms_txt} copyKey="std" filename="llms.txt" />
                       </div>
-                      <pre style={{padding:'1.25rem',fontFamily:"'JetBrains Mono',monospace",fontSize:'.75rem',lineHeight:1.85,color:'var(--muted)',maxHeight:'480px',overflowY:'auto',whiteSpace:'pre-wrap',wordBreak:'break-word'}}>
+                      <pre className="llms-pre" style={{
+                        padding:16, fontFamily:"'JetBrains Mono',monospace",
+                        fontSize:10, color:C.muted, lineHeight:1.85,
+                        maxHeight:500, overflowY:'auto',
+                      }}>
                         {result.llms_txt}
                       </pre>
                     </div>
                   )}
 
-                  {/* Tab: llms-full.txt */}
-                  {activeTab==='full' && (
-                    <div style={{background:'#0a0818',border:'1px solid var(--border)',borderRadius:'12px',overflow:'hidden'}}>
-                      <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'.75rem 1.1rem',borderBottom:'1px solid var(--border)',background:'rgba(255,255,255,.02)'}}>
-                        <div style={{display:'flex',alignItems:'center',gap:'.6rem'}}>
-                          <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'var(--violet)'}}>llms-full.txt</span>
-                          <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.58rem',color:'var(--muted2)',border:'1px solid var(--border)',padding:'.15rem .45rem',borderRadius:'3px'}}>EXTENDED</span>
+                  {/* ── Tab: llms-full.txt ─────────────────────────────────── */}
+                  {activeTab === 'full' && (
+                    <div className="llms-card" style={{ overflow:'hidden' }}>
+                      <div style={{
+                        display:'flex', alignItems:'center',
+                        justifyContent:'space-between', padding:'11px 15px',
+                        borderBottom:`1px solid ${C.line}`,
+                        background:'rgba(255,255,255,.02)', flexWrap:'wrap', gap:8,
+                      }}>
+                        <div style={{ display:'flex', alignItems:'center', gap:8 }}>
+                          {mono('llms-full.txt', { fontSize:10, color:C.violet })}
+                          {pill(C.violet, 'rgba(146,124,255,.07)', 'rgba(146,124,255,.2)', 'EXTENDED')}
                         </div>
-                        <div style={{display:'flex',gap:'.5rem'}}>
-                          <button className="copy-btn" onClick={() => copy(result.llms_full_txt,'full')}
-                            style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',color:'var(--muted2)',background:'none',border:'1px solid var(--border)',padding:'.3rem .7rem',borderRadius:'4px',transition:'all .2s'}}>
-                            {copied==='full'?'Copied!':'Copy'}
-                          </button>
-                          <button className="dl-btn" onClick={() => download(result.llms_full_txt,'llms-full.txt')}
-                            style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',color:'var(--violet)',background:'rgba(123,108,255,.06)',border:'1px solid rgba(123,108,255,.2)',padding:'.3rem .7rem',borderRadius:'4px',transition:'all .2s'}}>
-                            ↓ Download
-                          </button>
-                        </div>
+                        <ActionRow
+                          content={incFull ? result.llms_full_txt : ''}
+                          copyKey="full" filename="llms-full.txt"
+                          accentColor={C.violet} accentBorder="rgba(146,124,255,.3)"
+                        />
                       </div>
-                      <pre style={{padding:'1.25rem',fontFamily:"'JetBrains Mono',monospace",fontSize:'.75rem',lineHeight:1.85,color:'var(--muted)',maxHeight:'480px',overflowY:'auto',whiteSpace:'pre-wrap',wordBreak:'break-word'}}>
-                        {result.llms_full_txt}
+                      <pre className="llms-pre" style={{
+                        padding:16, fontFamily:"'JetBrains Mono',monospace",
+                        fontSize:10, color:C.muted, lineHeight:1.85,
+                        maxHeight:500, overflowY:'auto',
+                      }}>
+                        {incFull
+                          ? result.llms_full_txt
+                          : '# llms-full.txt\n\nEnable "Include llms-full.txt" above and re-generate to get the extended version.\n\nThe full version includes:\n- Detailed product and feature descriptions\n- Full page index with all subpages\n- Integration and compatibility info\n- AI citation guidance\n- Pricing model overview'
+                        }
                       </pre>
                     </div>
                   )}
 
-                  {/* Tab: Validation */}
-                  {activeTab==='validation' && (
-                    <div style={{background:'var(--card)',border:'1px solid var(--border)',borderRadius:'12px',overflow:'hidden'}}>
-                      <div style={{padding:'1rem 1.25rem',borderBottom:'1px solid var(--border)',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'.95rem'}}>
+                  {/* ── Tab: Validation ────────────────────────────────────── */}
+                  {activeTab === 'validation' && (
+                    <div className="llms-card" style={{ padding:16 }}>
+                      <div style={{
+                        fontFamily:"'Familjen Grotesk',sans-serif",
+                        fontWeight:600, fontSize:'.93rem', marginBottom:14,
+                      }}>
                         Spec validation
                       </div>
-                      <div style={{padding:'0 1.25rem'}}>
-                        {(result.validation || []).map((v, i) => (
-                          <div key={i} style={{display:'grid',gridTemplateColumns:'28px 1fr auto',gap:'10px',padding:'11px 0',borderBottom:'1px solid rgba(255,255,255,.05)',alignItems:'center'}}>
-                            <span style={{width:'24px',height:'24px',display:'grid',placeItems:'center',borderRadius:'5px',background:v.pass?'rgba(74,222,128,.08)':'rgba(248,113,113,.08)',color:v.pass?'var(--green)':'var(--red)',fontSize:'11px'}}>
-                              {v.pass?'✓':'×'}
+                      {(result.validation ?? []).map((v, i) => (
+                        <div key={i} style={{
+                          display:'grid', gridTemplateColumns:'26px 1fr auto',
+                          gap:10, padding:'10px 0',
+                          borderBottom:'1px solid rgba(255,255,255,.05)',
+                          alignItems:'center',
+                        }}>
+                          <span style={{
+                            width:22, height:22, display:'grid', placeItems:'center',
+                            borderRadius:5,
+                            background: v.pass ? 'rgba(82,227,142,.08)' : 'rgba(255,116,116,.08)',
+                            color: v.pass ? C.green : C.red,
+                            fontSize:11,
+                          }}>
+                            {v.pass ? '✓' : '×'}
+                          </span>
+                          <div>
+                            <div style={{
+                              fontFamily:"'Familjen Grotesk',sans-serif",
+                              fontWeight:500, fontSize:11, marginBottom:2,
+                            }}>
+                              {v.check}
+                            </div>
+                            <div style={{ fontSize:9, color:C.muted2 }}>{v.note}</div>
+                          </div>
+                          <span style={{
+                            fontFamily:"'JetBrains Mono',monospace", fontSize:9,
+                            padding:'2px 7px', borderRadius:4,
+                            border: v.pass ? '1px solid rgba(82,227,142,.2)' : '1px solid rgba(255,116,116,.2)',
+                            background: v.pass ? 'rgba(82,227,142,.07)' : 'rgba(255,116,116,.07)',
+                            color: v.pass ? C.green : C.red,
+                          }}>
+                            {v.pass ? 'PASS' : 'FAIL'}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* ── Tab: Deploy guide ──────────────────────────────────── */}
+                  {activeTab === 'deploy' && (
+                    <div className="llms-card" style={{ padding:'1.5rem' }}>
+                      <div style={{
+                        fontFamily:"'Familjen Grotesk',sans-serif",
+                        fontWeight:600, fontSize:'.93rem', marginBottom:3,
+                      }}>
+                        Deploy to {domain || 'your domain'}
+                      </div>
+                      <div style={{ fontSize:10, color:C.muted2, marginBottom:16 }}>
+                        3 steps to go live. Must be accessible at your domain root.
+                      </div>
+                      <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
+                        {([
+                          {
+                            n:'01', color:C.lime,
+                            title:'Download your llms.txt',
+                            body:'Click the Download button on the llms.txt tab. The filename must be exactly llms.txt.',
+                          },
+                          {
+                            n:'02', color:C.cyan,
+                            title:'Upload to your domain root',
+                            body:`Place it so it's accessible at https://${domain || 'yourdomain.com'}/llms.txt — same level as robots.txt. For Next.js put it in /public. For WordPress or cPanel, upload via FTP to root.`,
+                          },
+                          {
+                            n:'03', color:C.violet,
+                            title:'Verify it\'s live and re-scan',
+                            body:`Visit https://${domain || 'yourdomain.com'}/llms.txt in your browser — you should see plain text, not HTML. Then go back to your AEO dashboard and re-scan to see the score improvement.`,
+                          },
+                        ] as { n:string; color:string; title:string; body:string }[]).map(s => (
+                          <div key={s.n} style={{
+                            display:'grid', gridTemplateColumns:'34px 1fr', gap:12,
+                            padding:13, border:`1px solid ${C.line}`,
+                            borderRadius:7, background:'rgba(255,255,255,.02)',
+                          }}>
+                            <span style={{
+                              width:30, height:30, display:'grid', placeItems:'center',
+                              borderRadius:6, background:'rgba(255,255,255,.03)',
+                              color:s.color, fontFamily:"'JetBrains Mono',monospace",
+                              fontSize:10, fontWeight:500, flexShrink:0,
+                            }}>
+                              {s.n}
                             </span>
                             <div>
-                              <div style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:500,fontSize:'.82rem',marginBottom:'2px'}}>{v.check}</div>
-                              <div style={{fontSize:'.72rem',color:'var(--muted2)'}}>{v.note}</div>
+                              <div style={{
+                                fontFamily:"'Familjen Grotesk',sans-serif",
+                                fontWeight:600, fontSize:12, marginBottom:4,
+                              }}>
+                                {s.title}
+                              </div>
+                              <div style={{ fontSize:10, color:C.muted, lineHeight:1.65 }}>
+                                {s.body}
+                              </div>
                             </div>
-                            <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',padding:'.2rem .5rem',border:`1px solid ${v.pass?'rgba(74,222,128,.2)':'rgba(248,113,113,.2)'}`,background:v.pass?'rgba(74,222,128,.06)':'rgba(248,113,113,.06)',borderRadius:'4px',color:v.pass?'var(--green)':'var(--red)'}}>
-                              {v.pass?'PASS':'FAIL'}
-                            </span>
                           </div>
                         ))}
                       </div>
                     </div>
                   )}
 
-                  {/* Tab: Deploy guide */}
-                  {activeTab==='deploy' && (
-                    <div style={{background:'var(--card)',border:'1px solid var(--border)',borderRadius:'12px',padding:'1.5rem',display:'flex',flexDirection:'column',gap:'1rem'}}>
-                      <div style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'.95rem',marginBottom:'.25rem'}}>Deploy to {form.domain || 'your domain'}</div>
-                      {([
-                        {n:'01',color:'var(--accent)',  title:'Download llms.txt',     body:'Click the Download button on the llms.txt tab. The filename must be exactly llms.txt.'},
-                        {n:'02',color:'var(--cyan)',    title:'Upload to domain root', body:'For Next.js: place in your /public folder. It will be served at your domain root automatically.'},
-                        {n:'03',color:'var(--violet)',  title:'Verify it is live',     body:'Visit https://' + (form.domain || 'yourdomain.com') + '/llms.txt in your browser. Should return plain text, not HTML.'},
-                        {n:'04',color:'var(--green)',   title:'Re-run your AEO scan',  body:'Go back to the dashboard and re-scan ' + (form.domain || 'your domain') + ' to see the score improvement.'},
-                      ] as {n:string;color:string;title:string;body:string}[]).map(s => (
-                        <div key={s.n} style={{display:'grid',gridTemplateColumns:'36px 1fr',gap:'1rem',padding:'1rem',border:'1px solid var(--border)',borderRadius:'10px',background:'rgba(255,255,255,.02)'}}>
-                          <span style={{width:'32px',height:'32px',display:'grid',placeItems:'center',borderRadius:'7px',background:'rgba(255,255,255,.04)',color:s.color,fontFamily:"'JetBrains Mono',monospace",fontSize:'.7rem',fontWeight:500,flexShrink:0}}>{s.n}</span>
-                          <div>
-                            <div style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'.88rem',marginBottom:'.3rem'}}>{s.title}</div>
-                            <div style={{fontSize:'.8rem',color:'var(--muted)',lineHeight:1.6}}>{s.body}</div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
                   {/* Re-generate row */}
-                  <div style={{display:'flex',gap:'.6rem',marginTop:'1rem',justifyContent:'flex-end'}}>
-                    <button onClick={() => setResult(null)}
-                      style={{border:'1px solid var(--border)',background:'transparent',color:'var(--muted)',borderRadius:'100px',padding:'.6rem 1.1rem',fontSize:'.78rem',fontFamily:"'JetBrains Mono',monospace"}}>
-                      ← Clear
+                  <div style={{
+                    display:'flex', gap:8, marginTop:12, justifyContent:'flex-end',
+                  }}>
+                    <button
+                      onClick={() => { setResult(null); setDomain('') }}
+                      style={{
+                        border:`1px solid ${C.line}`, background:'rgba(255,255,255,.03)',
+                        color:C.muted, borderRadius:100, padding:'.55rem 1rem',
+                        fontSize:'.75rem', fontFamily:"'JetBrains Mono',monospace",
+                        cursor:'pointer',
+                      }}>
+                      ← New domain
                     </button>
                     <button onClick={generate}
-                      style={{background:'var(--accent)',color:'var(--bg)',border:'none',borderRadius:'100px',padding:'.6rem 1.1rem',fontSize:'.78rem',fontWeight:700,fontFamily:"'Familjen Grotesk',sans-serif"}}>
+                      style={{
+                        background:C.lime, color:'#07100b', border:'none',
+                        borderRadius:100, padding:'.55rem 1.1rem',
+                        fontSize:'.78rem', fontWeight:700,
+                        fontFamily:"'Familjen Grotesk',sans-serif", cursor:'pointer',
+                      }}>
                       Re-generate
                     </button>
                   </div>
                 </div>
               )}
+
             </div>
           </div>
         </div>

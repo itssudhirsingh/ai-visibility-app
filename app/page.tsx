@@ -5,6 +5,19 @@ import FAQClient from '@/components/FAQClient'
 import SharedHeader from '@/components/SharedHeader'
 import SharedFooter from '@/components/SharedFooter'
 
+const SUB_NAV = [
+  { label: 'AEO Guide',          href: '/aeo-guide' },
+  { label: 'llms.txt Generator', href: '/llms-text-generator' },
+  { label: 'Robots.txt Generator', href: '/robots-txt' },
+  { label: 'BLUF Templates',     href: '/bluf-templates' },
+  { label: 'Blog',               href: '/blog' },
+  { label: 'Changelog',          href: '/changelog' },
+  { label: 'About',              href: '/about' },
+  { label: 'Privacy',            href: '/privacy' },
+  { label: 'Terms',              href: '/terms' },
+  { label: 'Contact',            href: '/contact' },
+]
+
 export const metadata = {
   title: 'Notion Cue — AI Visibility Intelligence Platform',
   description: 'Track how often your website gets cited by ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude. Get your AEO score in 30 seconds.',

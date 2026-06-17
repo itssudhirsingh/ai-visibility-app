@@ -5,14 +5,15 @@ import SharedFooter from '@/components/SharedFooter'
 
 const SUB_NAV = [
   { label: 'AEO Guide',          href: '/aeo-guide' },
-  { label: 'llms.txt Generator', href: '/resources/llms-txt' },
-  { label: 'BLUF Templates',     href: '/resources/bluf-templates' },
-  { label: 'Blog',               href: '/resources/blog' },
-  { label: 'Changelog',          href: '/resources/changelog' },
-  { label: 'About',              href: '/resources/about' },
-  { label: 'Privacy',            href: '/resources/privacy' },
-  { label: 'Terms',              href: '/resources/terms' },
-  { label: 'Contact',            href: '/resources/contact' },
+  { label: 'llms.txt Generator', href: '/llms-text-generator' },
+  { label: 'Robots.txt Generator', href: '/robots-txt' },
+  { label: 'BLUF Templates',     href: '/bluf-templates' },
+  { label: 'Blog',               href: '/blog' },
+  { label: 'Changelog',          href: '/changelog' },
+  { label: 'About',              href: '/about' },
+  { label: 'Privacy',            href: '/privacy' },
+  { label: 'Terms',              href: '/terms' },
+  { label: 'Contact',            href: '/contact' },
 ]
 
 export default function ContactPage() {

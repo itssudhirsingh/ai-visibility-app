@@ -633,7 +633,7 @@ export default function HomePage() {
       <nav>
         <a href="/" className="nav-brand">
           <div className="nav-brand-icon">⚡</div>
-          AEOvision
+          NotionCue
         </a>
         <ul className="nav-links">
           <li><a href="#how">How it works</a></li>
@@ -658,7 +658,7 @@ export default function HomePage() {
             See how AI <span className="hl">sees</span> your <span className="outline">website</span>
           </h1>
           <p className="hero-sub">
-            AEOvision analyzes your website's presence across Google AI Overviews, Perplexity, ChatGPT, and emerging AI search platforms.
+            NotionCue analyzes your website's presence across Google AI Overviews, Perplexity, ChatGPT, and emerging AI search platforms.
           </p>
           <div className="url-input-wrap">
             <input type="url" placeholder="https://yourdomain.com" autoComplete="off" spellCheck={false} />
@@ -777,7 +777,7 @@ export default function HomePage() {
         <div className="s-label">Ready to get started?</div>
         <h2 className="s-h">Begin your <span className="dim">AI visibility journey</span></h2>
         <p className="s-sub">
-          Join thousands of companies already using AEOvision to understand and optimize their AI presence.
+          Join thousands of companies already using NotionCue to understand and optimize their AI presence.
         </p>
         <div className="cta-url-wrap" style={{ marginTop: '2rem' }}>
           <input type="url" placeholder="https://yourdomain.com" autoComplete="off" spellCheck={false} />
@@ -789,7 +789,7 @@ export default function HomePage() {
         <div className="footer-brand">
           <div className="footer-logo">
             <div className="footer-logo-icon"></div>
-            AEOvision
+            NotionCue
           </div>
           <div className="footer-tagline">AI visibility intelligence for the next era of search.</div>
         </div>
@@ -820,7 +820,7 @@ export default function HomePage() {
       </footer>
 
       <div className="footer-bottom">
-        <div className="footer-copy">© 2026 <em>AEOvision</em> — AI Visibility Intelligence Platform</div>
+        <div className="footer-copy">© 2026 <em>NotionCue</em> — AI Visibility Intelligence Platform</div>
         <div className="footer-copy">Built for the next era of search.</div>
       </div>
     </>
