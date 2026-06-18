@@ -15,10 +15,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "NotionCue | Free AI Visibility Checker - Track Your Brand in AI",
-  description: "The AI Brand Visibility tool is designed to analyze and compare how different AI models",
-};
+export const metadata = {
+  title: {
+    default: 'Notion Cue — 100% 🅵🆁🅴🅴 AI Visibility Tool Platform',
+    template: '%s — Notion Cue',  // auto appends on every page
+  },
+  description: 'Track how often your website gets cited by ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude.',
+  metadataBase: new URL('https://notioncue.com'),
+}
 
 export const viewport = {
   width: 'device-width',

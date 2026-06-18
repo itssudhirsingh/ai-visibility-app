@@ -19,10 +19,10 @@ const SUB_NAV = [
 ]
 
 export const metadata = {
-  title: 'Notion Cue — AI Visibility Intelligence Platform',
+  title: 'Notion Cue — 100% 🅵🆁🅴🅴 AI Visibility Tool Platform',
   description: 'Track how often your website gets cited by ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude. Get your AEO score in 30 seconds.',
   openGraph: {
-    title: 'Notion Cue — AI Visibility Intelligence Platform',
+    title: 'Notion Cue — 100% 🅵🆁🅴🅴 AI Visibility Tool Platform',
     description: 'See how visible your brand is to AI engines. Scan your domain free.',
     type: 'website',
   },
