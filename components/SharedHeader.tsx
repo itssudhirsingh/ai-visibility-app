@@ -7,6 +7,26 @@ import Logo from '@/components/logo'
 // ─── Site structure ────────────────────────────────────────────────────────────
 const TOOLS = [
   {
+    label:       'AI Visibilty Tool',
+    href:        '/dashboard',
+    desc:        'Track AI visibility across engines',
+    icon:        '📊',
+    badge:       'Free',
+    badgeColor:  'rgba(146,124,255,.08)',
+    badgeBorder: 'rgba(146,124,255,.25)',
+    badgeText:   '#927cff',
+  },
+  {
+    label:       'AI Topical Cluster Map',
+    href:        '/topic-cluster-generator',
+    desc:        'Generate AI Topical Cluster',
+    icon:        '🎯',
+    badge:       'Free',
+    badgeColor:  'rgba(146,124,255,.08)',
+    badgeBorder: 'rgba(146,124,255,.25)',
+    badgeText:   '#927cff',
+  },
+  {
     label:       'llms.txt Generator',
     href:        '/llms-text-generator',
     desc:        'Generate AI-ready llms.txt files',
@@ -27,7 +47,7 @@ const TOOLS = [
     badgeText:   '#52e38e',
   },
   {
-    label:       'BLUF Templates',
+    label:       'AI BLUF Template',
     href:        '/bluf-templates',
     desc:        'Bottom-line-up-front content templates',
     icon:        '⚡',
@@ -36,20 +56,11 @@ const TOOLS = [
     badgeBorder: 'rgba(82,227,142,.25)',
     badgeText:   '#52e38e',
   },
-  {
-    label:       'AEO Dashboard',
-    href:        '/dashboard',
-    desc:        'Track AI visibility across engines',
-    icon:        '📊',
-    badge:       'Free',
-    badgeColor:  'rgba(146,124,255,.08)',
-    badgeBorder: 'rgba(146,124,255,.25)',
-    badgeText:   '#927cff',
-  },
 ]
 
 const NAV_LINKS = [
-  { label: 'Dashboard', href: '/dashboard' },
+  { label: 'Cluster Map', href: '/topic-cluster-generator' },
+  { label: 'AI Visibility', href: '/dashboard' },
   { label: 'AEO Guide', href: '/aeo-guide' },
   { label: 'Blog',      href: '/blog' },
   { label: 'Changelog', href: '/changelog' },
