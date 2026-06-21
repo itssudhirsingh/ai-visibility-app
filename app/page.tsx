@@ -39,6 +39,15 @@ const FEATURES = [
   { icon:'📬', title:'Weekly Alert Reports', desc:'Receive a curated email digest every Monday with changes in your citation count, new competitor movements, and the top 3 action items for that week.', tag:'Monitoring', c:'rgba(251,191,36,.2)' },
 ]
 
+const TOOLS = [
+  { icon:'🔍', title:'AI Visibility Scanner', desc:'Paste any domain and get your AEO score across ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude in under 30 seconds.', cta:'Run free scan', href:'/dashboard', tag:'Core', c:'rgba(200,242,71,.2)' },
+  { icon:'✍️', title:'BLUF Builder', desc:'Paste a URL and get 3 conversational, citation-ready summaries — direct, benefit-led, and question-led — written from your real page content.', cta:'Generate BLUF', href:'/bluf-builder', tag:'Content', c:'rgba(34,211,238,.2)' },
+  { icon:'🪢', title:'Content Cluster Map', desc:'Enter a pillar topic and get a full hub-and-spoke content map — spokes, articles, and internal linking — scored for both SEO and AI citation potential.', cta:'Build cluster map', href:'/topic-cluster-generator', tag:'Strategy', c:'rgba(244,114,182,.2)' },
+  { icon:'⚡', title:'llms.txt Generator', desc:'Generate a correctly formatted llms.txt file in seconds, pre-configured to allow GPTBot, PerplexityBot, ClaudeBot, and Google-Extended.', cta:'Generate file', href:'/llms-text-generator', tag:'Technical', c:'rgba(123,108,255,.2)' },
+  { icon:'🤖', title:'Robots.txt Generator', desc:'Build a robots.txt that correctly allows AI crawlers without accidentally blocking them through outdated disallow rules.', cta:'Generate file', href:'/robots-txt', tag:'Technical', c:'rgba(74,222,128,.2)' },
+  { icon:'📖', title:'BLUF Templates', desc:'Ready-to-use BLUF content templates for product pages, blog posts, and landing pages — structured the way AI engines prefer to read and cite.', cta:'Browse templates', href:'/bluf-templates', tag:'Content', c:'rgba(251,191,36,.2)' },
+]
+
 const PLANS = [
   { plan:'Free', price:'0', desc:'Perfect for checking your own site and seeing where you stand.', features:['1 domain scan per day','AEO score for 3 LLMs','Basic citation count','llms.txt validator','7-day history'], cta:'Get started free', href:'/dashboard', featured:false },
   { plan:'Pro', price:'49', desc:'For SEO professionals managing client sites and their own brands.', features:['10 domains included','All 6 LLMs tracked daily','Full citation context + sentiment','Competitor benchmarking (up to 5)','Content gap analysis','Weekly email digest reports','90-day history','CSV/PDF exports'], cta:'Start 14-day free trial', href:'/dashboard', featured:true },
@@ -77,6 +86,9 @@ export default function HomePage() {
         button{cursor:pointer;font-family:inherit}
         .feat-card:hover{background:rgba(255,255,255,.03)!important}
         .feat-card:hover .feat-title{color:var(--accent)}
+        .tool-card:hover{background:rgba(255,255,255,.03)!important}
+        .tool-card:hover .tool-title{color:var(--accent)}
+        .tool-card:hover a{text-decoration:underline}
         .price-card{transition:all .3s}
         .price-card:hover{transform:translateY(-4px);border-color:var(--border-h)!important}
         .nav-link:hover{color:var(--text)!important}
@@ -190,6 +202,37 @@ export default function HomePage() {
                 <div className="feat-title" style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'1.1rem',marginBottom:'.5rem',transition:'color .2s'}}>{f.title}</div>
                 <div style={{fontSize:'.85rem',color:'var(--muted)',lineHeight:1.7}}>{f.desc}</div>
                 <span style={{display:'inline-block',marginTop:'1rem',fontFamily:"'JetBrains Mono',monospace",fontSize:'.62rem',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--violet)',background:'rgba(123,108,255,.08)',border:'1px solid rgba(123,108,255,.18)',borderRadius:'4px',padding:'.25rem .6rem'}}>{f.tag}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <div style={{height:'1px',background:'var(--border)',margin:'0 3.5rem'}} />
+
+        {/* ── ALL TOOLS ── */}
+        <section id="tools" style={{padding:'7rem 3.5rem',maxWidth:'1320px',margin:'0 auto'}}>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:'3rem',flexWrap:'wrap',gap:'2rem'}}>
+            <div>
+              <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.68rem',letterSpacing:'.18em',textTransform:'uppercase',color:'var(--violet)',marginBottom:'.75rem'}}>03 — All Tools</div>
+              <h2 style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'clamp(2rem,4vw,3.8rem)',lineHeight:1.05,letterSpacing:'-.025em'}}>
+                Everything free,<br/><span style={{color:'var(--muted)'}}>right now.</span>
+              </h2>
+            </div>
+            <p style={{fontSize:'1rem',color:'var(--muted)',lineHeight:1.75,maxWidth:'480px'}}>Six tools covering scanning, content, strategy, and technical AEO — no signup required to try any of them.</p>
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1px',background:'var(--border)',borderRadius:'16px',overflow:'hidden',border:'1px solid var(--border)'}}>
+            {TOOLS.map((t,i)=>(
+              <div key={i} className="tool-card" style={{background:'var(--card)',padding:'2.5rem 2rem',transition:'background .3s',display:'flex',flexDirection:'column'}}>
+                <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'1.4rem'}}>
+                  <div style={{width:'46px',height:'46px',borderRadius:'12px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.2rem',border:`1px solid ${t.c}`,background:t.c.replace('.2',',.08)')}}>{t.icon}</div>
+                  <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--violet)',background:'rgba(123,108,255,.08)',border:'1px solid rgba(123,108,255,.18)',borderRadius:'4px',padding:'.22rem .55rem'}}>{t.tag}</span>
+                </div>
+                <div className="tool-title" style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'1.1rem',marginBottom:'.6rem',transition:'color .2s'}}>{t.title}</div>
+                <div style={{fontSize:'.85rem',color:'var(--muted)',lineHeight:1.7,marginBottom:'1.5rem',flex:1}}>{t.desc}</div>
+                <a href={t.href} style={{display:'inline-flex',alignItems:'center',gap:'.4rem',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'.82rem',color:'var(--accent)',alignSelf:'flex-start'}}>
+                  {t.cta}
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
               </div>
             ))}
           </div>
@@ -554,7 +597,7 @@ export default function HomePage() {
 
         {/* ── PRICING ── */}
         <section id="pricing" style={{padding:'7rem 3.5rem',maxWidth:'1320px',margin:'0 auto',textAlign:'center'}}>
-          <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.68rem',letterSpacing:'.18em',textTransform:'uppercase',color:'var(--violet)',marginBottom:'.75rem'}}>03 — Pricing</div>
+          <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.68rem',letterSpacing:'.18em',textTransform:'uppercase',color:'var(--violet)',marginBottom:'.75rem'}}>08 — Pricing</div>
           <h2 style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'clamp(2rem,4vw,3.8rem)',lineHeight:1.05,letterSpacing:'-.025em',marginBottom:'1rem'}}>
             Simple, transparent<br/><span style={{color:'var(--muted)'}}>pricing.</span>
           </h2>
@@ -587,7 +630,7 @@ export default function HomePage() {
 
         {/* ── FAQ client island ── */}
         <section style={{padding:'7rem 3.5rem',maxWidth:'1320px',margin:'0 auto',textAlign:'center'}}>
-          <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.68rem',letterSpacing:'.18em',textTransform:'uppercase',color:'var(--violet)',marginBottom:'.75rem'}}>05 — FAQ</div>
+          <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.68rem',letterSpacing:'.18em',textTransform:'uppercase',color:'var(--violet)',marginBottom:'.75rem'}}>09 — FAQ</div>
           <h2 style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'clamp(2rem,4vw,3.8rem)',lineHeight:1.05,letterSpacing:'-.025em',marginBottom:'3rem'}}>
             Common <span style={{color:'var(--muted)'}}>questions.</span>
           </h2>
