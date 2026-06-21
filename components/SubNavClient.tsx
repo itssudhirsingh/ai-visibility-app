@@ -3,6 +3,7 @@ import { usePathname } from 'next/navigation'
 
 const SUB_NAV = [
   { label: 'AEO Guide',          href: '/aeo-guide' },
+  { label: 'Cluster Map',           href: '/topic-cluster-generator' },
   { label: 'llms.txt Generator', href: '/llms-text-generator' },
   { label: 'Robots.txt Generator', href: '/robots-txt' },
   { label: 'BLUF Templates',     href: '/bluf-templates' },
