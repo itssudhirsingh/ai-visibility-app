@@ -4,10 +4,10 @@ import SharedFooter from '@/components/SharedFooter'
 import SubNavClient from '@/components/SubNavClient'
 
 export const metadata = {
-  title: 'The Complete AEO Guide 2026 — Notion Cue',
+  title: 'The Complete AEO Guide 2026 — Start Ranking on AI Search',
   description: 'The full guide to Answer Engine Optimisation — how ChatGPT, Gemini, Perplexity, Claude, Grok, and Copilot select sources, and exactly how to optimise your content to get cited by each.',
   openGraph: {
-    title: 'The Complete AEO Guide 2026 — Notion Cue',
+    title: 'The Complete AEO Guide 2026 — Start Ranking on AI Search',
     description: 'Engine-by-engine breakdown of how AI search works and how to optimise for it. BLUF structure, schema, llms.txt, E-E-A-T, content clusters, and more.',
     type: 'article',
   },
