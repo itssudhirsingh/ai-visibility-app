@@ -56,6 +56,16 @@ const TOOLS = [
     badgeBorder: 'rgba(82,227,142,.25)',
     badgeText:   '#52e38e',
   },
+  {
+    label:       'AI BLUF Generator',
+    href:        '/bluff-builder',
+    desc:        'Bottom-line-up-front content templates',
+    icon:        '⚡',
+    badge:       'FREE',
+    badgeColor:  'rgba(82,227,142,.08)',
+    badgeBorder: 'rgba(82,227,142,.25)',
+    badgeText:   '#52e38e',
+  },
 ]
 
 const NAV_LINKS = [
