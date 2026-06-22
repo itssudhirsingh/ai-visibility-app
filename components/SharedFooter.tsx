@@ -12,7 +12,7 @@ const TOOLS = [
   { label: 'Robots.txt Generator',        href: '/robots-txt',            icon: '🤖', badge: 'FREE',  free: true  },
   { label: 'AI BLUF Templates',           href: '/bluf-templates',        icon: '⚡', badge: 'FREE',  free: true  },
   { label: 'AI BLUF Generator',           href: '/bluf-builder',          icon: '✍️', badge: 'FREE',  free: true  },
-  { label: 'AI E-E-A-T Checker',          href: '/eeat-audit',            icon: '🏅', badge: 'FREE',  free: true  },
+  { label: 'AI E-E-A-T Checker',          href: '/ai-eeat-checker',            icon: '🏅', badge: 'FREE',  free: true  },
   { label: 'AI Page Speed Analyser',      href: '/ai-page-speed-analysis-tools',    icon: '🚀', badge: 'FREE',  free: true  },
   { label: 'AI Readability Checker',      href: '/ai-readability-checker',  icon: '📖', badge: 'FREE',  free: true  },
   { label: 'AI Schema Markup Generator',  href: '/ai-schema-markup-generator',      icon: '🧩', badge: 'FREE',  free: true  },

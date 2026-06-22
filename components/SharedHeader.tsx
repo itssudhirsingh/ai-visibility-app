@@ -68,7 +68,7 @@ const TOOLS = [
   },
   {
     label:       'AI E-E-A-T Checker',
-    href:        '/eeat-audit',
+    href:        '/ai-eeat-checker',
     desc:        'Audit E-E-A-T signals for AI engines',
     icon:        '🏅',
     badge:       'FREE',

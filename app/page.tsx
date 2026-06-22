@@ -60,7 +60,7 @@ const TOOLS = [
   {
     icon:'🏅', title:'E-E-A-T Audit Tool',
     desc:'Audit all four E-E-A-T pillars — Experience, Expertise, Authoritativeness, Trustworthiness — with a pillar-by-pillar score and specific fixes per engine.',
-    cta:'Run audit', href:'/eeat-audit', tag:'Authority', c:'rgba(244,114,182,.2)',
+    cta:'Run audit', href:'/ai-eeat-checker', tag:'Authority', c:'rgba(244,114,182,.2)',
   },
   {
     icon:'🧩', title:'Schema Markup Generator',
