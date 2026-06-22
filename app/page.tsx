@@ -45,7 +45,7 @@ const TOOLS = [
   {
     icon:'📋', title:'AEO Content Brief',
     desc:'Enter a keyword and get a full AEO content brief — BLUF opening, section outline, FAQ blocks, E-E-A-T signals, schema, and competitor gap analysis.',
-    cta:'Generate brief', href:'/aeo-content-brief', tag:'Content', c:'rgba(251,191,36,.2)',
+    cta:'Generate brief', href:'/topic-cluster-generator', tag:'Content', c:'rgba(251,191,36,.2)',
   },
   {
     icon:'🔎', title:'AI Answer Gap Finder',
@@ -55,7 +55,7 @@ const TOOLS = [
   {
     icon:'🌡️', title:'AI Visibility Heatmap',
     desc:'Scan your entire site and get a colour-coded map showing which pages AI engines cite, which need work, and the single most impactful fix per page.',
-    cta:'View heatmap', href:'/visibility-heatmap', tag:'Intelligence', c:'rgba(74,222,128,.2)',
+    cta:'View heatmap', href:'/ai-visibility-heatmap', tag:'Intelligence', c:'rgba(74,222,128,.2)',
   },
   {
     icon:'🏅', title:'E-E-A-T Audit Tool',
@@ -65,12 +65,12 @@ const TOOLS = [
   {
     icon:'🧩', title:'Schema Markup Generator',
     desc:'Paste a URL and get real, filled-in JSON-LD schema — FAQPage, Organization, Article, HowTo, and more — generated from your actual page content.',
-    cta:'Generate schema', href:'/schema-generator', tag:'Technical', c:'rgba(34,211,238,.2)',
+    cta:'Generate schema', href:'/ai-schema-markup-generator', tag:'Technical', c:'rgba(34,211,238,.2)',
   },
   {
     icon:'🚀', title:'Page Speed AEO Checker',
     desc:'Get real Core Web Vitals data and see exactly how your page speed affects citation rates across ChatGPT, Perplexity, and Gemini — with specific fixes.',
-    cta:'Check speed', href:'/page-speed-checker', tag:'Technical', c:'rgba(200,242,71,.2)',
+    cta:'Check speed', href:'/ai-page-speed-analysis-tools', tag:'Technical', c:'rgba(200,242,71,.2)',
   },
   {
     icon:'📖', title:'AI Readability Score',
@@ -85,7 +85,7 @@ const TOOLS = [
   {
     icon:'🔍', title:'llms.txt Validator',
     desc:'Live-fetch and validate any domain\'s llms.txt. Checks format, all 8 AI bot declarations, and flags conflicts with robots.txt — for your site or any competitor.',
-    cta:'Validate file', href:'/llms-txt-validator', tag:'Technical', c:'rgba(251,191,36,.2)',
+    cta:'Validate file', href:'/llms-txt-live-validator', tag:'Technical', c:'rgba(251,191,36,.2)',
   },
   {
     icon:'🤖', title:'Robots.txt Generator',

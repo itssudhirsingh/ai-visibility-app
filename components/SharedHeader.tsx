@@ -78,7 +78,7 @@ const TOOLS = [
   },
   {
     label:       'AI Page Speed Analyser',
-    href:        '/page-speed-checker',
+    href:        '/ai-page-speed-analysis-tools',
     desc:        'Translate Core Web Vitals into AEO impact',
     icon:        '🚀',
     badge:       'FREE',
@@ -98,7 +98,7 @@ const TOOLS = [
   },
   {
     label:       'AI Schema Markup Generator',
-    href:        '/schema-generator',
+    href:        '/ai-schema-markup-generator',
     desc:        'Generate schema markup for AI crawlers',
     icon:        '🧩',
     badge:       'FREE',
@@ -108,7 +108,7 @@ const TOOLS = [
   },
   {
     label:       'AEO Content Brief Generator',
-    href:        '/aeo-content-brief',
+    href:        '/topic-cluster-generator',
     desc:        'Full AEO content brief from a keyword',
     icon:        '📋',
     badge:       'FREE',
@@ -118,7 +118,7 @@ const TOOLS = [
   },
   {
     label:       'AI Visibility Heatmap',
-    href:        '/visibility-heatmap',
+    href:        '/ai-visibility-heatmap',
     desc:        'Site-wide AEO citation coverage map',
     icon:        '🌡️',
     badge:       'FREE',
@@ -128,7 +128,7 @@ const TOOLS = [
   },
   {
     label:       'llms.txt Validator',
-    href:        '/llms-txt-validator',
+    href:        '/llms-txt-live-validator',
     desc:        'Validate any domain\'s llms.txt live',
     icon:        '🔍',
     badge:       'FREE',
