@@ -5,19 +5,6 @@ import FAQClient from '@/components/FAQClient'
 import SharedHeader from '@/components/SharedHeader'
 import SharedFooter from '@/components/SharedFooter'
 
-const SUB_NAV = [
-  { label: 'AEO Guide',          href: '/aeo-guide' },
-  { label: 'llms.txt Generator', href: '/llms-text-generator' },
-  { label: 'Robots.txt Generator', href: '/robots-txt' },
-  { label: 'BLUF Templates',     href: '/bluf-templates' },
-  { label: 'Blog',               href: '/blog' },
-  { label: 'Changelog',          href: '/changelog' },
-  { label: 'About',              href: '/about' },
-  { label: 'Privacy',            href: '/privacy' },
-  { label: 'Terms',              href: '/terms' },
-  { label: 'Contact',            href: '/contact' },
-]
-
 export const metadata = {
   title: 'Notion Cue — 100% 🅵🆁🅴🅴 AI Visibility Tool Platform',
   description: 'Track how often your website gets cited by ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude. Get your AEO score in 30 seconds.',
@@ -40,12 +27,76 @@ const FEATURES = [
 ]
 
 const TOOLS = [
-  { icon:'🔍', title:'AI Visibility Scanner', desc:'Paste any domain and get your AEO score across ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude in under 30 seconds.', cta:'Run free scan', href:'/dashboard', tag:'Core', c:'rgba(200,242,71,.2)' },
-  { icon:'✍️', title:'BLUF Builder', desc:'Paste a URL and get 3 conversational, citation-ready summaries — direct, benefit-led, and question-led — written from your real page content.', cta:'Generate BLUF', href:'/bluf-builder', tag:'Content', c:'rgba(34,211,238,.2)' },
-  { icon:'🪢', title:'Content Cluster Map', desc:'Enter a pillar topic and get a full hub-and-spoke content map — spokes, articles, and internal linking — scored for both SEO and AI citation potential.', cta:'Build cluster map', href:'/topic-cluster-generator', tag:'Strategy', c:'rgba(244,114,182,.2)' },
-  { icon:'⚡', title:'llms.txt Generator', desc:'Generate a correctly formatted llms.txt file in seconds, pre-configured to allow GPTBot, PerplexityBot, ClaudeBot, and Google-Extended.', cta:'Generate file', href:'/llms-text-generator', tag:'Technical', c:'rgba(123,108,255,.2)' },
-  { icon:'🤖', title:'Robots.txt Generator', desc:'Build a robots.txt that correctly allows AI crawlers without accidentally blocking them through outdated disallow rules.', cta:'Generate file', href:'/robots-txt', tag:'Technical', c:'rgba(74,222,128,.2)' },
-  { icon:'📖', title:'BLUF Templates', desc:'Ready-to-use BLUF content templates for product pages, blog posts, and landing pages — structured the way AI engines prefer to read and cite.', cta:'Browse templates', href:'/bluf-templates', tag:'Content', c:'rgba(251,191,36,.2)' },
+  {
+    icon:'📊', title:'AI Visibility Scanner',
+    desc:'Paste any domain and get your AEO score across ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude in under 30 seconds.',
+    cta:'Run free scan', href:'/dashboard', tag:'Core', c:'rgba(200,242,71,.2)',
+  },
+  {
+    icon:'🎯', title:'Content Cluster Map',
+    desc:'Enter a pillar topic and get a full hub-and-spoke content map — spokes, articles, and internal linking — scored for both SEO and AI citation potential.',
+    cta:'Build cluster map', href:'/topic-cluster-generator', tag:'Strategy', c:'rgba(244,114,182,.2)',
+  },
+  {
+    icon:'✍️', title:'BLUF Builder',
+    desc:'Paste a URL and get 3 conversational, citation-ready summaries — direct, benefit-led, and question-led — written from your real page content.',
+    cta:'Generate BLUF', href:'/bluf-builder', tag:'Content', c:'rgba(34,211,238,.2)',
+  },
+  {
+    icon:'📋', title:'AEO Content Brief',
+    desc:'Enter a keyword and get a full AEO content brief — BLUF opening, section outline, FAQ blocks, E-E-A-T signals, schema, and competitor gap analysis.',
+    cta:'Generate brief', href:'/aeo-content-brief', tag:'Content', c:'rgba(251,191,36,.2)',
+  },
+  {
+    icon:'🔎', title:'AI Answer Gap Finder',
+    desc:'Find the 20 questions AI engines answer in your niche where no brand is consistently cited — or where a weak competitor holds a citation you can displace.',
+    cta:'Find gaps', href:'/answer-gap-finder', tag:'Strategy', c:'rgba(123,108,255,.2)',
+  },
+  {
+    icon:'🌡️', title:'AI Visibility Heatmap',
+    desc:'Scan your entire site and get a colour-coded map showing which pages AI engines cite, which need work, and the single most impactful fix per page.',
+    cta:'View heatmap', href:'/visibility-heatmap', tag:'Intelligence', c:'rgba(74,222,128,.2)',
+  },
+  {
+    icon:'🏅', title:'E-E-A-T Audit Tool',
+    desc:'Audit all four E-E-A-T pillars — Experience, Expertise, Authoritativeness, Trustworthiness — with a pillar-by-pillar score and specific fixes per engine.',
+    cta:'Run audit', href:'/eeat-audit', tag:'Authority', c:'rgba(244,114,182,.2)',
+  },
+  {
+    icon:'🧩', title:'Schema Markup Generator',
+    desc:'Paste a URL and get real, filled-in JSON-LD schema — FAQPage, Organization, Article, HowTo, and more — generated from your actual page content.',
+    cta:'Generate schema', href:'/schema-generator', tag:'Technical', c:'rgba(34,211,238,.2)',
+  },
+  {
+    icon:'🚀', title:'Page Speed AEO Checker',
+    desc:'Get real Core Web Vitals data and see exactly how your page speed affects citation rates across ChatGPT, Perplexity, and Gemini — with specific fixes.',
+    cta:'Check speed', href:'/page-speed-checker', tag:'Technical', c:'rgba(200,242,71,.2)',
+  },
+  {
+    icon:'📖', title:'AI Readability Score',
+    desc:'Score any page or text across 5 AI-readability dimensions and get a BLUF rewrite of your opening sentences — ready to copy in immediately.',
+    cta:'Score content', href:'/ai-readability-score', tag:'Content', c:'rgba(123,108,255,.2)',
+  },
+  {
+    icon:'📄', title:'llms.txt Generator',
+    desc:'Generate a correctly formatted llms.txt file in seconds, pre-configured to allow GPTBot, PerplexityBot, ClaudeBot, and Google-Extended.',
+    cta:'Generate file', href:'/llms-text-generator', tag:'Technical', c:'rgba(74,222,128,.2)',
+  },
+  {
+    icon:'🔍', title:'llms.txt Validator',
+    desc:'Live-fetch and validate any domain\'s llms.txt. Checks format, all 8 AI bot declarations, and flags conflicts with robots.txt — for your site or any competitor.',
+    cta:'Validate file', href:'/llms-txt-validator', tag:'Technical', c:'rgba(251,191,36,.2)',
+  },
+  {
+    icon:'🤖', title:'Robots.txt Generator',
+    desc:'Build a robots.txt that correctly allows AI crawlers without accidentally blocking them through outdated disallow rules left over from staging configs.',
+    cta:'Generate file', href:'/robots-txt', tag:'Technical', c:'rgba(200,242,71,.2)',
+  },
+  {
+    icon:'⚡', title:'BLUF Templates',
+    desc:'Ready-to-use BLUF content templates for product pages, blog posts, and landing pages — structured the way AI engines prefer to read and cite.',
+    cta:'Browse templates', href:'/bluf-templates', tag:'Content', c:'rgba(34,211,238,.2)',
+  },
 ]
 
 const PLANS = [
@@ -80,18 +131,16 @@ export default function HomePage() {
         @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
         @keyframes spinR{to{transform:rotateX(70deg) rotateZ(360deg)}}
         @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-        @keyframes lineGrow{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
         a{color:inherit;text-decoration:none}
         input:focus,button:focus{outline:none}
         button{cursor:pointer;font-family:inherit}
         .feat-card:hover{background:rgba(255,255,255,.03)!important}
         .feat-card:hover .feat-title{color:var(--accent)}
-        .tool-card:hover{background:rgba(255,255,255,.03)!important}
+        .tool-card:hover{background:rgba(255,255,255,.04)!important}
         .tool-card:hover .tool-title{color:var(--accent)}
-        .tool-card:hover a{text-decoration:underline}
+        .tool-card:hover .tool-cta{text-decoration:underline}
         .price-card{transition:all .3s}
         .price-card:hover{transform:translateY(-4px);border-color:var(--border-h)!important}
-        .nav-link:hover{color:var(--text)!important}
         ::-webkit-scrollbar{width:4px}
         ::-webkit-scrollbar-track{background:transparent}
         ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
@@ -101,7 +150,7 @@ export default function HomePage() {
 
         <SharedHeader />
 
-        {/* ── HERO client island ── */}
+        {/* ── HERO ── */}
         <Suspense fallback={<div style={{minHeight:'100vh',background:'var(--bg)'}} />}>
           <HeroClient />
         </Suspense>
@@ -209,29 +258,29 @@ export default function HomePage() {
 
         <div style={{height:'1px',background:'var(--border)',margin:'0 3.5rem'}} />
 
-        {/* ── ALL TOOLS ── */}
+        {/* ── ALL TOOLS ── 14 tools in a 4-col responsive grid ── */}
         <section id="tools" style={{padding:'7rem 3.5rem',maxWidth:'1320px',margin:'0 auto'}}>
           <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:'3rem',flexWrap:'wrap',gap:'2rem'}}>
             <div>
               <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.68rem',letterSpacing:'.18em',textTransform:'uppercase',color:'var(--violet)',marginBottom:'.75rem'}}>03 — All Tools</div>
               <h2 style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'clamp(2rem,4vw,3.8rem)',lineHeight:1.05,letterSpacing:'-.025em'}}>
-                Everything free,<br/><span style={{color:'var(--muted)'}}>right now.</span>
+                {TOOLS.length} free tools,<br/><span style={{color:'var(--muted)'}}>no signup required.</span>
               </h2>
             </div>
-            <p style={{fontSize:'1rem',color:'var(--muted)',lineHeight:1.75,maxWidth:'480px'}}>Six tools covering scanning, content, strategy, and technical AEO — no signup required to try any of them.</p>
+            <p style={{fontSize:'1rem',color:'var(--muted)',lineHeight:1.75,maxWidth:'480px'}}>Scanning, content, strategy, and technical AEO — everything you need to find and fix your AI visibility gaps, all in one place.</p>
           </div>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1px',background:'var(--border)',borderRadius:'16px',overflow:'hidden',border:'1px solid var(--border)'}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'1px',background:'var(--border)',borderRadius:'16px',overflow:'hidden',border:'1px solid var(--border)'}}>
             {TOOLS.map((t,i)=>(
-              <div key={i} className="tool-card" style={{background:'var(--card)',padding:'2.5rem 2rem',transition:'background .3s',display:'flex',flexDirection:'column'}}>
-                <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'1.4rem'}}>
-                  <div style={{width:'46px',height:'46px',borderRadius:'12px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.2rem',border:`1px solid ${t.c}`,background:t.c.replace('.2',',.08)')}}>{t.icon}</div>
-                  <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--violet)',background:'rgba(123,108,255,.08)',border:'1px solid rgba(123,108,255,.18)',borderRadius:'4px',padding:'.22rem .55rem'}}>{t.tag}</span>
+              <div key={i} className="tool-card" style={{background:'var(--card)',padding:'1.75rem 1.5rem',transition:'background .3s',display:'flex',flexDirection:'column'}}>
+                <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'1rem'}}>
+                  <div style={{width:'40px',height:'40px',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.1rem',border:`1px solid ${t.c}`,background:t.c.replace('.2',',.08)')}}>{t.icon}</div>
+                  <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.58rem',letterSpacing:'.06em',textTransform:'uppercase',color:'var(--violet)',background:'rgba(123,108,255,.08)',border:'1px solid rgba(123,108,255,.18)',borderRadius:'4px',padding:'.2rem .5rem'}}>{t.tag}</span>
                 </div>
-                <div className="tool-title" style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'1.1rem',marginBottom:'.6rem',transition:'color .2s'}}>{t.title}</div>
-                <div style={{fontSize:'.85rem',color:'var(--muted)',lineHeight:1.7,marginBottom:'1.5rem',flex:1}}>{t.desc}</div>
-                <a href={t.href} style={{display:'inline-flex',alignItems:'center',gap:'.4rem',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'.82rem',color:'var(--accent)',alignSelf:'flex-start'}}>
+                <div className="tool-title" style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'1rem',marginBottom:'.5rem',transition:'color .2s',lineHeight:1.25}}>{t.title}</div>
+                <div style={{fontSize:'.82rem',color:'var(--muted)',lineHeight:1.65,marginBottom:'1.25rem',flex:1}}>{t.desc}</div>
+                <a href={t.href} className="tool-cta" style={{display:'inline-flex',alignItems:'center',gap:'.35rem',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'.8rem',color:'var(--accent)',alignSelf:'flex-start'}}>
                   {t.cta}
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
               </div>
             ))}
@@ -321,7 +370,6 @@ export default function HomePage() {
             <p style={{fontSize:'1rem',color:'var(--muted)',lineHeight:1.75,maxWidth:'480px'}}>Notion Cue doesn't just surface problems. Every issue comes with a one-click fix, a before/after preview, and an estimated citation impact so you know what to prioritise first.</p>
           </div>
           <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'1rem',marginBottom:'1rem'}}>
-
             {/* Before/After llms.txt */}
             <div style={{gridColumn:'span 2',background:'var(--card)',border:'1px solid var(--border)',borderRadius:'14px',padding:'1.75rem'}}>
               <div style={{display:'flex',alignItems:'center',gap:'.75rem',marginBottom:'1.25rem'}}>
@@ -357,13 +405,12 @@ export default function HomePage() {
                     <pre style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.72rem',lineHeight:1.8,color:'var(--muted)'}}>
                       <span style={{color:'var(--muted2)'}}># llms.txt — generated by Notion Cue{'\n'}</span>
                       <span style={{color:'var(--cyan)'}}>Name</span>: <span style={{color:'#4ade80'}}>Notion Cue{'\n'}</span>
-                      <span style={{color:'var(--cyan)'}}>Description</span>: <span style={{color:'#4ade80'}}>US women's fashion retailer{'\n'}</span>
-                      <span style={{color:'var(--cyan)'}}>Contact</span>: <span style={{color:'#4ade80'}}>seo@notioncue.com{'\n\n'}</span>
+                      <span style={{color:'var(--cyan)'}}>Description</span>: <span style={{color:'#4ade80'}}>AI visibility platform{'\n'}</span>
+                      <span style={{color:'var(--cyan)'}}>Contact</span>: <span style={{color:'#4ade80'}}>hello@notioncue.com{'\n\n'}</span>
                       <span style={{color:'var(--cyan)'}}>User-agent</span>: GPTBot{'\n'}
                       <span style={{color:'#4ade80'}}>Allow: /{'\n\n'}</span>
                       <span style={{color:'var(--cyan)'}}>User-agent</span>: Google-Extended{'\n'}
-                      <span style={{color:'#4ade80'}}>Allow: /collections/{'\n'}</span>
-                      <span style={{color:'#4ade80'}}>Allow: /blogs/</span>
+                      <span style={{color:'#4ade80'}}>Allow: /</span>
                     </pre>
                   </div>
                 </div>
@@ -389,7 +436,7 @@ export default function HomePage() {
                   </div>
                   <div style={{flex:1,border:'1px solid rgba(248,113,113,.2)',borderTop:'none',borderRadius:'0 0 8px 8px',padding:'1rem',background:'rgba(248,113,113,.02)'}}>
                     <div style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'.85rem',marginBottom:'.4rem'}}>About Our Evening Dresses</div>
-                    <div style={{fontSize:'.8rem',color:'var(--muted)',lineHeight:1.6,marginBottom:'.5rem'}}>Welcome to The Dress Outlet, where we have been selling dresses since 1998. Our store was founded with a passion for fashion and we believe every woman deserves to feel beautiful. We carry a wide range of styles across many categories that you might find interesting to browse through...</div>
+                    <div style={{fontSize:'.8rem',color:'var(--muted)',lineHeight:1.6,marginBottom:'.5rem'}}>Welcome to The Dress Outlet, where we have been selling dresses since 1998. Our store was founded with a passion for fashion and we believe every woman deserves to feel beautiful...</div>
                     <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.63rem',color:'#f87171'}}>⚠ Answer appears at paragraph 4 — AI stops reading at paragraph 1.</div>
                   </div>
                 </div>
@@ -404,7 +451,6 @@ export default function HomePage() {
                   <div style={{flex:1,border:'1px solid rgba(74,222,128,.2)',borderTop:'none',borderRadius:'0 0 8px 8px',padding:'1rem',background:'rgba(74,222,128,.02)'}}>
                     <div style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'.85rem',marginBottom:'.4rem'}}>Evening Dresses at The Dress Outlet</div>
                     <div style={{fontSize:'.8rem',color:'#4ade80',lineHeight:1.6,padding:'.5rem .75rem',background:'rgba(74,222,128,.06)',borderLeft:'2px solid #4ade80',borderRadius:'0 6px 6px 0',marginBottom:'.4rem'}}>The Dress Outlet sells formal and semi-formal evening dresses in sizes 0–30, priced from $49 to $299, with free shipping on orders over $75.</div>
-                    <div style={{fontSize:'.75rem',color:'var(--muted)',lineHeight:1.6}}>Founded in 1998, we specialise in occasion wear with new arrivals added weekly across ball gowns, cocktail dresses, and plus-size formal options...</div>
                     <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.63rem',color:'#4ade80',marginTop:'.6rem'}}>✦ Answer in sentence 1 — AI cites this directly.</div>
                   </div>
                 </div>
@@ -628,7 +674,7 @@ export default function HomePage() {
 
         <div style={{height:'1px',background:'var(--border)',margin:'0 3.5rem'}} />
 
-        {/* ── FAQ client island ── */}
+        {/* ── FAQ ── */}
         <section style={{padding:'7rem 3.5rem',maxWidth:'1320px',margin:'0 auto',textAlign:'center'}}>
           <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.68rem',letterSpacing:'.18em',textTransform:'uppercase',color:'var(--violet)',marginBottom:'.75rem'}}>09 — FAQ</div>
           <h2 style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'clamp(2rem,4vw,3.8rem)',lineHeight:1.05,letterSpacing:'-.025em',marginBottom:'3rem'}}>
