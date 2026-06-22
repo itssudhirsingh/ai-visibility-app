@@ -18,7 +18,7 @@ export default function GapFinderClient() {
     try {
       const competitor_domains = competitors.split('\n').map(u => u.trim()).filter(Boolean)
       const body = mode === 'domain' ? { domain, competitor_domains } : { niche, competitor_domains }
-      const res = await fetch('/api/answer-gap-finder', {
+      const res = await fetch('/api/ai-answer-gap-finder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),

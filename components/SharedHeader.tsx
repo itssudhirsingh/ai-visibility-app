@@ -88,7 +88,7 @@ const TOOLS = [
   },
   {
     label:       'AI Readability Checker',
-    href:        '/ai-readability-score',
+    href:        '/ai-readability-checker',
     desc:        'Score content readability for AI citation',
     icon:        '📖',
     badge:       'FREE',
@@ -138,7 +138,7 @@ const TOOLS = [
   },
   {
     label:       'AI Answer Gap Finder',
-    href:        '/answer-gap-finder',
+    href:        '/ai-answer-gap-finder',
     desc:        'Find unanswered questions in your niche',
     icon:        '🔎',
     badge:       'FREE',

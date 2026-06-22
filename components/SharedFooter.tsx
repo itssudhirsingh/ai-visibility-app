@@ -14,12 +14,12 @@ const TOOLS = [
   { label: 'AI BLUF Generator',           href: '/bluf-builder',          icon: '✍️', badge: 'FREE',  free: true  },
   { label: 'AI E-E-A-T Checker',          href: '/eeat-audit',            icon: '🏅', badge: 'FREE',  free: true  },
   { label: 'AI Page Speed Analyser',      href: '/ai-page-speed-analysis-tools',    icon: '🚀', badge: 'FREE',  free: true  },
-  { label: 'AI Readability Checker',      href: '/ai-readability-score',  icon: '📖', badge: 'FREE',  free: true  },
+  { label: 'AI Readability Checker',      href: '/ai-readability-checker',  icon: '📖', badge: 'FREE',  free: true  },
   { label: 'AI Schema Markup Generator',  href: '/ai-schema-markup-generator',      icon: '🧩', badge: 'FREE',  free: true  },
   { label: 'AEO Content Brief Generator', href: '/topic-cluster-generator',     icon: '📋', badge: 'FREE',  free: true  },
   { label: 'AI Visibility Heatmap',       href: '/ai-visibility-heatmap',    icon: '🌡️', badge: 'FREE',  free: true  },
   { label: 'llms.txt Validator',          href: '/llms-txt-live-validator',    icon: '🔍', badge: 'FREE',  free: true  },
-  { label: 'AI Answer Gap Finder',        href: '/answer-gap-finder',     icon: '🔎', badge: 'FREE',  free: true  },
+  { label: 'AI Answer Gap Finder',        href: '/ai-answer-gap-finder',     icon: '🔎', badge: 'FREE',  free: true  },
 ]
 
 const RESOURCES = [

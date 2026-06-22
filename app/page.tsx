@@ -50,7 +50,7 @@ const TOOLS = [
   {
     icon:'🔎', title:'AI Answer Gap Finder',
     desc:'Find the 20 questions AI engines answer in your niche where no brand is consistently cited — or where a weak competitor holds a citation you can displace.',
-    cta:'Find gaps', href:'/answer-gap-finder', tag:'Strategy', c:'rgba(123,108,255,.2)',
+    cta:'Find gaps', href:'/ai-answer-gap-finder', tag:'Strategy', c:'rgba(123,108,255,.2)',
   },
   {
     icon:'🌡️', title:'AI Visibility Heatmap',
@@ -75,7 +75,7 @@ const TOOLS = [
   {
     icon:'📖', title:'AI Readability Score',
     desc:'Score any page or text across 5 AI-readability dimensions and get a BLUF rewrite of your opening sentences — ready to copy in immediately.',
-    cta:'Score content', href:'/ai-readability-score', tag:'Content', c:'rgba(123,108,255,.2)',
+    cta:'Score content', href:'/ai-readability-checker', tag:'Content', c:'rgba(123,108,255,.2)',
   },
   {
     icon:'📄', title:'llms.txt Generator',
