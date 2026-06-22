@@ -9,7 +9,7 @@ const TOOLS = [
   {
     label:       'AI Visibility Tool',
     href:        '/dashboard',
-    desc:        'Track AI visibility across engines',
+    desc:        'Track AI visibility across 6 engines',
     icon:        '📊',
     badge:       'Free',
     badgeColor:  'rgba(146,124,255,.08)',
@@ -19,7 +19,7 @@ const TOOLS = [
   {
     label:       'AI Topical Cluster Map',
     href:        '/topic-cluster-generator',
-    desc:        'Generate AI topical clusters',
+    desc:        'Generate AI-optimised content clusters',
     icon:        '🎯',
     badge:       'Free',
     badgeColor:  'rgba(146,124,255,.08)',
@@ -58,9 +58,9 @@ const TOOLS = [
   },
   {
     label:       'AI BLUF Generator',
-    href:        '/bluff-builder',
-    desc:        'Generate BLUF-style content fast',
-    icon:        '⚡',
+    href:        '/bluf-builder',
+    desc:        'Generate citation-ready BLUF openings',
+    icon:        '✍️',
     badge:       'FREE',
     badgeColor:  'rgba(82,227,142,.08)',
     badgeBorder: 'rgba(82,227,142,.25)',
@@ -68,8 +68,8 @@ const TOOLS = [
   },
   {
     label:       'AI E-E-A-T Checker',
-    href:        '/ai-eeat-checker',
-    desc:        'Analyse E-E-A-T signals for AI',
+    href:        '/eeat-audit',
+    desc:        'Audit E-E-A-T signals for AI engines',
     icon:        '🏅',
     badge:       'FREE',
     badgeColor:  'rgba(82,227,142,.08)',
@@ -78,8 +78,8 @@ const TOOLS = [
   },
   {
     label:       'AI Page Speed Analyser',
-    href:        '/ai-page-speed-analysis-tools',
-    desc:        'Analyse page speed for AI visibility',
+    href:        '/page-speed-checker',
+    desc:        'Translate Core Web Vitals into AEO impact',
     icon:        '🚀',
     badge:       'FREE',
     badgeColor:  'rgba(82,227,142,.08)',
@@ -88,8 +88,8 @@ const TOOLS = [
   },
   {
     label:       'AI Readability Checker',
-    href:        '/ai-readability-checker',
-    desc:        'Score content readability for AI',
+    href:        '/ai-readability-score',
+    desc:        'Score content readability for AI citation',
     icon:        '📖',
     badge:       'FREE',
     badgeColor:  'rgba(82,227,142,.08)',
@@ -98,9 +98,49 @@ const TOOLS = [
   },
   {
     label:       'AI Schema Markup Generator',
-    href:        '/ai-schema-markup-generator',
+    href:        '/schema-generator',
     desc:        'Generate schema markup for AI crawlers',
     icon:        '🧩',
+    badge:       'FREE',
+    badgeColor:  'rgba(82,227,142,.08)',
+    badgeBorder: 'rgba(82,227,142,.25)',
+    badgeText:   '#52e38e',
+  },
+  {
+    label:       'AEO Content Brief Generator',
+    href:        '/aeo-content-brief',
+    desc:        'Full AEO content brief from a keyword',
+    icon:        '📋',
+    badge:       'FREE',
+    badgeColor:  'rgba(82,227,142,.08)',
+    badgeBorder: 'rgba(82,227,142,.25)',
+    badgeText:   '#52e38e',
+  },
+  {
+    label:       'AI Visibility Heatmap',
+    href:        '/visibility-heatmap',
+    desc:        'Site-wide AEO citation coverage map',
+    icon:        '🌡️',
+    badge:       'FREE',
+    badgeColor:  'rgba(82,227,142,.08)',
+    badgeBorder: 'rgba(82,227,142,.25)',
+    badgeText:   '#52e38e',
+  },
+  {
+    label:       'llms.txt Validator',
+    href:        '/llms-txt-validator',
+    desc:        'Validate any domain\'s llms.txt live',
+    icon:        '🔍',
+    badge:       'FREE',
+    badgeColor:  'rgba(82,227,142,.08)',
+    badgeBorder: 'rgba(82,227,142,.25)',
+    badgeText:   '#52e38e',
+  },
+  {
+    label:       'AI Answer Gap Finder',
+    href:        '/answer-gap-finder',
+    desc:        'Find unanswered questions in your niche',
+    icon:        '🔎',
     badge:       'FREE',
     badgeColor:  'rgba(82,227,142,.08)',
     badgeBorder: 'rgba(82,227,142,.25)',
@@ -117,9 +157,9 @@ const NAV_LINKS = [
   { label: 'About',          href: '/about' },
 ]
 
-// Split tools into two columns for dropdown
-const TOOLS_COL1 = TOOLS.slice(0, 5)
-const TOOLS_COL2 = TOOLS.slice(5)
+// Split 14 tools into two columns of 7
+const TOOLS_COL1 = TOOLS.slice(0, 7)
+const TOOLS_COL2 = TOOLS.slice(7)
 
 export default function SharedHeader() {
   const pathname = usePathname()
@@ -237,14 +277,14 @@ export default function SharedHeader() {
                 </svg>
               </button>
 
-              {/* ── 2-column dropdown ── */}
+              {/* ── 2-column dropdown — 7 items per column ── */}
               <div className="sh-dropdown" style={{
                 display:      'none',
                 position:     'absolute',
                 top:          'calc(100% + 8px)',
                 left:         '50%',
                 transform:    'translateX(-50%)',
-                width:        580,
+                width:        640,
                 background:   'linear-gradient(145deg,rgba(10,17,32,.98),rgba(6,11,20,.97))',
                 border:       '1px solid rgba(220,235,255,.1)',
                 borderRadius: 12,
@@ -262,10 +302,10 @@ export default function SharedHeader() {
                   borderBottom:  '1px solid rgba(220,235,255,.06)',
                   marginBottom:  6,
                 }}>
-                  Free Tools + Pro Features
+                  Free Tools + Pro Features — {TOOLS.length} total
                 </div>
 
-                {/* Two columns */}
+                {/* Two columns of 7 */}
                 <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'0 4px' }}>
                   {[TOOLS_COL1, TOOLS_COL2].map((col, ci) => (
                     <div key={ci}>
@@ -404,26 +444,24 @@ export default function SharedHeader() {
               onClick={() => setMobileOpen(o => !o)}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               style={{
-                display:     'none', /* shown via media query */
-                alignItems:  'center',
-                justifyContent:'center',
-                width:       36,
-                height:      36,
-                background:  mobileOpen ? 'rgba(202,255,69,.08)' : 'rgba(255,255,255,.04)',
-                border:      `1px solid ${mobileOpen ? 'rgba(202,255,69,.25)' : 'rgba(220,235,255,.1)'}`,
-                borderRadius:8,
-                cursor:      'pointer',
-                flexShrink:  0,
-                transition:  'background .2s, border-color .2s',
-                padding:     0,
+                display:        'none',
+                alignItems:     'center',
+                justifyContent: 'center',
+                width:          36,
+                height:         36,
+                background:     mobileOpen ? 'rgba(202,255,69,.08)' : 'rgba(255,255,255,.04)',
+                border:         `1px solid ${mobileOpen ? 'rgba(202,255,69,.25)' : 'rgba(220,235,255,.1)'}`,
+                borderRadius:   8,
+                cursor:         'pointer',
+                flexShrink:     0,
+                transition:     'background .2s, border-color .2s',
+                padding:        0,
               }}>
               {mobileOpen ? (
-                /* X icon */
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M1 1L13 13M13 1L1 13" stroke="#caff45" strokeWidth="1.8" strokeLinecap="round"/>
                 </svg>
               ) : (
-                /* Hamburger icon */
                 <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
                   <path d="M0 1H16M0 6H16M0 11H10" stroke="rgba(220,233,255,.7)" strokeWidth="1.5" strokeLinecap="round"/>
                 </svg>
@@ -438,18 +476,18 @@ export default function SharedHeader() {
         <div
           className="sh-mobile-menu"
           style={{
-            position:   'fixed',
-            top:        65,
-            left:       0,
-            right:      0,
-            bottom:     0,
-            zIndex:     850,
-            background: 'rgba(3,6,12,.97)',
+            position:       'fixed',
+            top:            65,
+            left:           0,
+            right:          0,
+            bottom:         0,
+            zIndex:         850,
+            background:     'rgba(3,6,12,.97)',
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
-            overflowY:  'auto',
-            animation:  'sh-slideIn .22s both',
-            borderTop:  '1px solid rgba(220,235,255,.07)',
+            overflowY:      'auto',
+            animation:      'sh-slideIn .22s both',
+            borderTop:      '1px solid rgba(220,235,255,.07)',
           }}>
           <div style={{ padding:'1.25rem 1.5rem 3rem' }}>
 
@@ -476,7 +514,7 @@ export default function SharedHeader() {
                   letterSpacing: '.08em',
                   textTransform: 'uppercase',
                 }}>
-                  Tools
+                  Tools ({TOOLS.length})
                 </span>
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                   style={{ transform: toolsOpen ? 'rotate(180deg)' : 'none', transition:'transform .2s', opacity:.5 }}>

@@ -6,16 +6,20 @@ import Logo from '@/components/logo'
 
 // ─── All tools ─────────────────────────────────────────────────────────────────
 const TOOLS = [
-  { label: 'AI Visibility Tool',         href: '/dashboard',                    icon: '📊', badge: 'Free',  free: false },
-  { label: 'AI Topical Cluster Map',     href: '/topic-cluster-generator',      icon: '🎯', badge: 'Free',  free: false },
-  { label: 'llms.txt Generator',         href: '/llms-text-generator',          icon: '📄', badge: 'FREE',  free: true  },
-  { label: 'Robots.txt Generator',       href: '/robots-txt',                   icon: '🤖', badge: 'FREE',  free: true  },
-  { label: 'AI BLUF Templates',          href: '/bluf-templates',               icon: '⚡', badge: 'FREE',  free: true  },
-  { label: 'AI BLUF Generator',          href: '/bluff-builder',                icon: '⚡', badge: 'FREE',  free: true  },
-  { label: 'AI E-E-A-T Checker',         href: '/ai-eeat-checker',              icon: '🏅', badge: 'FREE',  free: true  },
-  { label: 'AI Page Speed Analyser',     href: '/ai-page-speed-analysis-tools', icon: '🚀', badge: 'FREE',  free: true  },
-  { label: 'AI Readability Checker',     href: '/ai-readability-checker',       icon: '📖', badge: 'FREE',  free: true  },
-  { label: 'AI Schema Markup Generator', href: '/ai-schema-markup-generator',   icon: '🧩', badge: 'FREE',  free: true  },
+  { label: 'AI Visibility Tool',          href: '/dashboard',             icon: '📊', badge: 'Free',  free: false },
+  { label: 'AI Topical Cluster Map',      href: '/topic-cluster-generator', icon: '🎯', badge: 'Free', free: false },
+  { label: 'llms.txt Generator',          href: '/llms-text-generator',   icon: '📄', badge: 'FREE',  free: true  },
+  { label: 'Robots.txt Generator',        href: '/robots-txt',            icon: '🤖', badge: 'FREE',  free: true  },
+  { label: 'AI BLUF Templates',           href: '/bluf-templates',        icon: '⚡', badge: 'FREE',  free: true  },
+  { label: 'AI BLUF Generator',           href: '/bluf-builder',          icon: '✍️', badge: 'FREE',  free: true  },
+  { label: 'AI E-E-A-T Checker',          href: '/eeat-audit',            icon: '🏅', badge: 'FREE',  free: true  },
+  { label: 'AI Page Speed Analyser',      href: '/page-speed-checker',    icon: '🚀', badge: 'FREE',  free: true  },
+  { label: 'AI Readability Checker',      href: '/ai-readability-score',  icon: '📖', badge: 'FREE',  free: true  },
+  { label: 'AI Schema Markup Generator',  href: '/schema-generator',      icon: '🧩', badge: 'FREE',  free: true  },
+  { label: 'AEO Content Brief Generator', href: '/aeo-content-brief',     icon: '📋', badge: 'FREE',  free: true  },
+  { label: 'AI Visibility Heatmap',       href: '/visibility-heatmap',    icon: '🌡️', badge: 'FREE',  free: true  },
+  { label: 'llms.txt Validator',          href: '/llms-txt-validator',    icon: '🔍', badge: 'FREE',  free: true  },
+  { label: 'AI Answer Gap Finder',        href: '/answer-gap-finder',     icon: '🔎', badge: 'FREE',  free: true  },
 ]
 
 const RESOURCES = [
@@ -85,7 +89,7 @@ export default function SharedFooter() {
             </div>
           </div>
 
-          {/* Tools grid */}
+          {/* Tools grid — 5 cols to fit 14 tools in 3 rows */}
           <div style={{
             display:             'grid',
             gridTemplateColumns: 'repeat(5,1fr)',
