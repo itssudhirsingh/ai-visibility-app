@@ -185,7 +185,7 @@ function DashboardInner() {
           --lime:#caff45;--cyan:#45e4ff;--violet:#927cff;--rose:#ff7cb7;
           --red:#ff7474;--green:#52e38e;--amber:#ffc45c;
         }
-        html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:Epilogue,sans-serif;font-weight:300}
+        html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:Epilogue,sans-serif;font-weight:300;overflow-x:hidden}
         body{background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:48px 48px}
         button,input{font:inherit;cursor:pointer}
         input:focus,button:focus{outline:none}
@@ -196,7 +196,7 @@ function DashboardInner() {
         @keyframes spinR{to{transform:rotateX(70deg) rotateZ(360deg)}}
         @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
         @keyframes toastIn{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}
-        @keyframes slideIn{from{transform:translateX(-100%)}to{transform:translateX(0)}} /* ← NEW */
+        @keyframes slideIn{from{transform:translateX(-100%)}to{transform:translateX(0)}}
         .spin{animation:spin .8s linear infinite}
         .shimmer{background:linear-gradient(90deg,rgba(255,255,255,.02) 25%,rgba(255,255,255,.07) 50%,rgba(255,255,255,.02) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
         .pulse{animation:pulse 2s infinite}
@@ -214,35 +214,36 @@ function DashboardInner() {
         .toast-show{animation:toastIn .3s ease both}
         .pill{display:inline-flex;padding:3px 7px;border-radius:4px;font-family:"JetBrains Mono";font-size:9px;white-space:nowrap;line-height:1.4}
 
-        /* ── MOBILE SIDEBAR OVERLAY ── ← NEW */
+        /* ── SIDEBAR OVERLAY BACKDROP ── */
         .sidebar-overlay {
           display: none;
           position: fixed;
           inset: 0;
-          background: rgba(0,0,0,.6);
-          z-index: 40;
-          backdrop-filter: blur(2px);
+          background: rgba(0,0,0,.75);
+          z-index: 9998;
         }
         .sidebar-overlay.open { display: block; }
 
+        /* ── MOBILE SIDEBAR DRAWER ── */
         .mobile-sidebar {
           position: fixed;
-          top: 65px;
+          top: 0;
           left: 0;
-          width: 260px;
-          height: calc(100vh - 65px);
-          background: rgba(5,10,17,.98);
+          width: 280px;
+          height: 100vh;
+          background: #060d18;
           border-right: 1px solid var(--line2);
-          z-index: 50;
+          z-index: 9999;
           overflow-y: auto;
-          padding: 18px 14px;
+          padding: 72px 14px 24px;
           display: flex;
           flex-direction: column;
           gap: 8px;
           animation: slideIn .22s ease both;
+          box-shadow: 4px 0 40px rgba(0,0,0,.8);
         }
 
-        /* hamburger button — hidden on desktop ← NEW */
+        /* hamburger button — hidden on desktop */
         .hamburger-btn {
           display: none;
           align-items: center;
@@ -253,21 +254,54 @@ function DashboardInner() {
           background: rgba(255,255,255,.035);
           border-radius: 6px;
           color: var(--text);
-          font-size: 16px;
+          font-size: 18px;
           flex-shrink: 0;
+          line-height: 1;
         }
 
+        /* ── CONTENT LAYOUT GRID CLASSES ── */
+        .grid-kpi   { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:12px; }
+        .grid-2col  { display:grid; grid-template-columns:1.2fr .8fr; gap:12px; }
+        .grid-3col  { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+        .grid-2eq   { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+        .grid-tech  { display:grid; grid-template-columns:1fr 320px; gap:12px; }
+        .content-pad{ padding:22px; overflow:auto; }
+        .topbar-inner{ display:flex; align-items:center; gap:14px; padding:0 22px; width:100%; }
+
+        /* ── MOBILE BREAKPOINT ── */
         @media (max-width: 768px) {
-          /* ← NEW: collapse grid to single column, sidebar hidden by default */
-          .dashboard-grid {
-            grid-template-columns: 1fr !important;
-          }
-          .desktop-sidebar {
-            display: none !important;
-          }
-          .hamburger-btn {
-            display: flex !important;
-          }
+          .dashboard-grid        { grid-template-columns: 1fr !important; }
+          .desktop-sidebar       { display: none !important; }
+          .hamburger-btn         { display: flex !important; }
+
+          /* content grids → single column */
+          .grid-kpi              { grid-template-columns: 1fr 1fr !important; }
+          .grid-2col             { grid-template-columns: 1fr !important; }
+          .grid-3col             { grid-template-columns: 1fr !important; }
+          .grid-2eq              { grid-template-columns: 1fr !important; }
+          .grid-tech             { grid-template-columns: 1fr !important; }
+
+          /* tighten up content padding */
+          .content-pad           { padding: 14px 12px !important; }
+
+          /* topbar: shrink gap and padding */
+          .topbar-inner          { gap: 8px !important; padding: 0 12px !important; }
+
+          /* hide the domain pill in topbar (too wide) */
+          .topbar-domain-pill    { display: none !important; }
+
+          /* table horizontal scroll */
+          .table-scroll          { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+          /* KPI score card: stack vertically on very small */
+          .kpi-score-card        { flex-direction: column; align-items: flex-start; gap:8px; }
+
+          /* topbar scan input: smaller */
+          .topbar-search         { max-width: none !important; }
+        }
+
+        @media (max-width: 480px) {
+          .grid-kpi              { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
@@ -279,13 +313,16 @@ function DashboardInner() {
         <div className={`sidebar-overlay open`} onClick={() => setSidebarOpen(false)} />
       )}
 
-      {/* ── MOBILE SIDEBAR DRAWER ── ← NEW */}
+      {/* ── MOBILE SIDEBAR DRAWER ── */}
       {sidebarOpen && (
         <aside className="mobile-sidebar">
-          {/* Logo */}
-          <div style={{height:'46px',display:'flex',alignItems:'center',gap:'10px',padding:'0 10px',fontFamily:'"Familjen Grotesk"',fontSize:'15px',fontWeight:700,cursor:'pointer',borderBottom:'1px solid var(--line)',marginBottom:'4px',paddingBottom:'12px'}} onClick={()=>{router.push('/');setSidebarOpen(false)}}>
-            <div style={{width:'28px',height:'28px',display:'grid',placeItems:'center',background:'var(--lime)',color:'#07100b',borderRadius:'6px',boxShadow:'0 0 24px rgba(202,255,69,.18)',fontSize:'13px',fontWeight:800,flexShrink:0}}>A</div>
-            <span style={{fontSize:'13px'}}>Dashboard</span>
+          {/* Close button row */}
+          <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'8px',paddingBottom:'12px',borderBottom:'1px solid var(--line)'}}>
+            <div style={{display:'flex',alignItems:'center',gap:'10px',fontFamily:'"Familjen Grotesk"',fontSize:'13px',fontWeight:700,cursor:'pointer'}} onClick={()=>{router.push('/');setSidebarOpen(false)}}>
+              <div style={{width:'28px',height:'28px',display:'grid',placeItems:'center',background:'var(--lime)',color:'#07100b',borderRadius:'6px',fontSize:'13px',fontWeight:800,flexShrink:0}}>A</div>
+              Dashboard
+            </div>
+            <button onClick={()=>setSidebarOpen(false)} style={{border:'1px solid var(--line)',background:'rgba(255,255,255,.04)',color:'var(--muted)',borderRadius:'5px',width:'28px',height:'28px',display:'grid',placeItems:'center',fontSize:'14px',flexShrink:0}}>✕</button>
           </div>
 
           {/* Active domain mini card */}
@@ -419,7 +456,7 @@ function DashboardInner() {
         {/* ── MAIN ── */}
         <main style={{display:'grid',gridTemplateRows:'64px 1fr auto',minWidth:0}}>
           {/* Topbar — sticky at 65px (below SharedHeader) */}
-          <div style={{borderBottom:'1px solid var(--line)',background:'rgba(3,7,13,.8)',backdropFilter:'blur(20px)',display:'flex',alignItems:'center',gap:'14px',padding:'0 22px',position:'sticky',top:'65px',zIndex:10}}>
+          <div style={{borderBottom:'1px solid var(--line)',background:'rgba(3,7,13,.8)',backdropFilter:'blur(20px)',position:'sticky',top:'65px',zIndex:10}}><div className="topbar-inner">
 
             {/* ← NEW: Hamburger button — only visible on mobile */}
             <button
@@ -430,20 +467,20 @@ function DashboardInner() {
               {sidebarOpen ? '✕' : '☰'}
             </button>
 
-            <div style={{display:'flex',alignItems:'center',gap:'9px',padding:'0 12px',border:'1px solid var(--line)',background:'rgba(255,255,255,.025)',borderRadius:'6px',height:'36px',fontSize:'11px',fontFamily:'"JetBrains Mono"'}}>
+            <div className="topbar-domain-pill" style={{display:'flex',alignItems:'center',gap:'9px',padding:'0 12px',border:'1px solid var(--line)',background:'rgba(255,255,255,.025)',borderRadius:'6px',height:'36px',fontSize:'11px',fontFamily:'"JetBrains Mono"',flexShrink:0}}>
               <span style={{width:'7px',height:'7px',borderRadius:'50%',background:'var(--green)',boxShadow:'0 0 14px var(--green)',display:'inline-block'}} />
               {resultUrl||'No domain scanned'}
             </div>
-            <div style={{display:'flex',flex:1,alignItems:'center',gap:'9px',maxWidth:'440px',border:'1px solid var(--line)',background:'rgba(255,255,255,.025)',borderRadius:'6px',padding:'0 12px',height:'36px'}}>
+            <div className="topbar-search" style={{display:'flex',flex:1,alignItems:'center',gap:'9px',maxWidth:'440px',border:'1px solid var(--line)',background:'rgba(255,255,255,.025)',borderRadius:'6px',padding:'0 12px',height:'36px',minWidth:0}}>
               <span style={{color:'var(--muted2)',fontSize:'13px'}}>⌕</span>
               <input value={url} onChange={e=>setUrl(e.target.value)} onKeyDown={e=>e.key==='Enter'&&runAnalysis()}
-                placeholder="Enter domain to analyse..." style={{background:'transparent',border:'none',color:'var(--text)',fontSize:'11px',flex:1}} />
+                placeholder="Enter domain..." style={{background:'transparent',border:'none',color:'var(--text)',fontSize:'11px',flex:1,minWidth:0}} />
             </div>
-            <button onClick={()=>runAnalysis()} style={{height:'36px',background:'var(--lime)',color:'#07100b',border:'none',padding:'0 14px',borderRadius:'6px',fontSize:'11px',fontWeight:700,fontFamily:'"Familjen Grotesk"',marginLeft:'auto'}}>New scan</button>
-          </div>
+            <button onClick={()=>runAnalysis()} style={{height:'36px',background:'var(--lime)',color:'#07100b',border:'none',padding:'0 12px',borderRadius:'6px',fontSize:'11px',fontWeight:700,fontFamily:'"Familjen Grotesk"',flexShrink:0,whiteSpace:'nowrap'}}>Scan</button>
+          </div></div>
 
           {/* Content area */}
-          <div style={{padding:'22px',overflow:'auto'}}>
+          <div className="content-pad">
 
             {/* ── Loading ── */}
             {loading && (
@@ -510,8 +547,8 @@ function DashboardInner() {
                 </div>
 
                 {/* KPI row */}
-                <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'12px',marginBottom:'12px'}}>
-                  <div className="tilt" style={{border:'1px solid var(--line)',background:'linear-gradient(145deg,rgba(14,25,40,.94),rgba(7,13,23,.92))',borderRadius:'7px',padding:'16px',display:'flex',alignItems:'center',gap:'14px',boxShadow:'inset 0 1px rgba(255,255,255,.045)'}}>
+                <div className="grid-kpi">
+                  <div className="tilt kpi-score-card" style={{border:'1px solid var(--line)',background:'linear-gradient(145deg,rgba(14,25,40,.94),rgba(7,13,23,.92))',borderRadius:'7px',padding:'16px',display:'flex',alignItems:'center',gap:'14px',boxShadow:'inset 0 1px rgba(255,255,255,.045)'}}>
                     <div style={{position:'relative',width:'80px',height:'80px',flexShrink:0}}>
                       <svg width="80" height="80" style={{transform:'rotate(-90deg)'}}>
                         <circle cx="40" cy="40" r="36" fill="none" stroke="rgba(255,255,255,.06)" strokeWidth="6"/>
@@ -544,13 +581,13 @@ function DashboardInner() {
                 {/* ══ OVERVIEW ══ */}
                 {view==='overview' && (
                   <div style={{display:'flex',flexDirection:'column',gap:'12px'}}>
-                    <div style={{display:'grid',gridTemplateColumns:'1.2fr .8fr',gap:'12px'}}>
+                    <div className="grid-2col">
                       <div style={{border:'1px solid var(--line)',background:'linear-gradient(145deg,rgba(14,25,40,.94),rgba(7,13,23,.92))',borderRadius:'7px',overflow:'hidden'}}>
                         <div style={{padding:'14px 16px 10px',borderBottom:'1px solid var(--line)'}}>
                           <div style={{fontFamily:'"Familjen Grotesk"',fontSize:'14px',fontWeight:600}}>Engine performance</div>
                           <div style={{fontSize:'10px',color:'var(--muted2)',marginTop:'3px'}}>Citations across 6 AI engines</div>
                         </div>
-                        <table style={{width:'100%',borderCollapse:'collapse'}}>
+                        <div className="table-scroll"><table style={{width:'100%',borderCollapse:'collapse',minWidth:'360px'}}>
                           <thead><tr>
                             {['Engine','Score','Sentiment','Status'].map(h=>(
                               <th key={h} style={{fontFamily:'"JetBrains Mono"',fontSize:'9px',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--muted2)',padding:'10px 14px',textAlign:'left',borderBottom:'1px solid var(--line)',fontWeight:400}}>{h}</th>
@@ -574,7 +611,7 @@ function DashboardInner() {
                               </tr>
                             ))}
                           </tbody>
-                        </table>
+                        </table></div>
                       </div>
                       <div style={{border:'1px solid var(--line)',background:'linear-gradient(145deg,rgba(14,25,40,.94),rgba(7,13,23,.92))',borderRadius:'7px',padding:'16px'}}>
                         <div style={{fontFamily:'"Familjen Grotesk"',fontSize:'14px',fontWeight:600,marginBottom:'4px'}}>Priority actions</div>
@@ -595,7 +632,7 @@ function DashboardInner() {
                         <button onClick={()=>setView('gaps')} style={{marginTop:'10px',background:'none',border:'none',fontFamily:'"JetBrains Mono"',fontSize:'9px',color:'var(--cyan)',letterSpacing:'.04em',padding:0}}>View all gaps →</button>
                       </div>
                     </div>
-                    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:'12px'}}>
+                    <div className="grid-3col">
                       <div style={{border:'1px solid var(--line)',background:'linear-gradient(145deg,rgba(14,25,40,.94),rgba(7,13,23,.92))',borderRadius:'7px',padding:'16px'}}>
                         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'12px'}}>
                           <div style={{fontFamily:'"Familjen Grotesk"',fontSize:'13px',fontWeight:600}}>BLUF content score</div>
@@ -696,7 +733,7 @@ function DashboardInner() {
                         <div style={{fontFamily:'"Familjen Grotesk"',fontSize:'14px',fontWeight:600}}>Competitor comparison</div>
                         <div style={{fontSize:'10px',color:'var(--muted2)',marginTop:'3px'}}>Click a competitor row to reveal the content gap</div>
                       </div>
-                      <table style={{width:'100%',borderCollapse:'collapse'}}>
+                      <div className="table-scroll"><table style={{width:'100%',borderCollapse:'collapse',minWidth:'380px'}}>
                         <thead><tr style={{borderBottom:'1px solid var(--line)'}}>
                           {['Domain','Score','vs You','Bar',''].map(h=>(<th key={h} style={{fontFamily:'"JetBrains Mono"',fontSize:'9px',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--muted2)',padding:'10px 14px',textAlign:'left',fontWeight:400}}>{h}</th>))}
                         </tr></thead>
@@ -728,14 +765,14 @@ function DashboardInner() {
     </Fragment>
   ))}
 </tbody>
-                      </table>
+                      </table></div>
                     </div>
                   </div>
                 )}
 
                 {/* ══ CONTENT GAPS ══ */}
                 {view==='gaps' && (
-                  <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:'12px'}}>
+                  <div className="grid-2eq">
                     {result.fixes.map((f,i)=>{
                       const ps=pStyle(f.priority)
                       return (
@@ -756,7 +793,7 @@ function DashboardInner() {
 
                 {/* ══ TECHNICAL AEO ══ */}
                 {view==='technical' && (
-                  <div style={{display:'grid',gridTemplateColumns:'1fr 320px',gap:'12px'}}>
+                  <div className="grid-tech">
                     <div style={{display:'flex',flexDirection:'column',gap:'12px'}}>
                       <div style={{border:'1px solid var(--line)',background:'linear-gradient(145deg,rgba(14,25,40,.94),rgba(7,13,23,.92))',borderRadius:'7px',overflow:'hidden'}}>
                         <div style={{padding:'14px 16px 10px',borderBottom:'1px solid var(--line)'}}><div style={{fontFamily:'"Familjen Grotesk"',fontSize:'14px',fontWeight:600}}>Schema + crawlability audit</div></div>
@@ -807,7 +844,7 @@ function DashboardInner() {
 
                 {/* ══ REPORTS ══ */}
                 {view==='reports' && (
-                  <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:'12px'}}>
+                  <div className="grid-2eq">
                     {[
                       {title:'Weekly visibility digest',  badge:'Scheduled', desc:'AEO score, citation changes, competitor movements, and top three actions.'},
                       {title:'Competitor benchmark',      badge:'Monthly',   desc:'Share of voice and query ownership across your tracked competitors.'},
