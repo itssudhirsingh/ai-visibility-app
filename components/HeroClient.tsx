@@ -54,7 +54,7 @@ export default function HeroClient({ ctaOnly = false }: Props) {
   function go(val: string) {
     const clean = val.trim().replace(/^https?:\/\//, '')
     if (!clean) return
-    router.push(`/dashboard?url=${encodeURIComponent(clean)}`)
+    router.push(`/ai-visibility-tool?url=${encodeURIComponent(clean)}`)
   }
 
   const inputBox = (

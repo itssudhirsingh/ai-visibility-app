@@ -172,7 +172,7 @@ export default function AEOGuidePage() {
               <ToolCTA
                 icon="🔍" eyebrow="Start here" title="Get your AEO score in 30 seconds"
                 desc="Paste your domain and see exactly how you're cited across ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude right now."
-                href="/dashboard" cta="Run free scan" color="var(--accent)"
+                href="/ai-visibility-tool" cta="Run free scan" color="var(--accent)"
               />
 
               <h2 id="g3">How LLMs select sources</h2>

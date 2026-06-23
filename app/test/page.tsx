@@ -228,7 +228,7 @@ export default function LandingPage() {
     if (!clean) return
     const setter = which === 'hero' ? setScanState : setCtaScanState
     setter('scanning')
-    setTimeout(() => { setter('done'); setTimeout(() => { setter('idle'); router.push(`/dashboard?url=${encodeURIComponent(clean)}`) }, 2000) }, 1800)
+    setTimeout(() => { setter('done'); setTimeout(() => { setter('idle'); router.push(`/ai-visibility-tool?url=${encodeURIComponent(clean)}`) }, 2000) }, 1800)
   }
 
   function scanLabel(state: 'idle'|'scanning'|'done', label: string) {
@@ -326,8 +326,8 @@ export default function LandingPage() {
             ))}
           </ul>
           <div style={{display:'flex',gap:'.75rem',alignItems:'center'}}>
-            <button onClick={()=>router.push('/dashboard')} style={{fontFamily:"'Familjen Grotesk',sans-serif",fontSize:'.8rem',fontWeight:600,padding:'.55rem 1.2rem',border:'1px solid var(--border)',borderRadius:'100px',background:'transparent',color:'var(--muted)',cursor:'pointer',transition:'all .2s'}}>Log in</button>
-            <button onClick={()=>router.push('/dashboard')} style={{fontFamily:"'Familjen Grotesk',sans-serif",fontSize:'.8rem',fontWeight:700,padding:'.55rem 1.3rem',borderRadius:'100px',border:'none',background:'var(--accent)',color:'#fff',cursor:'pointer',transition:'all .2s'}}>Start free</button>
+            <button onClick={()=>router.push('/ai-visibility-tool')} style={{fontFamily:"'Familjen Grotesk',sans-serif",fontSize:'.8rem',fontWeight:600,padding:'.55rem 1.2rem',border:'1px solid var(--border)',borderRadius:'100px',background:'transparent',color:'var(--muted)',cursor:'pointer',transition:'all .2s'}}>Log in</button>
+            <button onClick={()=>router.push('/ai-visibility-tool')} style={{fontFamily:"'Familjen Grotesk',sans-serif",fontSize:'.8rem',fontWeight:700,padding:'.55rem 1.3rem',borderRadius:'100px',border:'none',background:'var(--accent)',color:'#fff',cursor:'pointer',transition:'all .2s'}}>Start free</button>
           </div>
         </nav>
 
@@ -580,7 +580,7 @@ export default function LandingPage() {
                     </li>
                   ))}
                 </ul>
-                <button onClick={()=>router.push('/dashboard')} style={{width:'100%',padding:'.85rem',borderRadius:'100px',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'.85rem',letterSpacing:'.04em',border:p.featured?'none':'1px solid var(--border)',background:p.featured?'var(--accent)':'transparent',color:p.featured?'#fff':'var(--text)',cursor:'pointer',transition:'all .22s'}}>
+                <button onClick={()=>router.push('/ai-visibility-tool')} style={{width:'100%',padding:'.85rem',borderRadius:'100px',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'.85rem',letterSpacing:'.04em',border:p.featured?'none':'1px solid var(--border)',background:p.featured?'var(--accent)':'transparent',color:p.featured?'#fff':'var(--text)',cursor:'pointer',transition:'all .22s'}}>
                   {p.cta}
                 </button>
               </div>

@@ -133,15 +133,23 @@ function DashboardInner() {
   const [toast, setToast] = useState('')
   const [openProbe, setOpenProbe] = useState<number|null>(null)
   const [openComp, setOpenComp] = useState<number|null>(null)
+  const [sidebarOpen, setSidebarOpen] = useState(false) // ← NEW
 
   function showToast(msg: string) { setToast(msg); setTimeout(()=>setToast(''),2400) }
 
   useEffect(()=>{ const p=searchParams.get('url'); if(p){setUrl(p);runAnalysis(p)} },[])
 
+  // ← NEW: close sidebar on nav change (mobile UX)
+  function handleNavChange(id: string) {
+    setView(id)
+    setSidebarOpen(false)
+  }
+
   async function runAnalysis(inputUrl?: string) {
     const target=(inputUrl||url).trim().replace(/^https?:\/\//,'')
     if(!target) return
     setLoading(true); setView('overview')
+    setSidebarOpen(false) // ← NEW: close sidebar when scan starts
     try {
       const res=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:target})})
       const data=await res.json()
@@ -188,6 +196,7 @@ function DashboardInner() {
         @keyframes spinR{to{transform:rotateX(70deg) rotateZ(360deg)}}
         @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
         @keyframes toastIn{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}
+        @keyframes slideIn{from{transform:translateX(-100%)}to{transform:translateX(0)}} /* ← NEW */
         .spin{animation:spin .8s linear infinite}
         .shimmer{background:linear-gradient(90deg,rgba(255,255,255,.02) 25%,rgba(255,255,255,.07) 50%,rgba(255,255,255,.02) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
         .pulse{animation:pulse 2s infinite}
@@ -204,18 +213,146 @@ function DashboardInner() {
         ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
         .toast-show{animation:toastIn .3s ease both}
         .pill{display:inline-flex;padding:3px 7px;border-radius:4px;font-family:"JetBrains Mono";font-size:9px;white-space:nowrap;line-height:1.4}
+
+        /* ── MOBILE SIDEBAR OVERLAY ── ← NEW */
+        .sidebar-overlay {
+          display: none;
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,.6);
+          z-index: 40;
+          backdrop-filter: blur(2px);
+        }
+        .sidebar-overlay.open { display: block; }
+
+        .mobile-sidebar {
+          position: fixed;
+          top: 65px;
+          left: 0;
+          width: 260px;
+          height: calc(100vh - 65px);
+          background: rgba(5,10,17,.98);
+          border-right: 1px solid var(--line2);
+          z-index: 50;
+          overflow-y: auto;
+          padding: 18px 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          animation: slideIn .22s ease both;
+        }
+
+        /* hamburger button — hidden on desktop ← NEW */
+        .hamburger-btn {
+          display: none;
+          align-items: center;
+          justify-content: center;
+          width: 36px;
+          height: 36px;
+          border: 1px solid var(--line);
+          background: rgba(255,255,255,.035);
+          border-radius: 6px;
+          color: var(--text);
+          font-size: 16px;
+          flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+          /* ← NEW: collapse grid to single column, sidebar hidden by default */
+          .dashboard-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .desktop-sidebar {
+            display: none !important;
+          }
+          .hamburger-btn {
+            display: flex !important;
+          }
+        }
       `}</style>
 
       {/* ── SHARED HEADER sits above everything ── */}
       <SharedHeader />
 
-      {/* ── SIDEBAR + MAIN grid — pushed down by SharedHeader's 65px spacer ── */}
-      <div style={{display:'grid',gridTemplateColumns:'236px 1fr',minHeight:'calc(100vh - 65px)',background:'var(--bg)'}}>
+      {/* ── MOBILE SIDEBAR BACKDROP ── ← NEW */}
+      {sidebarOpen && (
+        <div className={`sidebar-overlay open`} onClick={() => setSidebarOpen(false)} />
+      )}
 
-        {/* ── SIDEBAR ── */}
-        {/* top:65px so it starts below the fixed SharedHeader */}
-        <aside style={{background:'rgba(5,10,17,.94)',borderRight:'1px solid var(--line)',backdropFilter:'blur(24px)',padding:'18px 14px',display:'flex',flexDirection:'column',gap:'8px',position:'sticky',top:'65px',height:'calc(100vh - 65px)',overflowY:'auto'}}>
-          {/* Logo / home link — kept for quick nav within dashboard */}
+      {/* ── MOBILE SIDEBAR DRAWER ── ← NEW */}
+      {sidebarOpen && (
+        <aside className="mobile-sidebar">
+          {/* Logo */}
+          <div style={{height:'46px',display:'flex',alignItems:'center',gap:'10px',padding:'0 10px',fontFamily:'"Familjen Grotesk"',fontSize:'15px',fontWeight:700,cursor:'pointer',borderBottom:'1px solid var(--line)',marginBottom:'4px',paddingBottom:'12px'}} onClick={()=>{router.push('/');setSidebarOpen(false)}}>
+            <div style={{width:'28px',height:'28px',display:'grid',placeItems:'center',background:'var(--lime)',color:'#07100b',borderRadius:'6px',boxShadow:'0 0 24px rgba(202,255,69,.18)',fontSize:'13px',fontWeight:800,flexShrink:0}}>A</div>
+            <span style={{fontSize:'13px'}}>Dashboard</span>
+          </div>
+
+          {/* Active domain mini card */}
+          <div style={{margin:'2px 4px 10px',padding:'11px',border:'1px solid var(--line)',borderRadius:'7px',background:'rgba(255,255,255,.025)'}}>
+            <div style={{fontFamily:'"JetBrains Mono"',fontSize:'9px',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--muted2)',marginBottom:'7px'}}>Active domain</div>
+            <div style={{display:'flex',alignItems:'center',gap:'7px',marginBottom: result?'8px':'0'}}>
+              <span style={{width:'7px',height:'7px',borderRadius:'50%',background:'var(--green)',boxShadow:'0 0 10px var(--green)',display:'inline-block',flexShrink:0}} />
+              <span style={{fontFamily:'"JetBrains Mono"',fontSize:'11px',color:'var(--text)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{resultUrl||'—'}</span>
+            </div>
+            {result && (
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'6px'}}>
+                <div style={{padding:'6px',borderRadius:'5px',background:'rgba(255,255,255,.03)',textAlign:'center'}}>
+                  <div style={{fontFamily:'"Familjen Grotesk"',fontSize:'16px',fontWeight:700,color:scolor(result.score)}}>{result.score}</div>
+                  <div style={{fontFamily:'"JetBrains Mono"',fontSize:'8px',color:'var(--muted2)'}}>AEO</div>
+                </div>
+                <div style={{padding:'6px',borderRadius:'5px',background:'rgba(255,255,255,.03)',textAlign:'center'}}>
+                  <div style={{fontFamily:'"Familjen Grotesk"',fontSize:'16px',fontWeight:700,color:'var(--cyan)'}}>{result.engines_citing}</div>
+                  <div style={{fontFamily:'"JetBrains Mono"',fontSize:'8px',color:'var(--muted2)'}}>engines</div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div style={{fontFamily:'"JetBrains Mono"',fontSize:'9px',letterSpacing:'.1em',textTransform:'uppercase',color:'var(--muted2)',padding:'0 6px',marginBottom:'4px'}}>Navigation</div>
+          {NAVS.map(n=>(
+            <button key={n.id} onClick={()=>handleNavChange(n.id)} className="nav-btn"
+              style={{border:0,background:view===n.id?'linear-gradient(90deg,rgba(202,255,69,.13),rgba(69,228,255,.04))':'transparent',color:view===n.id?'var(--lime)':'var(--muted)',padding:'10px 11px',borderRadius:'6px',textAlign:'left',display:'flex',gap:'10px',alignItems:'center',fontSize:'12px',transition:'.2s',boxShadow:view===n.id?'inset 2px 0 var(--lime)':'none'}}>
+              <span style={{width:'17px',textAlign:'center',fontFamily:'"JetBrains Mono"',fontSize:'12px'}}>{n.icon}</span>{n.label}
+            </button>
+          ))}
+
+          <div style={{fontFamily:'"JetBrains Mono"',fontSize:'9px',letterSpacing:'.1em',textTransform:'uppercase',color:'var(--muted2)',padding:'0 6px',marginTop:'12px',marginBottom:'4px'}}>Recent scans</div>
+          {recentScans.map(s=>(
+            <div key={s.url} onClick={()=>{setUrl(s.url);runAnalysis(s.url)}} className="scan-item"
+              style={{padding:'10px 11px',border:'1px solid var(--line)',borderRadius:'6px',background:'rgba(255,255,255,.02)',cursor:'pointer',transition:'.2s'}}>
+              <div style={{display:'flex',justifyContent:'space-between',marginBottom:'3px'}}>
+                <span style={{fontFamily:'"JetBrains Mono"',fontSize:'11px',color:'var(--text)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',maxWidth:'130px'}}>{s.url}</span>
+                <span style={{fontFamily:'"Familjen Grotesk"',fontSize:'12px',fontWeight:700,color:scolor(s.score),flexShrink:0}}>{s.score}</span>
+              </div>
+              <span style={{fontFamily:'"JetBrains Mono"',fontSize:'9px',color:'var(--muted2)'}}>{s.time}</span>
+            </div>
+          ))}
+
+          <div style={{marginTop:'auto',padding:'12px',border:'1px solid rgba(202,255,69,.19)',background:'rgba(202,255,69,.045)',borderRadius:'7px'}}>
+            <div style={{fontFamily:'"JetBrains Mono"',fontSize:'9px',color:'var(--lime)',letterSpacing:'.1em',marginBottom:'10px'}}>FREE TIER USAGE</div>
+            {[{label:'API calls',val:'847 / 2000',pct:'42%',color:'var(--violet)'},{label:'DB rows',val:'1,203 / 50k',pct:'3%',color:'var(--green)'}].map(u=>(
+              <div key={u.label} style={{marginBottom:'8px'}}>
+                <div style={{display:'flex',justifyContent:'space-between',marginBottom:'4px'}}>
+                  <span style={{fontSize:'10px',color:'var(--muted)'}}>{u.label}</span>
+                  <span style={{fontFamily:'"JetBrains Mono"',fontSize:'9px',color:'var(--text)'}}>{u.val}</span>
+                </div>
+                <div style={{height:'3px',background:'rgba(255,255,255,.07)',borderRadius:'9px',overflow:'hidden'}}>
+                  <div style={{height:'100%',width:u.pct,background:u.color,borderRadius:'9px'}} />
+                </div>
+              </div>
+            ))}
+            <button onClick={()=>{router.push('/#pricing');setSidebarOpen(false)}} style={{marginTop:'8px',width:'100%',border:0,background:'var(--lime)',color:'#07100b',padding:'8px',borderRadius:'5px',fontSize:'10px',fontWeight:700,fontFamily:'"Familjen Grotesk"'}}>Upgrade to Pro</button>
+          </div>
+        </aside>
+      )}
+
+      {/* ── SIDEBAR + MAIN grid — pushed down by SharedHeader's 65px spacer ── */}
+      <div className="dashboard-grid" style={{display:'grid',gridTemplateColumns:'236px 1fr',minHeight:'calc(100vh - 65px)',background:'var(--bg)'}}>
+
+        {/* ── DESKTOP SIDEBAR ── */}
+        <aside className="desktop-sidebar" style={{background:'rgba(5,10,17,.94)',borderRight:'1px solid var(--line)',backdropFilter:'blur(24px)',padding:'18px 14px',display:'flex',flexDirection:'column',gap:'8px',position:'sticky',top:'65px',height:'calc(100vh - 65px)',overflowY:'auto'}}>
+          {/* Logo / home link */}
           <div style={{height:'46px',display:'flex',alignItems:'center',gap:'10px',padding:'0 10px',fontFamily:'"Familjen Grotesk"',fontSize:'15px',fontWeight:700,cursor:'pointer',borderBottom:'1px solid var(--line)',marginBottom:'4px',paddingBottom:'12px'}} onClick={()=>router.push('/')}>
             <div style={{width:'28px',height:'28px',display:'grid',placeItems:'center',background:'var(--lime)',color:'#07100b',borderRadius:'6px',boxShadow:'0 0 24px rgba(202,255,69,.18)',fontSize:'13px',fontWeight:800,flexShrink:0}}>A</div>
             <span style={{fontSize:'13px'}}>Dashboard</span>
@@ -283,6 +420,16 @@ function DashboardInner() {
         <main style={{display:'grid',gridTemplateRows:'64px 1fr auto',minWidth:0}}>
           {/* Topbar — sticky at 65px (below SharedHeader) */}
           <div style={{borderBottom:'1px solid var(--line)',background:'rgba(3,7,13,.8)',backdropFilter:'blur(20px)',display:'flex',alignItems:'center',gap:'14px',padding:'0 22px',position:'sticky',top:'65px',zIndex:10}}>
+
+            {/* ← NEW: Hamburger button — only visible on mobile */}
+            <button
+              className="hamburger-btn"
+              onClick={() => setSidebarOpen(o => !o)}
+              aria-label="Toggle navigation"
+            >
+              {sidebarOpen ? '✕' : '☰'}
+            </button>
+
             <div style={{display:'flex',alignItems:'center',gap:'9px',padding:'0 12px',border:'1px solid var(--line)',background:'rgba(255,255,255,.025)',borderRadius:'6px',height:'36px',fontSize:'11px',fontFamily:'"JetBrains Mono"'}}>
               <span style={{width:'7px',height:'7px',borderRadius:'50%',background:'var(--green)',boxShadow:'0 0 14px var(--green)',display:'inline-block'}} />
               {resultUrl||'No domain scanned'}
@@ -555,11 +702,10 @@ function DashboardInner() {
                         </tr></thead>
                        <tbody>
   {[{n:resultUrl,s:result.score,isYou:true,gap:''},...result.comps].map((c: any, i) => (
-    /* ✅ FIXED: Outermost element now holds the unique key */
     <Fragment key={`comp-block-${c.n || i}`}>
-      <tr 
-        onClick={() => !c.isYou && setOpenComp(openComp === i ? null : i)} 
-        className="comp-row" 
+      <tr
+        onClick={() => !c.isYou && setOpenComp(openComp === i ? null : i)}
+        className="comp-row"
         style={{ borderBottom: '1px solid rgba(255,255,255,.04)', transition: '.15s', cursor: c.isYou ? 'default' : 'pointer' }}
       >
         <td style={{ padding: '10px 14px', fontFamily: '"JetBrains Mono", analytics, monospace', fontSize: '11px', color: c.isYou ? 'var(--lime)' : 'var(--text)' }}>

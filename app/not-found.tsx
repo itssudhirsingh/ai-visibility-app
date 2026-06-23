@@ -89,7 +89,7 @@ export default function NotFound() {
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 12h18M3 12L9 6M3 12l6 6"/></svg>
                 Back to home
               </a>
-              <a href="/dashboard" className="btn-secondary" style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'.88rem',background:'transparent',color:'var(--muted)',border:'1px solid var(--border)',borderRadius:'100px',padding:'.75rem 1.75rem',transition:'all .2s'}}>
+              <a href="/ai-visibility-tool" className="btn-secondary" style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'.88rem',background:'transparent',color:'var(--muted)',border:'1px solid var(--border)',borderRadius:'100px',padding:'.75rem 1.75rem',transition:'all .2s'}}>
                 Open dashboard
               </a>
             </div>

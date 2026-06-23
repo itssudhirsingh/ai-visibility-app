@@ -8,7 +8,7 @@ import Logo from '@/components/logo'
 const TOOLS = [
   {
     label:       'AI Visibility Tool',
-    href:        '/dashboard',
+    href:        '/ai-visibility-tool',
     desc:        'Track AI visibility across 6 engines',
     icon:        '📊',
     badge:       'Free',
@@ -150,7 +150,7 @@ const TOOLS = [
 
 const NAV_LINKS = [
   { label: 'Cluster Map',    href: '/topic-cluster-generator' },
-  { label: 'AI Visibility',  href: '/dashboard' },
+  { label: 'AI Visibility',  href: '/ai-visibility-tool' },
   { label: 'AEO Guide',      href: '/aeo-guide' },
   { label: 'Blog',           href: '/blog' },
   { label: 'Changelog',      href: '/changelog' },
@@ -421,7 +421,7 @@ export default function SharedHeader() {
             </div>
 
             {/* CTA */}
-            <Link href="/dashboard" className="sh-cta"
+            <Link href="/ai-visibility-tool" className="sh-cta"
               style={{
                 fontFamily:    "'Familjen Grotesk',sans-serif",
                 fontWeight:    700,
@@ -601,7 +601,7 @@ export default function SharedHeader() {
             </div>
 
             {/* Mobile CTA */}
-            <Link href="/dashboard"
+            <Link href="/ai-visibility-tool"
               style={{
                 display:       'block',
                 textAlign:     'center',

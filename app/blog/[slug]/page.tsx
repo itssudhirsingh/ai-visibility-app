@@ -246,7 +246,7 @@ export default async function BlogPostPage(
                   Scan your domain free — get your AI visibility score in 30 seconds.
                 </div>
               </div>
-              <Link href="/dashboard"
+              <Link href="/ai-visibility-tool"
                 style={{ flexShrink:0, fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:700, fontSize:'.82rem', padding:'.65rem 1.35rem', borderRadius:100, background:'var(--lime)', color:'#03060c', whiteSpace:'nowrap' }}>
                 Scan my site →
               </Link>

@@ -30,7 +30,7 @@ const TOOLS = [
   {
     icon:'📊', title:'AI Visibility Scanner',
     desc:'Paste any domain and get your AEO score across ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude in under 30 seconds.',
-    cta:'Run free scan', href:'/dashboard', tag:'Core', c:'rgba(200,242,71,.2)',
+    cta:'Run free scan', href:'/ai-visibility-tool', tag:'Core', c:'rgba(200,242,71,.2)',
   },
   {
     icon:'🎯', title:'Content Cluster Map',
@@ -100,8 +100,8 @@ const TOOLS = [
 ]
 
 const PLANS = [
-  { plan:'Free', price:'0', desc:'Perfect for checking your own site and seeing where you stand.', features:['1 domain scan per day','AEO score for 3 LLMs','Basic citation count','llms.txt validator','7-day history'], cta:'Get started free', href:'/dashboard', featured:false },
-  { plan:'Pro', price:'49', desc:'For SEO professionals managing client sites and their own brands.', features:['10 domains included','All 6 LLMs tracked daily','Full citation context + sentiment','Competitor benchmarking (up to 5)','Content gap analysis','Weekly email digest reports','90-day history','CSV/PDF exports'], cta:'Start 14-day free trial', href:'/dashboard', featured:true },
+  { plan:'Free', price:'0', desc:'Perfect for checking your own site and seeing where you stand.', features:['1 domain scan per day','AEO score for 3 LLMs','Basic citation count','llms.txt validator','7-day history'], cta:'Get started free', href:'/ai-visibility-tool', featured:false },
+  { plan:'Pro', price:'49', desc:'For SEO professionals managing client sites and their own brands.', features:['10 domains included','All 6 LLMs tracked daily','Full citation context + sentiment','Competitor benchmarking (up to 5)','Content gap analysis','Weekly email digest reports','90-day history','CSV/PDF exports'], cta:'Start 14-day free trial', href:'/ai-visibility-tool', featured:true },
   { plan:'Agency', price:'149', desc:'For agencies managing multiple client accounts at scale.', features:['Unlimited domains','All 6 LLMs + custom prompt testing','White-label reports for clients','Unlimited competitor tracking','API access (coming soon)','Priority Slack support','365-day history'], cta:'Contact sales', href:'/resources/contact', featured:false },
 ]
 

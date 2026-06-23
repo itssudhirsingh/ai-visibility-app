@@ -6,11 +6,9 @@ import Logo from '@/components/logo'
 
 // ─── All tools ─────────────────────────────────────────────────────────────────
 const TOOLS = [
-  { label: 'AI Visibility Tool',          href: '/dashboard',             icon: '📊', badge: 'Free',  free: false },
-  { label: 'AI Topical Cluster Map',      href: '/topic-cluster-generator', icon: '🎯', badge: 'Free', free: false },
+  { label: 'AI Visibility Tool',          href: '/ai-visibility-tool',             icon: '📊', badge: 'Free',  free: false },
   { label: 'llms.txt Generator',          href: '/llms-text-generator',   icon: '📄', badge: 'FREE',  free: true  },
   { label: 'Robots.txt Generator',        href: '/robots-txt',            icon: '🤖', badge: 'FREE',  free: true  },
-  { label: 'AI BLUF Templates',           href: '/bluf-templates',        icon: '⚡', badge: 'FREE',  free: true  },
   { label: 'AI BLUF Generator',           href: '/bluf-builder',          icon: '✍️', badge: 'FREE',  free: true  },
   { label: 'AI E-E-A-T Checker',          href: '/ai-eeat-checker',            icon: '🏅', badge: 'FREE',  free: true  },
   { label: 'AI Page Speed Analyser',      href: '/ai-page-speed-analysis-tools',    icon: '🚀', badge: 'FREE',  free: true  },
@@ -23,7 +21,7 @@ const TOOLS = [
 ]
 
 const RESOURCES = [
-  { label: 'AEO Guide',  href: '/aeo-guide'  },
+  { label: 'Complete AEO Guide',  href: '/aeo-guide'  },
   { label: 'Blog',       href: '/blog'        },
   { label: 'Changelog',  href: '/changelog'   },
   { label: 'About',      href: '/about'       },
@@ -311,7 +309,7 @@ export default function SharedFooter() {
               }}>
                 Analyse your AI visibility in under 60 seconds.
               </div>
-              <Link href="/dashboard" className="sf-cta"
+              <Link href="/ai-visibility-tool" className="sf-cta"
                 style={{
                   display:       'inline-block',
                   fontFamily:    "'Familjen Grotesk',sans-serif",
