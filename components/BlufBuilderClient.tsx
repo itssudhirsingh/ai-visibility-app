@@ -84,7 +84,7 @@ export default function BlufBuilderClient() {
       )}
 
       {loading && (
-        <div style={{display:'flex',alignItems:'center',gap:'.75rem',color:'rgba(255,255,255,0.4)',fontFamily:"'JetBrains Mono',monospace",fontSize:'.78rem',padding:'2rem 0'}}>
+        <div style={{display:'flex',alignItems:'center',gap:'.75rem',color:'rgba(255,255,255,0.58)',fontFamily:"'JetBrains Mono',monospace",fontSize:'.78rem',padding:'2rem 0'}}>
           <span style={{width:'8px',height:'8px',borderRadius:'50%',background:'#c8f247',animation:'blink 1s ease-in-out infinite',display:'inline-block'}} />
           Reading the page, drafting 3 angles...
         </div>
@@ -98,7 +98,7 @@ export default function BlufBuilderClient() {
             <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',letterSpacing:'.08em',textTransform:'uppercase',color:'#7b6cff',background:'rgba(123,108,255,.1)',border:'1px solid rgba(123,108,255,.25)',padding:'.2rem .55rem',borderRadius:'4px'}}>
               {data.content_fetched ? '✓ Page content read' : '⚠ Inferred from URL'}
             </span>
-            <span style={{fontSize:'.82rem',color:'rgba(255,255,255,0.75)'}}>{data.page_summary}</span>
+            <span style={{fontSize:'.82rem',color:'rgba(255,255,255,0.88)'}}>{data.page_summary}</span>
           </div>
 
           {/* 3 options */}
@@ -114,7 +114,7 @@ export default function BlufBuilderClient() {
                     {opt.text}
                   </p>
                   <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',borderTop:'1px solid rgba(255,255,255,.07)',paddingTop:'.85rem'}}>
-                    <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'rgba(255,255,255,0.4)'}}>{opt.word_count} words</span>
+                    <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'rgba(255,255,255,0.58)'}}>{opt.word_count} words</span>
                     <button
                       onClick={()=>copyText(opt.text, i)}
                       style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',letterSpacing:'.04em',background:'none',border:'none',color: copiedIdx===i ? '#4ade80' : color,cursor:'pointer',padding:'.2rem .4rem'}}

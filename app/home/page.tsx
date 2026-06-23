@@ -13,8 +13,8 @@ const STYLES = `
   --border:    rgba(255,255,255,0.07);
   --border-h:  rgba(255,255,255,0.16);
   --text:      #ede9ff;
-  --muted:     rgba(255,255,255,0.75);
-  --muted2:    rgba(255,255,255,0.4);
+  --muted:     rgba(255,255,255,0.88);
+  --muted2:    rgba(255,255,255,0.58);
   --accent:    #c8f247;
   --violet:    #7b6cff;
   --cyan:      #22d3ee;

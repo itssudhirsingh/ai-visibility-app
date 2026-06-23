@@ -33,11 +33,11 @@ interface ClusterData {
 function ScoreBar({ label, value, color }: { label: string; value: number; color: string }) {
   return (
     <div style={{display:'flex',alignItems:'center',gap:'.5rem'}}>
-      <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',color:'rgba(255,255,255,0.4)',width:'30px',flexShrink:0}}>{label}</span>
+      <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',color:'rgba(255,255,255,0.58)',width:'30px',flexShrink:0}}>{label}</span>
       <div style={{flex:1,height:'4px',background:'rgba(255,255,255,.08)',borderRadius:'100px',overflow:'hidden'}}>
         <div style={{height:'100%',width:`${value}%`,background:color,borderRadius:'100px'}} />
       </div>
-      <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.62rem',color:'rgba(255,255,255,0.75)',width:'22px',textAlign:'right'}}>{value}</span>
+      <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.62rem',color:'rgba(255,255,255,0.88)',width:'22px',textAlign:'right'}}>{value}</span>
     </div>
   )
 }
@@ -102,7 +102,7 @@ export default function ClusterMapClient() {
       )}
 
       {loading && (
-        <div style={{display:'flex',alignItems:'center',gap:'.75rem',color:'rgba(255,255,255,0.4)',fontFamily:"'JetBrains Mono',monospace",fontSize:'.78rem',padding:'2rem 0'}}>
+        <div style={{display:'flex',alignItems:'center',gap:'.75rem',color:'rgba(255,255,255,0.58)',fontFamily:"'JetBrains Mono',monospace",fontSize:'.78rem',padding:'2rem 0'}}>
           <span style={{width:'8px',height:'8px',borderRadius:'50%',background:'#c8f247',animation:'blink 1s ease-in-out infinite',display:'inline-block'}} />
           Researching pillar viability, generating spokes, mapping articles, checking cannibalization risk...
         </div>
@@ -122,8 +122,8 @@ export default function ClusterMapClient() {
               )}
             </div>
             <div style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'1.4rem',marginBottom:'.6rem'}}>{data.pillar.topic}</div>
-            <div style={{fontSize:'.85rem',color:'rgba(255,255,255,0.75)',lineHeight:1.65,marginBottom:'.75rem'}}>{data.pillar.intent_summary}</div>
-            <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.68rem',color:'rgba(255,255,255,0.4)'}}>~{data.pillar.paa_count} distinct "People Also Ask" questions detected</div>
+            <div style={{fontSize:'.85rem',color:'rgba(255,255,255,0.88)',lineHeight:1.65,marginBottom:'.75rem'}}>{data.pillar.intent_summary}</div>
+            <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.68rem',color:'rgba(255,255,255,0.58)'}}>~{data.pillar.paa_count} distinct "People Also Ask" questions detected</div>
           </div>
 
           {/* Spokes */}
@@ -140,15 +140,15 @@ export default function ClusterMapClient() {
                     onClick={()=>setExpandedSpoke(isOpen ? null : spoke.slug)}
                     style={{display:'grid',gridTemplateColumns:'24px 1fr 140px 140px 90px 20px',gap:'1rem',alignItems:'center',padding:'1rem 1.25rem',cursor:'pointer'}}
                   >
-                    <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.7rem',color:'rgba(255,255,255,0.4)'}}>{String(i+1).padStart(2,'0')}</span>
+                    <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.7rem',color:'rgba(255,255,255,0.58)'}}>{String(i+1).padStart(2,'0')}</span>
                     <div>
                       <div style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'.92rem'}}>{spoke.title}</div>
-                      <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',color:'rgba(255,255,255,0.4)',marginTop:'.15rem'}}>{spoke.articles.length} articles · {spoke.intent}</div>
+                      <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',color:'rgba(255,255,255,0.58)',marginTop:'.15rem'}}>{spoke.articles.length} articles · {spoke.intent}</div>
                     </div>
                     <ScoreBar label="SEO" value={spoke.search_volume_score} color="linear-gradient(90deg,#22d3ee,#67e8f9)" />
                     <ScoreBar label="AEO" value={spoke.aeo_score} color="linear-gradient(90deg,#c8f247,#a3e635)" />
-                    <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.62rem',color:'rgba(255,255,255,0.4)',textAlign:'right'}}>{spoke.intent}</span>
-                    <span style={{fontSize:'.7rem',color:'rgba(255,255,255,0.4)',transform:isOpen?'rotate(180deg)':'none',transition:'transform .2s',textAlign:'center'}}>▾</span>
+                    <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.62rem',color:'rgba(255,255,255,0.58)',textAlign:'right'}}>{spoke.intent}</span>
+                    <span style={{fontSize:'.7rem',color:'rgba(255,255,255,0.58)',transform:isOpen?'rotate(180deg)':'none',transition:'transform .2s',textAlign:'center'}}>▾</span>
                   </div>
                   {isOpen && (
                     <div style={{borderTop:'1px solid rgba(255,255,255,0.07)',padding:'1rem 1.25rem 1.25rem 3.25rem'}}>
@@ -156,7 +156,7 @@ export default function ClusterMapClient() {
                         <div key={article.slug} style={{display:'grid',gridTemplateColumns:'1fr 140px 140px',gap:'1rem',alignItems:'center',padding:'.6rem 0',borderBottom:'1px solid rgba(255,255,255,.04)'}}>
                           <div>
                             <div style={{fontSize:'.82rem',color:'#fff'}}>{article.title}</div>
-                            <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.58rem',color:'rgba(255,255,255,0.4)',marginTop:'.1rem'}}>kw: {article.primary_keyword}</div>
+                            <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.58rem',color:'rgba(255,255,255,0.58)',marginTop:'.1rem'}}>kw: {article.primary_keyword}</div>
                           </div>
                           <ScoreBar label="SEO" value={article.search_volume_score} color="linear-gradient(90deg,#22d3ee,#67e8f9)" />
                           <ScoreBar label="AEO" value={article.aeo_score} color="linear-gradient(90deg,#c8f247,#a3e635)" />
@@ -180,9 +180,9 @@ export default function ClusterMapClient() {
                   <div key={i} style={{background:'#100e22',border:'1px solid rgba(255,255,255,0.07)',borderRadius:'10px',padding:'1rem 1.25rem'}}>
                     <div style={{display:'flex',alignItems:'center',gap:'.6rem',marginBottom:'.5rem',flexWrap:'wrap'}}>
                       <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.58rem',letterSpacing:'.06em',textTransform:'uppercase',color:riskColor(risk.risk),background:`${riskColor(risk.risk)}18`,border:`1px solid ${riskColor(risk.risk)}40`,padding:'.18rem .5rem',borderRadius:'4px'}}>{risk.risk} risk</span>
-                      <span style={{fontSize:'.82rem',color:'#fff'}}>{risk.topic_a} <span style={{color:'rgba(255,255,255,0.4)'}}>vs</span> {risk.topic_b}</span>
+                      <span style={{fontSize:'.82rem',color:'#fff'}}>{risk.topic_a} <span style={{color:'rgba(255,255,255,0.58)'}}>vs</span> {risk.topic_b}</span>
                     </div>
-                    <div style={{fontSize:'.8rem',color:'rgba(255,255,255,0.75)',lineHeight:1.5}}>{risk.fix}</div>
+                    <div style={{fontSize:'.8rem',color:'rgba(255,255,255,0.88)',lineHeight:1.5}}>{risk.fix}</div>
                   </div>
                 ))}
               </div>
@@ -194,7 +194,7 @@ export default function ClusterMapClient() {
             <div style={{background:'#100e22',border:'1px solid rgba(255,255,255,0.07)',borderRadius:'12px',padding:'1.25rem'}}>
               <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',letterSpacing:'.1em',textTransform:'uppercase',color:'#4ade80',marginBottom:'.75rem'}}>Phase 1 — Launch now</div>
               {data.rollout_plan.phase_1.map(slug => (
-                <div key={slug} style={{fontSize:'.8rem',color:'rgba(255,255,255,0.75)',padding:'.3rem 0'}}>→ {slug}</div>
+                <div key={slug} style={{fontSize:'.8rem',color:'rgba(255,255,255,0.88)',padding:'.3rem 0'}}>→ {slug}</div>
               ))}
             </div>
             <div style={{background:'#100e22',border:'1px solid rgba(255,255,255,0.07)',borderRadius:'12px',padding:'1.25rem'}}>
@@ -202,7 +202,7 @@ export default function ClusterMapClient() {
                 Phase 2 — Next {data.rollout_plan.estimated_timeline_weeks} weeks
               </div>
               {data.rollout_plan.phase_2.map(slug => (
-                <div key={slug} style={{fontSize:'.8rem',color:'rgba(255,255,255,0.75)',padding:'.3rem 0'}}>→ {slug}</div>
+                <div key={slug} style={{fontSize:'.8rem',color:'rgba(255,255,255,0.88)',padding:'.3rem 0'}}>→ {slug}</div>
               ))}
             </div>
           </div>

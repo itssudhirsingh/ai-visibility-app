@@ -102,13 +102,13 @@ export default function HeroClient({ ctaOnly = false }: Props) {
           <span style={{WebkitTextStroke:'1.5px rgba(255,255,255,.3)',color:'transparent'}}>visible</span> to<br/>
           <span style={{color:'#c8f247'}}>AI engines?</span>
         </h1>
-        <p style={{fontSize:'clamp(.95rem,2vw,1.15rem)',color:'rgba(255,255,255,0.75)',lineHeight:1.75,maxWidth:'540px',margin:'0 auto 2.5rem'}}>
+        <p style={{fontSize:'clamp(.95rem,2vw,1.15rem)',color:'rgba(255,255,255,0.88)',lineHeight:1.75,maxWidth:'540px',margin:'0 auto 2.5rem'}}>
           Notion Cue tracks how often your website gets cited, mentioned, and recommended by large language models. Paste your URL and get your AI visibility score in seconds.
         </p>
         <div style={{maxWidth:'620px',margin:'0 auto 1.25rem'}}>
           {inputBox}
         </div>
-        <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',letterSpacing:'.08em',color:'rgba(255,255,255,0.4)',display:'flex',alignItems:'center',justifyContent:'center',gap:'1.2rem',flexWrap:'wrap'}}>
+        <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',letterSpacing:'.08em',color:'rgba(255,255,255,0.58)',display:'flex',alignItems:'center',justifyContent:'center',gap:'1.2rem',flexWrap:'wrap'}}>
           {['Free forever plan','No credit card needed','Results in <30 seconds'].map(t=>(
             <span key={t} style={{display:'flex',alignItems:'center',gap:'.35rem'}}>
               <span style={{color:'#c8f247'}}>✦</span>{t}
@@ -117,7 +117,7 @@ export default function HeroClient({ ctaOnly = false }: Props) {
         </div>
       </div>
       <div style={{position:'absolute',bottom:'2rem',left:'50%',transform:'translateX(-50%)',zIndex:2,opacity:.3}}>
-        <div style={{width:'1px',height:'50px',background:'linear-gradient(to bottom,transparent,rgba(255,255,255,0.75))',animation:'lineGrow 2s ease-in-out infinite'}} />
+        <div style={{width:'1px',height:'50px',background:'linear-gradient(to bottom,transparent,rgba(255,255,255,0.88))',animation:'lineGrow 2s ease-in-out infinite'}} />
       </div>
     </section>
   )
