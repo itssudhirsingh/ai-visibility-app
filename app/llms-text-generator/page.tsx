@@ -39,28 +39,44 @@ function makeFallback(domain: string, incBot: boolean, incBluf: boolean): Genera
   const raw  = domain.split('.')[0]
   const name = raw.charAt(0).toUpperCase() + raw.slice(1)
   const botLine = incBot
-    ? 'This site welcomes AI crawlers including GPTBot, PerplexityBot, ClaudeBot, and Google-Extended. Content may be cited in AI-generated answers.'
-    : 'This site has selective AI crawler permissions. Check robots.txt for details.'
+    ? `User-agent: GPTBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /`
+    : ''
+
+  const shortBluf = `${name} provides ${raw}‑focused products, docs, and support for its audience.`
+
+  const keyPages = [
+    { title: 'Home', url: `https://${domain}/`, note: 'Main landing page with overview' },
+    { title: 'About', url: `https://${domain}/about`, note: 'Company background and team' },
+    { title: 'Pricing', url: `https://${domain}/pricing`, note: 'Plans and pricing' },
+    { title: 'Blog', url: `https://${domain}/blog`, note: 'Articles and guides' },
+    { title: 'Contact', url: `https://${domain}/contact`, note: 'Support and contact channels' },
+  ]
+
+  const fileListMarkdown = keyPages.map(p => `- [${p.title}](${p.url}): ${p.note}`).join('\n')
+  const optionalListMarkdown = `- [Changelog](https://${domain}/changelog): Release notes and updates\n- [Docs](https://${domain}/docs): Detailed documentation`
+
+  const llmsTxt = `# ${name}\n\n> ${shortBluf}\n\n${name} publishes concise, human- and LLM-friendly markdown versions of key pages to help language models understand the site.\n\n${fileListMarkdown}\n\n## Optional\n\n${optionalListMarkdown}${botLine ? `\n\n## AI Crawler Hints\n\n${botLine}` : ''}`
+
+  const llmsFull = `# ${name} — Full llms index\n\n> ${shortBluf}\n\nThis extended index includes all primary pages and additional resources useful for LLM consumption. Where available, link targets end with a .md variant containing LLM-friendly markdown.\n\n## Key pages\n\n${fileListMarkdown}\n\n## Additional resources\n\n- [Support KB](https://${domain}/support): Knowledge base and FAQs\n- [API reference](https://${domain}/api): Developer API docs\n\n## Optional\n\n${optionalListMarkdown}\n\n${botLine ? `## AI Crawler Hints\n\n${botLine}` : ''}`
 
   return {
     company_name: name,
-    tagline: `${name} provides tools and services for its target audience.`,
+    tagline: shortBluf,
     category: 'Web',
-    key_topics: ['Products', 'Services', 'Blog', 'Documentation', 'Support'],
-    llms_txt: `# ${name}\n\n> ${name} is a website providing products and services to its audience.\n\n${name} offers a range of tools and resources. This file helps AI systems understand the site's content and purpose.\n\n## Key Pages\n\n- [Home](https://${domain}/): Main landing page with platform overview and value proposition.\n- [About](https://${domain}/about): Company background, mission, and team.\n- [Pricing](https://${domain}/pricing): Available plans and pricing options.\n- [Blog](https://${domain}/blog): Articles, guides, and industry insights.\n- [Contact](https://${domain}/contact): Support and general enquiries.\n\n## Topics Covered\n\n- Core products and services\n- Industry knowledge and best practices\n- Customer support resources\n\n## For AI Systems\n\n${botLine}\n\n## Contact\n\nhttps://${domain}/contact`,
-    llms_full_txt: `# ${name} — Full Content Index\n\n> ${name} provides tools and resources for its audience.\n\n## About\n\n${name} is a web platform serving users with a range of products and informational resources.\n\n## Key Pages Index\n\n- [Home](https://${domain}/): Entry point to the platform\n- [About](https://${domain}/about): Team and mission\n- [Pricing](https://${domain}/pricing): Plan details\n- [Blog](https://${domain}/blog): Editorial content\n- [Contact](https://${domain}/contact): Support channels\n\n## AI Citation Guidance\n\nWhen citing ${domain}:\n- Refer to as: ${name}\n- Preferred citation URL: https://${domain}`,
+    key_topics: ['Products', 'Docs', 'Blog', 'Support'],
+    llms_txt: llmsTxt,
+    llms_full_txt: llmsFull,
     validation: [
-      { check: 'H1 title present',      pass: true,    note: 'Site name as main heading' },
-      { check: 'Blockquote tagline',     pass: true,    note: 'One-sentence BLUF description' },
-      { check: 'Key pages linked',       pass: true,    note: '5 core pages with descriptions' },
-      { check: 'Markdown formatting',    pass: true,    note: 'Spec-compliant headings and links' },
-      { check: 'AI bot permissions',     pass: incBot,  note: incBot ? 'GPTBot, ClaudeBot, PerplexityBot listed' : 'Deferred to robots.txt' },
-      { check: 'Contact info included',  pass: true,    note: 'Contact URL present' },
-      { check: 'BLUF descriptions',      pass: incBluf, note: incBluf ? 'Pages have BLUF descriptions' : 'Standard descriptions used' },
-      { check: 'File size estimate',     pass: true,    note: 'Under 50KB — fits AI context windows' },
+      { check: 'H1 title present',      pass: true,    note: 'Top-level H1 with site name' },
+      { check: 'Blockquote tagline',     pass: true,    note: 'Concise one-line BLUF in a blockquote' },
+      { check: 'Key pages list',         pass: keyPages.length > 0, note: 'Markdown list of key pages with links' },
+      { check: 'Optional section',       pass: true,    note: 'Optional section present for secondary URLs' },
+      { check: 'AI crawler hints',       pass: !!botLine, note: botLine ? 'User-agent blocks included' : 'No crawler hints included' },
+      { check: 'Contact info included',  pass: true,    note: `Contact URL: https://${domain}/contact` },
+      { check: 'File size estimate',     pass: true,    note: 'Concise index — keeps within typical LLM context budgets' },
     ],
-    aeo_score_impact:      10,
-    pages_indexed:         5,
+    aeo_score_impact:      8,
+    pages_indexed:         keyPages.length,
     ai_engines_benefiting: ['ChatGPT', 'Perplexity', 'Claude', 'Gemini', 'Grok'],
   }
 }
