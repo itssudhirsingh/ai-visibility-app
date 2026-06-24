@@ -1458,12 +1458,14 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
 <p><strong>What is the fastest way to improve E-E-A-T for a site with no current signals?</strong><br/>Add named authorship with linked bios and Person schema to your highest-traffic pages first. This single change addresses the most fundamental E-E-A-T gap — anonymous content — and is the action with the fastest observed impact on AI citation rates in case studies from early 2026. Then add primary-source citations to every major claim on those pages. Then build the off-site corroboration through review platform profiles and community participation.</p>
 `,
   },
+  
 
   // ─────────────────────────────────────────────────────────────────────────
   // ➕ ADD NEW POSTS BELOW THIS LINE
   // Copy the block above, change the fields, save. Done.
   // ─────────────────────────────────────────────────────────────────────────
 ]
+.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 export function getPostBySlug(slug: string): BlogPost | undefined {
