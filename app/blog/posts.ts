@@ -1463,7 +1463,7 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
   // ➕ ADD NEW POSTS BELOW THIS LINE
   // Copy the block above, change the fields, save. Done.
   // ─────────────────────────────────────────────────────────────────────────
-]
+].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 export function getPostBySlug(slug: string): BlogPost | undefined {
