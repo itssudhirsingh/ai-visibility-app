@@ -117,7 +117,7 @@ export default function BlogIndexPage() {
         }}>
           {SUB_NAV.map(n => (
             <Link key={n.href} href={n.href}
-              className={`subnav-link${n.href === '/resources/blog' ? ' active' : ''}`}>
+              className={`subnav-link${n.href === '/blog' ? ' active' : ''}`}>
               {n.label}
             </Link>
           ))}
@@ -138,14 +138,14 @@ export default function BlogIndexPage() {
             </p>
             {/* Tag filters — static links for SSR */}
             <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
-              <Link href="/resources/blog"
+              <Link href="/blog"
                 style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem', padding:'5px 12px', borderRadius:100, border:'1px solid var(--lime)', background:'rgba(202,255,69,.08)', color:'var(--lime)' }}>
                 All posts
               </Link>
               {BLOG_TAGS.map(tag => {
                 const s = tagStyle(tag)
                 return (
-                  <Link key={tag} href={`/resources/blog/tag/${tag.toLowerCase().replace(/\s+/g,'-')}`}
+                  <Link key={tag} href={`/blog/tag/${tag.toLowerCase().replace(/\s+/g,'-')}`}
                     style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem', padding:'5px 12px', borderRadius:100, border:`1px solid ${s.border}`, background:s.bg, color:s.text }}>
                     {tag}
                   </Link>
@@ -159,7 +159,7 @@ export default function BlogIndexPage() {
             <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.68rem', letterSpacing:'.12em', textTransform:'uppercase', color:'var(--muted2)', marginBottom:'1.25rem' }}>
               Latest post
             </div>
-            <Link href={`/resources/blog/${featured.slug}`}>
+            <Link href={`/blog/${featured.slug}`}>
               <div className="featured-card">
                 <div style={{ padding:'2.5rem' }}>
                   <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:'1.25rem', flexWrap:'wrap' }}>
