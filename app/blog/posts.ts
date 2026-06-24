@@ -1458,7 +1458,266 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
 <p><strong>What is the fastest way to improve E-E-A-T for a site with no current signals?</strong><br/>Add named authorship with linked bios and Person schema to your highest-traffic pages first. This single change addresses the most fundamental E-E-A-T gap — anonymous content — and is the action with the fastest observed impact on AI citation rates in case studies from early 2026. Then add primary-source citations to every major claim on those pages. Then build the off-site corroboration through review platform profiles and community participation.</p>
 `,
   },
-  
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 23 — How Perplexity Selects Sources
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'how-perplexity-selects-sources-citation-algorithm',
+    emoji:          '🔮',
+    bg:             'rgba(69,228,255,.06)',
+    tag:            'Technical',
+    date:           'Jun 25, 2026',
+    title:          'How Perplexity Selects Sources: The Citation Algorithm Decoded',
+    excerpt:        'Perplexity visits about 10 pages per query but only cites 3 to 4. It runs a six-stage RAG pipeline that most brands are not building for. This is what actually happens between your URL and a Perplexity citation.',
+    read:           '10 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>Two websites publish nearly identical articles about the same topic on the same day. Same domain authority, similar writing quality, comparable backlink profiles. Three weeks later, one gets cited in Perplexity answers every few days. The other has zero citations.</p>
+<p>This is not random. Perplexity's source selection runs a documented six-stage pipeline that filters candidates at every step. Most brands are optimising for stage one and wondering why nothing works.</p>
+<p>Perplexity processes roughly 780 million queries per month, up 239% from 230 million in August 2024. At that scale, it is a meaningful B2B distribution channel, not a novelty. Getting cited in a Perplexity response carries the same reach as coverage in a tier-one trade publication — except it happens in real time, every day, for the queries your buyers are actually running.</p>
+
+<h2>What Is the Six-Stage Perplexity Citation Pipeline?</h2>
+<p>Perplexity generates cited answers through a Retrieval-Augmented Generation pipeline with six distinct stages. A page must clear every stage to earn a citation. Failing any one of them removes it from consideration regardless of content quality.</p>
+<p><strong>Stage 1: Query intent parsing.</strong> Perplexity does not pass the raw user question to a search index. It uses a language model to parse the semantic structure of the query first. For complex questions, Pro Search and Deep Research modes break the query into three to five sub-queries and execute each separately. A user asking "what is the best AEO tracking tool for a B2B team" triggers sub-queries like "AEO tracking tools comparison," "B2B AI visibility platforms," and "citation monitoring software." Your page needs to be a candidate for at least one sub-query, not necessarily the full prompt.</p>
+<p><strong>Stage 2: Real-time retrieval.</strong> Perplexity combines BM25 keyword matching with dense embedding search to cast a wide net of candidate documents. Unlike ChatGPT, which leans on training data and activates web search on demand, Perplexity runs a live web search for every single query. Pages that Perplexity cannot crawl at query time are invisible at this stage. If PerplexityBot is blocked in your robots.txt or WAF, nothing else matters.</p>
+<p><strong>Stage 3: Three-layer ML reranking.</strong> The initial retrieval set gets pushed through a three-layer reranker. Layer one scores basic relevance. Layer two evaluates domain authority through a machine learning model that weighs E-E-A-T signals, cross-platform presence, and structured data. Layer three — the most important for competitive brands — applies a "topic multiplier." Content in AI, technology, science, and business gets amplified. Entertainment and sports content gets suppressed. This is why Perplexity citations are not proportional to web traffic; niche B2B content on technical topics punches far above its domain authority weight.</p>
+<p><strong>Stage 4: Freshness scoring.</strong> Perplexity applies an aggressive time decay. The freshness sweet spot sits at roughly 30 days. Content published or updated more than 30 days ago loses visibility rapidly unless it ranks in a high-authority source. This is not about republishing the same article with a new date. Perplexity's systems detect that. The decay resets only when you update the evidence, add new data points, and make the publication date visible and accurate.</p>
+<p><strong>Stage 5: Context assembly.</strong> Before any text is generated, citations are embedded into the prompt structure. The model is constrained to synthesise from the selected sources, not from general training data. This is why citation selection determines answer quality — and why a page that survives to this stage has already won the hard part.</p>
+<p><strong>Stage 6: LLM synthesis.</strong> The language model generates the answer from the assembled context. At this stage, extractability determines whether your content shapes the answer or just appears as a footnote. A page cited in the answer is different from a page cited at the bottom. The difference is passage extractability: whether your key claim appears in the first sentence of a section, standing on its own.</p>
+
+<h2>Why Most Perplexity Optimisation Advice Is Wrong</h2>
+<p>Most guidance treats Perplexity as one problem: get your page selected. It is two problems. Source selection — whether Perplexity retrieves and cites your page at all — is separate from answer absorption — whether your page's evidence actually shapes the generated response.</p>
+<p>A page can be listed as a source without any of its content influencing the answer. A page can shape an answer even when it is not prominently featured. These require different fixes. Optimising content structure helps absorption. Fixing crawl access helps selection. Strengthening off-site authority affects both, but through different mechanisms in the pipeline.</p>
+<p>Teams that conflate these two outcomes build for the wrong stage. They rewrite content structure when PerplexityBot cannot reach the page. Or they focus entirely on crawl access when the real problem is that their evidence is buried in paragraph four.</p>
+
+<h2>What Are the Actual Ranking Factors by Weight?</h2>
+<p>Independent analysis of Perplexity's source selection reveals approximate factor weights that shift by query type. For informational queries: content relevance accounts for roughly 30%, visual placement in the page for 20%, domain authority for 15%, content freshness for 15%, source diversity for 10%, and structured data for 10%. For commercial queries, trust signals, review platform presence, and G2 or Capterra listings gain additional weight while pure content relevance drops.</p>
+<p>The visual placement figure is counterintuitive but consistent across studies. "Visual placement" means where your key answer appears on the page. Content at the top of the page, in the first paragraph under each heading, scores higher than equivalent content deeper in the same article. Perplexity's crawler spends more time on above-the-fold content, and its scoring reflects that allocation.</p>
+
+<h2>How Do You Pass the Crawl Gate First?</h2>
+<p>Nothing else matters if PerplexityBot cannot reach your page. Check three things before anything else.</p>
+<p>First, your robots.txt. Confirm PerplexityBot is explicitly allowed, not just un-blocked by omission. An explicit allow rule is more reliable than relying on default behaviour.</p>
+<pre><code>User-agent: PerplexityBot
+Allow: /</code></pre>
+<p>Second, your server logs. Search for PerplexityBot activity in the past 30 days. If you see zero hits on pages you care about, your WAF or CDN bot rules are blocking it before robots.txt is checked. Cloudflare's Bot Fight Mode and many security plugins block AI crawlers by default.</p>
+<p>Third, your JavaScript dependency. Perplexity's crawler does not execute JavaScript. Critical content that loads client-side after the initial HTML response is invisible to Perplexity's retrieval system. Server-side rendering or static generation for key pages is not optional if you want Perplexity citations.</p>
+
+<div class="callout"><p>The NotioncCue AI Crawler Audit shows which pages PerplexityBot is fetching, how often, and which pages return empty content because of JavaScript rendering issues. Run it before anything else. Fixing crawl access is the highest-leverage single action in Perplexity optimisation.</p></div>
+
+<h2>What Content Structure Earns Absorption?</h2>
+<p>Getting into Perplexity's source list is stage one. Getting your evidence into the generated answer is stage two. These require different things.</p>
+<p>The absorption rate correlates almost entirely with one variable: whether your key claim appears in the first sentence of each section. Not in the second paragraph. Not after context-setting. The first sentence. Perplexity's synthesis model pulls passages directly when they are self-contained. A section that starts with setup before the point gets scored lower than an identical section that leads with the conclusion.</p>
+<p>The format that earns the highest citation rates across studies: FAQ pages, definition pages, and data-dense articles with visible source citations. The common factor is extractability. Each section answers exactly one question. The answer comes first. Supporting evidence follows.</p>
+
+<h2>How Does Off-Site Authority Affect Perplexity Citations?</h2>
+<p>Perplexity's layer-three reranker weighs external validation heavily. News placements and journalism coverage from tier-one publications carry structural advantages that website content alone cannot replicate. For B2B companies, this makes earned media strategy — pitching to niche trade publications your buyers read — a direct Perplexity optimisation tactic, not a separate brand activity.</p>
+<p>60% citation overlap between Perplexity and Google's top-ten results exists, per Search Engine Land data. But the remaining 40% are pages Perplexity cites that Google does not surface. These are typically smaller, more specific pages with strong topical focus and recent publication dates. Competing for that 40% means building content that is more current, more specific, and more externally validated than what the high-DA generalist sites are publishing.</p>
+<p>Reddit participation in relevant subreddits, third-party review platform profiles, and expert mentions in industry publications all feed Perplexity's entity authority signals. The same work that builds E-E-A-T for Google improves Perplexity citation probability through a different mechanism — the ML reranker at layer two weighs these cross-platform signals directly.</p>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>How often does Perplexity re-crawl pages?</strong><br/>Perplexity retrieves live web content at query time, not on a fixed crawl schedule. This means a page updated this morning can appear in citations this afternoon. The flip side is that outdated content loses citation velocity rapidly. The 30-day freshness sweet spot applies to most informational queries.</p>
+<p><strong>Does Perplexity citation correlate with Google rankings?</strong><br/>60% overlap exists between Perplexity citations and Google's top-ten results, per Search Engine Land. But 40% of Perplexity citations go to pages that do not rank in Google's top ten. Perplexity's algorithm applies its own evaluation criteria — specifically freshness, topical specificity, and cross-platform entity signals — that differ from Google's link-based ranking signals.</p>
+<p><strong>Can a small site get cited as often as a high-authority domain?</strong><br/>Yes, in specific conditions. A detailed technical analysis on a specific industry topic from a smaller but authoritative site can be cited alongside, or instead of, major publication content if it better addresses the query intent at that moment. Freshness, specificity, and extractability can overcome traditional authority gaps for informational queries.</p>
+<p><strong>What is the fastest change that moves Perplexity citation rates?</strong><br/>Fixing PerplexityBot access, where it was blocked, is the single highest-leverage change. If the crawler is already reaching your pages, moving your key answer to the first sentence of each section produces the fastest absorption improvement. Both are structural fixes that do not require new content.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 24 — ChatGPT Search AEO Guide
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'chatgpt-search-aeo-optimization-guide-2026',
+    emoji:          '💬',
+    bg:             'rgba(82,227,142,.06)',
+    tag:            'Technical',
+    date:           'Jun 25, 2026',
+    title:          'ChatGPT Search AEO: How to Get Your Brand Cited in 2026',
+    excerpt:        'ChatGPT retrieves pages for 85% of queries but only cites 15% of those pages. 32.9% of all cited pages were found through fan-out sub-queries with zero traditional search volume. Here is what that means for your content strategy.',
+    read:           '10 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>ChatGPT does not present a list of ranked pages. It retrieves candidates, evaluates them, and generates a synthesised answer citing only the pages that passed its selection criteria. An AirOps study analysing 548,534 pages across 15,000 prompts found that ChatGPT cites only 15% of the pages it retrieves. The other 85% are pulled into the process, scored, and discarded without ever appearing in the answer.</p>
+<p>That 15% figure is the gap this post addresses. Not how to drive traffic, not how to rank on Google — specifically, how to move from retrieved-but-ignored to cited.</p>
+<p>ChatGPT reaches 883 million monthly users, up significantly from 300 million weekly users in early 2026. 44% of SaaS brands with strong Google rankings have zero ChatGPT visibility, per EMGI Group's April 2026 analysis. Strong SEO is a contributing factor, not a guarantee. The two channels have diverged enough that you need to build for both explicitly.</p>
+
+<h2>How Does ChatGPT Search Actually Work?</h2>
+<p>ChatGPT Search does not search for the phrase a user types. It expands the query before retrieval through a process called fan-out. The AirOps dataset found that 89.6% of 15,000 original prompts triggered two or more follow-up searches. The total query set expanded from 15,000 prompts to 43,233 queries — nearly a 3x increase.</p>
+<p>What this means in practice: 32.9% of all cited pages appeared in fan-out results only. They were never discovered through the primary keyword. Nearly one-third of citation opportunities exist entirely outside what a conventional keyword strategy tracks.</p>
+<p>The fan-out queries that triggered citations had one notable characteristic: 95% of them had zero traditional search volume. These are not keywords brands target. They are the sub-questions ChatGPT asks itself while building an answer — questions like "NCLEX pass rates by nursing school" when a user asked "what are the best nursing programs." A page answering that specific sub-question in depth gets cited even if it has no organic traffic and ranks nowhere for the parent query.</p>
+
+<h2>What Is the Difference Between Retrieval and Citation?</h2>
+<p>This distinction is where most ChatGPT optimisation advice breaks down. Retrieval means ChatGPT found and considered your page. Citation means ChatGPT actually used your page in the answer. These require different interventions.</p>
+<p>Retrieval eligibility depends on crawl access, indexability, and enough topical relevance to surface in one of ChatGPT's sub-queries. If OAI-SearchBot or ChatGPT-User cannot reach your page, or if the page is not indexed, retrieval does not happen regardless of content quality.</p>
+<p>Citation selection depends on what happens once ChatGPT has your page in the candidate pool. At that point, the content itself determines whether it gets cited: how directly the answer appears, how verifiable the claims are, whether the writing is in active voice with specific rather than vague language, and whether the page has schema that tells ChatGPT exactly what type of content it is reading.</p>
+<p>Pages ranking in position one on Google are cited by ChatGPT 3.5x more often than pages outside the top 20. But only 12% of URLs cited by ChatGPT also rank in Google's top ten. High Google rankings improve retrieval probability. They do not determine citation. The content quality and structure at the citation stage is what creates the gap.</p>
+
+<h2>Which Content Types Get Cited Most by ChatGPT?</h2>
+<p>The content types that produce the highest ChatGPT citation rates, based on the AirOps dataset and cross-referenced against EMGI Group's April 2026 analysis, share three characteristics: they answer a specific question directly in the first sentence, they include verifiable data with named sources, and they are structured so any paragraph can stand alone without surrounding context.</p>
+<p>FAQ content performs disproportionately well because each question-answer pair is a self-contained extractable unit. ChatGPT can pull one pair without needing the page's introduction or conclusion. Definition pages perform similarly — a clean, specific definition in the first sentence of a section is one of the most reliably cited content formats.</p>
+<p>Reddit ranks among the top-cited domains across ChatGPT and other AI platforms. An analysis of approximately 250,000 Reddit posts found that Q&A threads account for over 50% of Reddit's AI citations. The strategic implication: authentic answers in relevant subreddits, written as genuine contributions rather than promotions, get surfaced repeatedly. ChatGPT's citation algorithm has become more resistant to manipulation. Obvious promotional content in community spaces works against the brand now.</p>
+<p>LinkedIn's domain rank on ChatGPT moved from approximately position 11 to position 5 between November 2025 and February 2026 — over a 2x increase in citation frequency, per Profound's March 2026 data. Long-form articles and posts from named individuals with genuine expertise are being surfaced alongside editorial sources. Founder commentary under real names, with category-specific points of view, is now a direct ChatGPT citation channel.</p>
+
+<h2>What Technical Requirements Must a Page Meet?</h2>
+<p>OAI-SearchBot and ChatGPT-User are the two crawlers involved in ChatGPT Search. OAI-SearchBot handles bulk indexing. ChatGPT-User fires in real time when a user's query needs a current page. Both must be allowed in your robots.txt. Blocking OAI-SearchBot cuts you out of ChatGPT's index. Blocking ChatGPT-User means real-time queries for current content cannot reach your pages.</p>
+<pre><code>User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /</code></pre>
+<p>Beyond access, JavaScript dependency is the most common technical failure. ChatGPT's crawlers do not execute JavaScript. Content that exists only after client-side rendering is invisible. Check what OAI-SearchBot actually sees with a plain HTML fetch on your most important pages. If the answer content is missing from the raw HTML response, SSR or static generation is the fix.</p>
+<p>Page speed matters at the crawl stage. Slow initial server response reduces how thoroughly a page gets parsed. A page with a time-to-first-byte above 800ms is a lower-quality crawl target than an equivalent page below that threshold. Fix TTFB on key pages before writing new content.</p>
+
+<h2>How Does the Fan-Out Technique Change What You Write?</h2>
+<p>A conventional content strategy targets one primary keyword per page. Fan-out citation opportunities are almost entirely outside that keyword universe. 95% of the sub-queries that triggered ChatGPT citations had zero search volume.</p>
+<p>This does not mean abandoning keyword research. It means adding a second layer to your content structure. After writing for the primary question (the keyword), identify the three or four sub-questions a buyer might ask while researching that topic. Write a full answer-block for each sub-question as a separate H2 section. Each section becomes a separate candidate for a different fan-out sub-query.</p>
+<p>A page targeting "AEO prompt tracking" written only for that phrase is one extraction candidate. A page targeting "AEO prompt tracking" with dedicated sections answering "how many prompts should I track for AEO," "what is a good AI share of voice score," and "how long before prompt tracking changes show results" is four extraction candidates — three of them for sub-queries with no search volume that a conventional strategy would never target.</p>
+
+<div class="callout"><p>The NotioncCue Prompt Tracker runs your tracked prompts through ChatGPT on a weekly cadence and shows whether your brand appears in the cited sources. It also surfaces which competitor pages are cited instead, which is where the content brief for your next fan-out section usually comes from.</p></div>
+
+<h2>What Off-Site Signals Matter Specifically for ChatGPT?</h2>
+<p>ChatGPT's citation algorithm weights off-site signals differently from Perplexity's. Where Perplexity's layer-three reranker amplifies journalism and news coverage, ChatGPT gives more weight to structured data and directory listings alongside editorial mentions. The multi-platform strategy needs to account for this difference.</p>
+<p>For ChatGPT specifically: review platform profiles on G2, Capterra, and Trustpilot correlate strongly with citation probability for commercial and comparison queries. Domains with complete profiles on these platforms get selected by ChatGPT as sources more often than equivalent domains without them, per Moburst's February 2026 analysis. This is the entity corroboration mechanism working through a different source set than Perplexity's journalism preference.</p>
+<p>Claimed and complete business profiles on major platforms, founder-authored LinkedIn articles in the relevant topic area, and expert quotes in niche trade publications all strengthen the off-site entity signal ChatGPT uses to assess how much to trust a domain on a given topic.</p>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>Does blocking GPTBot affect ChatGPT Search citations?</strong><br/>No, if you allow OAI-SearchBot and ChatGPT-User separately. GPTBot is OpenAI's training crawler — blocking it keeps your content out of model training but does not affect live search citations. OAI-SearchBot handles ChatGPT Search indexing. The two are independently configurable.</p>
+<p><strong>How quickly can ChatGPT citations change after a content update?</strong><br/>ChatGPT's retrieval layer responds faster than model memory. A structural content change on a page that gets re-crawled within days can affect citation selection within one to two weeks. Model memory updates take weeks to months. For the fastest feedback loop on content changes, watch your Perplexity citation rate first — it responds within days and signals whether the structural change is working before ChatGPT's slower cycle confirms it.</p>
+<p><strong>If I rank top three on Google, do I automatically get ChatGPT citations?</strong><br/>Not automatically. Pages ranking position one on Google are cited 3.5x more often by ChatGPT than pages outside the top 20 — but only 12% of ChatGPT-cited URLs rank in Google's top ten. Strong rankings improve retrieval probability, not citation selection. The content structure and entity signals at the citation stage determine whether a retrieved page earns a citation.</p>
+<p><strong>What is the single most effective structural change for ChatGPT citation?</strong><br/>Moving your key answer to the first sentence of each section. Not the first paragraph — the first sentence. A section that leads with context before the point gets scored lower than an identical section where the answer is sentence one. This single change affects citation selection for every section on the page simultaneously.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 25 — AEO for B2B SaaS
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'aeo-for-b2b-saas-complete-guide-2026',
+    emoji:          '🏢',
+    bg:             'rgba(255,196,92,.06)',
+    tag:            'AEO Strategy',
+    date:           'Jun 25, 2026',
+    title:          'AEO for B2B SaaS: The Complete Guide to Winning AI Citations When Buyers Are Evaluating You',
+    excerpt:        '51% of B2B software buyers now begin their research with an AI chatbot more often than with Google. That number was 29% in April 2025. If your brand is absent from those AI answers, you are invisible to the majority of your potential pipeline before they ever reach your website.',
+    read:           '11 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>51% of B2B software buyers now begin vendor research with an AI chatbot more often than with Google. That number was 29% in April 2025 — a 22-point jump in twelve months, per G2's 2026 AI Search Insight Report covering 1,076 decision-makers across North America, EMEA, and APAC.</p>
+<p>ChatGPT alone appears for 63% of buyers at some stage of vendor evaluation. 73% of B2B buyers use AI tools somewhere in their research process, according to an analysis of 680 million citations.</p>
+<p>The implication is not subtle. If your brand is absent from the AI answers buyers are getting when they research problems you solve, you are invisible to a majority of your pipeline before they ever reach your website.</p>
+<p>This guide covers the specific AEO tactics that move the needle for B2B SaaS — not general AEO principles, but the ones that apply specifically when buyers are comparing tools, evaluating vendors, and asking AI systems which software to buy.</p>
+
+<h2>Why B2B SaaS AEO Is Different From General AEO</h2>
+<p>Most AEO content covers informational queries: "what is X," "how does Y work," "best way to do Z." B2B SaaS buyers run a different set of queries at the prompts that matter most commercially. They ask comparison prompts, pricing prompts, integration prompts, and alternative prompts. These are decision-stage queries, not research queries. The buyer who asks "what are the best AEO tracking tools for a mid-market B2B team" is days away from a decision, not weeks.</p>
+<p>Decision-stage queries trigger different citation behaviour. AI engines apply heavier trust filtering for commercial and comparison queries than for informational ones. They weight review platform presence, customer evidence, and third-party validation more heavily. A page with excellent content structure but no external corroboration can earn strong citations on informational queries and zero citations on comparison queries. B2B SaaS AEO requires building for both layers simultaneously.</p>
+
+<h2>What Prompts Do B2B Buyers Actually Run?</h2>
+<p>Understanding the prompt landscape for your category is the first step. The prompts B2B SaaS buyers run cluster into six types.</p>
+<p><strong>Category definition prompts.</strong> "What is [category]?" "How does [category] work?" These happen early in the research process. Appearing here builds brand awareness before the buyer has a shortlist. The content format that wins: a clean, direct category definition in the first paragraph, followed by specific use cases and then a comparison of approaches. Not promotional. Factual.</p>
+<p><strong>Comparison prompts.</strong> "[Your tool] vs [Competitor]." "Best [category] tools for [specific use case]." These are the highest-value prompts commercially. AI engines pull from review platforms, third-party comparison articles, and your own comparison pages. If you have no comparison content on your own site, and no review platform presence, you are entirely dependent on what third parties say about you.</p>
+<p><strong>Pricing prompts.</strong> "How much does [your tool] cost?" "Is [your tool] worth it for a small team?" Pricing prompts are where AI hallucinations cause the most commercial damage. If your pricing page is not structured clearly, if your pricing information on G2 is outdated, or if a comparison article from 2023 still shows a discontinued tier, AI engines will cite the wrong number to a buyer making a financial evaluation.</p>
+<p><strong>Integration prompts.</strong> "Does [your tool] integrate with [platform]?" "Can [your tool] connect to [CRM/data source]?" These are specific and verifiable. A clean integrations page with schema is one of the most underinvested AEO assets in B2B SaaS. Most teams do not have structured integrations content. The ones that do pick up citation on a class of buyer prompts that competitors cannot easily replicate.</p>
+<p><strong>Alternative prompts.</strong> "Alternatives to [competitor] for [use case]." "What should I use instead of [tool] if I need [feature]?" Buyers who are already using a competitor and looking to switch are at the decision stage. Appearing in alternative prompts for your main competitors is a measurable citation opportunity most B2B SaaS brands miss entirely.</p>
+<p><strong>Social proof prompts.</strong> "What do users say about [your tool]?" "Is [your tool] reliable?" These pull from review platforms. A Capterra or G2 profile with recent, specific reviews is a direct input into AI answers for social proof queries. "Reliable and easy to set up" is not a citable review. "Set up in under two hours, migrated 3,000 tracked prompts, support responded same day" is.</p>
+
+<h2>How Do You Build a B2B AEO Content Architecture?</h2>
+<p>B2B SaaS AEO requires four content layers that most companies are missing at least two of.</p>
+<p><strong>Layer 1: Answer pages for category-definition prompts.</strong> A clean, factual page that answers "what is [your category]" without promotional language. Buyers and AI engines both treat promotional framing as a trust signal — a negative one. The page should define the category, explain how it works, describe who it is for, and link to your most specific product pages. FAQPage schema. Named author. Article schema with current dateModified.</p>
+<p><strong>Layer 2: Comparison and alternative pages.</strong> A dedicated page for each major comparison prompt your buyers run. "[Your tool] vs [Competitor A]" as a page title, with a structured comparison table, specific feature differences, and pricing transparency. These pages earn citations for comparison prompts the same way a review platform listing does — by giving AI engines a clear, structured source for a query with commercial intent. They also allow you to frame your own differentiation directly, rather than ceding that framing to third parties.</p>
+<p><strong>Layer 3: Use-case and integration pages.</strong> Specific pages for each significant use case and integration. "AEO tracking for B2B SaaS teams" earns citations on use-case prompts that a generic product page does not. "NotioncCue plus HubSpot integration" earns citations on integration prompts. These are targeted, low-competition pages that pick up citation for sub-queries AI engines run in fan-out when a buyer asks a broader question.</p>
+<p><strong>Layer 4: Evidence pages.</strong> Case studies and before-and-after results pages. AI engines weight first-hand experience signals (real outcomes with specific numbers from real customers) more heavily than general claims. "A B2B SaaS client moved from 2% to 12.6% AI share of voice in 60 days" earns citation on outcome-related prompts. "We help businesses improve their AI visibility" does not.</p>
+
+<h2>What Does Review Platform Presence Actually Do for B2B AEO?</h2>
+<p>For B2B SaaS specifically, review platform profiles on G2, Capterra, and Clutch are AEO infrastructure, not just conversion tools. AI engines weight these platforms heavily for commercial and comparison queries because they provide external, user-generated validation that a vendor's own content cannot.</p>
+<p>Four things to get right on B2B review platforms for AI citation purposes. Your product category listing needs to match how buyers describe the problem you solve — not your internal taxonomy. Your product description needs to match your website's language exactly, using the same product names and terms. Recent reviews signal active usage to AI engines. A profile with its last review from 2023 carries less citation weight than one with reviews from last month. And owner responses to reviews are read by AI engines as freshness and engagement signals.</p>
+<p>Companies cited 10 or more times monthly in Perplexity report 40% higher brand recognition in target markets compared to those without AI search visibility, per 2026 research. Traffic quality from AI citations also exceeds traditional search: visitors arriving through AI citations show 60% higher time-on-page and 35% better conversion rates because they are already pre-qualified by an AI answer that mentioned your product specifically.</p>
+
+<h2>How Do You Track B2B AEO Performance?</h2>
+<p>Standard analytics does not show AI citation performance. You need two data sources that most B2B SaaS teams are not collecting yet.</p>
+<p>First, prompt-level citation tracking. Run your ten to fifteen most commercially important prompts through ChatGPT, Perplexity, and Claude weekly. Document whether your brand appears, what it says about you, which competitor appears when you do not, and which source was cited for the competitor. This is your citation gap data — each prompt where a competitor appears and you do not is a specific content brief.</p>
+<p>Second, referral traffic from AI platforms. In Google Analytics, AI referral traffic appears with referral sources like chatgpt.com and perplexity.ai. As of May 2026, GA4 tracks this as a distinct channel. Create a segment for AI-referred sessions and track conversion rate separately. The 3x to 4x conversion rate premium for AI-referred traffic that most AEO practitioners report means this channel deserves its own reporting line.</p>
+
+<div class="callout"><p>The NotioncCue Citation Tracker runs your target prompts across ChatGPT, Perplexity, Claude, Google AI Overviews, and Gemini weekly. It surfaces which competitor pages are being cited on your most important commercial prompts — which is where the next comparison page or use-case page should come from.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>How long does B2B AEO take to show results?</strong><br/>Most B2B SaaS brands see initial citation improvements within four to eight weeks of implementing structural content changes and schema. Review platform improvements take longer to propagate because they depend on external sources being re-crawled. Full programme results across all engines typically appear in three to six months. Perplexity responds fastest. ChatGPT model memory is the slowest.</p>
+<p><strong>Should B2B SaaS brands invest in AEO before reaching product-market fit?</strong><br/>At seed and pre-PMF stage, no. AEO requires a stable product, stable positioning, and stable messaging before the entity signals you build start working for you rather than against you. A company that changes its ICP every quarter creates conflicting entity signals across its on-site content and off-site profiles. AEO becomes high-ROI once your product, audience, and differentiation are settled.</p>
+<p><strong>Is B2B AEO different for horizontal vs. vertical SaaS?</strong><br/>Yes. Vertical SaaS (software built for a specific industry) has narrower but higher-intent prompt sets. The buyer prompts are more specific, the comparison set is smaller, and the citation opportunity per prompt is more concentrated. Horizontal SaaS faces broader prompt sets, more competitors in any given AI answer, and a larger content investment to cover the full category landscape. Vertical SaaS can achieve meaningful AI visibility with a smaller content footprint.</p>
+<p><strong>What is the biggest AEO mistake B2B SaaS companies make?</strong><br/>Treating AEO as a content project rather than a systems project. Writing more blog posts does not move AI citation rates. Fixing crawl access, updating schema, building comparison pages, maintaining review platform profiles, and tracking prompts weekly — these are the system changes that produce citation growth. Teams that hire a writer and brief them on AEO without fixing the technical and off-site layers see no improvement regardless of content quality.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 26 — AEO Measurement and Analytics
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'aeo-measurement-analytics-how-to-track-ai-visibility',
+    emoji:          '📊',
+    bg:             'rgba(146,124,255,.06)',
+    tag:            'AEO Strategy',
+    date:           'Jun 25, 2026',
+    title:          'AEO Measurement: How to Track AI Visibility When Standard Analytics Shows Nothing',
+    excerpt:        'Google Analytics still does not show which AI engine sent a visitor. GSC does not separate AI Mode from organic clicks. Most teams are flying blind on a channel that converts at 4x the rate of standard search. Here is how to actually measure AEO performance.',
+    read:           '10 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>AI-referred traffic converts at 4.4 times the rate of standard organic traffic, per Discovered Labs 2026 data. HubSpot reports 3x better conversion from leads coming from AEO. Cubitrek's 2026 client data puts the figure at 3 to 4 times standard search conversion rates across a six-month tracked sample.</p>
+<p>These numbers are compelling. They are also mostly invisible in standard analytics setups, because the tools most teams rely on were not built to measure this channel. Google Analytics has only recently begun surfacing AI referral sources. Google Search Console does not separate AI Mode impressions from organic impressions. There is no native "AI citation" dimension in any major analytics platform yet.</p>
+<p>This post covers how to actually measure AEO performance: what data is available, where to find it, what to track manually, and how to build a reporting structure that shows whether AEO work is producing results.</p>
+
+<h2>What Is the Fundamental Problem With Standard AEO Measurement?</h2>
+<p>Standard search analytics measures clicks and rankings. AEO performance is about citation frequency and brand presence in generated answers — two metrics that produce no click data when the answer satisfies the user without them visiting your site.</p>
+<p>The zero-click problem is real but often misframed. Zero-click answers from AI engines do not mean zero commercial value. A buyer who sees your brand cited three times across separate AI answers during their vendor research phase arrives at your website pre-validated, not cold. The conversion advantage for AI-referred traffic reflects this pre-qualification. The problem is that the pre-qualification phase is invisible to your analytics unless you are specifically tracking it.</p>
+<p>Three data gaps affect every AEO programme that relies only on standard tools: citation rate (how often your brand appears in AI answers) is not tracked by any standard analytics platform; prompt-level visibility (which specific queries produce citations vs which do not) requires manual or dedicated tool tracking; and AI referral attribution (which AI engine sent a visitor) was not consistently available in GA4 until May 2026.</p>
+
+<h2>What Is Available in Google Analytics for AI Measurement?</h2>
+<p>As of May 2026, Google Analytics tracks AI-referred sessions as a distinct traffic source when referral tracking is in place. Sessions arriving from ChatGPT produce a chatgpt.com referral source. Perplexity sessions produce a perplexity.ai referral source. Claude produces claude.ai. These appear in GA4's acquisition reports under referral traffic.</p>
+<p>Three reports to build in GA4 for AI visibility measurement:</p>
+<p><strong>AI referral traffic segment.</strong> Create a segment filtering sessions where the source contains chatgpt.com, perplexity.ai, claude.ai, or any other AI platform you care about. Track sessions, conversion rate, time on page, and revenue or lead value for this segment weekly. Compare to your organic search segment. The conversion rate differential confirms the pre-qualification premium. The trend line tells you whether AI visibility is growing.</p>
+<p><strong>Landing page performance for AI referrals.</strong> Within your AI referral segment, which landing pages are receiving sessions? These are your cited pages. A page receiving AI referral traffic is being cited. A page receiving zero AI referral traffic is either not cited or producing zero-click answers. The distinction matters for attribution but does not fully capture citation volume.</p>
+<p><strong>Source comparison over time.</strong> Month-on-month change in AI referral sessions compared to organic sessions. If AI referral sessions are growing faster than organic, your AEO programme is building reach. If they are flat while organic grows, citation frequency is not improving despite SEO gains.</p>
+
+<h2>What Does Google Search Console Show for AI Visibility?</h2>
+<p>Google Search Console added AI Overviews and AI Mode reporting in 2026, but with limitations. You can see whether impressions or clicks are attributed to AI features, but you cannot yet filter to see which queries triggered AI Mode versus standard organic results. The data is mixed into the overall impressions and clicks count.</p>
+<p>A practical workaround: filter your GSC queries to question-format queries only (queries starting with "what," "how," "why," "which," "when"). These are the queries most likely to trigger AI Mode and AI Overviews. If impressions for these queries are rising but clicks are flat or falling, AI Mode is absorbing the intent. That pattern confirms AI Mode is active for those queries — and that citation is what you need to optimise for, not position.</p>
+<p>Watch for queries where average position is improving but CTR is declining. This is the signature of AI Mode displacement: you are ranking higher but getting fewer clicks because AI Mode is answering the query before users reach the organic results. These queries are your highest-priority AEO targets. Your brand may not be in the AI Mode answer even as your organic ranking improves.</p>
+
+<h2>How Do You Track Prompt-Level Citation Rate Without a Dedicated Tool?</h2>
+<p>Manual prompt tracking is slower than automated tracking but produces ground-truth data that no analytics platform provides. Here is the minimum viable manual tracking process.</p>
+<p>Select ten to fifteen prompts representing your most important commercial queries. Mix comparison prompts, category prompts, and specific use-case prompts. Run each prompt through ChatGPT, Perplexity, and Google AI Mode (or AI Overviews) in a fresh browser session, once per week. Record three things: whether your brand appears, whether a named competitor appears when you do not, and which URL is cited for the competitor.</p>
+<p>Track results in a simple spreadsheet with columns for date, prompt, engine, your brand appeared (yes/no), competitor cited, competitor URL. After four weeks you have enough data to calculate your citation rate per prompt per engine. After eight weeks, you have a trend line. After twelve weeks, you can attribute specific content changes to citation improvements — if you have been changing one variable at a time.</p>
+<p>The manual process has one advantage over automated tools: you read the actual answer. You see whether your brand is mentioned positively or neutrally, first or fifth in a list, as the recommended option or as an alternative. These qualitative signals matter for positioning and cannot be captured by a presence-rate metric alone.</p>
+
+<h2>What Are the Core AEO KPIs Worth Tracking?</h2>
+<p>Five metrics form a complete AEO measurement framework. They cover different parts of the citation pipeline and together give you a clear picture of whether the programme is working.</p>
+<p><strong>Prompt-level citation rate.</strong> For each tracked prompt, across each tracked engine, what percentage of your weekly runs produce a brand citation? A citation rate of 70% on a target prompt is strong. Below 30% indicates the content covering that topic is either not being retrieved or not passing citation selection. Track this per prompt, per engine, per week.</p>
+<p><strong>AI share of voice.</strong> For your full tracked prompt set, what percentage of brand appearances belong to your brand versus competitors? Your brand appears in 6 of 40 total brand appearances across 20 prompts — your AI SoV is 30%. Track this monthly. A rising SoV trend means your programme is working. Falling SoV means competitors are gaining faster than you.</p>
+<p><strong>AI referral sessions.</strong> Sessions from AI engines in GA4, tracked weekly. This is the channel metric. A rising trend here means citation is producing real traffic. The conversion rate of AI referral sessions versus organic sessions validates the quality premium.</p>
+<p><strong>Crawler access rate.</strong> What percentage of your target pages are being successfully fetched by AI crawlers? Check your server logs for OAI-SearchBot, PerplexityBot, Claude-SearchBot, and Google-Extended. Pages that are not being crawled are invisible to those engines regardless of content quality. Target 100% crawler access on your most important pages before optimising content.</p>
+<p><strong>Brand description accuracy.</strong> Run branded prompts across each engine monthly: "What is [your brand]?" "What does [your brand] do?" Record exactly what each engine says. Compare against your current product descriptions and Organisation schema. Any discrepancy between what an engine says about you and what you actually do is a hallucination that may be costing you commercial consideration.</p>
+
+<div class="callout"><p>The NotioncCue Citation Tracker automates the prompt-level tracking and AI share of voice calculation across ChatGPT, Perplexity, Claude, Google AI Overviews, and Gemini. It runs your tracked prompts weekly and surfaces the trend lines, competitor citations, and brand description changes that manual tracking takes hours to compile. It also connects crawler activity data to citation rates, so you can see the gap between pages that are crawled and pages that are actually being cited.</p></div>
+
+<h2>How Do You Report AEO to Leadership Without Standard Metrics?</h2>
+<p>The hardest part of AEO measurement for most teams is not the data — it is the framing. Stakeholders who expect rank positions and organic traffic reports have no reference point for citation rate and AI share of voice.</p>
+<p>Two framings that consistently land well. First: AI SoV is to AI search what market share is to revenue. It tells you what percentage of the relevant conversation in your category includes your brand. A team with 30% AI SoV is present in 30% of the buyer-intent conversations happening in AI tools before the buyer visits any website. That is a distribution metric, not a vanity metric.</p>
+<p>Second: connect AI referral conversion rate to the value of a citation. If AI-referred visitors convert at 4x the rate of organic visitors, and an organic visitor is worth £X in pipeline, then an AI-referred visitor is worth £4X. Citation rate drives AI referral volume. Higher citation rate equals more high-value visitors. The chain from "we improved our citation rate from 30% to 60% on these ten prompts" to "that generated this much additional pipeline" is trackable with four to six weeks of GA4 data.</p>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>Can I trust GA4 referral data for AI sources?</strong><br/>It is directionally accurate but not complete. Some AI engines do not pass referral headers consistently. Perplexity passes referral data reliably. ChatGPT's referral data improved significantly in early 2026 but still has gaps. Claude's referral attribution is the least reliable at the time of writing. Use AI referral traffic as a minimum floor figure — actual AI-driven visits are higher than what GA4 shows.</p>
+<p><strong>How many prompts do I need to track for statistically reliable data?</strong><br/>Ten to fifteen prompts per topic cluster give enough data for trend analysis after four to six weeks. Below ten prompts, single-session variation can swing your citation rate by 20 percentage points without reflecting a real change. Above fifty prompts for a single programme, the marginal prompt adds diminishing signal unless you have a very broad topic footprint.</p>
+<p><strong>How long before AEO changes show up in analytics?</strong><br/>Perplexity citation changes appear in server logs and referral traffic within days. Google AI Overviews and AI Mode follow Google's crawl cycle, typically one to two weeks. ChatGPT referral changes take two to four weeks to appear in GA4 data. Model memory changes for any engine take weeks to months. The Perplexity data is your leading indicator — changes that show there first will appear in the other engines with a lag.</p>
+<p><strong>Should I report AEO and SEO metrics together or separately?</strong><br/>Separately until your stakeholders understand both channels. Combining them obscures the AI channel performance, which is likely growing faster than organic from a lower base. Once leadership understands the AI channel, a combined search visibility view that includes citation rate alongside organic rank positions makes sense for executive reporting.</p>
+`,
+  },
+
 
   // ─────────────────────────────────────────────────────────────────────────
   // ➕ ADD NEW POSTS BELOW THIS LINE
