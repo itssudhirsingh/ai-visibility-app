@@ -8,8 +8,8 @@ import { BLOG_POSTS, BLOG_TAGS } from './posts'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Blog — AEOvision',
-  description: 'Research, case studies, and technical guides on Answer Engine Optimisation and AI visibility.',
+  title: 'AI SEO Research, guides and case studies',
+  description: 'Research, case studies, and technical guides on Answer Engine Optimisation and AI SEO visibility.',
 }
 
 // Tag colour map — add new tags here as you create them
@@ -51,6 +51,7 @@ export default function BlogIndexPage() {
           --line:rgba(220,235,255,.09);--line2:rgba(220,235,255,.18);
           --text:#f5f8ff;--muted:rgba(230,239,255,.65);--muted2:rgba(220,233,255,.38);
           --lime:#caff45;--cyan:#45e4ff;--violet:#927cff;
+          --meta:rgba(220,233,255,.72);
         }
         html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:Epilogue,sans-serif;font-weight:300}
         body{background-image:linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);background-size:48px 48px}
@@ -167,8 +168,9 @@ export default function BlogIndexPage() {
                         {featured.tag}
                       </span>
                     )})()}
-                    <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem', color:'var(--muted2)' }}>{featured.date}</span>
-                    <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem', color:'var(--muted2)' }}>· {featured.read}</span>
+                    {/* ── UPDATED: featured meta colour ── */}
+                    <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem', color:'var(--meta)' }}>{featured.date}</span>
+                    <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem', color:'var(--meta)' }}>· {featured.read}</span>
                   </div>
                   <h2 className="featured-title" style={{ fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:700, fontSize:'1.6rem', lineHeight:1.15, letterSpacing:'-.02em', marginBottom:'1rem', color:'var(--text)' }}>
                     {featured.title}
@@ -181,8 +183,9 @@ export default function BlogIndexPage() {
                       {featured.authorInitials}
                     </div>
                     <div>
-                      <div style={{ fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:600, fontSize:'.85rem' }}>{featured.author}</div>
-                      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.6rem', color:'var(--muted2)' }}>{featured.authorRole}</div>
+                      {/* ── UPDATED: featured author name and role colour ── */}
+                      <div style={{ fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:600, fontSize:'.85rem', color:'var(--text)' }}>{featured.author}</div>
+                      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.6rem', color:'var(--meta)' }}>{featured.authorRole}</div>
                     </div>
                   </div>
                 </div>
@@ -214,12 +217,14 @@ export default function BlogIndexPage() {
                           <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.6rem', letterSpacing:'.08em', textTransform:'uppercase', color:s.text, background:s.bg, border:`1px solid ${s.border}`, padding:'2px 7px', borderRadius:3 }}>
                             {post.tag}
                           </span>
-                          <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.6rem', color:'var(--muted2)' }}>{post.read}</span>
+                          {/* ── UPDATED: card read time colour ── */}
+                          <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.6rem', color:'var(--meta)' }}>{post.read}</span>
                         </div>
                         <h3 className="card-title" style={{ fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:600, fontSize:'.95rem', lineHeight:1.3, marginBottom:'.7rem', color:'var(--text)' }}>
                           {post.title}
                         </h3>
-                        <p style={{ fontSize:'.8rem', color:'var(--muted2)', lineHeight:1.65, flex:1, marginBottom:'1.1rem' }}>
+                        {/* ── UPDATED: excerpt colour ── */}
+                        <p style={{ fontSize:'.8rem', color:'var(--muted)', lineHeight:1.65, flex:1, marginBottom:'1.1rem' }}>
                           {post.excerpt}
                         </p>
                         <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginTop:'auto' }}>
@@ -227,9 +232,10 @@ export default function BlogIndexPage() {
                             <div style={{ width:24, height:24, borderRadius:'50%', background:'linear-gradient(135deg,var(--violet),var(--lime))', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'.58rem', fontWeight:700, color:'#fff', flexShrink:0 }}>
                               {post.authorInitials}
                             </div>
-                            <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.6rem', color:'var(--muted2)' }}>{post.author}</span>
+                            {/* ── UPDATED: card author name and date colour ── */}
+                            <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.6rem', color:'var(--meta)' }}>{post.author}</span>
                           </div>
-                          <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.6rem', color:'var(--muted2)' }}>{post.date}</span>
+                          <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.6rem', color:'var(--meta)' }}>{post.date}</span>
                         </div>
                       </div>
                     </article>

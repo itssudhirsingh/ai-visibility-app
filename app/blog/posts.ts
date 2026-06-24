@@ -28,6 +28,8 @@ export interface BlogPost {
 // ─── ALL POSTS ───────────────────────────────────────────────────────────────
 // Newest first — the index page renders them in this order.
 
+
+
 export const BLOG_POSTS: BlogPost[] = [
   // ─────────────────────────────────────────────────────────────────────────
   // POST 1
