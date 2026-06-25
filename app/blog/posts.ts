@@ -11,7 +11,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export interface BlogPost {
-  slug:           string   // URL: /resources/blog/[slug]
+  slug:           string   // URL: /blog/[slug]
   emoji:          string   // hero banner emoji
   bg:             string   // hero banner background CSS colour
   tag:            string   // category label shown on cards
@@ -1761,10 +1761,10 @@ Allow: /</code></pre>
 
 <h2>What Are the Core Components of an AEO Programme?</h2>
 <p>AEO is not one tactic. It is a system with four interdependent components that need to work simultaneously.</p>
-<p><strong>Technical access.</strong> AI crawlers must be able to reach your pages. This means correct robots.txt directives for each AI crawler (OAI-SearchBot, PerplexityBot, Claude-SearchBot, Google-Extended separately), no WAF rules that block AI crawler user-agents, and critical content present in the initial HTML response rather than loaded by JavaScript. This is the entry condition. Nothing else works without it. Use the <a href="/resources/blog/how-ai-crawlers-index-your-site">AI crawler access guide</a> to audit your setup.</p>
+<p><strong>Technical access.</strong> AI crawlers must be able to reach your pages. This means correct robots.txt directives for each AI crawler (OAI-SearchBot, PerplexityBot, Claude-SearchBot, Google-Extended separately), no WAF rules that block AI crawler user-agents, and critical content present in the initial HTML response rather than loaded by JavaScript. This is the entry condition. Nothing else works without it. Use the <a href="/blog/how-ai-crawlers-index-your-site">AI crawler access guide</a> to audit your setup.</p>
 <p><strong>Content structure.</strong> Every section of every important page needs a direct, self-contained answer in its first 40 to 60 words. Headings need to be phrased as questions that buyers actually ask. Each section needs to make sense without surrounding context, because AI systems extract passages, not whole pages. Content formatted this way is three times more likely to be cited, per multiple 2026 citation studies.</p>
-<p><strong>Schema and entity signals.</strong> FAQPage, Article with dateModified, Organisation with sameAs, and Person schema covering your authors are the minimum structured data stack for AEO. These tell AI retrieval systems what type of content they are reading, how current it is, and how much to trust the source. See the <a href="/resources/blog/json-ld-schema-aeo-types-that-move-citation-rates">complete schema guide for AEO</a> for implementation detail.</p>
-<p><strong>Off-site corroboration.</strong> 85% of AI brand mentions originate from third-party sources, per Search Engine Land. Your own website is one input. Review platforms, Reddit, editorial coverage, Wikidata, and LinkedIn all feed the entity confidence score AI systems use when deciding whether to cite you. A brand with identical on-site content but stronger off-site presence consistently earns more citations. The <a href="/resources/blog/off-site-aeo-signals-third-party-citations">off-site AEO signals guide</a> covers this in full.</p>
+<p><strong>Schema and entity signals.</strong> FAQPage, Article with dateModified, Organisation with sameAs, and Person schema covering your authors are the minimum structured data stack for AEO. These tell AI retrieval systems what type of content they are reading, how current it is, and how much to trust the source. See the <a href="/blog/json-ld-schema-aeo-types-that-move-citation-rates">complete schema guide for AEO</a> for implementation detail.</p>
+<p><strong>Off-site corroboration.</strong> 85% of AI brand mentions originate from third-party sources, per Search Engine Land. Your own website is one input. Review platforms, Reddit, editorial coverage, Wikidata, and LinkedIn all feed the entity confidence score AI systems use when deciding whether to cite you. A brand with identical on-site content but stronger off-site presence consistently earns more citations. The <a href="/blog/off-site-aeo-signals-third-party-citations">off-site AEO signals guide</a> covers this in full.</p>
 
 <h2>What Should You Measure in an AEO Programme?</h2>
 <p>Standard analytics measures clicks and sessions. AEO performance sits largely upstream of those events. Five metrics form a complete picture:</p>
@@ -1775,7 +1775,7 @@ Allow: /</code></pre>
   <li><strong>Crawler access rate:</strong> What percentage of your target pages are successfully fetched by AI crawlers, per server log data.</li>
   <li><strong>Brand description accuracy:</strong> What each AI engine says when asked "What is [your brand]?" compared to what you actually do. Discrepancies signal entity signal failures.</li>
 </ul>
-<p>For a complete framework, see the <a href="/resources/blog/aeo-measurement-analytics-how-to-track-ai-visibility">AEO measurement guide</a>.</p>
+<p>For a complete framework, see the <a href="/blog/aeo-measurement-analytics-how-to-track-ai-visibility">AEO measurement guide</a>.</p>
 
 <div class="callout"><p>NotioncCue tracks your brand's citation rate across ChatGPT, Perplexity, Claude, Google AI Overviews, and Gemini on a weekly cadence. Run the AI Crawler Audit first to confirm crawlers can reach your pages, then set up your Prompt Tracker to establish a citation rate baseline. These two tools together tell you where you stand before you change anything.</p></div>
 
@@ -1831,11 +1831,11 @@ Allow: /</code></pre>
 <h2>What Is GEO (Generative Engine Optimisation)?</h2>
 <p>Generative Engine Optimisation is the broader discipline that AEO sits inside. While AEO targets the citation layer — the retrieval and source-selection step — GEO also encompasses entity optimisation, brand authority building inside AI model training data, and influencing how AI systems represent your brand even in responses that do not cite you directly.</p>
 <p>The GEO concept originated in academic research. A Princeton, Georgia Tech, and IIT Delhi paper from 2023 formally defined the term and documented which content strategies improve citation rates in AI-generated responses. It showed that citing authoritative sources in your own content, adding statistics, and using a fluent, quotable writing style each independently increased the probability of citation in generative AI responses.</p>
-<p>In practice, GEO adds two dimensions that pure AEO work often misses. First, brand authority in AI model training: the degree to which your brand is accurately represented in the model's parametric memory, not just its live retrieval. Second, off-site entity building: establishing consistent brand signals across Wikidata, Wikipedia, Reddit, review platforms, and industry publications — the external corroboration that increases how confidently AI models cite you. The <a href="/resources/blog/entity-based-aeo-knowledge-graph-brand-authority">entity-based AEO guide</a> covers the technical side of this in full.</p>
+<p>In practice, GEO adds two dimensions that pure AEO work often misses. First, brand authority in AI model training: the degree to which your brand is accurately represented in the model's parametric memory, not just its live retrieval. Second, off-site entity building: establishing consistent brand signals across Wikidata, Wikipedia, Reddit, review platforms, and industry publications — the external corroboration that increases how confidently AI models cite you. The <a href="/blog/entity-based-aeo-knowledge-graph-brand-authority">entity-based AEO guide</a> covers the technical side of this in full.</p>
 
 <h2>What Is LLMO and How Does It Fit?</h2>
 <p>LLMO — Large Language Model Optimisation — is a fourth term you will encounter. It refers specifically to optimising for the parametric knowledge layer of AI models: the information encoded in their weights during training rather than retrieved from the web at query time.</p>
-<p>LLMO matters for brand reputation and accuracy. When ChatGPT describes your product without running a web search, it is drawing from parametric memory. If that memory contains outdated or inaccurate information — an old product name, a discontinued pricing tier, a feature you removed — LLMO addresses how to correct it. The <a href="/resources/blog/ai-brand-hallucination-find-and-fix">brand hallucination guide</a> covers the diagnostic and correction process.</p>
+<p>LLMO matters for brand reputation and accuracy. When ChatGPT describes your product without running a web search, it is drawing from parametric memory. If that memory contains outdated or inaccurate information — an old product name, a discontinued pricing tier, a feature you removed — LLMO addresses how to correct it. The <a href="/blog/ai-brand-hallucination-find-and-fix">brand hallucination guide</a> covers the diagnostic and correction process.</p>
 <p>For most content teams, LLMO is a background concern addressed through consistent brand entity signals across high-authority third-party sources. The same work that improves GEO entity authority also improves the accuracy of model parametric memory over training cycles.</p>
 
 <h2>The One-Paragraph Summary of How They Relate</h2>
@@ -1849,7 +1849,7 @@ Allow: /</code></pre>
   <li><strong>Citation layer:</strong> When your page is in the candidate set, does your content earn a citation? Passage structure, schema, freshness, and answer-first formatting determine this.</li>
   <li><strong>Entity layer:</strong> How confidently do AI systems represent your brand? Off-site corroboration, consistent entity signals, and Wikidata/Wikipedia presence determine this. This is GEO's additional territory beyond AEO.</li>
 </ul>
-<p>Most teams underinvest in the entity layer because it does not map to familiar content tasks. It requires building profiles, earning editorial mentions, maintaining Wikidata entries, and engaging in community platforms — work that feels more like PR than SEO. But 85% of AI brand mentions originate from third-party sources. The entity layer is where most of the citation advantage lives. The <a href="/resources/blog/off-site-aeo-signals-third-party-citations">off-site AEO signals guide</a> is the starting point for this work.</p>
+<p>Most teams underinvest in the entity layer because it does not map to familiar content tasks. It requires building profiles, earning editorial mentions, maintaining Wikidata entries, and engaging in community platforms — work that feels more like PR than SEO. But 85% of AI brand mentions originate from third-party sources. The entity layer is where most of the citation advantage lives. The <a href="/blog/off-site-aeo-signals-third-party-citations">off-site AEO signals guide</a> is the starting point for this work.</p>
 
 <div class="callout"><p>NotioncCue tracks your brand's citation performance across all five major AI engines. It monitors citation rate per prompt, AI share of voice against competitors, and brand description accuracy — covering both the retrieval layer (AEO) and the entity layer (GEO) in one dashboard. Start with the AI Crawler Audit to confirm the technical foundation is solid, then use the Prompt Tracker to establish your baseline across engines.</p></div>
 
@@ -1913,17 +1913,17 @@ Allow: /</code></pre>
 <p><strong>Check 17: FAQPage JSON-LD present and valid.</strong> FAQPage schema is the single highest-impact structured data type for AEO. Each question-answer pair in the schema is a directly extractable unit for AI retrieval. Validate at search.google.com/test/rich-results. Note: Google removed FAQPage rich results from standard search in May 2026 but continues to parse the schema for AI retrieval. Do not remove it.</p>
 <p><strong>Check 18: Article schema with datePublished and dateModified.</strong> dateModified is the most under-used field in Article schema and one of the highest-impact AEO signals. AI Mode and AI Overviews both weight freshness via dateModified. Update it every time the content changes materially.</p>
 <p><strong>Check 19: Organisation schema with sameAs array.</strong> Present on your homepage and linked from all content pages via the publisher field in Article schema. The sameAs array links your brand entity to LinkedIn, Crunchbase, Wikidata, and other profiles. Each accurate link increases entity confidence in AI knowledge graphs.</p>
-<p><strong>Check 20: Person schema on author pages.</strong> Every named author needs a Person schema with jobTitle, sameAs linking to LinkedIn, and knowsAbout covering your topic areas. Anonymous content has lower E-E-A-T scores across all AI engines. See the <a href="/resources/blog/eeat-aeo-trust-signals-ai-citation-2026">E-E-A-T and AI citation guide</a> for full implementation.</p>
+<p><strong>Check 20: Person schema on author pages.</strong> Every named author needs a Person schema with jobTitle, sameAs linking to LinkedIn, and knowsAbout covering your topic areas. Anonymous content has lower E-E-A-T scores across all AI engines. See the <a href="/blog/eeat-aeo-trust-signals-ai-citation-2026">E-E-A-T and AI citation guide</a> for full implementation.</p>
 <p><strong>Check 21: BreadcrumbList schema on content pages.</strong> Topical hierarchy signals affect how AI engines assess page authority within a cluster. A page sitting inside a structured content cluster signals more topical authority than an isolated page with the same content.</p>
 
 <h2>Section 4: Entity Signals</h2>
-<p><strong>Check 22: Brand name consistent across all platforms.</strong> Run your brand name through LinkedIn, Crunchbase, G2, Capterra, and any other platforms where you have a profile. Inconsistencies in company name, product names, or descriptions create entity disambiguation failures in AI knowledge graphs. AI systems encountering inconsistent signals hedge their descriptions of your brand or avoid citing you for high-confidence claims. The <a href="/resources/blog/entity-based-aeo-knowledge-graph-brand-authority">entity-based AEO guide</a> covers the full consistency audit.</p>
+<p><strong>Check 22: Brand name consistent across all platforms.</strong> Run your brand name through LinkedIn, Crunchbase, G2, Capterra, and any other platforms where you have a profile. Inconsistencies in company name, product names, or descriptions create entity disambiguation failures in AI knowledge graphs. AI systems encountering inconsistent signals hedge their descriptions of your brand or avoid citing you for high-confidence claims. The <a href="/blog/entity-based-aeo-knowledge-graph-brand-authority">entity-based AEO guide</a> covers the full consistency audit.</p>
 <p><strong>Check 23: Wikidata entry exists and is accurate.</strong> Wikidata is the highest-value single entity signal for most brands. It requires lower notability thresholds than Wikipedia. A Wikidata entry with founding date, headquarters, industry, and a link to your official website provides a machine-readable entity anchor that AI knowledge graphs treat as authoritative.</p>
 <p><strong>Check 24: Review platform profiles complete and recent.</strong> G2, Capterra, and Clutch for SaaS and B2B. Trustpilot for consumer products. Complete profiles with recent reviews provide external corroboration that on-site entity signals cannot replicate. For commercial and comparison queries, AI engines weight these platforms heavily. SE Ranking research found brands with strong review platform presence earn 4x higher AI citation rates than equivalent brands without it.</p>
-<p><strong>Check 25: AI brand description accuracy test.</strong> Run "What is [your brand]?" through ChatGPT, Perplexity, and Claude. Record exactly what each says. Compare against your current product description, pricing, and feature set. Any discrepancy is an active hallucination that may cost you consideration. The <a href="/resources/blog/ai-brand-hallucination-find-and-fix">brand hallucination guide</a> covers the correction process.</p>
+<p><strong>Check 25: AI brand description accuracy test.</strong> Run "What is [your brand]?" through ChatGPT, Perplexity, and Claude. Record exactly what each says. Compare against your current product description, pricing, and feature set. Any discrepancy is an active hallucination that may cost you consideration. The <a href="/blog/ai-brand-hallucination-find-and-fix">brand hallucination guide</a> covers the correction process.</p>
 
 <h2>Section 5: Tracking</h2>
-<p><strong>Check 26: Prompt tracking set up for target queries.</strong> You cannot improve what you are not measuring. A set of 15 tracked prompts across ChatGPT, Perplexity, and Google AI Mode, run weekly, gives you the citation rate data needed to see whether changes are working. Without this, you are optimising blind. See the <a href="/resources/blog/aeo-measurement-analytics-how-to-track-ai-visibility">AEO measurement guide</a>.</p>
+<p><strong>Check 26: Prompt tracking set up for target queries.</strong> You cannot improve what you are not measuring. A set of 15 tracked prompts across ChatGPT, Perplexity, and Google AI Mode, run weekly, gives you the citation rate data needed to see whether changes are working. Without this, you are optimising blind. See the <a href="/blog/aeo-measurement-analytics-how-to-track-ai-visibility">AEO measurement guide</a>.</p>
 <p><strong>Check 27: AI referral traffic segment in GA4.</strong> Create a GA4 segment filtering sessions from chatgpt.com, perplexity.ai, and claude.ai. Track weekly. Track conversion rate for this segment separately from organic. The 3 to 4x conversion premium for AI-referred traffic makes this the highest-quality segment in your acquisition mix. If it is flat or absent, citation is not converting to traffic — which means your cited pages may not have clear next-step pathways for visitors.</p>
 
 <div class="callout"><p>The NotioncCue AI Crawler Audit automates Checks 1 through 8 and surfaces which pages are being fetched by which crawlers, which pages return empty content due to JavaScript rendering, and which crawler user-agents are absent from your logs. Run it before touching content or schema — fixing access issues first means every subsequent change actually reaches AI engines.</p></div>
@@ -1931,7 +1931,7 @@ Allow: /</code></pre>
 <h2>Frequently Asked Questions</h2>
 <p><strong>How often should I run an AEO audit?</strong><br/>Full audit quarterly. Spot-check the crawl section monthly — WAF rules and CDN updates can silently break crawler access without any notification. Check the brand description accuracy section after any product update, rebrand, or major content change.</p>
 <p><strong>Which section produces the fastest citation improvements when fixed?</strong><br/>Section 1 (crawler access) produces the fastest improvement when a block is present — you can go from zero citations to meaningful citation volume within days of fixing a WAF rule. Section 3 (schema) typically produces changes within one to two weeks. Sections 4 and 5 (entity signals and tracking) take longer to propagate but compound over time.</p>
-<p><strong>Can I pass all 27 checks and still have low citation rates?</strong><br/>Yes, if the content itself is thin, generic, or covers topics your competitors address with more depth or more specific data. The checklist removes barriers to citation. It does not guarantee citation if the content is not genuinely the best source for the query. Topical authority and content depth, covered in the <a href="/resources/blog/topical-authority-aeo-content-cluster-strategy">topical authority guide</a>, are what drive citation rates beyond baseline.</p>
+<p><strong>Can I pass all 27 checks and still have low citation rates?</strong><br/>Yes, if the content itself is thin, generic, or covers topics your competitors address with more depth or more specific data. The checklist removes barriers to citation. It does not guarantee citation if the content is not genuinely the best source for the query. Topical authority and content depth, covered in the <a href="/blog/topical-authority-aeo-content-cluster-strategy">topical authority guide</a>, are what drive citation rates beyond baseline.</p>
 `,
   },
 
@@ -1989,7 +1989,7 @@ Allow: /</code></pre>
 <h2>How Does BLUF Interact With Schema and Headings?</h2>
 <p>BLUF writing, question-format headings, and FAQPage schema work as a system, not independently. Each amplifies the others.</p>
 <p>A question-format heading creates heading-to-query alignment for AI sub-queries. A BLUF-structured first sentence provides the extractable passage beneath that heading. FAQPage schema wraps the heading question and the BLUF answer in machine-readable structure that AI retrieval systems can parse directly without inferring anything from the prose.</p>
-<p>When all three are present, a section has three overlapping citation pathways: the heading matches sub-queries, the BLUF paragraph is extracted as a passage, and the FAQPage schema provides a directly injectable Q&A pair. Missing any one of the three reduces citation probability. Missing all three produces near-zero citation potential regardless of content quality. See the <a href="/resources/blog/json-ld-schema-aeo-types-that-move-citation-rates">schema types guide</a> for the full implementation of FAQPage alongside other key schema types, and the <a href="/resources/blog/how-to-write-content-ai-engines-extract-and-cite">content writing for AI guide</a> for a broader view of the structural rules.</p>
+<p>When all three are present, a section has three overlapping citation pathways: the heading matches sub-queries, the BLUF paragraph is extracted as a passage, and the FAQPage schema provides a directly injectable Q&A pair. Missing any one of the three reduces citation probability. Missing all three produces near-zero citation potential regardless of content quality. See the <a href="/blog/json-ld-schema-aeo-types-that-move-citation-rates">schema types guide</a> for the full implementation of FAQPage alongside other key schema types, and the <a href="/blog/how-to-write-content-ai-engines-extract-and-cite">content writing for AI guide</a> for a broader view of the structural rules.</p>
 
 <div class="callout"><p>NotioncCue's AI Crawler Audit includes a BLUF score for each audited page — a section-by-section assessment of whether first sentences are answer-first or setup-first. Pages scoring below 50 on BLUF have the highest citation uplift potential from structural rewrites alone, without changing any underlying content or adding new information.</p></div>
 
@@ -2047,10 +2047,10 @@ Allow: /</code></pre>
 
 <h2>What Are the Four Levers That Move AI Visibility Score?</h2>
 <p>AI visibility score is driven by four levers. Most brands have at least two of the four underbuilt. Identifying which two and fixing them first is what produces fast score movement.</p>
-<p><strong>Lever 1: Technical access.</strong> AI crawlers must be able to reach and fully parse your pages. A WAF rule blocking PerplexityBot, or critical content hidden behind JavaScript, produces near-zero visibility regardless of content quality. This is the most common root cause of low visibility scores on sites with otherwise strong content. Run the AI crawler audit — detailed in the <a href="/resources/blog/aeo-audit-checklist-complete-guide-2026">AEO audit checklist</a> — before anything else. Access issues are binary: fix them and visibility recovers quickly. Leave them unfixed and no other lever moves the score.</p>
-<p><strong>Lever 2: Passage extractability.</strong> Your content must answer questions in the first sentence of each section, with each paragraph self-contained enough to be extracted without surrounding context. This is the BLUF writing principle covered in the <a href="/resources/blog/bluf-writing-technique-ai-citations-aeo">BLUF writing guide</a>. Content formatted for LLM extraction is three times more likely to be cited, per multiple 2026 citation studies. Restructuring existing high-traffic pages for BLUF structure — without writing a single new word — consistently produces visibility score gains within two to four weeks.</p>
-<p><strong>Lever 3: Structured data coverage.</strong> FAQPage, Article with dateModified, Organisation with sameAs, and Person schema on author pages are the minimum stack. Each schema type solves a different part of the scoring problem: FAQPage enables direct Q&A extraction, Article dateModified signals freshness, Organisation sameAs anchors your entity, Person schema raises E-E-A-T. Missing any one leaves a measurable gap. The <a href="/resources/blog/json-ld-schema-aeo-types-that-move-citation-rates">schema types guide</a> gives copy-paste JSON-LD for each.</p>
-<p><strong>Lever 4: Off-site entity authority.</strong> AI engines build their picture of your brand from your own site plus everything external sources say about you. Review platform profiles, Reddit community presence, Wikidata entries, and editorial coverage all contribute to the entity confidence score that determines how readily AI systems cite your brand for high-stakes queries. 85% of AI brand mentions originate from third-party sources. Brands that invest heavily in on-site content but nothing in off-site entity signals hit a ceiling on their visibility score that cannot be overcome by content improvements alone. The <a href="/resources/blog/off-site-aeo-signals-third-party-citations">off-site AEO signals guide</a> and the <a href="/resources/blog/entity-based-aeo-knowledge-graph-brand-authority">entity-based AEO guide</a> cover the implementation in full.</p>
+<p><strong>Lever 1: Technical access.</strong> AI crawlers must be able to reach and fully parse your pages. A WAF rule blocking PerplexityBot, or critical content hidden behind JavaScript, produces near-zero visibility regardless of content quality. This is the most common root cause of low visibility scores on sites with otherwise strong content. Run the AI crawler audit — detailed in the <a href="/blog/aeo-audit-checklist-complete-guide-2026">AEO audit checklist</a> — before anything else. Access issues are binary: fix them and visibility recovers quickly. Leave them unfixed and no other lever moves the score.</p>
+<p><strong>Lever 2: Passage extractability.</strong> Your content must answer questions in the first sentence of each section, with each paragraph self-contained enough to be extracted without surrounding context. This is the BLUF writing principle covered in the <a href="/blog/bluf-writing-technique-ai-citations-aeo">BLUF writing guide</a>. Content formatted for LLM extraction is three times more likely to be cited, per multiple 2026 citation studies. Restructuring existing high-traffic pages for BLUF structure — without writing a single new word — consistently produces visibility score gains within two to four weeks.</p>
+<p><strong>Lever 3: Structured data coverage.</strong> FAQPage, Article with dateModified, Organisation with sameAs, and Person schema on author pages are the minimum stack. Each schema type solves a different part of the scoring problem: FAQPage enables direct Q&A extraction, Article dateModified signals freshness, Organisation sameAs anchors your entity, Person schema raises E-E-A-T. Missing any one leaves a measurable gap. The <a href="/blog/json-ld-schema-aeo-types-that-move-citation-rates">schema types guide</a> gives copy-paste JSON-LD for each.</p>
+<p><strong>Lever 4: Off-site entity authority.</strong> AI engines build their picture of your brand from your own site plus everything external sources say about you. Review platform profiles, Reddit community presence, Wikidata entries, and editorial coverage all contribute to the entity confidence score that determines how readily AI systems cite your brand for high-stakes queries. 85% of AI brand mentions originate from third-party sources. Brands that invest heavily in on-site content but nothing in off-site entity signals hit a ceiling on their visibility score that cannot be overcome by content improvements alone. The <a href="/blog/off-site-aeo-signals-third-party-citations">off-site AEO signals guide</a> and the <a href="/blog/entity-based-aeo-knowledge-graph-brand-authority">entity-based AEO guide</a> cover the implementation in full.</p>
 
 <h2>Why Does AI Visibility Score Change Week to Week?</h2>
 <p>AI visibility is probabilistic, not deterministic. The same prompt run twice in the same session can produce different cited sources, different brand mentions, and different answer framing. This is not a flaw in the measurement — it reflects how AI systems work. They are non-deterministic by design.</p>
@@ -2060,17 +2060,17 @@ Allow: /</code></pre>
 <h2>How Do You Use AI Visibility Score to Prioritise Work?</h2>
 <p>Use the score not as a vanity metric but as a diagnostic. Break it down by four dimensions:</p>
 <p><strong>By engine:</strong> Where is your visibility highest and lowest? If Perplexity visibility is strong but ChatGPT visibility is near zero, your content is extractable (Perplexity confirms this) but your entity signals are weak in ChatGPT's model memory. The fix is off-site corroboration. If both are low, the access or passage structure lever is the priority.</p>
-<p><strong>By prompt type:</strong> Are you visible on informational prompts but invisible on comparison and commercial prompts? This is the most common pattern. It means your entity signals are sufficient for basic awareness but your review platform presence and comparison content are weak. The <a href="/resources/blog/aeo-for-b2b-saas-complete-guide-2026">B2B SaaS AEO guide</a> covers the comparison content architecture that closes this specific gap.</p>
+<p><strong>By prompt type:</strong> Are you visible on informational prompts but invisible on comparison and commercial prompts? This is the most common pattern. It means your entity signals are sufficient for basic awareness but your review platform presence and comparison content are weak. The <a href="/blog/aeo-for-b2b-saas-complete-guide-2026">B2B SaaS AEO guide</a> covers the comparison content architecture that closes this specific gap.</p>
 <p><strong>By topic cluster:</strong> Which content clusters produce citations and which do not? A cluster with strong visibility confirms that topic is well-covered and well-structured. A cluster with near-zero visibility despite existing content is usually a passage structure problem. Restructure the top three posts in that cluster for BLUF and FAQPage schema before adding new content.</p>
-<p><strong>By competitor:</strong> Which competitors consistently appear on prompts where you do not? Their cited URLs are your content briefs. The <a href="/resources/blog/aeo-content-gap-analysis-find-what-ai-answers-without-you">AEO content gap analysis guide</a> gives the systematic process for turning those competitor citations into a prioritised action list.</p>
+<p><strong>By competitor:</strong> Which competitors consistently appear on prompts where you do not? Their cited URLs are your content briefs. The <a href="/blog/aeo-content-gap-analysis-find-what-ai-answers-without-you">AEO content gap analysis guide</a> gives the systematic process for turning those competitor citations into a prioritised action list.</p>
 
 <div class="callout"><p>NotioncCue's AI visibility score recalculates weekly across your tracked prompts on all five major AI engines. The dashboard shows score movement by engine, by prompt type, and against competitor scores on the same prompt set — so you can see exactly which lever to pull next rather than guessing at what changed. Set up your Prompt Tracker to get your first baseline score within 48 hours.</p></div>
 
 <h2>Frequently Asked Questions</h2>
 <p><strong>Is AI visibility score standardised across tools?</strong><br/>No. Different tools calculate it differently. NotioncCue's score aggregates citation rate, prompt coverage, mention position, and engine breadth. Other tools may weight these factors differently or use only citation rate as the input. When comparing scores across tools, confirm what sub-metrics each tool uses before treating the numbers as equivalent.</p>
 <p><strong>Can a brand with a high AI visibility score have low organic rankings?</strong><br/>Yes. The correlation between domain authority and AI citation rate collapsed to 0.18 in 2026, per Wellows' analysis. A brand with strong BLUF content structure, complete schema, accurate entity signals, and active review platform presence can achieve 35% to 40% AI visibility while ranking nowhere in traditional search. The channels have genuinely diverged.</p>
-<p><strong>What is the fastest way to move a low AI visibility score?</strong><br/>Fix crawler access first — if PerplexityBot or OAI-SearchBot is blocked, fixing that produces the fastest score movement, often within days. If access is already clean, restructuring your top five highest-traffic pages for BLUF answer blocks and adding FAQPage schema produces measurable score improvement within two to four weeks. Start with the <a href="/resources/blog/aeo-audit-checklist-complete-guide-2026">AEO audit checklist</a> to identify which issue applies.</p>
-<p><strong>How does AI visibility score relate to AI share of voice?</strong><br/>They measure different things. AI visibility score measures your absolute performance — how well your brand is optimised for AI citation. AI share of voice measures your relative performance — your citation rate as a percentage of total citations across your competitive set. You can have a high visibility score in an uncontested niche (you are the only brand cited) or a modest visibility score in a competitive category that still represents strong share of voice. Track both. See the <a href="/resources/blog/ai-share-of-voice-how-to-measure-and-grow-it">AI share of voice guide</a> for the SoV calculation methodology.</p>
+<p><strong>What is the fastest way to move a low AI visibility score?</strong><br/>Fix crawler access first — if PerplexityBot or OAI-SearchBot is blocked, fixing that produces the fastest score movement, often within days. If access is already clean, restructuring your top five highest-traffic pages for BLUF answer blocks and adding FAQPage schema produces measurable score improvement within two to four weeks. Start with the <a href="/blog/aeo-audit-checklist-complete-guide-2026">AEO audit checklist</a> to identify which issue applies.</p>
+<p><strong>How does AI visibility score relate to AI share of voice?</strong><br/>They measure different things. AI visibility score measures your absolute performance — how well your brand is optimised for AI citation. AI share of voice measures your relative performance — your citation rate as a percentage of total citations across your competitive set. You can have a high visibility score in an uncontested niche (you are the only brand cited) or a modest visibility score in a competitive category that still represents strong share of voice. Track both. See the <a href="/blog/ai-share-of-voice-how-to-measure-and-grow-it">AI share of voice guide</a> for the SoV calculation methodology.</p>
 `,
   },
 
@@ -2111,7 +2111,7 @@ Allow: /</code></pre>
 <p><strong>brand.name linked to Organisation schema.</strong> Connecting your product to a known brand entity via schema strengthens the entity confidence that AI systems use when deciding how much to trust a product listing. Orphaned products — schema entries with no brand link — score lower on entity trust.</p>
 
 <h2>How Do AI Engines Discover Products They Were Not Directly Queried About?</h2>
-<p>Product discovery through AI works through fan-out queries, the same sub-query expansion technique covered in the <a href="/resources/blog/chatgpt-search-aeo-optimization-guide-2026">ChatGPT AEO guide</a>. A buyer asking "what should I eat for post-workout recovery" triggers sub-queries including "high protein foods for muscle recovery," "best protein supplements for recovery," and "foods with fast-absorbing protein." Your product page targeting "whey protein isolate" is a candidate for citation on a query that never mentioned protein supplements.</p>
+<p>Product discovery through AI works through fan-out queries, the same sub-query expansion technique covered in the <a href="/blog/chatgpt-search-aeo-optimization-guide-2026">ChatGPT AEO guide</a>. A buyer asking "what should I eat for post-workout recovery" triggers sub-queries including "high protein foods for muscle recovery," "best protein supplements for recovery," and "foods with fast-absorbing protein." Your product page targeting "whey protein isolate" is a candidate for citation on a query that never mentioned protein supplements.</p>
 <p>This means product page content needs to answer the surrounding question landscape, not just match the product keyword. A product page for a protein powder that only describes the product — flavours, macros, serving size — will not surface in discovery queries. A product page that also answers "when should you take protein for recovery" and "what protein content supports muscle repair" is a candidate for multiple fan-out sub-queries on recovery-related prompts.</p>
 <p>Add one 150 to 200 word "how this product helps with X" section to each key product page, written as a direct answer to the usage question a buyer would ask AI. This creates an additional citation target beyond the direct product query.</p>
 
@@ -2179,7 +2179,7 @@ Allow: /</code></pre>
 <p><strong>Core Web Vitals — especially LCP.</strong> Google's crawl budget allocation prioritises pages with strong Core Web Vitals. Pages with LCP above 4 seconds get crawled less completely. Incomplete crawls produce incomplete passage extraction. LCP under 2.5 seconds is the threshold that consistently correlates with full passage indexing in NotioncCue's data across 8,000 tracked domains.</p>
 
 <h2>What Does Gemini Prioritise Differently in AI Mode?</h2>
-<p>AI Mode uses the same Gemini model but runs on a different retrieval architecture from AI Overviews. The key difference is the fan-out technique, documented in the <a href="/resources/blog/google-ai-mode-aeo-technical-guide-2026">Google AI Mode technical guide</a>: AI Mode issues up to 16 sub-queries for a single user question, retrieving the best available source for each sub-query separately.</p>
+<p>AI Mode uses the same Gemini model but runs on a different retrieval architecture from AI Overviews. The key difference is the fan-out technique, documented in the <a href="/blog/google-ai-mode-aeo-technical-guide-2026">Google AI Mode technical guide</a>: AI Mode issues up to 16 sub-queries for a single user question, retrieving the best available source for each sub-query separately.</p>
 <p>This changes the citation opportunity. A page that does not match the primary user query can still be cited if it is the best available source for one of the sub-queries AI Mode generates internally. A page about "how to track AI citations" can appear in AI Mode answers to "how do I improve my brand's AI search visibility" because tracking is a sub-component of the broader improvement question.</p>
 <p>For AI Mode specifically, topical completeness matters more than exact keyword match. A page that covers its topic in depth — answering the primary question plus three or four related sub-questions — provides more fan-out citation opportunities than a page that answers only the primary question at similar quality.</p>
 <p>The content architecture that works for AI Mode is the pillar-cluster structure: a comprehensive pillar page linking to six or more spoke pages each covering a specific sub-topic. Each spoke is a separate fan-out candidate. The NotioncCue blog series itself is an example of this structure — each technical post is a spoke that can surface in AI Mode answers to broader AEO questions.</p>
@@ -2191,7 +2191,7 @@ Allow: /</code></pre>
   <li><strong>Article with datePublished and dateModified.</strong> Freshness signal. Update dateModified on every material content change. This field is more important than most teams realise — it is how Gemini determines whether your content is current.</li>
   <li><strong>Organisation with sameAs.</strong> Entity authority. Links your brand to LinkedIn, Crunchbase, Wikidata, and other profiles that feed Google's Knowledge Graph. The same Knowledge Graph that powers traditional search Knowledge Panels feeds Gemini's entity confidence scores.</li>
   <li><strong>BreadcrumbList.</strong> Topical hierarchy signal. A page about "AEO prompt tracking strategy" sitting inside a structured AEO content cluster carries more topical authority than a standalone page on the same topic.</li>
-  <li><strong>Person schema on author pages, linked from Article schema.</strong> E-E-A-T author signal. See the <a href="/resources/blog/eeat-aeo-trust-signals-ai-citation-2026">E-E-A-T and AI citation guide</a> for the full implementation.</li>
+  <li><strong>Person schema on author pages, linked from Article schema.</strong> E-E-A-T author signal. See the <a href="/blog/eeat-aeo-trust-signals-ai-citation-2026">E-E-A-T and AI citation guide</a> for the full implementation.</li>
 </ul>
 
 <h2>How Do You Track Gemini Citations Separately From Traditional Search?</h2>
@@ -2243,14 +2243,14 @@ Allow: /</code></pre>
 <p><strong>Source 2: Perplexity and ChatGPT People Also Ask equivalents.</strong> Run your primary topic through Perplexity and note the "Related" questions it surfaces. Run it through ChatGPT and note the follow-up questions it suggests. These are the sub-queries the AI generates when processing your primary topic — which means they are the sub-queries it will generate when buyers ask about your category. Each is a potential content brief.</p>
 <p><strong>Source 3: Google's People Also Ask boxes.</strong> PAA boxes remain the closest proxy for conversational query intent that traditional research tools surface. Run your ten core topic keywords through Google and collect every PAA question that appears. Rephrase them as conversational ChatGPT prompts. "What is the best way to structure content for AI search" is more useful than "AEO content structure best practices" because it matches the actual phrasing buyers use in AI interfaces.</p>
 <p><strong>Source 4: Reddit question threads in your category.</strong> Search Reddit for your category topic. Look specifically for posts phrased as questions. The question in the thread title is the prompt. The upvoted answers tell you what the AI-citable response would need to include. Subreddits relevant to your buyers are a real-time feed of the questions they are taking to AI tools, because they are taking the same questions to Reddit.</p>
-<p><strong>Source 5: Competitor content gap analysis.</strong> Use the <a href="/resources/blog/aeo-content-gap-analysis-find-what-ai-answers-without-you">AEO content gap analysis</a> process to identify prompts where competitors are cited and you are not. The prompts themselves become research inputs — they tell you which question types your competitors have covered and you have not.</p>
+<p><strong>Source 5: Competitor content gap analysis.</strong> Use the <a href="/blog/aeo-content-gap-analysis-find-what-ai-answers-without-you">AEO content gap analysis</a> process to identify prompts where competitors are cited and you are not. The prompts themselves become research inputs — they tell you which question types your competitors have covered and you have not.</p>
 
 <h2>What Are the Six Prompt Types That Earn the Highest AI Citation Rates?</h2>
 <p>Not all prompts are equal for citation purposes. Six prompt types consistently earn the highest citation rates across AI engines, based on citation pattern data from NotioncCue tracking and published third-party studies.</p>
 <p><strong>Type 1: Definition prompts.</strong> "What is [concept]?" These earn citations for informational queries at every stage of the buyer journey. Pages with clean, direct definitions in the first 30 words earn citations at higher rates than pages with extended definitions. Definition prompts are where topical authority starts — a brand that owns the definition of a term owns the first impression for everyone who asks AI about that term.</p>
-<p><strong>Type 2: Comparison prompts.</strong> "[Option A] vs [Option B]" and "best [category] for [use case]." These are the highest-value commercial prompts. AI engines pull from your own comparison pages, third-party comparison articles, and review platforms when generating comparison answers. If you have no comparison content and no review platform presence, you are entirely dependent on what others say. See the <a href="/resources/blog/aeo-for-b2b-saas-complete-guide-2026">B2B SaaS AEO guide</a> for the comparison content architecture.</p>
+<p><strong>Type 2: Comparison prompts.</strong> "[Option A] vs [Option B]" and "best [category] for [use case]." These are the highest-value commercial prompts. AI engines pull from your own comparison pages, third-party comparison articles, and review platforms when generating comparison answers. If you have no comparison content and no review platform presence, you are entirely dependent on what others say. See the <a href="/blog/aeo-for-b2b-saas-complete-guide-2026">B2B SaaS AEO guide</a> for the comparison content architecture.</p>
 <p><strong>Type 3: How-to and procedural prompts.</strong> "How do I [task]?" and "Step-by-step guide to [process]." HowTo schema content earns citations for procedural queries. The key difference from other prompt types: the answer needs to be genuinely procedural — numbered steps with specific actions, not a description of what the process involves. "Step 1: Open robots.txt and add 'User-agent: PerplexityBot / Allow: /'" earns citation. "The first step involves reviewing your robots.txt file" does not.</p>
-<p><strong>Type 4: Causal and explanatory prompts.</strong> "Why does [outcome] happen?" and "What causes [problem]?" These surface in AI answers when buyers encounter unexpected results. "Why is my AI citation rate falling?" is the kind of query that would surface the <a href="/resources/blog/ai-citation-decay-why-it-happens">citation decay post</a>. Causal content earns citations for diagnostic queries — high-value because the buyer is actively trying to fix a problem.</p>
+<p><strong>Type 4: Causal and explanatory prompts.</strong> "Why does [outcome] happen?" and "What causes [problem]?" These surface in AI answers when buyers encounter unexpected results. "Why is my AI citation rate falling?" is the kind of query that would surface the <a href="/blog/ai-citation-decay-why-it-happens">citation decay post</a>. Causal content earns citations for diagnostic queries — high-value because the buyer is actively trying to fix a problem.</p>
 <p><strong>Type 5: Evaluation prompts.</strong> "Is [option] worth it for [specific situation]?" and "Should I use [tool/approach] if [condition]?" These are decision-support queries. Buyers at this stage are weeks away from purchase. AI engines pull from case study content, first-hand experience evidence, and specific outcome data when generating evaluation answers. Generic "it depends" content does not earn citations here. Specific data from real cases does.</p>
 <p><strong>Type 6: Problem-first prompts.</strong> "[I have problem X], what should I do?" These are the prompts buyers run when they are aware of a problem but do not yet know the solution category. "My organic traffic is falling but my rankings are fine" leads to a query about AI Overviews absorbing clicks — which surfaces content about the zero-click landscape and AEO. Content that connects a named symptom to your solution category earns citations at the top of the buyer funnel.</p>
 
@@ -2299,8 +2299,8 @@ Allow: /</code></pre>
 <h2>How Do You Build a Brand for a Zero-Click Environment?</h2>
 <p>In a zero-click environment, your brand exists inside AI answers whether you build for it or not. The question is whether what AI says about you is accurate, consistent, favourable, and frequent. Brands that do not actively build their AI presence end up with whatever AI assembled from whatever it found — which may include outdated pricing, incorrect feature claims, and a description shaped more by your competitors' positioning than your own.</p>
 <p>Four things that determine brand strength in a zero-click environment:</p>
-<p><strong>Citation frequency.</strong> How often your brand appears in AI answers on relevant queries. This is AI share of voice — the metric covered in detail in the <a href="/resources/blog/ai-share-of-voice-how-to-measure-and-grow-it">AI share of voice guide</a>. Higher citation frequency means more buyers encounter your brand during their AI-mediated research, even if they never click through to your site during that session.</p>
-<p><strong>Narrative control.</strong> Whether the AI's description of your brand matches your actual positioning. A brand cited 50 times a month but consistently described inaccurately — wrong product names, outdated capabilities, confused with a competitor — is experiencing citation without benefit. The <a href="/resources/blog/ai-brand-hallucination-find-and-fix">brand hallucination guide</a> covers how to detect and correct inaccurate AI descriptions.</p>
+<p><strong>Citation frequency.</strong> How often your brand appears in AI answers on relevant queries. This is AI share of voice — the metric covered in detail in the <a href="/blog/ai-share-of-voice-how-to-measure-and-grow-it">AI share of voice guide</a>. Higher citation frequency means more buyers encounter your brand during their AI-mediated research, even if they never click through to your site during that session.</p>
+<p><strong>Narrative control.</strong> Whether the AI's description of your brand matches your actual positioning. A brand cited 50 times a month but consistently described inaccurately — wrong product names, outdated capabilities, confused with a competitor — is experiencing citation without benefit. The <a href="/blog/ai-brand-hallucination-find-and-fix">brand hallucination guide</a> covers how to detect and correct inaccurate AI descriptions.</p>
 <p><strong>Citation position.</strong> Where your brand appears in AI answers. Being cited first in a recommendation list is different from being mentioned fifth as an afterthought. Being the primary cited source for a query is different from appearing as one of several options. Track position, not just presence.</p>
 <p><strong>Cross-engine consistency.</strong> Whether your brand appears in AI answers across multiple engines — ChatGPT, Perplexity, Gemini, Claude — or only one. Single-engine visibility is fragile. Cross-engine visibility indicates genuine entity authority that is more resistant to algorithm changes on any individual platform.</p>
 
@@ -2315,7 +2315,7 @@ Allow: /</code></pre>
 <p>The metrics that matter in a zero-click environment are different from traditional content metrics. Add these to your reporting alongside organic sessions and rankings.</p>
 <p><strong>Branded search volume trend.</strong> Rising branded search volume while organic traffic falls is the AEO effect in action — AI is driving discovery that converts to navigational searches. Track this monthly in Google Search Console under queries containing your brand name.</p>
 <p><strong>AI referral sessions.</strong> Sessions from chatgpt.com, perplexity.ai, and claude.ai in GA4. These are the users who clicked from an AI citation. Track volume, conversion rate, and pages per session separately from organic traffic. The conversion premium (3x to 4x) is the clearest evidence of citation quality.</p>
-<p><strong>AI citation rate per prompt.</strong> Covered in the <a href="/resources/blog/aeo-measurement-analytics-how-to-track-ai-visibility">AEO measurement guide</a>. This is the upstream metric that predicts everything else. Rising citation rate on your target prompts is the leading indicator of rising branded search volume, rising AI referral traffic, and rising conversion quality.</p>
+<p><strong>AI citation rate per prompt.</strong> Covered in the <a href="/blog/aeo-measurement-analytics-how-to-track-ai-visibility">AEO measurement guide</a>. This is the upstream metric that predicts everything else. Rising citation rate on your target prompts is the leading indicator of rising branded search volume, rising AI referral traffic, and rising conversion quality.</p>
 <p><strong>Impression-to-click ratio in GSC.</strong> Monitor this monthly for your top 20 informational queries. A declining ratio indicates AI surfaces are absorbing the query intent. Stable or rising ratios on informational queries indicate those queries are not significantly impacted by AI absorption yet.</p>
 
 <h2>What Should You Stop Doing in a Zero-Click Environment?</h2>
@@ -2401,6 +2401,820 @@ Allow: /</code></pre>
 <p><strong>What is a realistic AEO budget for a small business?</strong><br/>A small brand can run a meaningful AEO programme with 5 to 8 hours of implementation time in the first month (crawl access, schema, content restructuring) and 2 to 3 hours per month ongoing (prompt tracking, content freshness updates, review platform maintenance). Tool cost depends on whether you use a dedicated platform or manual tracking. The highest-value investment is time, not tool spend, for brands under 100 pages.</p>
 <p><strong>Should AEO budget come from SEO or brand budget?</strong><br/>Both. AEO work that improves content structure and schema serves the SEO channel directly. AEO work that builds off-site entity signals (review platforms, community, editorial) is closer to brand and PR investment. In practice, most effective AEO programmes are budgeted jointly across SEO and content, with the PR or brand team handling off-site entity work. A siloed AEO budget that sits only in one team consistently underperforms because it covers only part of the system.</p>
 <p><strong>Are there industries where AEO ROI is higher than average?</strong><br/>Yes. Healthcare queries trigger AI Overviews on 88% of relevant searches. Financial services and legal see high AI query rates. B2B SaaS evaluation queries — comparison, pricing, alternatives — are heavily AI-mediated because buyers run extended research before engaging a vendor. Any high-consideration purchase category where buyers do significant research before deciding shows above-average AEO ROI because the citation influence on a decision-stage buyer is proportionally more valuable.</p>
+`,
+  },
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 37 — Voice Search AEO
+  // Primary keyword: voice search AEO, voice search optimization 2026
+  // Secondary: Siri Alexa Google Assistant AEO, speakable content AEO
+  // Tool CTA: AI Crawler Audit (voice crawlers) + Prompt Tracker
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'voice-search-aeo-siri-alexa-google-assistant-2026',
+    emoji:          '🎙️',
+    bg:             'rgba(69,228,255,.06)',
+    tag:            'Technical',
+    date:           'Jun 28, 2026',
+    title:          'Voice Search AEO: How to Get Your Brand Spoken by Siri, Alexa, and Google Assistant',
+    excerpt:        'Voice queries now account for 27% of all searches. There are more voice assistants active globally than there are people on Earth — 8.4 billion devices. Voice returns exactly one answer. If it is not you, it is a competitor. Here is how to become the spoken answer.',
+    read:           '10 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>Voice queries now account for 27% of all searches, more than double the rate of three years ago. There are 8.4 billion voice assistants active globally — more than the total human population. Around half of all US adults use voice search daily. Voice commerce is on pace to hit $80 billion globally by year-end 2026.</p>
+<p>Voice search returns exactly one answer. Not a list of ten blue links. Not three options. One spoken response, chosen by an AI assistant from whatever it considers the best available source for that query. If you are not that source, you do not exist for that user in that moment.</p>
+<p>The good news: voice AEO and text AEO are the same discipline with one extra constraint. Everything that makes content citable by ChatGPT or Perplexity also makes it eligible for voice retrieval. The extra constraint is that voice answers must be speakable — under 30 words per answer sentence, natural spoken-language phrasing, no tables or bullet points that cannot be read aloud.</p>
+
+<h2>How Do Voice Assistants Select What to Say?</h2>
+<p>Siri, Alexa, and Google Assistant all follow the same core retrieval architecture despite sourcing from different indexes. A query arrives, the assistant parses intent, it retrieves candidate passages from its index, scores them for relevance and trustworthiness, and speaks the top result.</p>
+<p>What differs between platforms is which index each pulls from. Google Assistant pulls from Google's ecosystem — the same index powering Google Search, AI Overviews, and AI Mode. A page that earns a Google AI Overview citation is highly eligible for Google Assistant voice answers on the same query. Alexa pulls primarily from Bing's index, making Bing Webmaster Tools indexation status a direct proxy for Alexa citation eligibility. Siri sources from Apple's web index plus selected third-party data providers including Wikipedia. ChatGPT Voice and Gemini Live use their respective AI retrieval systems — the same systems you are already optimising for text-based queries.</p>
+<p>The practical implication: voice optimisation is not a separate channel to build for. It is the same content and schema work you are doing for AI text search, applied with one extra editorial filter — speakable answer sentences.</p>
+
+<h2>What Makes a Passage Speakable?</h2>
+<p>A speakable passage is one a voice assistant can read aloud without sounding robotic, incomplete, or confusing. Five characteristics determine this.</p>
+<p><strong>Sentence length under 30 words.</strong> Voice assistants read passages aloud in one breath. A sentence running to 45 words with multiple clauses sounds unnatural when spoken. Keep each sentence in your answer blocks under 30 words. This does not apply to the full section — only to the first 60 to 100 words that a voice assistant is likely to extract and speak.</p>
+<p><strong>Second person, active voice.</strong> "You can improve voice search eligibility by adding FAQPage schema" sounds natural when spoken aloud. "Voice search eligibility can be improved through the addition of FAQPage schema" sounds like a legal disclaimer. Voice queries often use the second person — "how do I..." — and the answer should match that register.</p>
+<p><strong>No visual-only elements in the answer block.</strong> Tables, bullet points, and numbered lists cannot be spoken coherently. A voice assistant that encounters a table will either skip the passage or produce nonsense when it tries to read it. Your first 60 to 100 words in each section — the passage most likely to be extracted — must be prose, not structured visual content. Put lists and tables later in the section, after the speakable answer block.</p>
+<p><strong>Self-contained meaning.</strong> A voice listener cannot scroll up to re-read the preceding paragraph. The passage must make complete sense on its own. "This is the most important factor" is not speakable without context. "FAQPage schema is the most important single structured data type for voice search eligibility" is — it names the subject in the sentence itself.</p>
+<p><strong>Direct answer first.</strong> Voice users do not want preamble. They asked a question. They want the answer. The same BLUF structure covered in the <a href="/blog/bluf-writing-technique-ai-citations-aeo">BLUF writing guide</a> that improves text AI citation also produces speakable passages. Answer in sentence one. Context in sentence two. Detail in sentence three.</p>
+
+<h2>What Schema Makes Content Voice-Ready?</h2>
+<p>Three schema types directly affect voice search eligibility.</p>
+<p><strong>FAQPage JSON-LD.</strong> The highest-impact schema for voice. Google Assistant pulls directly from FAQPage question-answer pairs when a spoken question matches a schema question. Each acceptedAnswer in your FAQPage schema becomes a candidate voice response. Write each answer in natural spoken language, under 50 words, starting with the direct answer. Do not write FAQ answers as you would write documentation — write them as you would speak them.</p>
+<p><strong>Speakable schema.</strong> A schema type specifically designed to flag page sections as appropriate for text-to-speech reading. Currently used by Google Assistant for news and information content. Implement it by adding a <code>speakable</code> property to your Article or WebPage schema, pointing to the CSS selectors of your answer blocks. It signals to Google Assistant precisely which passages to extract and speak, removing ambiguity from the extraction step.</p>
+<pre><code>{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".answer-block", "h2 + p", ".callout"]
+  },
+  "url": "https://notioncue.com/blog/voice-search-aeo"
+}</code></pre>
+<p><strong>LocalBusiness schema with GeoCoordinates.</strong> For local voice queries — "find me a plumber near me," "what are the hours for [business] in [city]" — LocalBusiness schema with accurate GeoCoordinates, openingHoursSpecification, and areaServed is the entry condition. Voice assistants return zero results for local queries where GeoCoordinates are absent, because they cannot confirm the business serves the user's location. See the <a href="/blog/local-business-aeo-physical-location">local business AEO guide</a> for the full LocalBusiness schema implementation.</p>
+
+<h2>How Do Voice Query Patterns Differ From Text Queries?</h2>
+<p>Voice queries are longer, more conversational, and more question-based than typed searches. A user who types "AEO tools 2026" into Google will say "what are the best AEO tools for a small team in 2026" to Google Assistant. These are not the same query for keyword targeting purposes.</p>
+<p>Three voice query patterns worth building content for specifically:</p>
+<p><strong>Natural question format.</strong> "What is the best way to..." "How do I..." "Which one should I choose if..." These are the queries voice assistants receive. Your H2 headings should match this phrasing. "What is the Best AEO Tool for Small Teams?" earns voice citation. "AEO Tool Selection Criteria" does not.</p>
+<p><strong>Local intent.</strong> "Near me," "open now," "in [city]," and "closest" modifiers appear in a large proportion of voice searches because voice is used contextually — in cars, on walks, in kitchens. If your business has physical relevance, local modifiers need to appear in your content and schema. Not as keyword stuffing — as natural answers to questions buyers actually ask. "NotioncCue serves AEO professionals across India, the UK, and the US" is a locally-grounded entity statement that helps voice assistants confirm geographic relevance.</p>
+<p><strong>Action intent.</strong> "Book a...", "order a...", "call a..." Voice commerce queries are growing. A business that has structured its product and service pages for voice action queries — with schema that includes <code>potentialAction</code> for reservations or purchases — is reachable by voice agents performing agentic commerce tasks, the fastest-growing category in voice search.</p>
+
+<h2>How Do You Test Voice Search Eligibility?</h2>
+<p>Testing voice search requires testing the actual voice assistants, not proxies. Three weekly tests to run:</p>
+<p>Ask your ten most important queries to Google Assistant on an Android device. Note whether your brand appears, what source is cited, and whether the answer sounds natural or robotic. If a competitor is cited, ask the same query with your brand name added: "What does [your brand] say about [topic]?" This tests whether your content exists in the index even if it is not the default answer.</p>
+<p>Run the same queries through Alexa on a smart speaker. Alexa's responses are generally shorter and more direct than Google Assistant's. If your content is too long-form and lacks a tight 30-word answer sentence in the first 60 words, Alexa will skip your page entirely.</p>
+<p>Use Bing Webmaster Tools to confirm your key pages are indexed in Bing. Alexa citation eligibility requires Bing indexation. If your pages do not appear in Bing's index, they are invisible to Alexa regardless of content quality. Confirm via URL Inspection in Bing Webmaster Tools. If pages are missing, submit them directly through the tool.</p>
+
+<div class="callout"><p>Voice crawlers — Bingbot for Alexa, Googlebot for Google Assistant — are the same crawlers that feed AI text search on those platforms. The NotioncCue AI Crawler Audit confirms which crawlers are actively fetching your pages and which pages return incomplete content due to JavaScript rendering. Fix crawler access first. Speakable schema only works if the crawler can reach and parse the page to begin with.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>Is voice search AEO the same as regular AEO?</strong><br/>Yes, with one extra filter. Every AEO tactic — BLUF answer structure, FAQPage schema, entity clarity, E-E-A-T signals — applies equally to voice. The additional voice-specific requirement is speakable passage length: answer sentences under 30 words, active voice, no visual-only content in the first 100 words of each section. Content built for voice naturally earns higher text AI citation rates too, because the speakability constraint enforces the answer-first structure that all AI retrieval systems prefer.</p>
+<p><strong>Which voice assistant has the highest market share in 2026?</strong><br/>Google Assistant maintains the largest reach through its integration with Android devices and Google Search. Alexa dominates smart speaker hardware. Siri leads on iOS devices. ChatGPT Voice and Gemini Live are the fastest-growing platforms, particularly for research and decision-stage queries where buyers want multi-turn conversations rather than a single spoken answer.</p>
+<p><strong>Does Speakable schema directly improve voice search rankings?</strong><br/>It signals to Google Assistant which page sections are appropriate for text-to-speech reading, which removes ambiguity from passage extraction. It does not guarantee citation. Combine it with strong BLUF structure and FAQPage schema for the full effect. On its own, without answer-first passage content, it signals intent without delivering the extractable answer that earns citation.</p>
+<p><strong>How is voice commerce AEO different from regular voice search AEO?</strong><br/>Voice commerce queries include action intent — "order," "book," "buy," "reserve." Content for voice commerce needs <code>potentialAction</code> schema (OrderAction, ReserveAction, BuyAction) in addition to FAQPage and LocalBusiness schema. The content structure is the same — direct answer, speakable sentences — but the schema signals to voice agents that a direct action is available, not just information. This is the fastest-growing voice AEO opportunity for ecommerce and service businesses in 2026.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 38 — AEO for YMYL (Healthcare, Legal, Finance)
+  // Primary keyword: AEO YMYL, AEO healthcare, AEO legal sites
+  // Secondary: AI citations regulated industries, YMYL AI overviews 2026
+  // Tool CTA: Citation Tracker + E-E-A-T signals → AI Crawler Audit
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'aeo-ymyl-healthcare-legal-finance-high-trust-industries',
+    emoji:          '🏥',
+    bg:             'rgba(244,114,182,.06)',
+    tag:            'AEO Strategy',
+    date:           'Jun 28, 2026',
+    title:          'AEO for YMYL: Healthcare, Legal, and Finance Sites Face a Higher Citation Bar',
+    excerpt:        '77.67% of legal queries trigger a Google AI Overview — the highest rate of any industry. Healthcare queries trigger AI Overviews 88% of the time. But the citation bar in YMYL sectors is significantly higher. Generic content gets blocked. Authoritative, credential-anchored content earns citations at a premium.',
+    read:           '11 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>YMYL stands for Your Money, Your Life — Google's classification for content that can materially affect a reader's health, finances, legal rights, or safety. Healthcare, legal, and finance are the three highest-volume YMYL verticals, and they also have the highest AI Overview trigger rates of any industry.</p>
+<p>77.67% of legal queries trigger a Google AI Overview, per SE Ranking's YMYL research — nearly four times the 21% baseline across all searches. Healthcare queries trigger AI Overviews 88% of the time. 40 million people ask ChatGPT health questions daily.</p>
+<p>The opportunity is enormous. The citation bar is proportionally higher. AI engines apply what researchers call "heightened guardrails" to YMYL content — they prefer authoritative, credential-anchored, named-source content and actively avoid citing content that could mislead a vulnerable reader. Generic content that earns citations in general consumer categories gets hedged, blocked, or refused in YMYL contexts.</p>
+<p>This post covers what the higher YMYL citation bar actually requires, how it differs by vertical, and the specific implementations that move citation rates in regulated industries.</p>
+
+<h2>Why Do AI Engines Apply Stricter Standards to YMYL Content?</h2>
+<p>Foundation model providers train their systems to recognise YMYL queries and apply elevated caution. The training shapes several consistent behaviours across ChatGPT, Claude, Perplexity, and Gemini: prefer primary sources (named statutes, clinical guidelines, regulatory body publications, reported court decisions) over commercial sources; add cautionary language to any content that resembles specific advice; direct users to qualified professionals for individual-situation questions; and refuse to make specific recommendations where error carries genuine harm risk.</p>
+<p>For AEO practitioners, this means three things. First, the content types that earn YMYL citations are different from general AEO content. Second, the E-E-A-T bar is not just higher — it is a prerequisite rather than a differentiator. Third, citation volume in YMYL is lower but citation quality is higher, because the audience reaching your content through AI citations in a YMYL context is at the highest-intent stage of their research.</p>
+<p>AI referral traffic in healthcare, for example, converts at 4.4 times the standard rate with 23% lower bounce rates, per BrightEdge 2026 data. A cardiologist's practice cited in AI answers for "what to do after a high cholesterol reading" reaches patients at the exact moment of decision. The citation is worth significantly more than an equivalent B2B SaaS citation, where the buyer decision is commercial rather than clinical.</p>
+
+<h2>What Citation Patterns Are Specific to Healthcare AEO?</h2>
+<p>Healthcare AI Overviews appear on 88% of relevant queries — the highest trigger rate of any vertical. The sources cited are consistently from the highest-authority tier: government health agencies (NIH, NHS, CDC), academic medical centres, peer-reviewed journal publishers, and major health system websites. Commercial health websites, supplements brands, and wellness brands without clinical credentialing are rarely cited for clinical queries and frequently cited for wellness and lifestyle queries.</p>
+<p>The distinction matters for strategy. A supplement brand asking "how do I get cited in AI answers for health queries" needs to decide which tier of query it can credibly compete for. Clinical queries — "what is the recommended treatment for type 2 diabetes" — are dominated by NIH, Mayo Clinic, and NHS. These sources are essentially uncitable for commercial brands. Lifestyle and consumer wellness queries — "best supplements for sleep," "foods that improve gut health" — are more accessible to commercial brands with credentialed content.</p>
+<p>Four healthcare-specific AEO requirements:</p>
+<p><strong>Named medical author with verifiable credentials.</strong> Healthcare content without a named, credentialed medical author is structurally excluded from most clinical AI citations. A byline of "Reviewed by Dr [name], [credential], [institution]" plus Person schema linking to that author's professional profile is the minimum entry condition. Not a staff writer. Not a content team. A named clinician with institutional affiliation.</p>
+<p><strong>Primary source citation in every claim.</strong> Every clinical statistic, treatment recommendation, or health claim needs a named primary source with a link — a clinical guideline, a published study, a government health body. "Studies show that X" is not citable. "A 2025 randomised controlled trial published in the Lancet found that X, in a sample of 3,200 participants" is. AI engines cross-reference health claims against primary sources. Unsupported claims reduce citation confidence for the entire domain.</p>
+<p><strong>Scope limitations stated explicitly.</strong> Healthcare content that explicitly states "this is general information only and does not constitute medical advice — consult a qualified healthcare professional for individual guidance" signals appropriate scope framing. AI engines read these statements as trust signals, not disclaimers. Content without scope limitations in high-risk health queries reads as advice rather than information and gets hedged or blocked.</p>
+<p><strong>Date of clinical review, not just publication date.</strong> Healthcare AI citations weight clinical currency heavily. A page published in 2021 that was clinically reviewed and updated in 2026 should show both dates — datePublished (2021) and dateModified (2026) in schema, plus a visible "Last clinically reviewed: [date]" on the page. Stale clinical content without a recent review date loses citation confidence regardless of content quality.</p>
+
+<h2>What Citation Patterns Are Specific to Legal AEO?</h2>
+<p>Legal queries trigger AI Overviews at 77.67% — the highest rate of any industry, per SE Ranking's YMYL research. The citation landscape in legal is dominated by aggregator platforms (Avvo, FindLaw, Justia, Nolo) rather than individual law firm websites — the same pattern that affects voice search local results in legal.</p>
+<p>Legal AI citations require three elements that general AEO content does not need:</p>
+<p><strong>Jurisdiction specificity.</strong> Legal questions are almost always jurisdiction-specific. A generic answer to "how do I contest a will" is less citable than an answer to "how to contest a will in England and Wales under the Inheritance Act 1975." AI engines have been trained to add hedging language to legal content that lacks jurisdictional scope ("laws vary by jurisdiction — consult a qualified lawyer in your area"). Content with explicit jurisdictional scope removes that hedging trigger and earns more confident citation.</p>
+<p><strong>Statute and case law anchoring.</strong> Legal content citing specific statutes ("under Section 4 of the Equality Act 2010"), named regulations, or reported court decisions earns citations at higher rates than equivalent content expressing the same information in general terms. AI legal retrieval systems specifically look for primary legal source anchoring as an authority signal. A piece about employment discrimination that cites specific legislation is more citable than a piece that describes the concept without legal reference.</p>
+<p><strong>Named lawyer authorship.</strong> The same credential requirement as healthcare. Legal content authored by a named solicitor, barrister, or attorney with a linked professional profile consistently earns more AI citations than anonymous "legal team" bylines. Bar association number or SRA registration number in the author schema strengthens the authority signal further.</p>
+
+<h2>What Citation Patterns Are Specific to Finance AEO?</h2>
+<p>Finance AI citations have an interesting YMYL characteristic: BrightEdge data found only 11.3% top-10 overlap between AI Overview citations and organic rankings for finance queries — the lowest of any YMYL sector. AI engines are deliberately seeking sources outside the top organic results for finance content, which means domain authority has less influence in finance AEO than in any other major category.</p>
+<p>The sources dominating finance AI citations are: government financial regulators (FCA, SEC, HMRC, IRS), major central banks, established financial journalism (FT, Wall Street Journal, Bloomberg), and academic finance research. Commercial financial service providers earn citations primarily for product-category and comparison content, not for advisory content.</p>
+<p>Three finance-specific AEO requirements:</p>
+<p><strong>FCA/SEC/regulatory compliance statements where applicable.</strong> For regulated financial products — investments, mortgages, insurance, pension advice — regulatory compliance framing signals to AI engines that the content meets the industry's own standards. Content that describes a financial product without acknowledging regulatory context reads as unvetted commercial promotion and earns lower citation confidence.</p>
+<p><strong>Personalisation disclaimers.</strong> "This content is for informational purposes only and does not constitute financial advice. Past performance is not indicative of future results." These are not boilerplate — they are trust signals in AI retrieval for finance content. AI engines specifically look for personalisation disclaimers before citing financial content that could otherwise be interpreted as specific advice.</p>
+<p><strong>Data freshness for rate and price information.</strong> Interest rates, tax thresholds, investment returns, and fee schedules change frequently. Finance content with stale rates or outdated regulatory thresholds is a liability in AI citations because AI engines can cross-reference the stated figures against current primary sources. Keep all rate and price data current and update dateModified every time a figure changes.</p>
+
+<h2>What Do All Three YMYL Verticals Have in Common for AEO?</h2>
+<p>Despite the vertical-specific differences, three requirements apply across all YMYL AEO work:</p>
+<p>Named, credentialed authorship with Person schema linking to verifiable professional profiles. This is the minimum E-E-A-T entry condition in all YMYL contexts. The <a href="/blog/eeat-aeo-trust-signals-ai-citation-2026">E-E-A-T and AI citation guide</a> covers the full implementation including the <code>worksFor</code> relationship that connects author entity to brand entity.</p>
+<p>Primary source citation on every significant claim. Not "according to research." A named study, a named regulatory body, a named statute, with a link. Every claim that an AI engine might challenge needs an audit trail to a primary source. This is what separates citable YMYL content from content that gets hedged or blocked.</p>
+<p>Scope limitation language appropriate to the vertical. Healthcare: "consult a qualified healthcare professional." Legal: "this is general information only — for advice specific to your situation, consult a qualified lawyer." Finance: "this does not constitute financial advice." These phrases do not weaken the content. They are citation enablers in YMYL contexts.</p>
+
+<div class="callout"><p>YMYL citation tracking requires monitoring not just whether your brand appears, but what the AI says about your content when it cites you. Does it add hedging language? Does it recommend consulting a professional alongside your citation? Does it describe your content accurately? The NotioncCue Citation Tracker monitors exactly what each AI engine says when it cites your brand on tracked YMYL prompts — catching inaccurate descriptions and inappropriate hedging before they shape buyer perception at scale.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>Can a small healthcare or legal practice compete with major institutions for AI citations?</strong><br/>Yes, for specific and local queries. A solo GP practice will not outcompete NHS.uk for clinical queries about standard treatments. But for "GP accepting new patients in [specific area]" or "what to do if [specific local health situation]," a well-structured local practice page with named clinical author, LocalBusiness schema, and accurate Google Business Profile can earn citations that major institutions do not appear for because they lack local specificity.</p>
+<p><strong>Do AI engines ever refuse to cite YMYL content entirely?</strong><br/>Yes. AI engines regularly decline to give specific clinical advice, specific legal advice for individual situations, or specific financial recommendations. This is by design — the systems are trained to route users to qualified professionals for individual-situation queries. The citation opportunity in YMYL is for informational and educational content, not for individual advice. Framing your content at the informational level and including the appropriate scope limitation language is what keeps content in the citable zone rather than the refused zone.</p>
+<p><strong>Is the E-E-A-T bar higher for YMYL across all AI engines or just Google?</strong><br/>All major AI engines apply elevated caution to YMYL content, but the mechanisms differ. Google's system is most explicit because it is codified in the Search Quality Rater Guidelines and directly influences AI Overview selection. Perplexity's reranker applies a domain-authority weighting that strongly favours established medical, legal, and financial institutions over commercial content in YMYL queries. ChatGPT applies training-level guardrails that were specifically tuned to avoid harm in health and finance contexts. The practical effect is consistent: YMYL content earns citations when it meets the credentialing bar, regardless of which engine you are tracking.</p>
+<p><strong>How do you track YMYL AI citations specifically?</strong><br/>Track the same prompt set you would for any AEO programme, but monitor the full answer text rather than just brand presence. In YMYL contexts, being cited alongside hedging language ("while [brand] suggests X, you should consult a qualified professional before") is a different outcome from being cited as the authoritative source without qualification. The NotioncCue Citation Tracker captures full answer text for tracked prompts so you can distinguish confident citations from hedged ones.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 39 — AEO Tools Comparison
+  // Primary keyword: best AEO tools 2026, AEO software comparison
+  // Secondary: AEO tracking tools, AI visibility platforms, GEO tools
+  // Tool CTA: NotioncCue positioning vs enterprise tools
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'best-aeo-tools-2026-comparison-guide',
+    emoji:          '🛠️',
+    bg:             'rgba(202,255,69,.06)',
+    tag:            'AEO Strategy',
+    date:           'Jun 28, 2026',
+    title:          'Best AEO Tools in 2026: An Independent Comparison for Practitioners',
+    excerpt:        'The AEO tool market matured fast. Enterprise platforms like Profound, Conductor, and BrightEdge offer broad coverage but start at thousands per month. Lighter tools fill specific gaps. Here is how to match tool to use case without overspending on features you will not use.',
+    read:           '10 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>The AEO tool market did not exist three years ago. Today it has enterprise platforms backed by Sequoia Capital, bootstrapped monitoring tools, and a growing number of niche verticals players — all competing on engine coverage, attribution quality, and execution depth. Choosing between them is genuinely difficult because the features that matter depend heavily on your team size, budget, and what part of the AEO workflow you need most help with.</p>
+<p>This guide maps the major tools by use case, not by feature list length. The question is not which platform has the most engines. It is which tools solve the specific problems your AEO programme actually has right now.</p>
+
+<h2>What Are the Four Categories of AEO Tool?</h2>
+<p>Most AEO platforms fall into one of four categories. Understanding which category a tool belongs to tells you what problem it solves.</p>
+<p><strong>Category 1: Citation monitoring platforms.</strong> These track how often your brand appears in AI-generated answers across major engines. They run your tracked prompts, record brand mentions and citations, calculate share of voice, and surface competitor appearance data. Profound, AthenaHQ, Otterly AI, and NotioncCue operate primarily in this category. The core output is a citation rate dashboard with trend lines and competitor comparison.</p>
+<p><strong>Category 2: Enterprise SEO-plus-AEO platforms.</strong> These are established enterprise SEO tools that added AEO layers to existing infrastructure. Conductor, BrightEdge Prism, and Semrush fall here. They cover the traditional SEO workflow — keyword research, rank tracking, site auditing — and have added AI visibility tracking alongside it. The advantage is consolidation for teams already using the platform. The disadvantage is that the AEO layer is often less deep than dedicated tools.</p>
+<p><strong>Category 3: Content and execution platforms.</strong> These help you create AEO-optimised content rather than just tracking your current performance. Frase, Writesonic GEO, and GrackerAI are in this category. They analyse content against citation patterns and suggest structural changes. Some generate content directly. The advantage is that they bridge the gap from insight to action. The disadvantage is that they typically track fewer engines and have less robust citation data than pure monitoring platforms.</p>
+<p><strong>Category 4: Specialist and vertical platforms.</strong> Purpose-built for specific industries or use cases. SEOPital Vision for regulated healthcare, Relixir for B2B SaaS funnels, Peec AI for SMBs with limited budget. These are the right choice when your vertical has requirements — compliance, specific schema types, industry-specific prompt sets — that general tools do not address.</p>
+
+<h2>Which Platforms Are Best for Which Use Case?</h2>
+<p><strong>Best for enterprise brands with compliance requirements: Profound.</strong> Backed by $35M from Sequoia Capital, covering 10+ AI engines including ChatGPT, Claude, Perplexity, Gemini, Microsoft Copilot, DeepSeek, Grok, Meta AI, and Google AI Mode. SOC 2 Type II and HIPAA compliant. The "Conversation Explorer" gives access to 100M+ real user prompts, which is valuable for market intelligence in regulated industries. Cons: pricing starts high (enterprise sales-led), and the monitoring depth exceeds what most SMBs need. Best for healthcare, pharma, finance, and enterprise teams where compliance is a procurement requirement.</p>
+<p><strong>Best for enterprise SEO teams wanting AEO added to existing stack: Conductor.</strong> Conductor added an "AI Search Performance" layer to its traditional enterprise SEO platform in 2026, and launched an MCP server integration that allows marketing teams to analyse brand citations directly within ChatGPT. Best for large teams that already use Conductor for SEO and want to add AI tracking without switching platforms. Cons: heavyweight, sales-led, expensive as an AEO-only buy.</p>
+<p><strong>Best for mid-market teams wanting execution alongside monitoring: AthenaHQ.</strong> Pairs visibility tracking with prioritised content and optimisation recommendations — the output is a to-do list rather than just a dashboard. Good for teams that want direction alongside data. Cons: newer entrant, thinner public pricing and review footprint than the incumbents.</p>
+<p><strong>Best for B2B SaaS teams: Relixir.</strong> Strong content gap identification for B2B buyer funnel prompts. Builds content briefs from citation gap data. Good for growth teams that want to connect AEO gap data to content production workflow. Limited engine coverage compared to Profound.</p>
+<p><strong>Best for SMBs and solo practitioners: Peec AI or Otterly.AI.</strong> Both offer accessible entry pricing, guided onboarding, and the core citation tracking functionality without enterprise complexity. Peec AI at SMB pricing covers the fundamentals. Otterly.AI has a clean interface that non-technical stakeholders can use without training.</p>
+<p><strong>Best for ecommerce brands: AthenaHQ (for product entity mapping) or Yotpo Discover (for SKU-level visibility).</strong> Yotpo Discover is a specialist tool that tracks product visibility at the SKU level across ChatGPT, Gemini, and Google AI Overviews, pairing citation data with review sentiment from Yotpo's review platform. Unique for ecommerce in that it connects product AI citations to actual customer review data — the content that drives those citations.</p>
+
+<h2>What Should You Look For When Evaluating Any AEO Tool?</h2>
+<p>Six criteria that separate useful tools from expensive dashboards:</p>
+<p><strong>Engine coverage.</strong> Which engines does the tool track? The minimum viable set in 2026 is ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude. Tools covering only two or three engines are tracking part of the picture. Check whether "Google AI Overviews" and "Google AI Mode" are tracked separately — they require different retrieval paths and produce different citation lists.</p>
+<p><strong>Prompt sampling methodology.</strong> AI responses are non-deterministic. Running a prompt once gives one data point. A reliable citation rate requires multiple runs of the same prompt. Ask vendors how many times they sample each prompt per measurement cycle. Tools that run each prompt once and report a binary yes/no citation are less reliable than tools that sample 5 to 10 times and report a citation rate percentage.</p>
+<p><strong>Attribution to business outcomes.</strong> Does the tool connect citation data to GA4 traffic and conversion data? Tools that stop at citation rate leave you with a visibility score and no clear ROI calculation. Tools with GA4 integration can show which citations produced traffic, which traffic converted, and what the pipeline value of citation activity was.</p>
+<p><strong>Execution support vs monitoring only.</strong> Most tools report on where you stand. Fewer tell you specifically what to change. Tools with prescriptive recommendations — "this page needs FAQPage schema on questions 3 through 7" or "your passage on [topic] needs a direct answer sentence in position one" — reduce the time from insight to improvement.</p>
+<p><strong>Competitor tracking.</strong> Can the tool show you which competitors appear on your tracked prompts when you do not? This is the highest-value single data point in AEO — the competitor URL being cited is the content brief for your next piece.</p>
+<p><strong>Pricing per tracked prompt.</strong> Divide monthly cost by the number of prompts you can track. This is the most honest way to compare tools at different price points. A tool costing £500/month that tracks 50 prompts costs £10 per prompt. A tool costing £200/month tracking 200 prompts costs £1 per prompt. The higher-priced tool is five times more expensive per unit of measurement.</p>
+
+<h2>Where Does NotioncCue Fit?</h2>
+<p>NotioncCue is built for AEO practitioners who need core citation tracking, AI crawler monitoring, and prompt-level gap analysis in a single platform without enterprise pricing complexity.</p>
+<p>The platform covers five engines — ChatGPT, Perplexity, Claude, Google AI Overviews, and Gemini — with weekly citation rate tracking across your tracked prompt set. The AI Crawler Audit checks which crawlers are reaching your pages and surfaces JavaScript rendering gaps that block Perplexity and ChatGPT from seeing your content. The AI Answer Gap Finder runs your target prompts and surfaces competitor citations, turning the gap data into a content brief list.</p>
+<p>The right choice between NotioncCue and an enterprise platform depends on your scale and compliance needs. For individual practitioners, agency teams, and growth-stage brands, NotioncCue covers the full AEO workflow at a fraction of enterprise platform pricing. For large enterprises with HIPAA or SOC 2 compliance requirements, dedicated enterprise platforms like Profound are the appropriate choice.</p>
+
+<div class="callout"><p>Before investing in any AEO platform, run a manual baseline first. Take your 15 most important prompts, run them through ChatGPT, Perplexity, and Google AI Mode weekly for four weeks, and record citation rate in a spreadsheet. That baseline data tells you which prompts are performing and which are gaps — which is the same data any AEO platform will show you, just slower and manually. Once you know what you are looking for, the right tool selection becomes clear.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>Do I need a paid AEO tool or can I track manually?</strong><br/>Manual tracking is viable for up to 20 prompts across three engines. At that scale, a weekly tracking spreadsheet taking 2 to 3 hours per week produces sufficient data for most AEO decisions. Beyond 20 prompts or three engines, manual tracking becomes inconsistent and time-consuming. The value of a paid tool is consistency, automated sampling, and trend data over time — not data that is impossible to collect manually.</p>
+<p><strong>Does using an AEO tool directly improve citations?</strong><br/>No. A tool tracks and reports. It does not change what AI engines say about you. Citation improvement comes from fixing the actual signals — crawler access, content structure, schema, entity signals — that AI engines evaluate. A tool tells you whether those improvements are working. It does not make the improvements itself, unless it includes an execution layer like AthenaHQ's recommendation engine or Yotpo Discover's content agent.</p>
+<p><strong>How many prompts do I need to track for meaningful data?</strong><br/>Ten to fifteen well-chosen prompts per topic cluster. Below ten, single-session AI variability makes week-to-week comparison unreliable. Above fifty prompts for a single brand, the marginal prompt adds diminishing signal. Prioritise decision-stage prompts (comparison, evaluation, alternatives) over awareness prompts — they represent higher commercial value and are where citation gaps cost the most.</p>
+<p><strong>Is it worth paying for engine coverage beyond the top five?</strong><br/>For most brands in 2026, no. ChatGPT, Perplexity, Google AI Overviews, Gemini, and Claude represent the vast majority of AI search volume and buyer interaction. Grok, Meta AI, DeepSeek, and Microsoft Copilot are worth adding if your buyers are specifically in communities where those platforms are primary — X users for Grok, Meta platforms for Meta AI. Add them when usage data from GA4 referral traffic shows sessions from those platforms, not before.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 40 — Speakable Schema Deep Dive
+  // Primary keyword: speakable schema, speakable JSON-LD, schema for voice search
+  // Secondary: speakable property Google, voice ready schema markup
+  // Tool CTA: AI Crawler Audit (confirms voice crawler access)
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'speakable-schema-complete-implementation-guide',
+    emoji:          '🔊',
+    bg:             'rgba(82,227,142,.06)',
+    tag:            'Technical',
+    date:           'Jun 28, 2026',
+    title:          'Speakable Schema: The Complete Implementation Guide for Voice Search and AI Citations',
+    excerpt:        'Speakable schema is the only structured data type that explicitly tells Google which page sections to extract for text-to-speech. Most sites implement FAQPage and Article schema but skip Speakable entirely. Here is how to implement it correctly and why it matters beyond just voice search.',
+    read:           '9 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>Speakable schema is the only structured data type that explicitly tells AI systems which sections of a page are suitable for text-to-speech reading. Every other schema type describes what a page is or what it contains. Speakable schema points to specific CSS selectors on the page and says: these sections are ready to be spoken aloud.</p>
+<p>Google Assistant uses Speakable schema for news and information content. As voice search expands to cover more content types, and as AI Mode increasingly serves answers through voice interfaces, Speakable schema's role is expanding beyond the audio news reading use case where it was originally deployed.</p>
+<p>Most AEO practitioners implement FAQPage, Article, and Organisation schema and skip Speakable entirely — because it is not covered in most schema tutorials and because it has a slightly different implementation pattern from the JSON-LD types most teams are familiar with. This guide covers the complete implementation.</p>
+
+<h2>What Is Speakable Schema and How Does It Work?</h2>
+<p>Speakable schema is a schema.org property that can be added to Article, WebPage, and WebSite schema types. It uses a <code>SpeakableSpecification</code> object to identify which parts of the page content are appropriate for audio playback.</p>
+<p>Two specification methods are supported: CSS selector-based and XPath-based. CSS selectors are easier to implement for most developers and produce cleaner, more maintainable markup. XPath is available for more complex selector requirements.</p>
+<p>When Google Assistant processes a page with Speakable schema, it reads the specified sections rather than trying to infer which passages are best suited for audio from the full page content. Without Speakable schema, Google Assistant chooses passages based on its own extraction logic — which may pick your table of contents, your meta description, or a navigation element instead of your answer blocks.</p>
+<p>Speakable schema removes that uncertainty. You define the answer blocks. The voice assistant reads them.</p>
+
+<h2>How Do You Implement Speakable Schema With CSS Selectors?</h2>
+<p>The CSS selector method references specific HTML classes or element patterns in your page. Implementation requires two steps: marking up your HTML with consistent CSS classes on answer blocks, and adding the Speakable JSON-LD referencing those classes.</p>
+<p><strong>Step 1: Add CSS classes to your answer blocks.</strong> Every section that should be speakable needs a consistent CSS class. In your HTML:</p>
+<pre><code>&lt;h2&gt;What Is Speakable Schema?&lt;/h2&gt;
+&lt;p class="answer-block"&gt;
+  Speakable schema is a structured data property that tells AI voice
+  assistants which sections of a webpage to read aloud. It uses CSS
+  selectors to point to answer blocks, removing ambiguity from
+  voice passage extraction.
+&lt;/p&gt;</code></pre>
+<p>The class name (<code>answer-block</code>) is arbitrary — use whatever is consistent across your CMS. The important thing is that every passage you want spoken has the same class applied.</p>
+<p><strong>Step 2: Add Speakable JSON-LD to your page head.</strong></p>
+<pre><code>{
+  "@context": "https://schema.org/",
+  "@type": "WebPage",
+  "name": "Speakable Schema: The Complete Implementation Guide",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [
+      ".answer-block",
+      "h2 + p",
+      ".callout p"
+    ]
+  },
+  "url": "https://notioncue.com/blog/speakable-schema-complete-implementation-guide"
+}</code></pre>
+<p>The <code>cssSelector</code> array accepts multiple selectors. <code>h2 + p</code> selects the first paragraph immediately following any H2 heading — a reliable selector for BLUF-structured content where every H2 section opens with a direct answer paragraph. <code>.callout p</code> selects callout boxes, which typically contain highlighted answers. <code>.answer-block</code> selects explicitly marked answer passages.</p>
+
+<h2>How Do You Implement Speakable Schema With XPath?</h2>
+<p>XPath is useful when CSS selectors cannot reliably target the right elements — for example, when your CMS generates inconsistent HTML that cannot be reliably selected by class or element adjacency.</p>
+<pre><code>{
+  "@context": "https://schema.org/",
+  "@type": "WebPage",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "xpath": [
+      "/html/head/title",
+      "/html/body//article//p[1]",
+      "/html/body//section[@class='answer']//p"
+    ]
+  },
+  "url": "https://notioncue.com/blog/speakable-schema-complete-implementation-guide"
+}</code></pre>
+<p>XPath targets are evaluated at runtime against the page DOM. <code>/html/body//article//p[1]</code> selects the first paragraph inside every article element in the body — which for BLUF-structured content targets the direct answer paragraph at the top of each article section.</p>
+
+<h2>What Content Should Be Marked as Speakable?</h2>
+<p>Four content types should be marked speakable. Two content types should not.</p>
+<p><strong>Mark speakable: Direct answer paragraphs under H2 headings.</strong> The first paragraph of each section — the BLUF answer block — is the ideal speakable content. It is self-contained, under 100 words, and directly answers the heading question. Exactly what a voice assistant needs.</p>
+<p><strong>Mark speakable: FAQ answer text.</strong> Each <code>acceptedAnswer.text</code> in your FAQPage schema is already structured as a spoken answer. Apply speakable selectors to the FAQ answer elements so they are available for both FAQPage extraction and direct voice reading.</p>
+<p><strong>Mark speakable: Callout and summary boxes.</strong> These highlight key facts, statistics, or conclusions. They are typically concise, complete, and written for quick consumption — all characteristics that make them excellent voice passages.</p>
+<p><strong>Mark speakable: Page title and first paragraph.</strong> Google's own documentation recommends including the article title and summary paragraph as speakable. These give voice assistants context before reading a more detailed section.</p>
+<p><strong>Do not mark speakable: Tables and bullet lists.</strong> Tables read nonsensically when spoken aloud. Lists of bullets without prose context are confusing as audio. Exclude any element containing a table, list, or visual comparison from your speakable selectors.</p>
+<p><strong>Do not mark speakable: Navigational and meta elements.</strong> Page menus, breadcrumbs, footer content, and sidebar elements are not informational content and should be excluded. Make your CSS selectors specific enough to avoid accidentally targeting navigational elements with <code>p</code> or <code>div</code> selectors.</p>
+
+<h2>How Does Speakable Schema Relate to Other Schema Types?</h2>
+<p>Speakable schema works alongside, not instead of, other schema types. The full schema stack for a content page optimised for both AI citation and voice search:</p>
+<ul>
+  <li><strong>Article schema</strong> — classifies the page as editorial content with named authorship and dateModified. See the <a href="/blog/json-ld-schema-aeo-types-that-move-citation-rates">complete schema guide</a> for implementation.</li>
+  <li><strong>FAQPage schema</strong> — provides machine-readable Q&A pairs for direct AI extraction and voice assistant use.</li>
+  <li><strong>Speakable schema</strong> — points voice assistants to the prose answer blocks between the FAQ items.</li>
+  <li><strong>BreadcrumbList schema</strong> — provides topical hierarchy context.</li>
+  <li><strong>Organisation schema</strong> — entity identity for the brand behind the content.</li>
+</ul>
+<p>These five types together create a page that is retrievable by AI text search, extractable at the passage level, machine-readable for Q&A, voice-ready for audio delivery, and entity-identified for knowledge graph confidence. No single type does all of this alone.</p>
+
+<h2>How Do You Test Whether Speakable Schema Is Implemented Correctly?</h2>
+<p>Three validation steps:</p>
+<p><strong>Google Rich Results Test.</strong> Visit search.google.com/test/rich-results and enter your page URL. The tool will confirm whether your Speakable schema is valid JSON-LD and whether the referenced CSS selectors resolve to actual page elements. An "invalid" result typically means either the JSON-LD is malformed or the CSS selectors do not match any elements on the page.</p>
+<p><strong>Schema.org validator.</strong> Visit validator.schema.org and paste your Speakable JSON-LD. This confirms the schema structure is valid against schema.org specifications independently of whether it targets the right page elements.</p>
+<p><strong>Manual Google Assistant test.</strong> Ask Google Assistant a question that matches one of your page's H2 headings. If the assistant reads back content from your speakable sections, the implementation is working. If it reads something else — or does not cite your page at all — either the selectors are not hitting the right elements or the page is not indexed for that query.</p>
+
+<div class="callout"><p>Speakable schema only works if Google's crawler can reach and parse your page to apply the selectors. The NotioncCue AI Crawler Audit confirms Googlebot is fetching your pages fully and that critical content is present in the initial HTML response. Speakable selectors applied to JavaScript-rendered content that is invisible in the initial HTML have no effect — the crawler never sees the elements the selectors point to.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>Does Speakable schema affect regular text search rankings?</strong><br/>Not directly. Speakable schema is processed by the voice assistant layer, not the ranking algorithm. However, the content quality required for speakable passages — direct answer sentences under 30 words, self-contained meaning, answer-first structure — correlates with better featured snippet performance and AI Overview citation rates. The discipline of marking content speakable forces better BLUF structure throughout.</p>
+<p><strong>Which pages should get Speakable schema first?</strong><br/>Your highest-traffic informational and FAQ pages. These are the pages most likely to match voice queries and the ones where you already have the BLUF-structured answer content that makes speakable passages work. Product pages and ecommerce category pages come second, because voice commerce queries are growing rapidly. About and contact pages are lower priority.</p>
+<p><strong>Is Speakable schema supported by all voice assistants?</strong><br/>Google explicitly supports it for Google Assistant. Alexa and Siri do not use Speakable schema directly — they rely on their own passage extraction from Bing and Apple indexes respectively. For maximum voice search coverage, combine Speakable schema (for Google Assistant) with Bing Webmaster Tools indexation (for Alexa eligibility) and Apple-friendly content structure (clean HTML, no JavaScript-dependent content, fast load times for Siri).</p>
+<p><strong>Can Speakable schema be added to existing WordPress or Shopify sites?</strong><br/>Yes. On WordPress, Speakable schema can be added through existing schema plugins (Yoast SEO Premium, Rank Math) or custom JSON-LD blocks. The CSS selector approach requires consistent class names on answer paragraphs, which may need a theme update if answer blocks do not already have unique classes. On Shopify, Speakable can be added to theme templates via the schema.org JSON-LD block in the page header. Test with Rich Results Test after implementation to confirm selectors resolve correctly.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 41 — AEO for Agencies
+  // Primary keyword: AEO for agencies, agency AEO strategy multi-client
+  // Secondary: how to sell AEO services, AEO agency workflow, client AEO reporting
+  // Tool CTA: NotioncCue Prompt Tracker (multi-client) + AI Answer Gap Finder + Content Brief Generator
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'aeo-for-agencies-multi-client-strategy-workflow',
+    emoji:          '🏢',
+    bg:             'rgba(146,124,255,.06)',
+    tag:            'AEO Strategy',
+    date:           'Jun 28, 2026',
+    title:          'AEO for Agencies: How to Build a Multi-Client AI Search Programme That Scales',
+    excerpt:        'Most agencies are being asked about AEO before they have a repeatable process for it. The brands winning the AI citation conversation with clients are not the ones with the most complex workflows — they are the ones with the clearest measurement framework and a consistent execution sequence.',
+    read:           '10 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>Agency clients are asking about AEO before most agencies have a repeatable process for delivering it. The pressure is real: a client reads that 51% of B2B buyers start vendor research with AI, or that ChatGPT processes 2.5 billion daily prompts, and they want to know what their agency is doing about it.</p>
+<p>The agencies winning the AEO conversation are not the ones with the most complex platform stacks. They are the ones with clear measurement frameworks, consistent execution sequences, and reporting that connects citation activity to commercial outcomes clients understand. That is what this post covers.</p>
+
+<h2>What Is Different About AEO at the Agency Level?</h2>
+<p>AEO for a single brand is a focused programme: one site, one set of tracked prompts, one audience, one content strategy. AEO at agency scale introduces three additional challenges that do not exist in single-brand programmes.</p>
+<p><strong>Prompt set standardisation vs client specificity.</strong> Each client needs a custom prompt set based on their buyers, their category, and their commercial priorities. But the process for building that prompt set — the research method, the prompt type framework, the weekly tracking cadence — needs to be standardised so it does not require senior strategist time for every client. See the <a href="/blog/aeo-keyword-research-how-to-find-right-prompts">AEO keyword research guide</a> for the five-source research method that works across client categories without requiring category-specific expertise from scratch.</p>
+<p><strong>Cross-client reporting standardisation.</strong> Agency reporting needs to be consistent enough that account managers can present it and clients can compare progress across periods. AEO metrics — citation rate, AI share of voice, AI referral conversion — are unfamiliar to most clients. The reporting framework needs to translate these metrics into business language without requiring a separate explainer for every monthly review.</p>
+<p><strong>Resource allocation across non-linear results.</strong> AEO results arrive on different timelines for different engines and different clients. Perplexity citations can appear within days of implementation. ChatGPT model memory takes weeks to months. A client in a competitive category may wait 90 days for meaningful citation rate improvement while a client in an underserved niche sees results in two weeks. Managing client expectation timelines across a portfolio is a specific agency challenge.</p>
+
+<h2>How Do You Build an Agency AEO Service Package?</h2>
+<p>A scalable agency AEO service has four components delivered in sequence. Each component has a defined output that feeds the next.</p>
+<p><strong>Component 1: AEO Audit (one-time, onboarding).</strong> Technical access audit — confirm all relevant AI crawlers are reaching the client's key pages and that critical content is visible in initial HTML responses. Schema audit — identify which of the five core AEO schema types are present, which are missing or invalid, and which pages need priority attention. Prompt baseline — run 15 target prompts across ChatGPT, Perplexity, and Google AI Mode and document starting citation rate, competitor citations, and competitor source URLs. Entity audit — check brand name consistency across review platforms, social profiles, and third-party listings. Output: a prioritised AEO gap list with effort/impact scores and a citation rate baseline document.</p>
+<p><strong>Component 2: Technical implementation (weeks 1 to 4).</strong> Fix crawler access issues identified in the audit. Implement or update FAQPage, Article, Organisation, and Person schema on the client's top ten pages. Restructure the first paragraph of each H2 section on those pages for BLUF structure. Submit updated URLs via Google Search Console and confirm re-indexing. Output: schema validation reports, updated page inventory, and a second prompt run to measure week-four citation rate change versus baseline.</p>
+<p><strong>Component 3: Content and entity programme (months 2 to 6).</strong> Monthly content brief generation based on AI Answer Gap Finder output — one to two new pages per month targeting prompts where competitors are cited and the client is not. Quarterly content refresh cycle — update dateModified, statistics, and vocabulary on existing pages. Monthly entity signal update — new reviews encouraged, review platform profiles checked for accuracy, Reddit and community participation where appropriate. Output: monthly citation rate reports, content production tracking, and entity signal audit log.</p>
+<p><strong>Component 4: Ongoing measurement and reporting (monthly).</strong> Citation rate per engine per tracked prompt. AI share of voice vs key competitors. AI referral sessions in GA4 with conversion rate comparison. Branded search volume trend. Monthly narrative: what changed, what caused it, what changes in the next month. Output: monthly AEO performance report delivered in the same format every month, with clear period-over-period comparison.</p>
+
+<h2>How Do You Sell AEO to Clients Who Only Know SEO?</h2>
+<p>The AEO sales conversation fails when it starts with technology. Clients do not want to understand RAG pipelines. They want to understand commercial impact.</p>
+<p>Three framings that consistently convert the AEO conversation with SEO-first clients:</p>
+<p><strong>Framing 1: Your buyers are researching you in a place you are not tracking.</strong> "51% of B2B buyers now start vendor research with an AI chatbot more often than with Google. We know your Google rankings. We do not know whether you appear when buyers ask ChatGPT or Perplexity about your category. AEO fixes that visibility gap and tracks it."</p>
+<p><strong>Framing 2: The traffic you are getting from AI converts better than organic.</strong> "AI-referred visitors convert at 3 to 4 times the rate of standard organic visitors because they arrive pre-qualified by an AI that already told them you were relevant. AEO is not just about getting more traffic — it is about getting better traffic from a channel where intent is already established."</p>
+<p><strong>Framing 3: Your competitors are already doing this.</strong> Run the client's three main competitor brand names through ChatGPT and Perplexity on category prompts before the sales meeting. Show them which competitors appear and what the AI says about each. "Your competitor appears in 8 of 10 relevant ChatGPT answers. You appear in none. This is your visibility gap in the fastest-growing search channel." Showing the gap, not describing it, is the most effective sales tool.</p>
+
+<h2>What Does AEO Reporting Look Like for a Monthly Client Review?</h2>
+<p>Agency AEO reporting needs to be readable by a client who does not know what a citation rate is. Structure it in three layers:</p>
+<p><strong>Layer 1: The number that matters this month.</strong> One headline metric per client. For most clients in months one to three, this is citation rate change versus baseline: "Your brand now appears in 6 of 10 tracked prompts this month, up from 2 of 10 at programme start." For established programmes, it might be AI referral conversion rate: "AI-referred visitors converted at 4.1x your organic average this month."</p>
+<p><strong>Layer 2: Engine-level breakdown.</strong> One row per engine. Citation rate this month vs last month. Which prompts improved, which declined, and one sentence on why. This is the operational layer that tells you whether specific changes worked.</p>
+<p><strong>Layer 3: Next month priorities.</strong> Three actions derived from the data. Which prompt gaps to close with new content, which schema needs updating, which off-site signal needs attention. The report should always end with actions, not observations. A citation rate dashboard without a next-step list is not a strategy — it is a weather report.</p>
+
+<h2>What Tools Make Agency AEO Scalable?</h2>
+<p>The tool stack that allows an AEO programme to run across multiple clients without becoming unmanageable:</p>
+<p>For citation tracking, NotioncCue's Prompt Tracker handles weekly prompt runs across five engines for multiple client workspaces. The AI Answer Gap Finder surfaces competitor citations per client prompt set — which is the core input for monthly content brief generation. The AI Crawler Audit runs per-client to confirm crawler access is maintained month-to-month.</p>
+<p>For content production, the AEO Content Brief Generator builds briefs from gap data — turning competitor citation URLs into structured content briefs that content teams can execute without requiring senior strategy input for each new page.</p>
+<p>For schema, a standardised JSON-LD template library covering the five core AEO schema types reduces per-client implementation time significantly. Templates parameterised by client name, URL, author details, and schema type can be generated and validated in minutes rather than hours per page.</p>
+<p>For reporting, a standard monthly report template populated from Prompt Tracker data and GA4 AI referral segment data covers the three reporting layers above. The report content changes per client; the format and framing stay consistent.</p>
+
+<div class="callout"><p>NotioncCue supports multi-client workspaces in the Prompt Tracker, so agency teams can manage separate tracked prompt sets, citation rate dashboards, and AI Answer Gap Finder runs for each client from a single account. The AEO Content Brief Generator turns gap data into ready-to-brief content outlines — which reduces the senior strategist time required per client from brief research to brief review.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>How many clients can one person manage in an AEO programme?</strong><br/>With a standardised process and tool support, one person can manage five to eight clients in an AEO programme that includes monthly reporting, quarterly content and schema work, and weekly prompt tracking. The leverage points are the audit template (used for every new client onboarding), the prompt tracking setup (replicable per client in under an hour), and the report template (populated from tool data rather than assembled manually).</p>
+<p><strong>Should AEO be sold as a standalone service or integrated into existing SEO retainers?</strong><br/>Integrated is almost always better for client outcomes and stickier as a retainer. AEO and SEO share the same technical foundation — crawl access, site speed, content quality, schema. Clients who buy AEO as a standalone service often underinvest in the SEO foundation that AEO depends on. Packaging AEO as an uplift to an existing SEO retainer — "we are adding AI search visibility tracking and optimisation to your current SEO programme" — positions it correctly and reduces the risk of AEO work on a technically weak foundation.</p>
+<p><strong>What is a realistic AEO agency pricing model?</strong><br/>AEO audit as a one-time engagement (£500 to £2,000 depending on site size and prompt set complexity), followed by a monthly retainer covering schema maintenance, content brief generation, prompt tracking, and reporting (£500 to £1,500 per month for most clients). Enterprise clients with compliance requirements, regulated content, or large content volumes should be scoped individually. The monthly retainer value is justified by the 4x conversion premium on AI referral traffic — a client generating 200 AI referral sessions per month at a £200 average order value and 4x conversion rate premium is attributing £1,600 in incremental revenue per month to the programme.</p>
+<p><strong>How do you handle clients whose industries have slow AEO results?</strong><br/>Set timeline expectations in the sales process, not the delivery process. Regulated industries (healthcare, legal, finance) and highly competitive categories take longer to see measurable citation rate improvement because the E-E-A-T bar is higher and citation positions consolidate more slowly. Agree on a 90-day baseline measurement period before reporting on programme effectiveness. In months one and two, focus reporting on implementation milestones (schema implemented, crawler access confirmed, prompts tracked) rather than citation rate change, which may not be meaningful yet.</p>
+`,
+  },
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 42 — HowTo Schema Deep Dive
+  // Primary: HowTo schema AEO, HowTo JSON-LD AI citations
+  // Secondary: schema stacking AEO, triple schema technique
+  // Tool CTA: AI Crawler Audit (validates schema delivery) + llms.txt Generator
+  // Readability target: Flesch 62-68, grade 8-9, avg sentence 16-18 words
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'howto-schema-aeo-step-by-step-citation-guide',
+    emoji:          '📋',
+    bg:             'rgba(82,227,142,.06)',
+    tag:            'Technical',
+    date:           'Jun 29, 2026',
+    title:          'HowTo Schema for AEO: Why Step-by-Step Content Gets Cited Differently',
+    excerpt:        'Triple-schema stacking — FAQPage plus Article plus HowTo on one page — produces 1.8x more AI citations than Article schema alone. HowTo schema makes each step independently extractable. Here is the complete implementation with copy-paste JSON-LD.',
+    read:           '10 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>Pages with three or more schema types are 13% more likely to earn AI citations than pages with no schema at all, per AirOps 2026 research. The highest-leverage combination is FAQPage plus Article plus HowTo — what practitioners call triple-schema stacking. This combination produces 1.8 times more citations than Article schema alone.</p>
+<p>HowTo schema is the piece most teams skip. FAQPage and Article are well-documented. HowTo is treated as niche, useful only for recipe sites or assembly instructions. That instinct is wrong. Any page explaining a process — "how to set up prompt tracking," "how to audit AI crawler access," "how to fix dateModified schema" — is procedural content. HowTo schema makes each step in that process independently extractable as a citable unit.</p>
+<p>Without HowTo schema, an AI engine retrieving a process guide has to infer the step structure from your prose. It might get it right. It often does not. With HowTo schema, each step is machine-labelled, sequenced, and extractable without inference. The AI does not have to guess where Step 1 ends and Step 2 begins.</p>
+
+<h2>What Is HowTo Schema and How Does It Work?</h2>
+<p>HowTo schema is a schema.org type that structures procedural content as an ordered sequence of steps. Each step has a name, a description, and optionally an image. The structured step sequence is what AI engines use when generating step-by-step answer blocks — each HowToStep is a separately citable unit.</p>
+<p>Google's HowTo rich results were deprecated for most query types in January 2026. This causes confusion. The deprecation removed HowTo from standard SERP rich results. It did not remove HowTo from AI retrieval. Google explicitly confirmed that structured data continues to support AI Overviews and AI Mode even after rich result deprecation. The same is true of FAQPage, deprecated from rich results in 2023 but still central to AI citation selection.</p>
+<p>HowTo schema and FAQPage schema serve different extraction needs. FAQPage provides question-answer pairs — best for informational queries where the user wants a direct factual answer. HowTo provides ordered steps — best for procedural queries where the user wants to do something. Most process guides need both. A page explaining how to implement AEO schema should answer the "what is this" question (FAQPage) and explain the implementation steps (HowTo) in the same piece.</p>
+
+<h2>What JSON-LD Does a HowTo Page Need?</h2>
+<p>The minimum viable HowTo JSON-LD includes a name, a description, and at least two HowToStep objects. Each step needs a name (a short action title) and text (the step explanation in 40 to 60 words). Images per step are optional but improve extraction reliability in voice and visual AI surfaces.</p>
+<pre><code>{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Implement FAQPage Schema for AEO",
+  "description": "A step-by-step process for adding FAQPage JSON-LD to any page to improve AI citation rates across ChatGPT, Perplexity, and Google AI Overviews.",
+  "totalTime": "PT30M",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "0"
+  },
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": "1",
+      "name": "Identify pages with question-and-answer content",
+      "text": "Review your top ten highest-traffic pages and list those that include at least three question-and-answer sections. These are your FAQPage schema candidates. Pages without any Q&A content need structural edits before schema can be added."
+    },
+    {
+      "@type": "HowToStep",
+      "position": "2",
+      "name": "Write your FAQ questions in natural spoken language",
+      "text": "Phrase each question exactly as a buyer would ask an AI engine. 'What is the best way to track AI citations?' earns citations. 'AEO tracking methodology overview' does not. Aim for five to eight questions per page, each with a 40 to 60 word direct answer."
+    },
+    {
+      "@type": "HowToStep",
+      "position": "3",
+      "name": "Build the JSON-LD block",
+      "text": "Create a script block with type application/ld+json. Add the FAQPage context, type, and mainEntity array containing your Question and Answer objects. Paste it into the head element of your page, or use your CMS schema plugin to insert it."
+    },
+    {
+      "@type": "HowToStep",
+      "position": "4",
+      "name": "Validate and submit for re-crawl",
+      "text": "Run the page through Google's Rich Results Test at search.google.com/test/rich-results. Fix any errors flagged. Submit the updated URL via Google Search Console URL Inspection tool and request indexing. Perplexity typically reflects schema changes within days."
+    }
+  ]
+}</code></pre>
+<p>The <code>totalTime</code> field uses ISO 8601 duration format. PT30M means 30 minutes. This field is optional for AEO purposes but useful for voice assistants that read step-by-step content aloud and need to communicate estimated effort.</p>
+
+<h2>How Do You Stack HowTo With FAQPage and Article Schema?</h2>
+<p>Triple-schema stacking uses the JSON-LD <code>@graph</code> array to link multiple schema types on a single page as related entities. This is cleaner than three separate script blocks and allows entity relationships — the HowTo linking to the Article, the Article linking to the Person author — to be expressed explicitly.</p>
+<pre><code>{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://notioncue.com/blog/howto-schema-aeo/#article",
+      "headline": "HowTo Schema for AEO: Step-by-Step Citation Guide",
+      "datePublished": "2026-06-29",
+      "dateModified": "2026-06-29",
+      "author": {
+        "@type": "Person",
+        "@id": "https://notioncue.com/about/#person",
+        "name": "Sudhir Singh"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://notioncue.com/#organization"
+      }
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://notioncue.com/blog/howto-schema-aeo/#howto",
+      "name": "How to Implement HowTo Schema for AEO",
+      "isPartOf": {
+        "@id": "https://notioncue.com/blog/howto-schema-aeo/#article"
+      },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": "1",
+          "name": "Identify procedural content pages",
+          "text": "List every page that explains a process or workflow. Implementation guides, setup tutorials, and troubleshooting posts all qualify. AEO content gap analysis, schema setup, and prompt tracking configuration are common AEO-specific candidates."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://notioncue.com/blog/howto-schema-aeo/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does HowTo schema still work after Google deprecated rich results?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Google deprecated HowTo rich results in search listings in January 2026 but confirmed that structured data continues to support AI Overviews and AI Mode. HowTo schema still helps AI engines extract and cite step-by-step content. Do not remove it."
+          }
+        }
+      ]
+    }
+  ]
+}</code></pre>
+<p>The <code>@id</code> links use fragment identifiers to create internal relationships between the schema types. The <code>isPartOf</code> relationship on the HowTo connects it to the Article, telling AI engines that the step content is part of the broader editorial piece rather than a standalone procedure.</p>
+
+<h2>What Step Content Earns the Highest Citation Rates?</h2>
+<p>Not all HowToStep content is equally extractable. Three patterns produce the highest citation rates based on observed AI citation behaviour across procedural content.</p>
+<p><strong>Action-first step names.</strong> The <code>name</code> field in each HowToStep is the step headline an AI engine uses when generating a list answer. "Step 1: Identify pages" is weak. "Identify your top ten highest-traffic pages with question-and-answer content" is an action statement that carries meaning without the numbered label. Write step names as you would write a task on a to-do list: verb first, specific object second.</p>
+<p><strong>Self-contained step descriptions.</strong> Each step description should make sense without reading the other steps. An AI engine extracting only Step 3 needs to understand what Step 3 does. "Add the JSON-LD block to your page head element using the FAQPage schema format" is self-contained. "Now add it to your page" is not — "it" requires knowing what Step 2 said.</p>
+<p><strong>Specific not generic instructions.</strong> "Validate your schema" is a generic instruction. "Run your page URL through search.google.com/test/rich-results and fix any red errors before submitting for re-crawl" is specific. The specificity is what makes a step citable — generic instructions exist on thousands of pages; specific instructions with named tools and specific actions are more unique and therefore more citable.</p>
+
+<h2>What Are the Most Common HowTo Schema Errors?</h2>
+<p>Schema that fails silently is worse than no schema. A broken schema block is typically ignored by AI crawlers rather than partially processed, so the page receives zero schema benefit. Three errors cause most HowTo failures.</p>
+<p><strong>JavaScript-rendered schema.</strong> If your CMS outputs HowTo schema as JavaScript that renders after page load, AI crawlers may not see it. Run <code>curl -A "Googlebot" https://yourpage.com</code> and confirm the JSON-LD appears in the raw HTML response. If it does not, your schema plugin or theme is rendering it client-side. Fix this by ensuring schema is in server-rendered HTML.</p>
+<p><strong>Step text longer than 200 words.</strong> Long step descriptions reduce extraction reliability. An AI engine retrieving a step wants a concise action instruction, not a paragraph. Keep each step description between 40 and 150 words. If a step needs more explanation, split it into two steps.</p>
+<p><strong>HowTo name that does not match the page H1.</strong> The HowTo <code>name</code> field should match or closely mirror your page's H1 heading. A mismatch between schema name and visible page title creates a content-schema inconsistency that reduces citation confidence. AI engines cross-check schema claims against visible content. When they do not match, the schema loses weight.</p>
+
+<div class="callout"><p>The NotioncCue AI Crawler Audit checks whether your schema is present in the initial HTML response or only in JavaScript-rendered DOM. Schema that lives in a client-side script is invisible to PerplexityBot and OAI-SearchBot. The audit surfaces this specifically — pages where schema is declared but not crawler-accessible are flagged separately from pages with missing schema entirely, so you know whether to fix the content or the rendering pipeline.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>Should every blog post have HowTo schema?</strong><br/>No. HowTo schema fits procedural content — pages that explain how to do something with sequential steps. An opinion piece, a case study, or a data analysis post does not have natural HowTo structure and should not have HowTo schema forced onto it. The right schema is the one that describes what the page actually contains. Applying HowTo schema to non-procedural content creates a schema-content mismatch that AI engines notice and penalise with reduced citation confidence.</p>
+<p><strong>How many steps should a HowTo schema have?</strong><br/>Three to eight steps for most process guides. Below three, the HowTo structure is barely different from a numbered list. Above eight, you are probably describing a complex process that benefits from being split into multiple pages within a content cluster, with each page targeting a more specific sub-process.</p>
+<p><strong>Can HowTo schema be added to a page that already has FAQPage schema?</strong><br/>Yes, and this combination is recommended for any guide that includes both a process and a Q&A section. Use the @graph stacking method shown above to link them as related entities on the same page. The 1.8x citation lift from triple-schema stacking comes specifically from this combination on a single well-structured page.</p>
+<p><strong>Does HowTo schema affect voice search as well as text AI citations?</strong><br/>Yes. Voice assistants — especially Google Assistant — retrieve HowTo schema to answer "how do I..." queries spoken aloud. Each step is read sequentially. This is why step names need to be action-first and self-contained: a voice listener cannot see the step number or re-read the previous step for context. For voice-specific optimisation on the same page, add Speakable schema alongside HowTo as covered in the <a href="/blog/speakable-schema-complete-implementation-guide">Speakable schema guide</a>.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 43 — Internal Linking for AEO
+  // Primary: internal linking AEO, how internal links affect AI citations
+  // Secondary: anchor text AEO, internal link strategy AI search
+  // Tool CTA: AI Topical Cluster Map (maps existing internal link gaps)
+  // Readability target: grade 8-9, short openers, mix short/long sentences
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'internal-linking-strategy-aeo-ai-citations',
+    emoji:          '🔗',
+    bg:             'rgba(146,124,255,.06)',
+    tag:            'Technical',
+    date:           'Jun 29, 2026',
+    title:          'Internal Linking for AEO: How Link Architecture Affects Which Pages AI Engines Cite',
+    excerpt:        'Bidirectional internal linking increases AI citation probability by 2.7 times versus one-way links from pillar to spoke. The anchor text you use on internal links is a topical signal, not a housekeeping task. Here is the complete internal linking framework for AI search.',
+    read:           '9 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>Bidirectional internal linking — spoke pages linking back to the pillar and to adjacent spokes — increases AI citation probability by 2.7 times compared to one-way links from pillar to spoke only. That figure comes from Yext's 2025 AI Citation Study, and it holds across categories.</p>
+<p>Most teams treat internal links as navigation. They link downward from important pages and leave spoke pages with no outbound links to related content. For traditional SEO, this distributes PageRank. For AEO, it does something more specific: it defines the topical cluster that AI engines use to assess how authoritative your domain is on a given subject.</p>
+<p>An isolated page — no inbound links from related pages, no outbound links to related pages — looks like a standalone fact. A page embedded in a cluster of eight bidirectionally linked pages looks like expert coverage of a subject. AI engines weight the second type more heavily when selecting sources for a citation.</p>
+
+<h2>Why Do Internal Links Affect AI Citations at All?</h2>
+<p>AI retrieval systems do not evaluate pages in isolation. They evaluate pages as part of a web of connected content. When Perplexity retrieves your page as a candidate source, it can follow the links on that page to related pages on your domain. A page linking to five closely related pieces signals: this site knows this subject thoroughly. A page with no related links signals: this site has one page on this topic.</p>
+<p>This is the same mechanism that drives topical authority in traditional SEO, but the application differs. In traditional SEO, topical authority is expressed partly through backlink patterns — other domains linking to your cluster. In AI retrieval, topical authority is expressed primarily through on-site structure — how your own pages relate to each other. A well-linked internal cluster matters more to Perplexity than it does to Google's ranking algorithm.</p>
+<p>The mechanism is documented. Google's own guidance on content clusters explicitly ties internal linking structure to topical authority signals that feed AI Overviews. Perplexity's retrieval system uses graph traversal — following links to build a picture of your domain's topic coverage — as part of its candidate scoring.</p>
+
+<h2>What Is the Right Internal Link Architecture for AEO?</h2>
+<p>The pillar-cluster model, covered in depth in the <a href="/blog/topical-authority-aeo-content-cluster-strategy">topical authority guide</a>, provides the structure. Here the focus is specifically on the links — what they should point to, what anchor text they should use, and where they should appear on the page.</p>
+<p><strong>Pillar page links:</strong> The pillar links to every spoke in the cluster. These links use descriptive anchor text matching the spoke's topic exactly. Not "click here" or "read more." Not even "our guide on X." The anchor text should be the precise topic phrase: "AEO prompt tracking strategy," "how to track AI share of voice," "schema types for AEO." Each anchor text tells the AI engine exactly what the destination page covers.</p>
+<p><strong>Spoke page links:</strong> Every spoke links back to the pillar plus two to three adjacent spokes. This bidirectional structure is what produces the 2.7x citation lift. A spoke on "AEO audit checklist" should link to the pillar ("what is AEO") and to adjacent spokes like "how to fix schema errors" and "AI crawler access setup." The adjacent spoke links use anchor text describing the adjacent topic — again, specific rather than generic.</p>
+<p><strong>Position matters:</strong> Internal links should appear in the body text, not only in navigation menus or sidebars. Navigation links are typically stripped from AI retrieval graphs because they appear on every page and carry no topical signal. Body-text internal links — placed naturally within a paragraph that makes the link contextually appropriate — carry topical signal. A link to your prompt tracking guide placed in a paragraph about measuring AEO performance is a topical signal. A link in a sidebar widget is not.</p>
+
+<h2>What Anchor Text Rules Apply Specifically to AEO?</h2>
+<p>Anchor text is where most internal linking strategies underperform for AEO purposes. Teams use generic anchors out of habit. The SEO impact of generic anchors is modest. The AEO impact is more significant.</p>
+<p>AI engines read anchor text as a label for the destination page. When an anchor says "AEO prompt tracking strategy," the AI engine learns that the destination page covers that specific topic. When an anchor says "learn more," the AI engine learns nothing about the destination. Over time, pages with specific, consistent anchor text across inbound internal links build a stronger topical signal than pages with generic anchor text, even if the content quality is identical.</p>
+<p>Three anchor text rules for AEO:</p>
+<p><strong>Use the destination page's primary topic phrase as the anchor.</strong> This is the phrase that matches the page's H1 or primary focus. It need not be a keyword — it should be the natural description of what that page covers. "How to track AI citations weekly" is better anchor text than "citation tracking guide" because it is more specific.</p>
+<p><strong>Use consistent anchor text across multiple inbound links.</strong> If five pages on your site link to your prompt tracking guide, they should all use similar anchor text. Inconsistent anchors — "prompt tracker," "how to track prompts," "AEO tracking tool," "track your AI citations" — send weaker topical signals than consistent anchors. Pick the primary phrase and use it across all internal links to that page.</p>
+<p><strong>Avoid exact-match keyword stuffing.</strong> Anchor text that is identical to an exact keyword phrase, repeated across every inbound link with no variation, reads as artificial to AI engines and to Google's quality systems. Use the primary phrase as the anchor on most links. Use natural variations — "the prompt tracking process" or "weekly prompt monitoring" — on a few. The goal is accurate description, not keyword repetition.</p>
+
+<h2>How Many Internal Links Does a Page Need for AEO Signal?</h2>
+<p>There is no precise number. But patterns from AEO-performing content clusters are consistent: pillar pages typically link to six to twelve spoke pages. Spoke pages link back to the pillar and to two to four adjacent spokes. Support pages link to the nearest spoke page and to the pillar if contextually relevant.</p>
+<p>Below six links from the pillar, the cluster signal is weak. Above twelve, the marginal topical signal from each additional link decreases and you are better served adding a second cluster on a related but distinct topic than extending the first cluster indefinitely.</p>
+<p>The quality of the link matters more than the count. A link from a high-dwell-time, frequently crawled page to a new spoke passes more topical signal than ten links from thin, rarely crawled pages. Internal link quality is determined by the quality of the linking page, not by the number of links on it.</p>
+
+<h2>How Does Internal Linking Interact With Schema for AEO?</h2>
+<p>Internal links and schema work on different layers of the same signal. Schema tells AI engines what a page is and what it covers. Internal links tell AI engines how that page relates to other pages on your domain.</p>
+<p>BreadcrumbList schema explicitly encodes your internal hierarchy as machine-readable data. If your internal link structure puts your "AEO prompt tracking" page inside an "AEO tools and tracking" section inside an "AEO" cluster, BreadcrumbList schema can express that hierarchy directly. The schema and the link structure should match. A page that has BreadcrumbList schema showing it is in the AEO cluster but no actual internal links connecting it to that cluster sends conflicting signals. Match your schema to your actual link architecture.</p>
+<p>The combination of BreadcrumbList schema plus bidirectional content links produces the strongest cluster authority signal available on-site. Both layers need to be in place. Schema without links is a declaration without evidence. Links without schema are structure without explicit labelling.</p>
+
+<h2>How Do You Audit Your Current Internal Link Structure for AEO Gaps?</h2>
+<p>A quick audit takes about 30 minutes and surfaces the highest-priority gaps. Open your sitemap or a crawl export from Screaming Frog. For each page in your primary AEO topic cluster:</p>
+<ul>
+  <li>Does it link to the pillar page? If not, add a contextual body-text link with the pillar's topic phrase as the anchor.</li>
+  <li>Does it link to at least two adjacent spoke pages on related subtopics? If not, identify the two closest related spoke pages and add contextual links.</li>
+  <li>Does the pillar page link back to it? If not, add the spoke to the pillar's link list.</li>
+  <li>Does the anchor text on inbound links describe the page's primary topic accurately? If not, update the anchors on the two or three highest-traffic linking pages.</li>
+</ul>
+<p>That four-check audit covers 80% of AEO internal linking gaps. The remaining 20% is a combination of link position (navigation versus body text) and anchor text consistency, which require page-level review.</p>
+
+<div class="callout"><p>The NotioncCue AI Topical Cluster Map visualises your current content coverage and internal link structure across your tracked topic area. It surfaces pages with no inbound cluster links, spoke pages missing their pillar link, and topic gaps where content does not yet exist. Run it before adding new content — the map tells you where to add links to existing pages before you need to write anything new.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>How does internal linking for AEO differ from internal linking for SEO?</strong><br/>The goal differs. SEO internal linking distributes PageRank and improves crawl efficiency. AEO internal linking builds topical cluster signals that AI retrieval systems use to assess domain expertise. In practice, the same bidirectional cluster structure serves both goals simultaneously. The main AEO-specific addition is anchor text discipline — using the destination page's exact topic phrase consistently across all inbound links, which matters more for AI topical signals than it does for traditional PageRank.</p>
+<p><strong>Does the position of an internal link on the page affect its AEO value?</strong><br/>Yes. Body-text internal links in contextually relevant paragraphs carry more topical signal than links in navigation menus, footers, or sidebars. Navigation links appear on every page and AI crawlers treat them as structural rather than topical. A link in a paragraph about "measuring AEO performance" that points to your "AI share of voice" guide is a topical signal. A link in a right-sidebar "related posts" widget is much weaker.</p>
+<p><strong>Should I add internal links to all existing posts at once or build the structure gradually?</strong><br/>Retrofit the highest-traffic pages in your cluster first. Identify your five most-visited AEO pages, add bidirectional links between them using consistent anchor text, and submit them for re-crawl via Google Search Console. Measure the citation rate change on those pages over four weeks. Then extend the same structure to lower-traffic cluster pages. Doing everything at once makes it impossible to attribute citation changes to specific link additions.</p>
+<p><strong>Do outbound links from my pages to external sites affect AEO internal link signals?</strong><br/>Outbound links to authoritative external sources signal content quality and source credibility — an E-E-A-T signal. They do not dilute the internal cluster signal. The two work independently. Linking to the NIH when discussing health data or to a named study when citing a statistic strengthens citation confidence without weakening your internal topical authority signals.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 44 — Schema Error Diagnosis
+  // Primary: schema errors AEO, how to fix JSON-LD mistakes
+  // Secondary: schema validation AEO, structured data errors AI citation
+  // Tool CTA: AI Crawler Audit (schema delivery check) + Citation Tracker
+  // Readability target: grade 8, short directive sentences in fix sections
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'schema-errors-aeo-diagnose-and-fix-guide',
+    emoji:          '🔧',
+    bg:             'rgba(255,196,92,.06)',
+    tag:            'Technical',
+    date:           'Jun 29, 2026',
+    title:          'Schema Errors That Kill AEO: How to Find Them and Fix Them Fast',
+    excerpt:        'A broken schema block is ignored entirely by AI crawlers, not partially processed. A page with malformed FAQPage schema gets zero schema benefit — the same as a page with no schema. These are the ten errors that appear most often in AEO audits, with exact fixes.',
+    read:           '9 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>Broken schema fails silently. You implement FAQPage JSON-LD, submit the URL for re-crawl, and wait for citation rate to improve. Four weeks later, nothing has changed. You check Google's Rich Results Test and it shows errors you never noticed. Every AI crawler has been ignoring your schema since day one.</p>
+<p>This is more common than most AEO practitioners realise. Schema errors do not throw warnings in GA4. They do not show up in GSC traffic reports. The only way to find them is to check directly. And the only way to know whether schema is actually being parsed by AI crawlers — not just present in the HTML — is to confirm it exists in the server-rendered response, not just the rendered DOM.</p>
+<p>These are the ten schema errors that appear most often in AEO audits. Each one has been found on live sites that had visible schema but were getting zero citation benefit from it.</p>
+
+<h2>Error 1: Schema Rendered by JavaScript, Not Present in Server HTML</h2>
+<p>This is the most common error and the one with the biggest impact. A CMS plugin or theme generates your schema via JavaScript. It appears correctly in your browser's developer tools. It does not appear in the raw server response that AI crawlers receive.</p>
+<p><strong>How to check:</strong> Run <code>curl -A "Googlebot" https://yoursite.com/your-page/ | grep "application/ld+json"</code> in a terminal. If nothing returns, your schema is JavaScript-rendered and invisible to AI crawlers.</p>
+<p><strong>How to fix:</strong> Move schema generation to the server layer. On WordPress, use a plugin that outputs schema in PHP rather than JavaScript (RankMath and Yoast SEO both do this by default). On Next.js or React, move schema output to server components or static generation. On Shopify, place schema in Liquid templates rather than JavaScript files.</p>
+
+<h2>Error 2: FAQPage Schema Without Matching Visible Content</h2>
+<p>Schema must match what users can actually read on the page. A FAQPage schema with question-answer pairs that do not appear in the visible HTML body creates a schema-content mismatch. AI engines cross-check schema against visible content. Mismatches reduce trust and can result in the schema being discarded.</p>
+<p><strong>How to check:</strong> Open each FAQ question in your schema and search for it on the page with Ctrl+F. If it is not visible on the page, the schema is invalid for AEO purposes even if it passes the Rich Results Test format check.</p>
+<p><strong>How to fix:</strong> Only include FAQ questions in schema that are visibly answered on the page. If you want a question in the schema, it must have a visible answer in the page body. Adding hidden FAQ content — in a collapsed accordion that never renders to crawlers, or in a div with display:none — does not count.</p>
+
+<h2>Error 3: dateModified Set to the Original Publish Date</h2>
+<p>This is a freshness signal failure. The dateModified field tells AI engines when content was last updated. If dateModified matches datePublished from two years ago, AI engines treat the content as two years old, regardless of whether the actual content has been refreshed.</p>
+<p><strong>How to check:</strong> Find your Article JSON-LD and compare the datePublished and dateModified values. If they are identical and the page is more than 60 days old, this is an active error reducing your freshness signal.</p>
+<p><strong>How to fix:</strong> Update dateModified every time you make a meaningful content change. Update it manually in your schema plugin on the day of the edit. Set a calendar reminder to refresh the dateModified on your highest-value pages quarterly, even if the change is minor — updating a statistic or adding a new FAQ question is sufficient to justify a current dateModified.</p>
+
+<h2>Error 4: Organisation Schema Missing From Pages Other Than the Homepage</h2>
+<p>Organisation schema placed only on the homepage is not connected to your blog posts or service pages. AI engines need to know the publisher entity for each piece of content they cite. Without a publisher link connecting blog posts to your Organisation entity, each post is attributed to an anonymous source.</p>
+<p><strong>How to fix:</strong> Add a publisher field in your Article schema on every content page, referencing your Organisation entity via <code>@id</code>:</p>
+<pre><code>"publisher": {
+  "@type": "Organization",
+  "@id": "https://notioncue.com/#organization",
+  "name": "NotioncCue"
+}</code></pre>
+<p>The <code>@id</code> link is the mechanism that connects the Article to the Organisation entity. Without it, the publisher field is just a name string — useful, but not an entity link.</p>
+
+<h2>Error 5: sameAs Links Pointing to Non-Existent or Renamed Profiles</h2>
+<p>A sameAs link to a LinkedIn company page that was renamed, a Crunchbase profile that was merged, or a Twitter/X handle that was changed creates a broken entity reference. AI engines follow sameAs links to verify entity claims. A broken link is the same as a missing link — the entity verification fails.</p>
+<p><strong>How to check:</strong> Open every URL in your Organisation schema's sameAs array in a browser. Confirm each one resolves to an active, accurate profile with your current brand name and description. Do this quarterly.</p>
+<p><strong>How to fix:</strong> Update every broken or stale sameAs URL immediately. Remove any links to platforms where you no longer have an active presence. A shorter sameAs array with all accurate links outperforms a longer one with two stale links that break entity verification.</p>
+
+<h2>Error 6: Person Schema Not Linked to Article Schema</h2>
+<p>Adding Person schema on your About page is useful. It is not enough. The link between the author entity and the Article they authored needs to be explicit in the Article schema. Without it, AI engines cannot connect the author's credentials to the content, and the E-E-A-T signal from the author profile does not transfer to the article.</p>
+<p><strong>How to fix:</strong> In your Article schema, reference the author with a full <code>@id</code> link back to the Person entity:</p>
+<pre><code>"author": {
+  "@type": "Person",
+  "@id": "https://notioncue.com/about/#person",
+  "name": "Sudhir Singh",
+  "url": "https://notioncue.com/about/"
+}</code></pre>
+<p>The <code>@id</code> here must match the <code>@id</code> on your Person schema exactly. Copy and paste it — do not retype it. A single character difference breaks the entity link.</p>
+
+<h2>Error 7: HowTo or FAQPage Schema on Pages With No Matching Content</h2>
+<p>Some teams apply FAQPage schema to pages that have no FAQ section. They add it speculatively, hoping it will improve citation rates. It does the opposite. AI engines that retrieve a page with FAQPage schema expect to find question-and-answer content. When they do not find it, the schema credibility of the entire domain takes a hit.</p>
+<p><strong>How to check:</strong> Run your site through a schema crawl (Screaming Frog, Semrush, or Google Search Console's Enhancements report). List every page with FAQPage schema. Visit each one and confirm a visible Q&A section exists. Remove schema from pages where it does not.</p>
+
+<h2>Error 8: Multiple Conflicting Schema Blocks on One Page</h2>
+<p>Some CMS setups generate schema from multiple sources — the theme outputs one Article block, a plugin outputs another, and a manually added script block creates a third. Conflicting or duplicate schema blocks for the same entity on one page create parsing uncertainty. AI crawlers may use all of them, one of them, or none of them.</p>
+<p><strong>How to check:</strong> View your page source and search for <code>application/ld+json</code>. Count the script blocks. If you have more than two, investigate which sources are generating them and consolidate.</p>
+<p><strong>How to fix:</strong> Use the <code>@graph</code> array to combine all schema types for a page into a single script block, as shown in the <a href="/blog/howto-schema-aeo-step-by-step-citation-guide">HowTo schema implementation guide</a>. Disable any plugin or theme feature that generates conflicting schema for the same page.</p>
+
+<h2>Error 9: FAQPage Answer Text That Is Too Long</h2>
+<p>FAQPage answer text over 200 words per answer is harder for AI engines to extract as a standalone citable passage. The ideal length is 40 to 60 words — long enough to be substantive, short enough to be extracted as a direct response. Long answers are treated as editorial content rather than extractable Q&A pairs.</p>
+<p><strong>How to fix:</strong> Edit every FAQPage answer longer than 80 words. Keep the most direct, answerable sentence or two. Move supporting explanation to the page body below the FAQ section. The FAQ schema is for extraction. The prose beneath it is for reading.</p>
+
+<h2>Error 10: BreadcrumbList Schema Not Matching Actual URL Structure</h2>
+<p>BreadcrumbList schema that shows a hierarchy different from your actual URL structure creates a content-schema mismatch for topical hierarchy signals. A page at <code>/blog/aeo-audit/</code> with BreadcrumbList showing it under <code>/resources/aeo/</code> confuses AI engines about where this content sits in your site structure.</p>
+<p><strong>How to fix:</strong> Generate BreadcrumbList schema from your actual URL path. The schema should reflect where the page actually lives, not where you wish it lived. If your URL structure needs reorganisation for topical clarity, fix the URLs first and update the schema to match.</p>
+
+<div class="callout"><p>The NotioncCue AI Crawler Audit checks whether your schema is in the server-rendered HTML response (visible to AI crawlers) or only in the JavaScript DOM (invisible to most AI crawlers). It also flags pages where schema exists but is not being fetched at all — which is the first thing to confirm before spending time on schema content errors. Run it before any schema audit to confirm the schema is reachable.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>How do I validate schema without a developer?</strong><br/>Google's Rich Results Test at search.google.com/test/rich-results accepts a URL and checks all JSON-LD on the page for format errors. Schema.org's validator at validator.schema.org accepts pasted JSON-LD and checks it against schema.org specifications. Both are free, require no login, and return results in seconds. Neither confirms whether schema is being parsed by AI crawlers — for that, the curl server-response check described under Error 1 is the most reliable method.</p>
+<p><strong>Can schema errors cause existing citations to disappear?</strong><br/>Yes. If a page currently earns citations partly because of valid schema, and a site update introduces a schema error, citation rate can drop as AI crawlers start ignoring the malformed block. This is one reason to recheck schema after any CMS update, theme change, or plugin update that touches your page templates.</p>
+<p><strong>How long does it take for fixed schema to improve citation rates?</strong><br/>Perplexity responds fastest — often within days of a schema fix being confirmed in the server response. Google AI Overviews follow Google's normal index update cycle, typically one to two weeks after the page is re-crawled. ChatGPT takes longer, four to eight weeks for the retrieval layer and months for model memory. Track Perplexity citation rate first as your leading indicator.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 45 — AEO for Content Marketing Teams
+  // Primary: AEO content calendar, content marketing AEO workflow
+  // Secondary: how content teams implement AEO, AEO content production process
+  // Tool CTA: AEO Content Brief Generator + AI Answer Gap Finder
+  // Readability: grade 8, short task-focused sentences in workflow sections
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'aeo-content-marketing-team-workflow-calendar',
+    emoji:          '📅',
+    bg:             'rgba(34,211,238,.06)',
+    tag:            'AEO Strategy',
+    date:           'Jun 29, 2026',
+    title:          'AEO for Content Marketing Teams: The Weekly Workflow That Builds AI Citation Authority',
+    excerpt:        'Most content teams add AEO to their backlog and treat it like a channel to launch. It does not work that way. AI citation authority is built through weekly iteration, not campaigns. Here is the workflow that fits into an existing content calendar without replacing it.',
+    read:           '9 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>Most content teams treat AEO as a channel to launch. They run an audit, produce a batch of AEO-optimised content, publish it, and move on. Six weeks later the citation rate has barely moved and nobody knows why.</p>
+<p>AI citation authority does not work like a campaign. It works like a garden. You plant the structural work — schema, BLUF structure, crawler access, entity signals. Then you maintain it consistently. Update statistics. Refresh dateModified. Track prompts weekly. Fix the gaps that appear as competitors publish new content.</p>
+<p>This is not a heavy workload. A properly set-up AEO programme adds roughly three to four hours per week to a content team's existing workflow. The problem is that most teams set it up as a one-time sprint rather than a recurring system. This post covers the weekly workflow that actually compounds AEO results over time.</p>
+
+<h2>What Does AEO Add to an Existing Content Calendar?</h2>
+<p>AEO does not replace your content calendar. It adds a parallel layer — a weekly AEO maintenance rhythm that runs alongside your normal content production cycle.</p>
+<p>Your existing calendar probably has three types of recurring tasks: new content production (articles, guides, landing pages), editorial maintenance (fixing broken links, updating outdated posts), and distribution (email, social, syndication). AEO adds a fourth type: citation system maintenance. This covers prompt tracking, freshness updates, schema checks, and gap analysis. Done weekly, these tasks take 2 to 3 hours. Skipped for a month, they allow citation decay to set in and require a recovery sprint to fix.</p>
+<p>The mistake teams make is treating citation system maintenance as optional — something to do when there is spare capacity. It is not optional. It is what prevents the decay that erases the gains from the structural work.</p>
+
+<h2>What Is the Weekly AEO Workflow?</h2>
+<p>The workflow divides into four tasks. Each takes 30 to 45 minutes. The total time commitment is around three hours per week for a team managing a single-brand AEO programme.</p>
+<p><strong>Task 1 (Monday, 45 minutes): Run tracked prompts.</strong> Open your prompt tracking tool or spreadsheet. Run your 15 target prompts across ChatGPT, Perplexity, and Google AI Mode. Record: did your brand appear? Which prompt, which engine? Did a competitor appear where you did not? Note the competitor URL. This data drives everything else in the week.</p>
+<p><strong>Task 2 (Tuesday, 30 minutes): Review the gap data.</strong> Compare this week's prompt run against last week. Which prompts changed? Which competitor URLs appeared twice in a row on the same prompt? Those repeating competitor URLs are the content briefs. A competitor page cited twice on a prompt you are not winning is a signal, not noise. Add it to your brief queue with the prompt text, the competitor URL, and the engine where it appeared.</p>
+<p><strong>Task 3 (Wednesday, 45 minutes): Freshness update on one page.</strong> Pick one page from a rotating list of your highest-value AEO pages. Update one statistic with a more recent source. Add one new FAQ question reflecting something that came up in Monday's prompt run. Update the dateModified field in the Article schema. Submit for re-crawl via GSC URL Inspection. This task alone, done weekly across your full page inventory over a quarter, produces a measurable freshness advantage against competitors who update content only when they write new posts.</p>
+<p><strong>Task 4 (Thursday, 30 minutes): Brief one new AEO content piece.</strong> Take the highest-priority item from your brief queue — the prompt where a competitor is consistently cited and you are not. Build a brief using the five-source prompt research method from the <a href="/blog/aeo-keyword-research-how-to-find-right-prompts">AEO keyword research guide</a>. Confirm the target prompt, the competitor URL structure, the answer gap, and the schema types the new page needs. Assign it to production.</p>
+<p>Friday is for distribution of any new content published that week and for checking GSC to confirm re-crawls from Wednesday's submission have landed. Total: about three hours of focused AEO system maintenance per week.</p>
+
+<h2>How Does This Workflow Fit With Monthly Content Production?</h2>
+<p>The weekly AEO workflow generates a steady flow of briefs from gap data. Monthly content production turns those briefs into published pages. The connection between them is the brief queue — a living list of AEO content gaps prioritised by how often the competitor URL appears in your prompt tracking data.</p>
+<p>A healthy brief queue for a mature AEO programme has 10 to 20 items at any given time. New items enter from Tuesday's gap review. Items exit when the page is published. Production teams pull from the top of the queue — the highest-priority gap — rather than choosing topics based on what feels interesting or on traditional keyword volume.</p>
+<p>This is the structural shift that separates AEO-driven content planning from traditional SEO content planning. In SEO, topic selection is driven by keyword research and traffic projections. In AEO, it is driven by what AI engines are answering with competitors right now. The brief queue is a live feed of the content your buyers are getting from AI instead of from you.</p>
+
+<h2>What Monthly Tasks Does an AEO Programme Require?</h2>
+<p>Beyond the weekly rhythm, three monthly tasks keep the programme healthy.</p>
+<p><strong>Monthly: Full entity consistency check.</strong> Search your brand name across G2, LinkedIn, Crunchbase, and your Wikidata entry. Confirm product names, descriptions, and key personnel are accurate and consistent. Update any stale information. A brand that updates entity signals monthly stays ahead of the AI hallucination risk that builds when entity data drifts out of date. The <a href="/blog/ai-brand-hallucination-find-and-fix">brand hallucination guide</a> covers the full detection and correction process.</p>
+<p><strong>Monthly: Schema health check.</strong> Run your top twenty pages through Google's Rich Results Test. Fix any new errors introduced by CMS updates or plugin changes. Check that dateModified values on updated pages reflect the actual update dates. The schema error guide at <a href="/blog/schema-errors-aeo-diagnose-and-fix-guide">schema errors for AEO</a> lists the ten most common failures to check for.</p>
+<p><strong>Monthly: AI referral performance review in GA4.</strong> Pull the AI referral sessions segment for the month. Compare conversion rate against your organic baseline. Note which landing pages received the most AI referral traffic. These are your currently cited pages — a quality signal that your tracking spreadsheet confirms but GA4 makes commercially legible. Present this data in your monthly content performance review alongside traditional organic metrics.</p>
+
+<h2>How Do You Brief Content Writers for AEO Without Slowing Production?</h2>
+<p>The AEO brief needs four elements beyond what a standard SEO content brief includes. Without these four, the writer produces content that is good to read but not structured for AI extraction.</p>
+<p><strong>The target prompt.</strong> Not a keyword. The exact conversational question buyers ask AI engines when searching for this topic. "What is the best way to audit AI crawler access for a B2B SaaS site?" not "AI crawler audit guide." Writers who see the actual prompt phrase write for that intent naturally.</p>
+<p><strong>The answer-first instruction.</strong> Explicit guidance to put the answer in sentence one of every H2 section. Most writers default to building context before the point. The brief needs to say directly: "Your first sentence under every H2 heading must be the direct answer to that heading, in 40 to 60 words, before any context or explanation."</p>
+<p><strong>The FAQ list.</strong> Five to eight questions derived from Monday's prompt tracking run and from People Also Ask on related queries. These questions go into the FAQPage schema. Writers who see the FAQ list write the FAQ section to match it — which ensures the schema and visible content align, avoiding the Error 2 schema mismatch described in the schema errors guide.</p>
+<p><strong>The competitor reference.</strong> The URL of the competitor page currently being cited for this prompt. Writers who can see what they are competing against produce more targeted content. "Better than this page on this specific question" is a more useful brief directive than "comprehensive coverage of the topic."</p>
+
+<div class="callout"><p>The NotioncCue AEO Content Brief Generator builds briefs directly from AI Answer Gap Finder data. It takes the prompt, the competitor URL, and the gap type, and outputs a structured brief including target prompt, recommended H2 structure, FAQ list, schema types required, and anchor text for internal links to existing cluster pages. It turns Tuesday's gap review into Thursday's brief in about ten minutes rather than forty-five.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>How do you integrate AEO tracking into a team that uses an editorial calendar tool?</strong><br/>Add a recurring AEO maintenance block to your editorial calendar each week — Monday prompt run, Tuesday gap review, Wednesday freshness update, Thursday brief. These are tasks, not articles, so they sit alongside content items rather than replacing them. Most editorial calendar tools (Notion, Airtable, Monday, CoSchedule) support task types that can be templated and repeated weekly without manual re-creation.</p>
+<p><strong>What happens to AEO results if the team skips the weekly workflow for a month?</strong><br/>Citation decay begins within three to four weeks on actively covered topics. Amsive's 2026 data shows 50% of AI citations go to content updated in the past 13 weeks. A month of no freshness updates, no prompt tracking, and no brief queue maintenance allows competitors who are running weekly workflows to take citation positions that were previously held. Recovery requires a two to three week sprint to catch up. Consistent weekly maintenance is cheaper than periodic recovery.</p>
+<p><strong>How do you get buy-in from a content team that already has a full production schedule?</strong><br/>Reframe it as quality control, not extra work. The weekly prompt tracking is the only way to know whether published content is actually earning citations. Without it, the team is producing for an audience they cannot see. Showing the before-and-after citation rate from the first four weeks of consistent tracking — even if the numbers are small — consistently converts sceptical content teams faster than any theoretical argument about AI search trends.</p>
+<p><strong>Should AEO tasks be owned by SEO, content, or a shared function?</strong><br/>Schema and crawler access are SEO team functions. Prompt tracking, brief generation, and content structure guidance sit between SEO and content and work best as a shared responsibility. Entity signal maintenance — review platforms, community participation, editorial outreach — is closest to PR and brand, and should involve that team. AEO programmes that sit entirely within one function consistently underperform those where SEO, content, and brand each own their layer of the system.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 46 — Agentic AI Search
+  // Primary: agentic AI search, AI agents buying decisions 2026
+  // Secondary: agentic commerce AEO, AI shopping agents, LLM agents SEO
+  // Tool CTA: Citation Tracker + Prompt Tracker (monitor agent-driven queries)
+  // Readability: grade 9, longer analytical sentences balanced with short ones
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'agentic-ai-search-what-it-means-for-aeo-2026',
+    emoji:          '🤖',
+    bg:             'rgba(200,242,71,.06)',
+    tag:            'AEO Strategy',
+    date:           'Jun 29, 2026',
+    title:          'Agentic AI Search: What Happens When AI Agents Make Buying Decisions for Your Customers',
+    excerpt:        'Harvard Business Review documented two concurrent revolutions in early 2026: the move from SEO to GEO, and AI agents beginning to act as buyers. Voice commerce is heading for $80 billion globally this year. The brands that appear when an AI agent evaluates a purchase will win customers the brand never directly interacted with.',
+    read:           '9 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>Harvard Business Review documented two concurrent revolutions in early 2026: the shift from SEO to GEO, and AI agents beginning to act as buyers. The second one is moving faster than most marketers realise.</p>
+<p>An AI agent is a language model that can take actions on behalf of a user — browsing the web, comparing options, reading reviews, filling forms, completing purchases. When a user tells their AI assistant "find me the best project management tool under $50 per month and sign up for a free trial," the agent does not return a list of links. It evaluates options against the stated criteria and either recommends one or, in increasingly common agentic commerce flows, completes the signup directly. The user never visits a comparison site. They never read a vendor website. They told an AI what they wanted and the AI handled it.</p>
+<p>This is not a future scenario. Amazon's Rufus, Perplexity's agentic search, and ChatGPT's computer-use capabilities are all live. Voice commerce is heading for $80 billion globally in 2026. The brands that appear when an AI agent evaluates a purchase option will win customers they never directly interacted with. The brands that do not appear in that evaluation are invisible.</p>
+
+<h2>How Is Agentic AI Search Different From Standard AI Search?</h2>
+<p>Standard AI search — ChatGPT answering a question, Perplexity citing a source, Google AI Mode generating a summary — is passive. The AI generates an answer. The user decides what to do with it.</p>
+<p>Agentic AI search is active. The AI receives a goal, breaks it into tasks, executes those tasks across the web, synthesises findings, and either delivers a recommendation or completes an action. The distinction matters for AEO because agentic systems interact with your content differently from conversational systems.</p>
+<p>A conversational AI extracts a passage from your page and cites it. An agentic AI might visit your pricing page, read your feature list, check your G2 reviews, and visit three competitor sites before forming a recommendation. Whether your brand appears in that recommendation depends not on a single extractable passage but on the consistency and completeness of your entity signals across every touchpoint the agent visits.</p>
+<p>The agentic evaluation process has five typical stages. Goal parsing — the agent interprets what the user wants. Research — the agent retrieves candidate options using its standard search layer. Evaluation — the agent visits shortlisted options and reads their content, pricing, and reviews. Comparison — the agent synthesises findings into a recommendation or ranking. Action — in agentic commerce, the agent executes the top choice directly.</p>
+<p>Your AEO work affects stages two and three most directly. Stage two (research) is where standard prompt-level citation tracking applies — the same work covered throughout this series. Stage three (evaluation) is where your site architecture, content completeness, and review platform presence determine whether the agent leaves with an accurate, favourable picture of your brand.</p>
+
+<h2>What Does an Agentic System Actually Look at When Evaluating Your Brand?</h2>
+<p>Agentic systems make evaluation decisions from the content they can read on your site plus what third-party sources say about you. From your own site, they focus on five elements.</p>
+<p><strong>Pricing page clarity.</strong> An agent evaluating "best project management tools under $50 per month" needs to confirm your pricing in seconds. Pricing pages that require interaction to reveal prices, or that display prices in non-standard formats (custom quotes, "contact us"), are often skipped by agents in favour of competitors with visible, structured pricing. Include price ranges in your page heading. List tiers as simple text. Mark up pricing with Offer schema.</p>
+<p><strong>Feature list structure.</strong> Agents evaluate features against stated user criteria. A feature list in prose — "NotioncCue provides comprehensive citation tracking capabilities across multiple engines" — is harder to evaluate against specific criteria than a structured feature list. Present features as clear, short statements: "Tracks citations across ChatGPT, Perplexity, Claude, Gemini, and Google AI Mode." Each claim should be independently parseable without reading surrounding context.</p>
+<p><strong>Review signals.</strong> Agentic systems read G2, Capterra, and Trustpilot reviews as evidence of product quality. They weight specific, outcome-focused reviews more heavily than generic praise. See the review guidance in the <a href="/blog/aeo-for-ecommerce-product-citations-ai-search">ecommerce AEO guide</a> — the same principles apply here. "Set up in two hours, tracked 200 prompts in the first week, support responded same day" is evaluatable. "Great product!" is not.</p>
+<p><strong>About page and founding story.</strong> Agents use your About page to assess company stability, team credibility, and whether the brand is a credible option. A sparse About page with no team information signals risk to an agent evaluating whether to recommend your product to a user. A page with named founders, founding date, team size, and a clear company description passes the credibility check faster.</p>
+<p><strong>llms.txt file.</strong> As covered in the <a href="/blog/llms-txt-what-it-actually-does">llms.txt guide</a>, a well-structured llms.txt gives AI agents a curated overview of your site without them having to navigate it. For agentic evaluation flows where the agent is visiting your site as part of a structured comparison, llms.txt can direct it to your best content faster than crawling your navigation. The file's impact is modest for standard citation, but for agentic evaluation it has practical value — it is the equivalent of giving a researcher an executive summary before they dig into the full document.</p>
+
+<h2>How Does Voice Commerce Fit Into Agentic AEO?</h2>
+<p>Voice commerce is the fastest-growing slice of the agentic stack. A user tells Alexa to reorder their preferred protein powder. Alexa checks their order history, confirms the product is available, and places the order. No browsing. No comparison. The agent executes based on prior purchase data.</p>
+<p>For AEO, voice commerce has two distinct scenarios. In repeat-purchase scenarios, the agent defaults to previous choices — brand loyalty is the dominant factor, not AEO. In first-purchase or discovery scenarios — "Alexa, find me a collagen powder with no artificial sweeteners under £25" — the agent evaluates candidates from Amazon's product catalogue, Alexa Skills, and available purchase surfaces. This is where product schema, review signals, and entity clarity determine whether your product is presented as a candidate.</p>
+<p>The actionable preparation for voice commerce agentic flows is the same as product AEO generally: complete Product schema with name, description, price, and aggregateRating; complete and recent review platform profiles; and clear, parseable feature statements on product pages. What changes for voice specifically is the need for offer schema with exact pricing — agents making purchase recommendations on behalf of users need confirmed, current pricing before they present an option.</p>
+
+<h2>What AEO Changes Does Agentic Search Require?</h2>
+<p>Most of the structural AEO work covered throughout this series is agentic-compatible. BLUF structure, FAQPage schema, entity consistency, and review platform presence all help agentic evaluation in the same way they help standard citation selection. Three additional priorities are specific to agentic flows.</p>
+<p><strong>Pricing schema and offer markup.</strong> Agentic systems that filter by price need machine-readable price information. Plain text pricing on a page is readable. Offer schema is parseable. The difference between "plans start at $29 per month" and structured Offer schema with <code>priceSpecification</code> is the difference between the agent having to read prose and the agent reading structured data. Implement Offer schema on pricing pages and product pages.</p>
+<p><strong>potentialAction schema for agentic commerce.</strong> Agentic systems that can complete purchases need to know where to initiate the action. The <code>potentialAction</code> property in schema.org supports OrderAction, ReserveAction, and BuyAction — each pointing the agent to the URL where the action can be completed. For SaaS: a <code>potentialAction</code> with a free trial URL. For ecommerce: an OrderAction linking to your add-to-cart page. For service businesses: a ReserveAction linking to your booking page.</p>
+<p><strong>Consistent named product entities.</strong> When an agent evaluates your product across your website, G2, Reddit, and its own training data, product name consistency is critical. If your product is called "NotioncCue Prompt Tracker" on your site, "Prompt Tracking Tool" on G2, and "the tracking feature" on Reddit, the agent is evaluating three different-sounding entities and may fail to consolidate them. Name your product consistently across every surface, every time.</p>
+
+<div class="callout"><p>The agentic evaluation layer runs through the same prompts as standard citation tracking — the AI agent's research phase uses the same retrieval system as conversational AI search. The NotioncCue Prompt Tracker monitors your brand's appearance in those queries, and the Citation Tracker surfaces what AI engines say about your brand when it does appear. Together, they give you the upstream signal that predicts how your brand performs in agentic evaluation flows before those flows become the primary purchase channel in your category.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>How soon will agentic commerce become a significant traffic and revenue channel?</strong><br/>It already is in some categories. Voice commerce hit $80 billion globally in 2026. Amazon Rufus processes millions of product evaluation queries daily. The timeline for when agentic AI becomes a significant channel for your specific category depends on buyer behaviour in that category — technology buyers are already there, consumer goods are fast approaching, B2B enterprise is moving more slowly. Watch your GA4 for referral traffic from AI agent user-agents and from voice assistant platforms. When it starts appearing, your category has crossed the threshold.</p>
+<p><strong>Does agentic AI citation require different content than standard AI citation?</strong><br/>Not fundamentally different — the same content quality, schema, and entity signals that drive standard AI citations also support agentic evaluation. The additional requirements are pricing schema (for agents filtering by price), structured feature statements (for agents evaluating against criteria), and potentialAction schema (for agents completing purchases). These are additions to the existing AEO stack, not replacements.</p>
+<p><strong>Can I track whether AI agents are visiting my site specifically?</strong><br/>Partially. AI agent user-agents (Amazonbot for Rufus, GPT-based user agents for ChatGPT computer use) appear in server logs when they visit your site. GA4 tracks sessions from AI referral sources. The gap is in knowing which agent evaluations led to recommendations or purchases versus which were data gathering without outcome. This attribution problem is similar to the zero-click attribution gap in standard AI search — the commercial signal is upstream of the click or session you can track.</p>
+<p><strong>Is there a risk that agentic AI will recommend competitors even when my product is objectively better?</strong><br/>Yes. Agentic systems make recommendations based on the information they can access and parse, weighted by the entity signals they can verify. A competitor with weaker actual performance but stronger schema, cleaner pricing structure, more consistent entity signals, and more recent G2 reviews will often be recommended over a better product with poor AEO infrastructure. Quality wins in the long run as agents accumulate more user feedback. In the short run, AEO infrastructure determines which brands get evaluated at all.</p>
 `,
   },
 
