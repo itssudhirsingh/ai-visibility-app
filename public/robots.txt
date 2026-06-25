@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /*?
+
+Sitemap: https://notioncue.com/sitemap.xml
 
 # AI crawlers — allow all
 User-agent: GPTBot
@@ -19,10 +23,3 @@ Allow: /
 
 User-agent: Googlebot
 Allow: /
-
-
-User-agent: *
-
-Disallow: /api/
-
-Sitemap: https://notioncue.com/sitemap.xml
