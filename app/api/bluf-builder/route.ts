@@ -3,7 +3,7 @@ export async function POST(req: Request) {
     const { url } = await req.json()
     if (!url) return Response.json({ error: 'URL is required' }, { status: 400 })
 
-    const apiKey = process.env.OPENAI_API_KEY
+    const apiKey = process.env.NVIDIA_API_KEY || process.env.OPENAI_API_KEY
     if (!apiKey) return Response.json({ error: 'Missing API key' }, { status: 500 })
 
     // Normalize URL
@@ -90,7 +90,7 @@ Return ONLY this exact JSON structure:
           }
         ],
         max_tokens: 1500,
-        temperature: 0.8
+        temperature: 0.4
       })
     })
 
@@ -108,8 +108,11 @@ Return ONLY this exact JSON structure:
       return Response.json({ error: 'Empty response', raw: json }, { status: 500 })
     }
 
-    const clean = text.replace(/```json|```/g, '').trim()
-    const data = JSON.parse(clean)
+    const cleaned = text.replace(/```json/gi, '').replace(/```/g, '').trim()
+    const jsonStart = cleaned.indexOf('{')
+    const jsonEnd = cleaned.lastIndexOf('}')
+    if (jsonStart === -1 || jsonEnd === -1) return Response.json({ error: 'Model did not return JSON', raw: cleaned.slice(0, 300) }, { status: 500 })
+    const data = JSON.parse(cleaned.slice(jsonStart, jsonEnd + 1))
     return Response.json(data)
 
   } catch (err) {

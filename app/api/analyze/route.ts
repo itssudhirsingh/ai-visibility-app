@@ -3,90 +3,140 @@ export async function POST(req: Request) {
     const { url } = await req.json()
     if (!url) return Response.json({ error: 'URL is required' }, { status: 400 })
 
-    const apiKey = process.env.NVIDIA_API_KEY
-if (!apiKey) return Response.json({ error: 'Missing API key' }, { status: 500 })
+    const apiKey = process.env.NVIDIA_API_KEY || process.env.OPENAI_API_KEY
+    if (!apiKey) return Response.json({ error: 'Missing API key' }, { status: 500 })
 
-    console.log('Key exists:', !!apiKey)
-    console.log('Key prefix:', apiKey.slice(0, 10))
+    // ── 1. Fetch real page content ──────────────────────────────────────────
+    let targetUrl = url.trim()
+    if (!/^https?:\/\//i.test(targetUrl)) targetUrl = `https://${targetUrl}`
 
+    let pageText = ''
+    let pageHtml = ''
+    try {
+      const pageRes = await fetch(targetUrl, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; NotionCueBot/1.0; +https://notioncue.com)' },
+        signal: AbortSignal.timeout(8000),
+      })
+      pageHtml = await pageRes.text()
+      pageText = pageHtml
+        .replace(/<script[\s\S]*?<\/script>/gi, '')
+        .replace(/<style[\s\S]*?<\/style>/gi, '')
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, 5000)
+    } catch {
+      // Page fetch failed — model will work from domain name only
+      pageText = `Could not fetch page content for ${url}.`
+    }
+
+    // ── 2. Quick HTML signal checks ─────────────────────────────────────────
+    const hasLlmsTxt       = await checkUrl(`${targetUrl}/llms.txt`)
+    const hasRobotsTxt     = pageHtml ? /robots/i.test(pageHtml) : false
+    const hasFaqSchema     = /FAQPage/i.test(pageHtml)
+    const hasHowToSchema   = /HowTo/i.test(pageHtml)
+    const hasOrgSchema     = /Organization|WebSite/i.test(pageHtml)
+    const hasBreadcrumb    = /BreadcrumbList/i.test(pageHtml)
+    const hasSSL           = targetUrl.startsWith('https')
+    const hasGPTBot        = /GPTBot/i.test(pageHtml)
+    const hasPerplexityBot = /PerplexityBot/i.test(pageHtml)
+
+    // ── 3. Call AI model ────────────────────────────────────────────────────
     const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${apiKey}`  // ← curly braces + correct variable
-  },
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+      },
       body: JSON.stringify({
-        model: 'meta/llama-3.1-8b-instruct',
+        model: 'deepseek-ai/deepseek-v4-flash',
         messages: [
           {
             role: 'system',
-            content: 'You are an expert AI visibility analyst. Always respond with valid JSON only — no markdown, no code fences, no extra text.'
+            content: 'You are an expert AI visibility and AEO analyst. Always respond with valid JSON only — no markdown, no code fences, no extra text.',
           },
           {
             role: 'user',
             content: `Analyse the AI visibility of this brand/domain: "${url}"
 
-Return ONLY this exact JSON structure with real, specific analysis for "${url}":
+Real page content detected:
+"""
+${pageText}
+"""
+
+Technical signals detected from the actual page:
+- HTTPS/SSL: ${hasSSL}
+- FAQPage schema: ${hasFaqSchema}
+- HowTo schema: ${hasHowToSchema}
+- Organization/WebSite schema: ${hasOrgSchema}
+- BreadcrumbList schema: ${hasBreadcrumb}
+- llms.txt file: ${hasLlmsTxt}
+- robots.txt mentions: ${hasRobotsTxt}
+- GPTBot access: ${hasGPTBot}
+- PerplexityBot access: ${hasPerplexityBot}
+
+Use the page content and detected signals above to produce ACCURATE analysis. Do NOT rely solely on brand reputation.
+
+Return ONLY this exact JSON structure:
 
 {
-  "score": <number 1-100, overall AEO score>,
-  "mentions": <estimated monthly AI mentions>,
+  "score": <number 1-100, overall AEO score based on page content and signals>,
+  "mentions": <estimated monthly AI mentions, be conservative if unknown brand>,
   "sentiment": "<positive|neutral|negative>",
   "engines_citing": "<X/6>",
   "engines": [
-    {"n": "ChatGPT", "s": <score 1-100>, "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<2-3 sentence description>", "citations": ["<snippet>", "<snippet>"]},
-    {"n": "Perplexity", "s": <score>, "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<description>", "citations": ["<snippet>"]},
-    {"n": "Gemini", "s": <score>, "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<description>", "citations": ["<snippet>"]},
-    {"n": "Claude", "s": <score>, "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<description>", "citations": ["<snippet>"]},
-    {"n": "Grok", "s": <score>, "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<description>", "citations": ["<snippet>"]},
-    {"n": "Copilot", "s": <score>, "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<description>", "citations": ["<snippet>"]}
+    {"n": "ChatGPT",    "s": <score 1-100>, "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<2-3 sentence description based on page content>", "citations": ["<snippet from actual page>"]},
+    {"n": "Perplexity", "s": <score>,       "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<description>", "citations": ["<snippet>"]},
+    {"n": "Gemini",     "s": <score>,       "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<description>", "citations": ["<snippet>"]},
+    {"n": "Claude",     "s": <score>,       "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<description>", "citations": ["<snippet>"]},
+    {"n": "Grok",       "s": <score>,       "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<description>", "citations": ["<snippet>"]},
+    {"n": "Copilot",    "s": <score>,       "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<description>", "citations": ["<snippet>"]}
   ],
   "comps": [
-    {"n": "<real competitor domain>", "s": <score>, "gap": "<gap description>"},
-    {"n": "<real competitor domain>", "s": <score>, "gap": "<gap description>"},
-    {"n": "<real competitor domain>", "s": <score>, "gap": "<gap description>"}
+    {"n": "<real competitor domain in same space>", "s": <score>, "gap": "<specific gap vs the analysed site>"},
+    {"n": "<real competitor domain>",               "s": <score>, "gap": "<specific gap>"},
+    {"n": "<real competitor domain>",               "s": <score>, "gap": "<specific gap>"}
   ],
   "fixes": [
+    {"priority": "HIGH", "title": "<fix title>", "desc": "<actionable description based on detected signals>"},
     {"priority": "HIGH", "title": "<fix title>", "desc": "<actionable description>"},
-    {"priority": "HIGH", "title": "<fix title>", "desc": "<actionable description>"},
-    {"priority": "MED", "title": "<fix title>", "desc": "<actionable description>"},
-    {"priority": "LOW", "title": "<fix title>", "desc": "<actionable description>"}
+    {"priority": "MED",  "title": "<fix title>", "desc": "<actionable description>"},
+    {"priority": "LOW",  "title": "<fix title>", "desc": "<actionable description>"}
   ],
   "eeat": {"experience": <0-100>, "expertise": <0-100>, "authority": <0-100>, "trust": <0-100>},
   "schema": [
-    {"label": "FAQPage schema", "status": "<pass|fail|warn>"},
-    {"label": "HowTo schema", "status": "<pass|fail|warn>"},
-    {"label": "Organization schema", "status": "<pass|fail|warn>"},
-    {"label": "BreadcrumbList", "status": "<pass|fail|warn>"},
-    {"label": "robots.txt AI bots", "status": "<pass|fail|warn>"},
-    {"label": "PerplexityBot access", "status": "<pass|fail|warn>"},
-    {"label": "GPTBot access", "status": "<pass|fail|warn>"}
+    {"label": "FAQPage schema",        "status": "${hasFaqSchema     ? 'pass' : 'fail'}"},
+    {"label": "HowTo schema",          "status": "${hasHowToSchema   ? 'pass' : 'fail'}"},
+    {"label": "Organization schema",   "status": "${hasOrgSchema     ? 'pass' : 'fail'}"},
+    {"label": "BreadcrumbList",        "status": "${hasBreadcrumb    ? 'pass' : 'fail'}"},
+    {"label": "robots.txt AI bots",    "status": "${hasRobotsTxt     ? 'pass' : 'fail'}"},
+    {"label": "PerplexityBot access",  "status": "${hasPerplexityBot ? 'pass' : 'fail'}"},
+    {"label": "GPTBot access",         "status": "${hasGPTBot        ? 'pass' : 'fail'}"}
   ],
-  "llms_txt": {"exists": <true|false>, "valid": <true|false>, "content": "<sample content or empty string>"},
-  "bluf": {"score": <0-100>, "headline": "<homepage H1 paraphrase>", "issues": ["<issue 1>", "<issue 2>"]},
+  "llms_txt": {"exists": ${hasLlmsTxt}, "valid": ${hasLlmsTxt}, "content": "<first 300 chars of llms.txt if it exists, else empty string>"},
+  "bluf": {"score": <0-100>, "headline": "<actual H1 text from page or paraphrase>", "issues": ["<specific issue from actual content>", "<issue>"]},
   "weekly_trend": [
-    {"week": "W1", "score": <score>},
-    {"week": "W2", "score": <score>},
-    {"week": "W3", "score": <score>},
+    {"week": "W1", "score": <score minus 3-8 points>},
+    {"week": "W2", "score": <score minus 1-4 points>},
+    {"week": "W3", "score": <score minus 1-2 points>},
     {"week": "W4", "score": <current score>}
   ],
   "query_probes": [
-    {"engine": "ChatGPT", "query": "<realistic query>", "response": "<response excerpt>", "cited": <true|false>},
+    {"engine": "ChatGPT",    "query": "<realistic query someone would ask about this site's topic>", "response": "<realistic AI response excerpt, mention brand if score>=65>", "cited": <true|false>},
     {"engine": "Perplexity", "query": "<realistic query>", "response": "<response excerpt>", "cited": <true|false>},
-    {"engine": "Gemini", "query": "<realistic query>", "response": "<response excerpt>", "cited": <true|false>},
-    {"engine": "Grok", "query": "<realistic query>", "response": "<response excerpt>", "cited": <true|false>}
+    {"engine": "Gemini",     "query": "<realistic query>", "response": "<response excerpt>", "cited": <true|false>},
+    {"engine": "Grok",       "query": "<realistic query>", "response": "<response excerpt>", "cited": <true|false>}
   ]
-}`
-          }
+}`,
+          },
         ],
-        max_tokens: 4000,
-        temperature: 0.7
-      })
+        max_tokens: 4096,
+        temperature: 0.2,
+      }),
     })
 
     const rawText = await response.text()
     console.log('NVIDIA status:', response.status)
-    console.log('Raw response preview:', rawText.slice(0, 300))
 
     if (!response.ok) {
       console.error('NVIDIA API error:', rawText)
@@ -101,12 +151,28 @@ Return ONLY this exact JSON structure with real, specific analysis for "${url}":
       return Response.json({ error: 'Empty response', raw: json }, { status: 500 })
     }
 
-    const clean = text.replace(/```json|```/g, '').trim()
-    const data = JSON.parse(clean)
+    const cleaned = text.replace(/```json/gi, '').replace(/```/g, '').trim()
+    const jsonStart = cleaned.indexOf('{')
+    const jsonEnd = cleaned.lastIndexOf('}')
+    if (jsonStart === -1 || jsonEnd === -1) return Response.json({ error: 'Model did not return JSON', raw: cleaned.slice(0, 300) }, { status: 500 })
+    const data = JSON.parse(cleaned.slice(jsonStart, jsonEnd + 1))
     return Response.json(data)
 
   } catch (err) {
     console.error('API Error:', err)
     return Response.json({ error: String(err) }, { status: 500 })
+  }
+}
+
+// ── Helper: HEAD check for a URL ─────────────────────────────────────────────
+async function checkUrl(url: string): Promise<boolean> {
+  try {
+    const res = await fetch(url, {
+      method: 'HEAD',
+      signal: AbortSignal.timeout(4000),
+    })
+    return res.ok
+  } catch {
+    return false
   }
 }
