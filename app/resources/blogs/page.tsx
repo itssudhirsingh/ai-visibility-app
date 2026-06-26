@@ -69,7 +69,7 @@ export default function BlogPage() {
             {/* Grid */}
             <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1.25rem'}}>
               {BLOG_POSTS.map((p,i)=>(
-                <a key={i} href={`/resources/blog/${p.slug}`} className="blog-card" style={{background:'var(--card)',border:'1px solid var(--border)',borderRadius:'14px',overflow:'hidden'}}>
+                <a key={i} href={`/blog/${p.slug}`} className="blog-card" style={{background:'var(--card)',border:'1px solid var(--border)',borderRadius:'14px',overflow:'hidden'}}>
                   <div style={{height:'140px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'2.2rem',borderBottom:'1px solid var(--border)',background:p.bg}}>{p.emoji}</div>
                   <div style={{padding:'1.4rem'}}>
                     <div style={{display:'flex',alignItems:'center',gap:'.65rem',marginBottom:'.65rem',flexWrap:'wrap'}}>

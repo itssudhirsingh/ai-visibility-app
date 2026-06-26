@@ -97,6 +97,16 @@ const TOOLS = [
     desc:'Ready-to-use BLUF content templates for product pages, blog posts, and landing pages — structured the way AI engines prefer to read and cite.',
     cta:'Browse templates', href:'/bluf-templates', tag:'Content', c:'rgba(34,211,238,.2)',
   },
+  {
+    icon:'📚', title:'AEO Strategy Guide',
+    desc:'The complete playbook behind notioncue.com — how answer engines pick sources, per-engine ranking signals, and the exact steps to earn AI citations.',
+    cta:'Read the guide', href:'/aeo-guide', tag:'Strategy', c:'rgba(123,108,255,.2)',
+  },
+  {
+    icon:'🗂️', title:'AEO Resource Library',
+    desc:'Curated guides, checklists, and breakdowns on Answer Engine Optimisation — everything notioncue.com uses to track and grow AI visibility, in one place.',
+    cta:'Browse resources', href:'/resources', tag:'Core', c:'rgba(74,222,128,.2)',
+  },
 ]
 
 const PLANS = [
@@ -136,9 +146,11 @@ export default function HomePage() {
         button{cursor:pointer;font-family:inherit}
         .feat-card:hover{background:rgba(255,255,255,.03)!important}
         .feat-card:hover .feat-title{color:var(--accent)}
-        .tool-card:hover{background:rgba(255,255,255,.04)!important}
+        .tool-card:hover{background:rgba(255,255,255,.03)!important;border-color:rgba(200,242,71,.22)!important;transform:translateY(-3px)}
         .tool-card:hover .tool-title{color:var(--accent)}
         .tool-card:hover .tool-cta{text-decoration:underline}
+        @media(max-width:1080px){.tools-grid{grid-template-columns:repeat(2,1fr)!important}}
+        @media(max-width:620px){.tools-grid{grid-template-columns:1fr!important}}
         .price-card{transition:all .3s}
         .price-card:hover{transform:translateY(-4px);border-color:var(--border-h)!important}
         ::-webkit-scrollbar{width:4px}
@@ -269,15 +281,15 @@ export default function HomePage() {
             </div>
             <p style={{fontSize:'1rem',color:'var(--muted)',lineHeight:1.75,maxWidth:'480px'}}>Scanning, content, strategy, and technical AEO — everything you need to find and fix your AI visibility gaps, all in one place.</p>
           </div>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'1px',background:'var(--border)',borderRadius:'16px',overflow:'hidden',border:'1px solid var(--border)'}}>
+          <div className="tools-grid" style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'1.25rem'}}>
             {TOOLS.map((t,i)=>(
-              <div key={i} className="tool-card" style={{background:'var(--card)',padding:'1.75rem 1.5rem',transition:'background .3s',display:'flex',flexDirection:'column'}}>
-                <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'1rem'}}>
-                  <div style={{width:'40px',height:'40px',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.1rem',border:`1px solid ${t.c}`,background:t.c.replace('.2',',.08)')}}>{t.icon}</div>
+              <div key={i} className="tool-card" style={{background:'var(--card)',padding:'2.25rem 2rem',border:'1px solid var(--border)',borderRadius:'16px',transition:'background .3s,border-color .3s,transform .3s',display:'flex',flexDirection:'column'}}>
+                <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'1.5rem'}}>
+                  <div style={{width:'44px',height:'44px',borderRadius:'11px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.2rem',border:`1px solid ${t.c}`,background:t.c.replace('.2',',.08)')}}>{t.icon}</div>
                   <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.58rem',letterSpacing:'.06em',textTransform:'uppercase',color:'var(--violet)',background:'rgba(123,108,255,.08)',border:'1px solid rgba(123,108,255,.18)',borderRadius:'4px',padding:'.2rem .5rem'}}>{t.tag}</span>
                 </div>
-                <div className="tool-title" style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'1rem',marginBottom:'.5rem',transition:'color .2s',lineHeight:1.25}}>{t.title}</div>
-                <div style={{fontSize:'.82rem',color:'var(--muted)',lineHeight:1.65,marginBottom:'1.25rem',flex:1}}>{t.desc}</div>
+                <div className="tool-title" style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'1.05rem',marginBottom:'.65rem',transition:'color .2s',lineHeight:1.3}}>{t.title}</div>
+                <div style={{fontSize:'.82rem',color:'var(--muted)',lineHeight:1.7,marginBottom:'1.75rem',flex:1}}>{t.desc}</div>
                 <a href={t.href} className="tool-cta" style={{display:'inline-flex',alignItems:'center',gap:'.35rem',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'.8rem',color:'var(--accent)',alignSelf:'flex-start'}}>
                   {t.cta}
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -465,9 +477,10 @@ export default function HomePage() {
 
             {/* Checklist cards */}
             {[
-              {title:'Schema Markup',items:[{s:'pass',t:'Organization schema present.'},{s:'pass',t:'Product schema on PDPs.'},{s:'fail',t:'FAQ schema missing on blog posts.'},{s:'fail',t:'BreadcrumbList not implemented.'},{s:'warn',t:'Article schema incomplete.'}],score:'3/5'},
-              {title:'E-E-A-T Signals',items:[{s:'pass',t:'Author bylines present.'},{s:'pass',t:'About page indexed.'},{s:'fail',t:'No expert credentials linked.'},{s:'fail',t:'Citations / references missing.'},{s:'warn',t:'Review schema partial.'}],score:'2/5'},
-              {title:'Content Structure',items:[{s:'pass',t:'BLUF paragraphs on 61% of pages.'},{s:'pass',t:'H1 present on all pages.'},{s:'pass',t:'Definition sections present.'},{s:'fail',t:'FAQ blocks sparse on PDPs.'},{s:'warn',t:'Average answer depth: low.'}],score:'3/5'},
+              {title:'Schema Markup',items:[{s:'pass',t:'Organization schema present on notioncue.com.'},{s:'pass',t:'WebSite schema on homepage.'},{s:'fail',t:'FAQ schema missing on blog posts.'},{s:'fail',t:'BreadcrumbList not implemented.'},{s:'warn',t:'Article schema incomplete.'}],score:'3/5'},
+              {title:'E-E-A-T Signals',items:[{s:'pass',t:'Author bylines present on notioncue.com.'},{s:'pass',t:'About page indexed.'},{s:'fail',t:'No expert credentials linked.'},{s:'fail',t:'Citations / references missing.'},{s:'warn',t:'Review schema partial.'}],score:'2/5'},
+              {title:'Content Structure',items:[{s:'pass',t:'BLUF paragraphs on 61% of notioncue.com pages.'},{s:'pass',t:'H1 present on all pages.'},{s:'pass',t:'Definition sections present.'},{s:'fail',t:'FAQ blocks sparse on tool pages.'},{s:'warn',t:'Average answer depth: low.'}],score:'3/5'},
+              {title:'AI Crawler Access',items:[{s:'pass',t:'GPTBot allowed in notioncue.com/robots.txt.'},{s:'pass',t:'PerplexityBot allowed.'},{s:'pass',t:'llms.txt present at root.'},{s:'fail',t:'Google-Extended not specified.'},{s:'warn',t:'Sitemap not referenced in llms.txt.'}],score:'3/5'},
             ].map((card,i)=>(
               <div key={i} style={{background:'var(--card)',border:'1px solid var(--border)',borderRadius:'14px',padding:'1.75rem'}}>
                 <div style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'1rem',marginBottom:'1.25rem',paddingBottom:'.75rem',borderBottom:'1px solid var(--border)'}}>{card.title}</div>

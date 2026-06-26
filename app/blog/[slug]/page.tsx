@@ -20,7 +20,7 @@ export async function generateMetadata(
   const post = getPostBySlug(slug)
   if (!post) return {}
   return {
-    title:       `${post.title} — NotioncCue Blog`,
+    title:       `${post.title} — NotionCue Blog`,
     description: post.excerpt,
     openGraph: {
       title:         post.title,
@@ -82,7 +82,7 @@ export default async function BlogPostPage(
     description:   post.excerpt,
     datePublished: post.date,
     author: { '@type': 'Person', name: post.author, jobTitle: post.authorRole },
-    publisher: { '@type': 'Organization', name: 'NotioncCue', url: 'https://notioncue.com' },
+    publisher: { '@type': 'Organization', name: 'NotionCue', url: 'https://notioncue.com' },
   }
 
   return (
@@ -708,7 +708,7 @@ export default async function BlogPostPage(
                       {post.authorRole}
                     </div>
                     <p style={{ fontSize: '12px', color: 'var(--prose)', lineHeight: 1.72 }}>
-                      Senior SEO and AEO specialist with 12+ years across e-commerce, global education, and healthcare. Building NotioncCue to track brand citations across ChatGPT, Perplexity, Gemini, and AI Overviews.
+                      Senior SEO and AEO specialist with 12+ years across e-commerce, global education, and healthcare. Building NotionCue to track brand citations across ChatGPT, Perplexity, Gemini, and AI Overviews.
                     </p>
                     <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
                       <Link href="https://linkedin.com/in/sudhir-ks" style={{
@@ -722,7 +722,7 @@ export default async function BlogPostPage(
                         color: 'var(--lime)', border: '1px solid var(--lime-border)',
                         borderRadius: 100, padding: '4px 11px',
                         textTransform: 'uppercase', letterSpacing: '.06em',
-                      }}>NotioncCue</Link>
+                      }}>NotionCue</Link>
                     </div>
                   </div>
                 </div>

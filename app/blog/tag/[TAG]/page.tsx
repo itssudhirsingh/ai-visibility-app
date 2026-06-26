@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import SharedHeader from '@/components/SharedHeader'
 import SharedFooter from '@/components/SharedFooter'
-import { BLOG_POSTS, BLOG_TAGS } from '../posts'
+import { BLOG_POSTS, BLOG_TAGS } from '../../posts'
 
 // Slugify a tag the same way the index page links it: lowercase, spaces → hyphens
 function slugifyTag(tag: string) {

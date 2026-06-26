@@ -1,4 +1,4 @@
-// app/resources/blog/page.tsx
+// app/blog/page.tsx
 
 import Link from 'next/link'
 import SharedHeader from '@/components/SharedHeader'
