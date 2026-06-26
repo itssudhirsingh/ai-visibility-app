@@ -126,7 +126,7 @@
   }
   html {
     @apply font-sans;
-    font-size: 20px; /* base scale-up: every rem-based size grows ~6% site-wide */
+    font-size: 17px; /* base scale-up: every rem-based size grows ~6% site-wide */
   }
   /* Keep the very smallest mono labels from getting oversized */
   body {
@@ -158,112 +158,167 @@ html, body {
   }
 }
 
-/* ── Base font scale eases back on small screens ── */
-@media (max-width: 768px) {
-  html { font-size: 16px; }
+/* ════════════════════════════════════════════════════════════ */
+/* RESPONSIVE — rebuilt. Matches React's rendered inline styles    */
+/* (kebab-case, NO space after colon, e.g. grid-template-columns:  */
+/* repeat(4,1fr)). Uses substring matches that are space-agnostic. */
+/* ════════════════════════════════════════════════════════════ */
+
+/* ── TABLET (max 1024px): 4-col → 2-col, 3-col → 2-col ── */
+@media (max-width: 1024px) {
+  [style*="grid-template-columns:repeat(4"],
+  [style*="grid-template-columns: repeat(4"],
+  [style*="grid-template-columns:repeat(3"],
+  [style*="grid-template-columns: repeat(3"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .tools-grid { grid-template-columns: repeat(2,1fr) !important; }
 }
 
 /* ── MOBILE (max 768px) ── */
 @media (max-width: 768px) {
 
-  /* Nav — compact + hide middle links */
-  nav {
-    padding: 1rem 1.25rem !important;
-  }
-  nav > div:nth-child(2) {
-    display: none !important;
-  }
+  /* Root font eases back so vw headings don't overflow */
+  html { font-size: 16px; }
 
-  /* Sections */
-  section {
-    padding: 3.5rem 1.25rem !important;
-  }
+  /* Nav — compact + hide middle links */
+  nav { padding: 1rem 1.25rem !important; }
+  nav > div:nth-child(2) { display: none !important; }
+
+  /* Sections + footer padding */
+  section { padding: 3.5rem 1.25rem !important; }
+  footer  { padding: 2.5rem 1.25rem !important; }
 
   /* Headings scale down */
-  h1 { font-size: clamp(2rem, 9vw, 3.5rem) !important; line-height: 1.05 !important; }
-  h2 { font-size: clamp(1.6rem, 7vw, 2.8rem) !important; }
+  h1 { font-size: clamp(1.8rem, 8vw, 3rem) !important; line-height: 1.08 !important; }
+  h2 { font-size: clamp(1.5rem, 6.5vw, 2.4rem) !important; line-height: 1.12 !important; }
 
-  /* ALL inline grid divs → single column */
-  div[style*="grid-template-columns"],
-  div[style*="gridTemplateColumns"] {
+  /* CATCH-ALL: every multi-column inline grid collapses to ONE column.
+     Covers repeat(N), fixed-px sidebars (220px 1fr), fr combos, etc.
+     This is the key fix — nothing stays stuck multi-col on phones. */
+  [style*="grid-template-columns"] {
     grid-template-columns: 1fr !important;
     gap: 1rem !important;
   }
 
-  /* Keep 2-col for stats and footer */
-  div[style*="repeat(4,1fr)"],
-  div[style*="repeat(4, 1fr)"] {
-    grid-template-columns: 1fr 1fr !important;
+  /* EXCEPTION: the Engine Matrix has 6 fixed 80px columns that must NOT
+     collapse (labels would break). Let its wrapper scroll horizontally
+     instead, and keep the matrix grid intact. */
+  [style*="1fr repeat(6,80px)"],
+  [style*="1fr repeat(6, 80px)"] {
+    grid-template-columns: 1fr repeat(6,80px) !important;
+    min-width: 620px;
   }
+  /* The card that wraps the matrix → allow horizontal scroll on mobile */
+  #matrix > div[style*="overflow:hidden"],
+  #matrix > div[style*="overflow: hidden"] {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Section side padding: 3.5rem (56px) is too wide for phones → 1.25rem */
+  section[style*="3.5rem"] {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+  /* Section divider rules + CTA block use 3.5rem side margins/padding too */
+  div[style*="margin:0 3.5rem"], div[style*="margin: 0 3.5rem"] {
+    margin-left: 1.25rem !important;
+    margin-right: 1.25rem !important;
+  }
+  div[style*="8rem 3.5rem"], div[style*="padding:'1.5rem 3.5rem'"],
+  div[style*="padding: '1.5rem 3.5rem'"] {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  /* Orbital widget (360px) overflows a 375px screen → shrink + center */
+  [style*="width:360px"][style*="height:360px"],
+  [style*="width: '360px'"] {
+    width: 280px !important;
+    height: 280px !important;
+    max-width: 100%;
+  }
+
+  /* CTA radial glow (600px) can push width → clamp it */
+  [style*="width:600px"], [style*="width: '600px'"] {
+    width: 100% !important;
+    max-width: 600px;
+  }
+
+  /* Footer micro-bar: stack the two lines so they don't collide */
+  div[style*="padding:'1.5rem 3.5rem'"][style*="space-between"],
+  div[style*="justify-content:space-between"][style*="1.5rem"] {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    text-align: center !important;
+  }
+
+  /* Keep stats + footer as a tidy 2-up (override the catch-all) */
+  .stats-grid,
+  .grid-kpi,
   footer > div {
     grid-template-columns: 1fr 1fr !important;
-    gap: 2rem !important;
+    gap: 1.5rem !important;
   }
 
-  /* Dashboard: hide sidebar, full width content */
-  aside {
-    display: none !important;
+  /* Dashboard: hide sidebar */
+  aside { display: none !important; }
+
+  /* Before/after comparison panels: drop the middle arrow column */
+  [style*="1fr 60px 1fr"] > div:nth-child(2) { display: none !important; }
+  /* "From audit to action": cards use grid-column:span 2 inside a 1fr 1fr
+     grid. On mobile the grid is 1 col, so reset the span and stack the
+     inner before/after panels into a single column. */
+  [style*="grid-column:span 2"], [style*="grid-column: span 2"] {
+    grid-column: span 1 !important;
   }
-  div[style*="gridTemplateColumns: '236px"] {
+  /* The inner before/after comparison stacks (the catch-all sets 1 col;
+     this guarantees it even if matched differently) and gaps open up */
+  [style*="1fr 60px 1fr"] {
     grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
   }
 
-  /* Before/after comparison panels — stack */
-  div[style*="'1fr 60px 1fr'"] {
-    grid-template-columns: 1fr !important;
-  }
-  div[style*="'1fr 60px 1fr'"] > div:nth-child(2) {
-    display: none !important;
-  }
+  /* Tame oversized flex gaps */
+  [style*="gap:5rem"],  [style*="gap: 5rem"]  { gap: 2rem !important; }
+  [style*="gap:4rem"],  [style*="gap: 4rem"]  { gap: 1.5rem !important; }
+  [style*="gap:3rem"],  [style*="gap: 3rem"]  { gap: 1.25rem !important; }
 
-  /* Large gaps — reduce */
-  div[style*="gap: '5rem'"] { gap: 2rem !important; }
-  div[style*="gap: '4rem'"] { gap: 1.5rem !important; }
-
-  /* Footer padding */
-  footer {
-    padding: 2rem 1.25rem !important;
-  }
-
-  /* Sub-nav on resource pages */
-  div[style*="top: '65px'"][style*="display: 'flex'"] {
+  /* Sticky sub-nav on resource/blog pages — let it scroll, tighten pad */
+  [style*="top:65px"], [style*="top: 65px"],
+  [style*="top:65"] {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
+  }
+
+  /* Any flex row that was holding input+button side by side → stack */
+  [style*="border-radius:100px"][style*="padding:.35rem"],
+  [style*="borderRadius: '100px'"] {
+    flex-direction: column !important;
+    border-radius: 14px !important;
+    padding: 0.75rem !important;
+    gap: 0.5rem !important;
   }
 }
 
 /* ── SMALL MOBILE (max 480px) ── */
 @media (max-width: 480px) {
 
-  /* Footer fully stacks */
+  /* Everything that was 2-up now fully stacks */
+  .stats-grid,
+  .grid-kpi,
   footer > div {
     grid-template-columns: 1fr !important;
   }
 
-  /* Stats fully stack */
-  div[style*="repeat(4,1fr)"],
-  div[style*="repeat(4, 1fr)"] {
-    grid-template-columns: 1fr !important;
-  }
+  section { padding: 2.5rem 1rem !important; }
+  nav     { padding: 0.85rem 1rem !important; }
+  footer  { padding: 2rem 1rem !important; }
 
-  /* Hero input — stack button below input */
-  div[style*="borderRadius: '100px'"][style*="padding: '.35rem"] {
-    flex-direction: column !important;
-    border-radius: 14px !important;
-    padding: 0.75rem !important;
-    gap: 0.5rem !important;
-  }
-  div[style*="borderRadius: '100px'"][style*="padding: '.35rem"] > button {
-    width: 100% !important;
-    justify-content: center !important;
-    border-radius: 10px !important;
-  }
-
-  section {
-    padding: 2.5rem 1rem !important;
-  }
-
-  nav {
-    padding: 0.85rem 1rem !important;
-  }
+  /* Buttons in stacked rows go full-width */
+  [style*="1fr 60px 1fr"] ~ button,
+  .hero-cta button { width: 100% !important; }
 }
