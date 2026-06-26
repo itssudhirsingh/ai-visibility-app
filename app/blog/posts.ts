@@ -3503,6 +3503,666 @@ Disallow: /</code></pre>
 <p><strong>How often should documentation be updated for AEO purposes?</strong><br/>Update every time the documented feature changes — which for most SaaS products means at least monthly. The dateModified freshness signal is most valuable when it reflects genuine changes, not cosmetic updates. A documentation page updated monthly because the product genuinely changes monthly earns sustained freshness signals. A page updated weekly with minor copy edits without product changes eventually reads as artificial freshness manipulation to AI engines that cross-reference the claimed update against actual content differences.</p>
 `,
   },
+// ─────────────────────────────────────────────────────────────────────────
+  // POST 51 — Video AEO / YouTube
+  // Primary: video AEO, YouTube AEO, VideoObject schema AI citations
+  // Secondary: YouTube AI citations 2026, video transcript AEO
+  // Interlinks: topical-authority-aeo-content-cluster-strategy,
+  //             howto-schema-aeo-step-by-step-citation-guide,
+  //             how-ai-crawlers-index-your-site,
+  //             bluf-writing-technique-ai-citations-aeo,
+  //             speakable-schema-complete-implementation-guide,
+  //             aeo-measurement-analytics-how-to-track-ai-visibility
+  // Tool CTA: AI Topical Cluster Map (video as cluster hub)
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'video-aeo-youtube-videoobject-schema-ai-citations',
+    emoji:          '🎬',
+    bg:             'rgba(255,90,90,.06)',
+    tag:            'Technical',
+    date:           'Jul 1, 2026',
+    title:          'Video AEO: How YouTube Became the Highest-Cited Domain in AI Search',
+    excerpt:        'YouTube is now cited 200 times more than any other video platform in AI-generated answers. Subscriber count and view count have near-zero correlation with AI citation rate. A 400-view explainer video with a clean transcript and VideoObject schema competes on exactly the same terms as a two-million-view video that has neither.',
+    read:           '10 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>YouTube is the most-cited domain in Google AI Overviews as of 2026. It is cited 200 times more than any other video platform in AI-generated answers across ChatGPT, Perplexity, and Google's AI surfaces. In an Ahrefs 2026 analysis of 75,000 brands, YouTube mentions correlated with AI engine visibility at r = 0.737 — the strongest predictor in the dataset, stronger than backlinks and domain authority combined.</p>
+<p>The counterintuitive finding is what makes this actionable: subscriber count and view count have near-zero correlation with AI citation rate. OtterlyAI's 2026 YouTube Citation Study, based on 100 million citation instances, found that 40.83% of AI-cited videos had fewer than 1,000 views. The median cited channel had fewer than 41 total videos. A 400-view explainer with a corrected transcript and VideoObject schema competes on the same terms as a viral video that has neither.</p>
+<p>AI engines cannot watch videos. They read transcripts, metadata, and chapter markers. A structurally sound video is citable. A visually compelling video with no machine-readable text is invisible to AI retrieval — regardless of how good it is.</p>
+
+<h2>Why YouTube Gets Cited So Heavily by AI Engines</h2>
+<p>YouTube videos arrive packaged with machine-readable text: transcripts (generated or uploaded), chapter titles, video descriptions, and metadata tags. That combination produces the dense, quotable, topic-labelled content that AI engines prefer over raw prose. A chaptered YouTube tutorial on "how to implement FAQPage schema" contains explicit topic labels (chapter titles), sequential steps (the narration), and source metadata (channel identity, upload date) in a format AI systems can extract without inference.</p>
+<p>YouTube also overtook Reddit as the most-cited social platform in AI answers around October 2025, per Goodie AI's analysis of 6.1 million citations. YouTube's share of social media citations rose from 18.9% to 39.2% between August and December 2025, while Reddit's share dropped from 44.2% to 20.3%. For content strategy purposes, YouTube is now the highest-leverage single platform for AI citation surface area — but only for brands that structure their video content for machine extraction rather than just viewer experience.</p>
+<p>Citation distribution across AI engines is unequal and worth knowing before allocating production effort. Per OtterlyAI's 2026 study: Perplexity drives 38.7% of YouTube citations, Google AI Overviews 36.6%, Google AI Mode 19.6%, ChatGPT 4.4%, and Copilot 0.5%. Google's AI surfaces dominate. If your primary AI visibility goal is Google AI Overviews, YouTube is particularly high-value. ChatGPT cannot directly access YouTube — it reads text about videos rather than the videos themselves. Claude has no direct YouTube access either, citing content through what is written about a video on the open web.</p>
+
+<h2>What Makes a Video Citable by AI Engines?</h2>
+<p>Five elements determine whether a video earns AI citations. All five are controllable at upload time or shortly after.</p>
+<p><strong>Corrected transcript.</strong> This is the foundation. YouTube auto-generates captions, but auto-captions contain errors — particularly on brand names, technical terms, and product-specific vocabulary. An AI engine that reads "no shun cue" instead of "NotioncCue" in a transcript cannot correctly attribute the citation. Upload a human-corrected caption file (SRT or VTT format) for every video you want cited. Rev, Otter.ai, and Descript all produce accurate transcripts. The correction step takes 15 to 30 minutes per video and is the single highest-impact action for AI citation accuracy.</p>
+<p><strong>Question-format chapter titles.</strong> YouTube chapters are created by adding timestamps to the video description. The chapter title is what AI engines use when generating segmented citations — particularly on Google AI Overviews, which can cite specific video segments. "Introduction" as a chapter title carries no query-matching signal. "How do I add VideoObject schema to a blog post?" as a chapter title matches the exact query a developer would run. Rewrite chapter titles as the questions each segment answers.</p>
+<p><strong>200 to 300 word description structured as a blog introduction.</strong> The YouTube video description is the primary text AI engines use when indexing the video. Write the description as you would write a BLUF-structured article opening: direct answer to the video's core question in sentence one, then what the video covers, then the specific information included. The same writing principles from the <a href="/resources/blog/bluf-writing-technique-ai-citations-aeo">BLUF writing guide</a> apply directly. A description that opens with "In this video we will discuss..." earns no citation. A description that opens with "VideoObject schema goes inside a script tag in the page's HTML head, referencing your YouTube embed URL in the embedUrl field" earns citations for schema setup queries.</p>
+<p><strong>Transcript landing page on your website.</strong> This is the highest-leverage video AEO move. Create a dedicated page on your domain embedding the YouTube video with the full corrected transcript beneath it. This page is what Claude, ChatGPT in non-browse mode, and any text-only AI retrieval system will cite — because those engines cannot access YouTube directly but can crawl your website. One video becomes two separately citable assets: the YouTube URL (for Perplexity and Google's AI surfaces) and the transcript page on your domain (for text-based AI retrieval).</p>
+<p><strong>VideoObject schema on the embedding page.</strong> The transcript page needs VideoObject schema linking it to the YouTube video. The schema declares what the video contains, who made it, when it was uploaded, and where the embed and transcript live. AI engines that crawl the transcript page see the VideoObject schema and understand the relationship between the text and the video:</p>
+<pre><code>{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "How to Implement VideoObject Schema for AEO",
+      "datePublished": "2026-07-01",
+      "dateModified": "2026-07-01",
+      "author": {
+        "@type": "Person",
+        "@id": "https://notioncue.com/about/#person",
+        "name": "Sudhir Singh"
+      },
+      "video": { "@id": "#main-video" }
+    },
+    {
+      "@type": "VideoObject",
+      "@id": "#main-video",
+      "name": "How to Implement VideoObject Schema for AEO",
+      "description": "Step-by-step implementation of VideoObject schema for a YouTube video embedded on a blog page, with @graph stacking, transcript declaration, and Clip schema for key chapters.",
+      "thumbnailUrl": "https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg",
+      "uploadDate": "2026-07-01T09:00:00Z",
+      "duration": "PT12M30S",
+      "embedUrl": "https://www.youtube.com/embed/YOUR_VIDEO_ID",
+      "contentUrl": "https://www.youtube.com/watch?v=YOUR_VIDEO_ID",
+      "transcript": "Full corrected transcript text here...",
+      "hasPart": [
+        {
+          "@type": "Clip",
+          "name": "How do I add VideoObject schema to a blog post?",
+          "startOffset": 120,
+          "endOffset": 280
+        }
+      ]
+    }
+  ]
+}</code></pre>
+<p>The <code>hasPart</code> array with <code>Clip</code> objects maps your chapter structure into machine-readable format. Each Clip has a name (the chapter title as a question) and start/end offsets in seconds. Google uses these Clip objects to generate timestamped citations in AI Overviews — the segment-level citations that appear only on Google's surfaces and not on other engines.</p>
+
+<h2>How Does Video Fit Into a Topical Cluster?</h2>
+<p>Video is strongest as a cluster hub, not a standalone piece. The architecture that produces compounding citation returns combines a pillar article (written content), a YouTube video on the same topic, and a transcript page on your domain — all internally linked and covering the same subject from different angles.</p>
+<p>The pillar article earns text-based AI citations from ChatGPT, Claude, and Perplexity. The YouTube video earns Perplexity and Google AI Overview citations for video-format queries. The transcript page earns text-based citations from Claude and ChatGPT when they cannot reach YouTube directly. Internal links between all three signal the same topical cluster to AI retrieval systems — the video, the article, and the transcript are covering the same subject from one authoring entity.</p>
+<p>This is the architecture the <a href="/resources/blog/topical-authority-aeo-content-cluster-strategy">topical authority guide</a> describes for written content, extended to include video as a third format within each cluster. A cluster with a written pillar but no video is weaker than a cluster where both formats exist and link to each other. Each format reaches different AI engines and different query types. Video earns visual-query citations and tutorial citations. Written content earns definition and analysis citations. The cluster earns both.</p>
+
+<h2>Which Video Types Earn the Most AI Citations?</h2>
+<p>Long-form content (over 10 minutes) dominates. Per OtterlyAI's study, 94% of YouTube AI citations go to long-form video. The reason is structural: long-form videos have more chapters, more transcript content, and more extractable passages than short clips. A 12-minute tutorial on AEO schema implementation has 12 minutes of quotable transcript. A 60-second clip has one minute. AI engines extracting content have more material to work with in long-form.</p>
+<p>Tutorial and how-to content earns the highest citation rates per unit of content produced. An AI answering "how do I implement HowTo schema" will cite a video tutorial demonstrating the implementation if that video has a corrected transcript and chapter structure — exactly as it would cite a written guide with HowTo schema applied. The <a href="/resources/blog/howto-schema-aeo-step-by-step-citation-guide">HowTo schema guide</a> covers the written implementation; video tutorials on the same topic should mirror that HowTo structure in their chapter architecture.</p>
+<p>Case studies and outcome-specific videos earn strong citations for commercial-intent queries. A video titled "How we grew AI citation rate 340% using NotioncCue — what we changed and what we measured" will be cited for queries about measuring AEO results in ways that generic explainer content will not. The specificity of the outcome — named product, named metric, named time frame — is the citation magnet. AI engines retrieving sources for outcome-specific queries need specific evidence, not general guidance.</p>
+
+<div class="callout"><p>The NotioncCue AI Topical Cluster Map shows where video fits — and where it is missing — in your current content architecture. It surfaces topic clusters where you have written content but no video equivalent, and highlights queries where video results are appearing in AI citations but your cluster has no video asset. Building video into the right cluster positions rather than producing standalone YouTube content is what converts video production effort into compounding citation returns.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>Do I need a large YouTube channel to earn AI citations?</strong><br/>No. OtterlyAI's 2026 study of 100 million citation instances found near-zero correlation between subscriber count and citation frequency. The median cited channel has fewer than 41 videos. What predicts citation is structural quality — corrected transcript, question-format chapter titles, VideoObject schema on an embedding page — not channel size or view count. A new channel with three well-structured tutorials competes for AI citations on the same terms as an established channel with 200 poorly structured videos.</p>
+<p><strong>Can AI engines cite specific segments of a YouTube video, or only the full video?</strong><br/>Google AI Overviews and AI Mode can cite specific segments using the Clip schema data embedded in VideoObject. Perplexity typically cites the full video page. ChatGPT and Claude cannot access YouTube directly and cite through the transcript page on your domain. For Google-specific segment citations, the <code>hasPart</code> array with Clip objects and startOffset/endOffset values is how you declare which segments correspond to which questions.</p>
+<p><strong>Should a video page use standalone VideoObject schema or nest it inside an Article?</strong><br/>Nest it inside an Article using the <code>@graph</code> stacking pattern and the <code>video</code> property linking them. Standalone VideoObject on an article page creates a schema conflict — the page is primarily an article that contains a video, not a video-only page. The @graph approach declares both correctly and links them as related entities, which tells AI engines that the transcript text and the video content are the same source. Standalone VideoObject is correct only on pages where the video is the sole primary content with no supporting article text.</p>
+<p><strong>How do you track whether your YouTube content is being cited in AI engines?</strong><br/>Perplexity shows source URLs including YouTube links directly in citations — check manually by running target queries. GA4 shows referral traffic from perplexity.ai and from google.com/search (for AI Overview clicks) segmented by landing page. If your transcript page is driving sessions via these referrers, the video cluster is earning citations. The <a href="/resources/blog/aeo-measurement-analytics-how-to-track-ai-visibility">AEO measurement guide</a> covers the full GA4 setup for tracking AI citation traffic separately from organic search traffic.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 52 — Reddit and Community Signals for AEO
+  // Primary: Reddit AEO, community signals AI citations, UGC AEO strategy
+  // Secondary: Reddit citations AI search, community AEO 2026
+  // Interlinks: off-site-aeo-signals-third-party-citations,
+  //             entity-based-aeo-knowledge-graph-brand-authority,
+  //             ai-brand-hallucination-find-and-fix,
+  //             eeat-aeo-trust-signals-ai-citation-2026,
+  //             aeo-measurement-analytics-how-to-track-ai-visibility
+  // Tool CTA: Citation Tracker (Reddit sentiment monitoring)
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'reddit-community-signals-aeo-ugc-ai-citations',
+    emoji:          '💬',
+    bg:             'rgba(255,148,70,.06)',
+    tag:            'AEO Strategy',
+    date:           'Jul 1, 2026',
+    title:          'Reddit and Community AEO: Why 40% of AI Citations Come From Platforms You Don\'t Control',
+    excerpt:        'Reddit accounts for roughly 40% of AI citations across ChatGPT, Gemini, and Claude — the single most-cited source in every major engine. Not your website. Not your blog. An anonymous forum. Here is what that means for your brand and what you can actually do about it.',
+    read:           '9 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>Reddit accounts for roughly 40% of AI citations across ChatGPT, Gemini, and Claude, per the 5W AI Platform Citation Source Index 2026 — an analysis of 680 million citations across five AI platforms. Not editorial news. Not Wikipedia. Not brand websites. Reddit, a forum where users argue anonymously, is the most-cited source in AI-generated answers.</p>
+<p>That fact is uncomfortable for most marketing teams, and it should be. The off-site AEO work covered in the <a href="/resources/blog/off-site-aeo-signals-third-party-citations">off-site signals guide</a> — G2 reviews, Wikidata entries, editorial mentions — all matter. But none of those channels individually comes close to Reddit's citation weight. When AI engines need to answer "what is the best AEO tool for a B2B startup," they retrieve Reddit threads because those threads contain practitioner-specific answers that no vendor website or editorial outlet provides in the same format.</p>
+<p>The question is not whether Reddit matters for AEO. It clearly does. The question is what a brand can legitimately do about a citation surface it does not own and cannot directly control.</p>
+
+<h2>Why Do AI Engines Weight Reddit So Heavily?</h2>
+<p>AI engines cite Reddit for the same reason humans trust it: specificity, lived experience, and the presence of correction mechanisms. A Reddit thread about "best CRM for a 12-person fintech startup" contains exactly the kind of specific, conditional, edge-case-aware answer that AI engines need to answer similar queries. "We tried HubSpot but the automation limits hit us at 3,000 contacts. Switched to Pipedrive, took two weeks to migrate, the API is cleaner" is the entity-dense, outcome-specific content that AI retrieval systems extract reliably.</p>
+<p>Kevin Indig's analysis at Growth Memo found that cited text has an entity density of 20.6% — nearly three times the 5-8% in normal English. Reddit threads are naturally entity-dense. Nobody on Reddit writes "consider evaluating a leading CRM solution." They write brand names, version numbers, specific limitations, and named outcomes. That specificity is what makes Reddit content extractable by AI systems operating on retrieval-augmented generation.</p>
+<p>Google's $60 million annual licensing deal with Reddit — which gives Google structured access to Reddit's content for AI training and retrieval — reinforced Reddit's position. OpenAI signed a separate Reddit data partnership in 2024. Both deals mean Reddit content flows into AI retrieval pools at a structural level, not just as a crawled website competing with other indexed pages.</p>
+<p>The community correction mechanism also matters. A wrong answer on Reddit gets downvoted and corrected in the replies. AI engines that weight community consensus (upvotes, reply quality, thread recency) effectively inherit Reddit's own quality filtering. A highly upvoted answer with no contradicting replies is more AI-citable than a low-engagement post with contested claims.</p>
+
+<h2>What Does Reddit Citation Concentration Mean for Your Brand?</h2>
+<p>It means that when someone asks an AI engine what your product does, whether it is worth buying, and how it compares to alternatives, the answer may be assembled primarily from Reddit — not your website, not your documentation, not your blog.</p>
+<p>Three specific query types pull heavily from Reddit: experience-based queries ("has anyone used X for Y"), comparison queries ("X vs Y, which is better for Z"), and problem-diagnosis queries ("X keeps returning error Y, how to fix"). These are exactly the queries buyers run before making decisions. If Reddit threads about your product are inaccurate, outdated, or dominated by negative posts about a problem you have since fixed, AI engines will surface that narrative regardless of what your website says.</p>
+<p>Perplexity cites Reddit in 46.7% of responses per Lily Ray's research at Amsive. Google AI Overviews cite Reddit at 21%. ChatGPT cites Reddit at 11.3%. The exact percentages shift regularly — ChatGPT's Reddit citation share dropped from 60% to 10% in six weeks during late 2025, per the 5W Index — but Reddit's structural position as a primary AI citation source has been consistent for over a year. Brands that ignore Reddit's AEO signal and focus only on owned content optimisation are building an incomplete strategy.</p>
+
+<h2>What Can You Legitimately Do About Reddit for AEO?</h2>
+<p>The answer is genuine community participation — not astroturfing, not promotional posting, and not automated engagement. Reddit bans are permanent. Once a brand is flagged for fake community behaviour, that negative signal enters the AI retrieval pool and gets cited alongside anything positive your team produces. Reddit moderation communities share ban information. The damage compounds in ways that are extremely difficult to reverse.</p>
+<p>Four legitimate strategies produce real Reddit AEO signal:</p>
+<p><strong>Identify and monitor your priority subreddits.</strong> Find the three to five subreddits where your buyers discuss your product category. For AEO tools: r/SEO, r/marketing, r/SaaS, r/startups. For B2B software: category-specific subreddits plus role-specific ones (r/dataengineering, r/devops, r/sales). Search your brand name and product category in each. Read what is already being said. The existing thread landscape tells you what AI engines are currently retrieving about your brand. This is cheaper and faster than any AEO tool for answering "what does AI currently know about us from Reddit?"</p>
+<p><strong>Respond to threads where your product is mentioned or compared, with disclosure.</strong> FTC rules and Reddit's site-wide policies both require disclosure of commercial affiliation when discussing your own product. A company employee responding to "does anyone use NotioncCue?" should say explicitly that they work for the company before answering. Undisclosed promotion gets flagged faster than almost any other content type and generates the worst possible outcome: a thread discussing how your brand tried to manipulate Reddit, which then becomes the content AI engines cite.</p>
+<p><strong>Answer questions as a genuine practitioner, not as a promoter.</strong> The brand signals that compound on Reddit are those from employees who participate in communities as subject matter experts, answer questions in their area of expertise, and mention their product only when it is directly relevant and disclosed. A 95/5 contribution ratio — 95% pure value, 5% brand-relevant — is the benchmark cited consistently in Reddit community research. Accounts that contribute genuine expertise for 30 to 60 days before any brand mention build the karma history that gives later brand references credibility.</p>
+<p><strong>Create citable original content that Reddit communities want to reference.</strong> Original research, benchmark data, and transparent pricing pages earn Reddit links and mentions without requiring direct participation. If you publish the only independent study comparing AEO tool citation tracking accuracy across five engines, Reddit threads discussing AEO tools will cite that study. The link from Reddit to your research page becomes an AI citation signal through two paths: direct Reddit citation and the link signal that improves your overall off-site authority.</p>
+
+<h2>Which Other Community Platforms Carry AEO Signal?</h2>
+<p>Reddit dominates, but it is not alone. Stack Overflow carries strong citation weight for technical queries. Quora is cited at 14.3% in Google AI Overviews. LinkedIn is cited particularly heavily by Copilot, given Microsoft's ownership. Niche forums in specific verticals — industry-specific Slack communities, GitHub Discussions, domain-specific forums — carry outsized weight in their categories even with lower overall citation frequency.</p>
+<p>The platform priority depends on your category. B2B technology brands should focus on Reddit (r/SaaS, r/sales, r/marketing), Stack Overflow (for developer-adjacent products), and LinkedIn (for Copilot signals). B2C brands should prioritise Reddit and YouTube. Highly regulated industries — healthcare, legal, finance — will find that AI engines weight professional community platforms (PubMed, professional association forums, NEJM comments) more heavily than general Reddit threads.</p>
+<p>Google's May 2026 Community Perspectives update to AI Overviews now pulls Reddit and forum quotes directly into search results, showing the community member's handle alongside their quoted text. This gives Reddit participants additional direct visibility in Google's AI surfaces — a named quote attribution inside an AI Overview is a meaningfully different AEO outcome from an anonymous citation. Building a genuine community presence rather than anonymous participation has improved return with this change.</p>
+
+<h2>How Do You Measure Reddit's Contribution to Your AEO Metrics?</h2>
+<p>Measuring Reddit's effect on AI citations is indirect, because the citation chain runs from Reddit thread to AI retrieval to AI answer, without a direct trackable click. Three proxy metrics help.</p>
+<p><strong>Reddit thread sentiment for your brand and category.</strong> Run your brand name and product category in Reddit search monthly. Note the sentiment of threads that appear in the top results — these are the threads with the highest engagement and therefore the most likely AI citation candidates. Compare against what AI engines actually say about your product in the <a href="/resources/blog/ai-brand-hallucination-find-and-fix">brand hallucination check</a>. Where AI descriptions match Reddit thread content, you can see the signal path.</p>
+<p><strong>AI citation content analysis for community-sourced claims.</strong> Ask ChatGPT, Perplexity, and Claude: "What do users say about [your brand] in AEO communities?" The AI response will often cite Reddit threads directly or paraphrase them. The specific claims the AI makes about your product that are not on your website are community-sourced. Track these claims over time — improving Reddit sentiment about those specific claims is the lever that changes the AI narrative.</p>
+<p><strong>GA4 referral traffic from reddit.com.</strong> Direct Reddit referral traffic shows which pages Reddit users are linking to. These are your most likely Reddit-mediated AI citation pages. If a Reddit thread links to your research page and that page later earns AI citations, the Reddit link was part of the signal chain — even if the AI citation came weeks later after a crawler visit.</p>
+
+<div class="callout"><p>The NotioncCue Citation Tracker surfaces what AI engines say about your brand across ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews on a weekly cadence. When a Reddit thread is the source behind an inaccurate AI description — when Claude says your product has a limitation that was fixed six months ago — the Citation Tracker flags the discrepancy between your current product and what AI engines are citing. That flag tells you which thread to find and respond to correctly, rather than discovering the narrative problem from a lost sales call.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>Can a brand pay for Reddit promotion to improve AEO signal?</strong><br/>Reddit's paid advertising (Reddit Ads) does not produce organic Reddit citations in AI engines. AI engines retrieve from organic Reddit threads, not promoted posts. Paid Reddit promotion can drive awareness and potentially lead to organic discussion, but the paid posts themselves do not enter the organic citation pool.</p>
+<p><strong>What do you do if Reddit threads about your brand contain outdated or incorrect information?</strong><br/>Respond in the thread with disclosure, providing the correct current information and citing the source (your documentation, a changelog entry, or a named support article). Do not ask moderators to remove the thread unless it violates Reddit rules — removal requests from brands rarely succeed and often generate negative secondary threads about the attempted censorship. A well-crafted correction response from a disclosed employee often becomes the most-upvoted reply and the content AI engines surface alongside the original concern.</p>
+<p><strong>How long does it take to build a genuine Reddit presence that influences AI citations?</strong><br/>The 60-day roadmap that Discovered Labs and similar practitioners document is realistic: 15 days of listening and setup, 15 days of genuine non-branded contribution, 15 days of soft brand introduction, 15 days of anchor content. Initial AI citation signal from community participation typically appears at 60-90 days. The signal builds slowly and compounds — a community presence built over six months is significantly more durable than one built over six weeks.</p>
+<p><strong>Does Reddit's Community Perspectives feature in Google AI Overviews change the strategy?</strong><br/>Named attribution in Community Perspectives — where Google shows the Reddit commenter's handle alongside their quote — makes genuine named participation more valuable. An employee participating under their own name and role, with disclosure, can earn named brand mentions inside AI Overviews in a way that anonymous accounts cannot. The strategy implications: encourage employees who are genuinely knowledgeable about your product category to participate in communities under their real names, building personal professional credibility alongside brand signal.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 53 — AEO for Startups
+  // Primary: AEO for startups, early-stage AI citations, startup AEO strategy
+  // Secondary: AEO without domain authority, zero budget AEO, startup AI search
+  // Interlinks: what-is-answer-engine-optimization-aeo-guide,
+  //             aeo-audit-checklist-complete-guide-2026,
+  //             entity-based-aeo-knowledge-graph-brand-authority,
+  //             llms-txt-what-it-actually-does,
+  //             aeo-keyword-research-how-to-find-right-prompts,
+  //             aeo-content-gap-analysis-find-what-ai-answers-without-you
+  // Tool CTA: AEO Content Brief Generator (resource-constrained teams)
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'aeo-for-startups-early-stage-ai-citations-no-domain-authority',
+    emoji:          '🚀',
+    bg:             'rgba(146,124,255,.06)',
+    tag:            'AEO Strategy',
+    date:           'Jul 1, 2026',
+    title:          'AEO for Startups: How to Earn AI Citations With Zero Domain Authority',
+    excerpt:        'Traditional SEO requires six to twelve months of authority building before a new domain earns competitive rankings. AEO requires two to three hours of technical setup before you start appearing in AI answers. The overlap between AI citation sources and Google\'s top-ten results is only 12%. You do not need to beat established competitors at SEO to beat them at AEO.',
+    read:           '9 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>Traditional SEO punishes new domains. A startup with a three-month-old website competes against brands with eight years of accumulated backlinks and domain authority. Getting to page one for a competitive keyword takes six to twelve months on a good trajectory. For most early-stage founders, "invest in SEO content" means waiting a year to know if it worked.</p>
+<p>AEO runs on different rules. The overlap between AI citation sources and Google's top-ten results is only 12%, per Ahrefs analysis of millions of queries. ChatGPT has just 8% overlap with Google and Bing rankings. That means 88% to 92% of AI citations come from pages that are not top-ten Google results. Domain authority predicts AI citation rate at lower confidence than content structure, entity signals, and topical specificity.</p>
+<p>A well-structured startup page can earn AI citations alongside competitors with decade-old domains. The mechanism is different from SEO, and so is the timeline. Initial citations typically appear within two to four weeks of setup on Perplexity. Gemini and Claude follow within four to eight weeks. ChatGPT is slowest, often requiring two to four months of accumulated content and third-party signals before citations appear for competitive queries.</p>
+
+<h2>Why Does AEO Level the Playing Field for Startups?</h2>
+<p>AI retrieval systems evaluate pages on content structure and metadata — not on the backlink profiles and domain age that Google's algorithm weights heavily. The question an AI engine asks when selecting a citation source is: "Does this page provide a clear, extractable, verifiable answer to this query?" Not: "How many domains link to this page?"</p>
+<p>For startups, this is the opening. Your competitors have domain authority you cannot replicate quickly. They do not necessarily have better-structured content. They do not necessarily have FAQPage schema, BLUF-structured sections, or entity-complete Organisation schema. Many of them have never heard of VideoObject schema or llms.txt. These technical and structural elements can be implemented in an afternoon and produce measurable AI citation returns within weeks — on a domain launched last month.</p>
+<p>The Princeton/Georgia Tech/Allen Institute research on Generative Engine Optimization documented up to 40% visibility improvement in AI-generated responses from specific content optimisation strategies — adding inline citations to named sources, including specific statistics with dates, and structuring content as direct answer blocks. These are content structure changes, not authority signals. A new domain implementing them competes on the same terms as an established domain that has not.</p>
+<p>Gartner's AI citation research also found that category entry — the first citation wins for a query cluster — is disproportionately durable. A startup that earns the first citations for a narrow, specific set of queries builds a position that incumbents have to actively displace. The cost of being first is much lower than the cost of catching up as a latecomer.</p>
+
+<h2>What Are the First Three Hours of Startup AEO?</h2>
+<p>These three hours of technical setup produce the machine-readable signals AI engines need to understand what your brand is and what it offers. None of them require content production. All of them can be done on a new domain with no existing traffic.</p>
+<p><strong>Hour 1: Organisation schema and entity foundation.</strong> Add Organisation schema to your homepage with your brand name, founding date, brief description, logo, and sameAs links to your LinkedIn company page, Crunchbase entry, and any other professional directory where your startup is listed. This is the entity declaration that tells AI engines your brand exists as a distinct, named entity — the same foundation covered in the <a href="/resources/blog/entity-based-aeo-knowledge-graph-brand-authority">entity-based AEO guide</a>. Without it, AI engines have to infer your brand's identity from your homepage text. With it, identity is explicitly declared.</p>
+<p><strong>Hour 2: llms.txt file and robots.txt configuration.</strong> Create a simple llms.txt at your domain root — a Markdown file naming your brand, summarising what you do in two or three sentences, and linking to your five most important pages with one-sentence descriptions. This takes 20 minutes. Then check your robots.txt to confirm GPTBot, ClaudeBot, Claude-SearchBot, PerplexityBot, GoogleBot-Extended, OAI-SearchBot, and Bingbot are all explicitly allowed. The full user-agent list and configuration is in the <a href="/resources/blog/how-ai-crawlers-index-your-site">AI crawlers guide</a>. New domains sometimes inherit default hosting configurations that block crawlers — confirm each one is actually allowed rather than assuming.</p>
+<p><strong>Hour 3: A 20-question FAQ page with FAQPage schema.</strong> Choose the 20 questions your buyers ask most often about your product category and what you specifically do. Answer each one in 40 to 60 words — direct, specific, no marketing language. Add FAQPage schema to the page as a JSON-LD block. This is the highest-leverage single piece of content a startup can publish for AEO. FAQ format matches exactly how AI engines retrieve and answer queries. FAQPage schema makes each answer independently extractable. A new startup with one well-structured FAQ page is immediately citable for the specific questions on that page.</p>
+
+<h2>What Content Strategy Works at Seed Stage?</h2>
+<p>Narrow and specific always beats broad and comprehensive for startup AEO. An established competitor has a hundred pages covering every aspect of your category. They are already cited for the broad category queries. You cannot beat them on broad coverage — you have neither the content volume nor the authority signals.</p>
+<p>What you can beat them on is depth in two or three narrow query clusters where your product has a genuine edge. "Best AEO tool for early-stage B2B SaaS" is a narrower query than "best AEO tool." The competitive citation field is smaller. The query specificity matches your product's actual use case. A well-structured page with FAQPage schema targeting that specific query cluster can earn citations from Perplexity within weeks, alongside tools with ten times your domain authority.</p>
+<p>The query research method for finding these narrow clusters is in the <a href="/resources/blog/aeo-keyword-research-how-to-find-right-prompts">AEO keyword research guide</a>: run your category queries through ChatGPT and Perplexity, note who is cited for broad queries and where the citations are absent or weak, and find the long-tail variations where no competitor has clearly citable content. Those are your entry points.</p>
+<p>FogTrail's 2026 startup AEO analysis documents the engine-specific timing: Perplexity and Grok tend to cite newer domains earliest, because both weight recency and specificity over domain authority. Gemini follows, since it also weights freshness heavily. Claude and ChatGPT take longer — both weight entity corroboration signals that take more time to build. Start measuring your citation rate on Perplexity first. An early Perplexity citation is a signal that the content structure and entity foundation are working, before the slower engines respond.</p>
+
+<h2>What Third-Party Signals Does a Startup Need Immediately?</h2>
+<p>Third-party signals are the corroboration layer that AI engines use to verify that your brand entity is real and your claims are trustworthy. For a brand-new startup, the owned signals — website schema, FAQ page, llms.txt — declare identity. Third-party signals verify it. AI engines that see a brand's schema declaration without any corroborating third-party signals apply lower confidence to citations.</p>
+<p>Five third-party signals that a startup can establish in the first 30 days, ordered by effort-to-impact ratio:</p>
+<p><strong>LinkedIn Company Page.</strong> Create a complete company page with a current description matching your website Organisation schema exactly. Add your founding date, industry, and company size. This is the most important single third-party signal for Copilot (which weights LinkedIn heavily) and contributes to all AI engines' entity graphs.</p>
+<p><strong>Crunchbase profile.</strong> A free Crunchbase entry establishes your startup in a database AI engines treat as authoritative for company identity. Match the company name and description to your schema exactly. Add your founding date, category, and location.</p>
+<p><strong>G2 or Capterra listing.</strong> For SaaS startups, a product listing on G2 or Capterra — even with no reviews yet — establishes a third-party entity reference. Add the listing and request your first three to five reviews from early customers. The reviews do not need to be numerous. They need to be specific and outcome-focused.</p>
+<p><strong>One editorial mention with a named company reference.</strong> A single mention of your startup by name in a relevant publication — a trade newsletter, an industry blog, a Medium post by a practitioner in your field — creates an external entity reference that AI engines can follow. Target publications your buyers actually read, not generic startup press. One specific mention in the right publication outperforms ten generic press releases.</p>
+<p><strong>Wikidata entry if applicable.</strong> If your startup has enough external coverage to justify a Wikidata entry (typically 2-3 independent editorial references), create one. Wikidata entries feed directly into AI training data and knowledge graph signals. Not every startup qualifies at seed stage, but it is worth checking the eligibility criteria once you have editorial coverage.</p>
+
+<h2>How Do You Prioritise When You Have No Marketing Team?</h2>
+<p>A solo founder with two hours per week for marketing has to choose. This is the order:</p>
+<p>First, the technical setup (three hours, once): Organisation schema, llms.txt, robots.txt, FAQ page with FAQPage schema. This infrastructure persists and compounds without maintenance.</p>
+<p>Second, one piece of deep content per month targeting the narrowest, most specific query where you have genuine expertise and competitors have weak content. Use the <a href="/resources/blog/aeo-content-gap-analysis-find-what-ai-answers-without-you">content gap analysis guide</a> to find it. Produce it with BLUF structure, named sources, and specific outcomes. One well-structured page per month is enough to build citation traction at seed stage.</p>
+<p>Third, community participation: 30 minutes per week answering questions in the two or three Reddit communities where your buyers discuss your category. Not promotional. Genuine answers in your area of expertise, disclosed identity when your product is relevant. The compounding return from sustained community participation at seed stage often exceeds the return from blog content because it enters the Reddit citation pool that AI engines weight so heavily.</p>
+
+<div class="callout"><p>The NotioncCue AEO Content Brief Generator is built for resource-constrained teams. Instead of spending hours researching which query to target and how competitors are answering it, the Brief Generator takes the gap data from the AI Answer Gap Finder and outputs a structured brief: target prompt, competitor URL, recommended H2 structure, FAQ list, and schema types needed. For a solo founder or a two-person content team, the Brief Generator cuts brief production from 45 minutes to 10 and ensures every piece of content is targeting a real AI citation gap rather than a keyword that already has well-cited competition.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>Should a startup prioritise AEO or SEO first?</strong><br/>AEO for the first 30 days, then both in parallel. The technical AEO foundation — Organisation schema, llms.txt, FAQ page, robots.txt — takes three hours and starts producing results in two to four weeks. Traditional SEO requires months of content and link building before competitive rankings appear. Starting with AEO infrastructure means your brand is visible in AI search while the longer SEO programme builds. The two approaches reinforce each other: content built for AI citations also earns traditional search rankings when it is high quality and well-structured.</p>
+<p><strong>What query clusters should a seed-stage startup target for AEO?</strong><br/>Narrow, specific, and use-case-anchored. Not "best CRM" but "best CRM for a 12-person sales team using Slack and HubSpot." Not "AEO tools" but "AEO tools for startups tracking Perplexity citations under $100 per month." The specificity matches your actual target user and reduces competitive citation pressure. Perplexity and Grok respond to this approach fastest. Start with five to eight narrow query clusters and expand from there as citations accumulate.</p>
+<p><strong>How do you know if your AEO setup is working?</strong><br/>Run your five target queries through Perplexity every Monday. Record whether your brand appears and which URL is cited. If after three weeks of consistently structured content you are not appearing at all, the issue is usually one of three things: robots.txt blocking the crawler, schema not present in the server-rendered HTML (JavaScript-rendered schema is invisible to AI crawlers), or the content is not specific enough to be extractable. The <a href="/resources/blog/schema-errors-aeo-diagnose-and-fix-guide">schema errors guide</a> covers each failure mode and its fix.</p>
+<p><strong>Is AEO worthwhile before product-market fit?</strong><br/>Yes, for two reasons. First, the technical infrastructure (Organisation schema, llms.txt, FAQ page) takes three hours to build and does not require ongoing maintenance — it is worth doing even if your content strategy is not yet defined. Second, early AI citations are an independent validation signal. If Perplexity is citing your FAQ page for queries your target buyers are running, that tells you the content is resonating before GA4 traffic volumes are large enough to give statistically meaningful data. Citation rate is a leading indicator of product-market fit in AI search, because AI engines are already surfacing you to buyers who are looking for exactly what you offer.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 54 — First-Party Research as AEO Fuel
+  // Primary: first-party research AEO, original data AI citations
+  // Secondary: zero-party data AEO, proprietary research AI search, data-driven AEO
+  // Interlinks: eeat-aeo-trust-signals-ai-citation-2026,
+  //             off-site-aeo-signals-third-party-citations,
+  //             how-to-write-content-ai-engines-extract-and-cite,
+  //             aeo-content-gap-analysis-find-what-ai-answers-without-you,
+  //             bluf-writing-technique-ai-citations-aeo,
+  //             aeo-roi-how-to-prove-value-and-build-business-case
+  // Tool CTA: AI Answer Gap Finder + Prompt Tracker
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'first-party-research-aeo-original-data-ai-citations',
+    emoji:          '🔬',
+    bg:             'rgba(82,227,142,.06)',
+    tag:            'AEO Strategy',
+    date:           'Jul 1, 2026',
+    title:          'First-Party Research and AEO: Why Original Data Is Your Highest-Value Citation Asset',
+    excerpt:        'Adding inline citations to named sources improves AI visibility by up to 40%, per the Princeton GEO research paper. But being cited is even more valuable than citing others. Original data — benchmark studies, proprietary product analytics, customer survey findings — earns citations from AI engines that synthesised content from the same sources simply cannot compete with.',
+    read:           '9 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>The Princeton/Georgia Tech/Allen Institute GEO research paper documented that adding inline citations to named sources improves AI visibility by up to 40% for mid-ranked pages. That is a content strategy lever most AEO practitioners now know. What fewer brands have acted on is the flip side: being cited is more valuable than citing others.</p>
+<p>Original data — a benchmark study your team ran, a pattern extracted from your product analytics, a survey of your customer base — earns citations from AI engines that synthesised content assembled from the same third-party sources simply cannot. When every competitor is citing the same Semrush statistic about AI Overviews, the brand that publishes its own data from its own platform creates a unique citable asset that no other source contains.</p>
+<p>This is not a new SEO insight. Link-worthy original research has driven backlinks since the early 2000s. What is new is the mechanism. AI engines retrieve and cite original data sources differently from link-building. A study published on your blog that earns 50 backlinks and 200 referring Reddit mentions creates a citation chain into AI training data and retrieval pools that multiplies the original work across all the AI engines that reference those backlinks and Reddit threads. The study earns a citation. The Reddit threads discussing the study earn citations. The articles that cite the study earn citations. One original piece of research seeds an entire citation ecosystem.</p>
+
+<h2>What Makes Data Citable by AI Engines?</h2>
+<p>Not all data is equally citable. AI engines retrieve data that meets four criteria simultaneously. Research that fails any one of them earns fewer citations than research that passes all four.</p>
+<p><strong>Named source with methodology disclosed.</strong> AI engines cannot cite "internal data" or "our analysis." They cite named sources with verifiable origin. "NotioncCue's analysis of 50,000 URLs tracked through the platform between January and May 2026" is citable. "Our research" is not. Name the sample, the time period, and the collection method in every data publication. The naming makes the data independently verifiable — which is exactly what AI citation algorithms want before surfacing a statistic.</p>
+<p><strong>Specific metric with a unit.</strong> "AI citation rates increased significantly" is not citable. "Pages with three or more schema types earned AI citations at 13% higher rates than pages with no schema" is citable. The specificity — 13%, three schema types, rate rather than volume — gives AI engines a precise, quotable number. Vague findings produce vague AI descriptions. Specific findings produce specific AI citations.</p>
+<p><strong>Freshness signal.</strong> AI engines weight data recency heavily. Amsive's 2026 research found that 50% of AI citations go to content updated in the past 13 weeks. Data from 2023 competes poorly against 2026 data regardless of sample size or methodology quality. Publish research with explicit date ranges. Update key statistics quarterly when your product platform produces new data. The dateModified schema field on your research page should reflect genuine updates, not just calendar-year refreshes.</p>
+<p><strong>Entity-first framing.</strong> Name the subject entity in every sentence that contains data. "Pages using FAQPage schema are 4.2x more likely to be cited in AI Overviews than pages without it (Semrush, March 2026)" is entity-first. "Pages using that type of schema are more likely to be cited" is not — "that type" requires the previous sentence for context. AI engines extract passages independently. Each sentence containing a statistic should be self-contained and include the entity name.</p>
+
+<h2>What Data Does Every SaaS Platform Already Have?</h2>
+<p>Most SaaS teams sit on more citable first-party data than they realise, because they think of product analytics as operational data rather than publication material. Three categories of product data consistently produce high-citation research:</p>
+<p><strong>Aggregated behavioural data.</strong> How customers use the product at scale. For NotioncCue, this is citation rate data across tracked domains — which schema types correlate with citation frequency, how citation rates decay without content updates, which AI engines respond fastest to structural changes. Any SaaS platform that tracks user behaviour at scale can extract aggregated, anonymised patterns that no external researcher can replicate. The methodology requirement: aggregate across enough users that individual behaviour is not identifiable, and describe the aggregation method explicitly.</p>
+<p><strong>Benchmark data from product outputs.</strong> A rank tracker can publish benchmark data on how rankings shift. A citation tracker can publish how citation rates change after specific interventions. An A/B testing tool can publish conversion rate benchmarks across industries. Your platform produces data that answers questions your users and their peers are running through AI engines. Publishing that data creates direct citations for those queries.</p>
+<p><strong>Customer survey findings.</strong> Survey your customer base on a specific question relevant to your category. "How much time does your team spend on AEO maintenance per week?" is a question with a citable answer that no external researcher has published because nobody else has access to a cohort of AEO practitioners. Four to six customer survey data points, published with sample size and methodology, is enough to create a citable asset for practitioners who are trying to benchmark their own operations.</p>
+
+<h2>How Do You Structure Research for Maximum Citation Rate?</h2>
+<p>The structure of a research publication matters as much as the data it contains. The same findings presented in a dense methodology-first format earn fewer AI citations than the same findings presented with BLUF structure and extractable stat blocks. The <a href="/resources/blog/bluf-writing-technique-ai-citations-aeo">BLUF writing guide</a> covers the underlying principles; research publications have specific structural requirements on top of those principles.</p>
+<p><strong>Lead with the three most citable findings.</strong> Open the research page — not the methodology section, the homepage of the research — with three to five headline findings stated as specific, named, dated statistics. These are your extraction targets. AI engines retrieving the page will pull from the opening section more heavily than from any other section. A finding buried on page four of a methodology-dense report earns fewer AI citations than the same finding in sentence two of a well-structured research summary.</p>
+<p><strong>Create a standalone findings summary separate from the full methodology.</strong> Publish the full research with complete methodology for practitioners who want depth. Also publish a 400 to 600 word summary page with only the key findings, each stated as a named, specific, dated statistic. This summary page is the AI citation target. The full methodology page is for human readers and for linking authority. Search engines and AI engines index both; AI engines extract from the summary more reliably.</p>
+<p><strong>Add FAQPage schema with five questions derived from the findings.</strong> Research papers earn citations for the statistics they contain. They also earn citations for the questions the statistics answer. "Does FAQPage schema improve AI citation rates?" is a query buyers run. A FAQPage schema entry answering that question directly — citing your own research finding — creates a double citation pathway: the finding earns citations, and the FAQ schema creates an additional extractable Q&A pair that AI engines can cite independently.</p>
+<p><strong>Publish on your main domain, not a subdomain.</strong> A research publication on research.yourdomain.com creates a domain authority split — the research earns citations that credit the subdomain, not the main domain. Keep research publications under yourdomain.com/research/ or integrated into your blog. The topical authority from research citing should flow back to your core domain entity.</p>
+
+<h2>How Does First-Party Research Seed Community Citations?</h2>
+<p>Original data is the content type most likely to earn Reddit links and forum citations — which feed back into AI retrieval pools as the community-validated signal that Reddit's AEO role produces. A benchmark study answering "how do AI citation rates change after fixing schema errors?" will be cited in Reddit threads every time a practitioner asks that question. Those threads then feed into AI retrieval for that query type.</p>
+<p>The citation chain: your original research earns a citation in a practitioner blog post. That blog post earns a Reddit upvote and link in a community thread. The Reddit thread earns an AI citation for community-validated evidence. Your research earns an AI citation directly. The practitioner post earns an AI citation. One study creates five to eight downstream citation touchpoints across owned, editorial, and community channels.</p>
+<p>For maximising the community citation chain, publish with a clear, short data statement that is easy to quote in a Reddit thread or tweet. "NotioncCue's analysis of 50,000 URLs found that pages with dateModified updated within 13 weeks were 3.2x more likely to earn AI citations than pages with older timestamps" is one sentence. It is the complete finding. It is quotable in a community thread without needing context. AI engines can extract it independently. Write every research headline finding as a quotable one-sentence statement.</p>
+
+<h2>How Do You Track Whether Research Is Driving AI Citations?</h2>
+<p>Three measurement approaches, in order of directness:</p>
+<p>Run your research headlines as prompts through ChatGPT, Perplexity, and Claude. "What does research show about the correlation between schema types and AI citation rates?" If your study findings appear in the response, the research is in the retrieval pool. If competitor findings appear instead, your research has a distribution or structural gap.</p>
+<p>Track GA4 referral traffic from AI engines to your research summary page specifically. When Perplexity cites your study, the researcher who reads the Perplexity answer and clicks through lands on that page. A persistent stream of AI referral traffic to a research page confirms ongoing citation activity in the retrieval pool.</p>
+<p>Monitor your brand's AI descriptions quarterly using the <a href="/resources/blog/aeo-roi-how-to-prove-value-and-build-business-case">AEO ROI tracking approach</a>. When AI engines start describing your brand as "NotioncCue, the AEO platform whose research showed X," the research has achieved the highest-value AEO outcome: the brand is cited by association with an original insight, not just by name. That association is what drives qualified pipeline from buyers who find you through AI before they find your marketing.</p>
+
+<div class="callout"><p>Original research creates citation targets but also creates content brief targets — the questions your research answers become high-confidence AEO brief inputs. Run your research findings through the NotioncCue AI Answer Gap Finder to see which competitor sources are currently being cited for the same questions, then use that gap data with the Prompt Tracker to confirm whether your published study is displacing those citations over time. The combination of original data publication and weekly prompt tracking is how you measure whether your research investment is compounding into AI citation authority or sitting unread.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>How large does a research sample need to be to earn AI citations?</strong><br/>There is no minimum sample size rule, but context matters. A 200-customer survey is credible for a niche SaaS product. The same sample published as a claim about "how most businesses handle AEO" would be a credibility mismatch. Name the exact sample: "survey of 200 NotioncCue users managing AEO for B2B SaaS products." That framing is specific enough to be credible and honest enough to be citable. AI engines that surface inflated sample claims — "a survey of businesses found" with a 47-person sample — are increasingly flagging those as low-confidence sources.</p>
+<p><strong>Should research be gated behind a form or freely accessible?</strong><br/>Freely accessible for AI citation purposes. AI engines cannot retrieve gated content. Research behind a form has no AI citation value regardless of how good the data is. Publish a complete, freely accessible summary and reserve the full PDF for lead generation — but make certain the summary contains enough standalone data to be citable without the gated version. If the summary is too thin to cite, the research earns no AI citations.</p>
+<p><strong>How often should a platform publish original research to compound AEO authority?</strong><br/>Quarterly is the cadence most AEO-focused SaaS platforms that publish research maintain. Monthly is achievable if you have product analytics that refresh naturally and do not require separate data collection. Annual research publications produce one citation cycle per year — useful but slow to compound. Quarterly publications mean each piece of research is still within the 13-week freshness window when the next one publishes, creating an overlapping freshness signal that keeps your domain in the "recent data" pool year-round.</p>
+<p><strong>Can you reuse the same underlying data for multiple research publications?</strong><br/>Yes, if the analytical angle differs. The same dataset can produce a publication on schema types and citation rate, another on freshness decay curves, and a third on engine-specific citation patterns — three separate citable publications, each targeting different query clusters, from one data collection effort. AI engines treat each publication as a distinct source for distinct queries. The limitation is that you should not restate the same finding from the same data with a new headline — AI engines that encounter effectively duplicate content from the same domain reduce citation confidence for both pieces.</p>
+`,
+  },
+
+   // ─────────────────────────────────────────────────────────────────────────
+  // POST 55 — AEO for Fintech / Financial Services
+  // Primary: AEO fintech, financial services AI citations, YMYL AEO
+  // Secondary: FinancialProduct schema, FCA AEO, SEC compliance AEO
+  // Interlinks: aeo-ymyl, eeat-aeo, entity-based-aeo, schema-errors-aeo,
+  //             off-site-aeo, aeo-measurement
+  // Tool CTA: Citation Tracker (compliance-accurate citations)
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'aeo-fintech-financial-services-ymyl-ai-citations',
+    emoji:          '💳',
+    bg:             'rgba(34,211,238,.06)',
+    tag:            'AEO Strategy',
+    date:           'Jul 2, 2026',
+    title:          'AEO for Fintech: Why Financial Content Faces a Higher Citation Bar (and How to Clear It)',
+    excerpt:        'AI engines apply their most cautious citation patterns to financial content. A consumer-electronics brand earns citations through review density alone. A fintech brand needs regulatory credentials, named authors with verifiable qualifications, rate disclosures with effective dates, and methodology pages — before a citation is possible. Here is what that means for your content programme.',
+    read:           '10 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>Financial content is YMYL — Your Money or Your Life. AI engines apply their highest caution to this tier. The training behind ChatGPT, Claude, Gemini, and Perplexity explicitly encodes the principle that financial recommendations carry real-world risk and therefore require a higher evidence bar before citation.</p>
+<p>A consumer-electronics brand can earn a product recommendation citation through G2 review density and a well-structured product page. A fintech brand needs regulatory credentials, named authors with verifiable professional qualifications, rate disclosures with effective dates, and methodology pages explaining how rates or scores are calculated — before the AI considers the page citation-worthy for a financial recommendation query.</p>
+<p>This is not unfair. It reflects accurate risk calibration. The practical implication is that fintech AEO requires a compliance-integrated content strategy rather than a standard AEO stack. The content structure and schema work is largely the same. The E-E-A-T evidence layer is substantially deeper, and the compliance review workflow cannot be skipped.</p>
+
+<h2>Why Does the YMYL Citation Bar Apply to Fintech Specifically?</h2>
+<p>Foundation model providers — Anthropic, OpenAI, Google, Microsoft — train their assistants to recognise YMYL queries and apply elevated guardrails. Financial topics sit at the centre of that elevated tier. The guardrail behaviours include: preferring regulator-authored or government-authored sources over commercial sources for definitional or regulatory questions; adding disclaimers to financial recommendations regardless of source confidence; refusing outright to give specific investment or trading advice; and hedging performance, return, and risk claims even when the source content carries them confidently.</p>
+<p>For fintech AEO, these behaviours mean the citation process is gatekeeping, not just ranking. A page that would be ranked and cited freely in a tech or retail category gets hedged or skipped in a financial category unless specific trust signals are present. The Stridec April 2026 analysis of fintech citation patterns found that citation-earning financial content consistently shares four features: clear rate disclosures with effective dates, named methodology pages explaining calculation approaches, fee schedules with full breakdowns, and explicit references to the regulatory framework the product operates under.</p>
+<p>Jurisdiction compounds the challenge. A fintech brand operating in the UK needs FCA authorisation references and Financial Services Register number in its Organisation schema. A US fintech needs SEC, FINRA, or FDIC registration signals. An EU fintech needs MiCA categorisation for crypto-assets and MiFID II framework references for investment products. Each jurisdiction has different regulatory signals that AI engines treating financial content with elevated scrutiny check for. Missing one can mean a page is otherwise perfect but earns zero citation for the target market query.</p>
+
+<h2>What Is FinancialProduct and FinancialService Schema?</h2>
+<p>Schema.org provides two specialised types for financial content that carry additional weight in AI citation algorithms compared to generic Product or Service schema: <code>FinancialProduct</code> and <code>FinancialService</code>. Most fintech brands are using the generic types and missing the elevated trust signal.</p>
+<p><code>FinancialProduct</code> applies to individual financial offerings — savings accounts, loans, credit cards, investment products. <code>FinancialService</code> applies to financial service businesses — banks, brokers, payment processors, insurance companies. Both inherit from their parent types and add financial-specific fields including <code>annualPercentageRate</code>, <code>feesAndCommissionsSpecification</code>, and <code>interestRate</code>.</p>
+<pre><code>{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "NotioncCue Business Savings Account",
+  "description": "A FSCS-protected business savings account with a 4.65% AER variable rate. No minimum balance. Suitable for UK-registered limited companies.",
+  "annualPercentageRate": {
+    "@type": "QuantitativeValue",
+    "value": 4.65,
+    "unitText": "PERCENT"
+  },
+  "feesAndCommissionsSpecification": "No monthly fees. No withdrawal fees. No minimum balance requirement.",
+  "termsOfService": "https://example.com/terms/savings-account",
+  "provider": {
+    "@type": "FinancialService",
+    "@id": "https://example.com/#organization",
+    "name": "Example Bank",
+    "fcsNumber": "123456",
+    "regulatoryStatus": "FCA authorised: FRN 123456"
+  },
+  "category": "Business Savings Account",
+  "areaServed": {
+    "@type": "Country",
+    "name": "United Kingdom"
+  }
+}</code></pre>
+<p>The <code>fcsNumber</code> and <code>regulatoryStatus</code> fields are not standard schema.org properties — they are custom properties you can add to help AI engines recognise regulatory credential signals. The more important mechanism is ensuring your regulatory reference number appears in your Organisation schema's <code>description</code> field and that it matches exactly the registered name and number on the relevant regulator's public register.</p>
+<p>AI engines that evaluate financial content for YMYL compliance check entity consistency. A UK fintech whose Organisation schema says "FCA Authorised" but where no FCA register entry can be found for that company name earns zero regulatory trust signal — and may be explicitly flagged as a low-confidence financial source.</p>
+
+<h2>What Are the Content Patterns That Earn Fintech Citations?</h2>
+<p>Fintech AEO content splits into three types, each with different citation eligibility patterns.</p>
+<p><strong>Rate and product content.</strong> Pages about interest rates, fees, APR, and product terms earn citations for comparison queries — "best high-yield savings account UK 2026," "lowest business loan rate comparison." This content earns citations when it includes the rate with an effective date (not "rates from X%," but "4.65% AER as of July 2026"), the full fee breakdown in a table format that AI can extract as structured data, a FAQPage schema section answering "how is this rate calculated?" and "when does this rate change?", and a link to the regulator's authorisation record for the provider. Without the effective date, AI engines treat rate content as potentially stale — one of the few content types where stale is not just a freshness penalty but a citation disqualifier.</p>
+<p><strong>Financial education content.</strong> Explanatory content — "what is a Roth IRA," "how does MiCA affect crypto exchanges," "what is a SIPP" — earns citations at higher rates than product content because the evidence bar is lower. Educational content about regulated concepts does not require product-specific regulatory credentials. It requires named, credentialled authors and citations to primary regulatory sources. A page explaining how FCA authorisation works earns citations when written by a named author with a financial services background, cited back to the FCA's official documentation, and updated when regulatory guidance changes.</p>
+<p><strong>Financial comparison and analysis content.</strong> Comparison pages — "SIPP vs ISA for retirement savings," "business current accounts UK comparison 2026" — earn citations when they include original data, not just summaries of competitors' published data. A comparison page that aggregates publicly available rate data with no additional analysis is weaker than a comparison page that adds proprietary data, a named methodology, or expert commentary from a credentialled author. The original analysis is the citation magnet. The aggregated data is the context.</p>
+
+<h2>How Does Expert Authorship Work for Fintech AEO?</h2>
+<p>Named author credentials carry more weight in fintech than in almost any other content category. An article about productivity tools written by "the editorial team" earns citations in AI engines without issue. An article about investment strategies or mortgage products written by "the editorial team" earns hedging or no citation.</p>
+<p>For fintech content to earn confident AI citations, every financial piece needs a named author with verifiable financial credentials: CFA, CPA, CFP, or equivalent. The author needs a detailed page on your domain with their credentials, their FCA or professional registration number if applicable, their publication history, and their specific area of financial expertise. Person schema on the author page with <code>hasCredential</code> and <code>knowsAbout</code> fields connecting them explicitly to the financial topic areas they cover.</p>
+<p>The author page needs to pass the same verification check that AI engines apply to YMYL credentials. A claimed "financial expert" with no verifiable registration, no publication history in financial media, and no third-party mentions earns less trust than a named registered adviser with an FCA number that resolves on the Financial Services Register. Build real author credentials before building author pages — the infrastructure signals credibility only when the underlying credential is genuine.</p>
+
+<h2>What Comparison Site Presence Does a Fintech Need?</h2>
+<p>AI engines cite fintech brands from comparison sites at higher rates than from the fintech's own website for commercial queries. Per MarGen's 2026 fintech AEO analysis, five comparison domains — MoneySavingExpert, NerdWallet, Finder, MoneySuperMarket, and sector-specific comparison platforms — account for a large share of financial product citations in AI answers. Your product listing on these platforms is as important as your on-site schema for earning comparison-query citations.</p>
+<p>Complete every field on your comparison site listings. Ensure your interest rates and fees on comparison sites match your website and schema exactly — a discrepancy between a comparison site listing and your own website creates an inconsistency signal that AI engines flag when cross-checking financial claims. Update comparison site listings within 24 hours whenever rates or fees change. Stale comparison site data is a YMYL credibility problem, not just an accuracy problem.</p>
+<p>Review platform profiles matter too. Trustpilot with consistent recent reviews is a trust signal AI engines check for UK financial brands. G2 and Capterra serve the same function for B2B fintech products. Per Bankrate's AI Trust in Financial Institutions Survey 2025, 78% of consumers say they trust financial recommendations from AI more when the cited source displays regulatory credentials — and AI engines mirror that consumer preference in their citation selection.</p>
+
+<div class="callout"><p>Fintech citation rate in AI engines is harder to measure than standard AEO because many financial queries trigger AI hedging without citation rather than citation or no citation. The NotioncCue Citation Tracker monitors what AI engines say about your brand across ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews on a weekly cadence — capturing not just whether you are cited but how you are described, including whether the AI is hedging your claims or citing you as an authoritative source. For fintech brands, the qualitative citation tone is as important as citation frequency.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>Does FCA authorisation automatically improve AI citation rates?</strong><br/>FCA authorisation is a necessary condition for earning confident citations in UK financial queries but not a sufficient one. The authorisation needs to be in your Organisation schema, match your Financial Services Register entry exactly, and appear on a website that also has strong E-E-A-T signals — named credentialled authors, source citations, rate disclosures with effective dates. FCA authorisation without these content signals earns a marginal improvement. All elements together earn the citations.</p>
+<p><strong>How do you handle compliance review in a fintech AEO content programme?</strong><br/>Build compliance review into the production calendar, not as a post-production gate. Plan content four to six weeks ahead. Draft and submit for compliance review two weeks before publication. This eliminates the publication bottleneck that most fintech content teams hit when AEO content requirements conflict with the legal review timeline. Evergreen financial education content needs annual review rather than per-publication review, which significantly reduces the recurring compliance burden for established brands.</p>
+<p><strong>Can a fintech startup without FCA authorisation earn AI citations for financial queries?</strong><br/>For educational and informational content: yes, with strong author credentials and cited regulatory sources. For product recommendation or comparison queries: limited. Without regulatory authorisation, AI engines applying YMYL caution will hedge or avoid citing a fintech product for queries where product suitability or safety is relevant. The fastest path to citation eligibility for a pre-authorisation startup is educational content written by credentialled guest authors, cited to official regulatory sources, with clear disclaimers about the company's current regulatory status.</p>
+<p><strong>How should fintech brands handle AI hallucinations about rates or product terms?</strong><br/>Check what AI engines say about your product monthly by running "what are [product name] rates" and "how does [product] work" through ChatGPT, Perplexity, and Claude. Discrepancies between AI descriptions and current product terms are training data gaps or stale retrieval issues. The fix is a combination of updating your schema with current terms (dateModified and effective rate date), submitting for re-crawl via IndexNow, and ensuring your comparison site listings carry current data. The <a href="/resources/blog/ai-brand-hallucination-find-and-fix">brand hallucination guide</a> covers the full detection and correction process for all content types, with the fintech-specific addition that stale rate information requires same-day correction across all surfaces.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 56 — Multilingual / International AEO
+  // Primary: multilingual AEO, international AI citations, hreflang AI search
+  // Secondary: non-English AI search, cross-lingual AEO, global AI visibility
+  // Interlinks: entity-based-aeo, how-ai-crawlers, schema-errors-aeo,
+  //             aeo-audit-checklist, aeo-measurement, international-aeo (post 5)
+  // Tool CTA: Prompt Tracker (non-English prompt tracking)
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'multilingual-international-aeo-hreflang-ai-citations',
+    emoji:          '🌍',
+    bg:             'rgba(200,242,71,.06)',
+    tag:            'Technical',
+    date:           'Jul 2, 2026',
+    title:          'Multilingual AEO: How to Earn AI Citations Across Languages and Markets',
+    excerpt:        'AI engines bypass language barriers. Perplexity and Gemini pull facts from English-language sources and synthesise answers in French, German, or Portuguese in real time. Sites that only translate without localising lose 431% in AI citation eligibility against properly localised competitors. Hreflang is necessary but nowhere near sufficient.',
+    read:           '9 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>AI engines bypass language barriers in a way traditional search never did. Perplexity and Gemini can pull facts from an English-language source and synthesise a fluent answer in French, German, or Portuguese without the user ever visiting an English page. ChatGPT Search launched multilingual web retrieval on 31 October 2024. Perplexity has always done live multilingual retrieval. Claude added web search with multilingual capability in March 2025.</p>
+<p>This creates two distinct problems for brands with non-English markets. First, your English content may be cited in response to non-English queries — earning you citation credit without a localised page. Second, a competitor's English content may be cited instead of your localised page because AI engines weight their English-language content more heavily than your translated page for the same query. Both outcomes are possible simultaneously, and both require different fixes.</p>
+<p>Alhena AI's analysis of cross-market citation behaviour found a 431% difference in AI citation eligibility between sites that only translate content and sites that properly localise — meaning the content addresses market-specific regulations, local examples, region-specific data, and cultural context, not just language. Translation is table stakes. Localisation is the citation differentiator.</p>
+
+<h2>What Is the Difference Between Translation AEO and Localisation AEO?</h2>
+<p>A translated page contains the same information as the source page, expressed in a different language. A localised page contains information specifically relevant to the target market — local regulations, local examples, local data sources, local search behaviour — expressed in the target language.</p>
+<p>AI engines evaluate content for market-specific relevance in addition to language matching. A page in German that references US statistics, cites US regulatory bodies, and uses US examples will lose to an English-language page that contains the same statistics but is otherwise more authoritative — because the German page's market-specific signals are weak. ALM Corp's 2026 international SEO analysis documented this clearly: organisations that continue to rely on translation alone find their international content increasingly invisible in AI-generated responses, as systems default to the most confident global representation regardless of geographic appropriateness.</p>
+<p>The practical difference for your content programme: translation requires linguistic conversion. Localisation requires market research, local source citation, local regulatory reference, and local entity signals — the same work that earns citations in English, replicated for each target market.</p>
+
+<h2>Does Hreflang Still Matter for AI Citations?</h2>
+<p>Hreflang matters significantly, but for a different reason than in traditional international SEO. In traditional SEO, hreflang routes the right language version to the right user by signalling language and regional targeting to Google's ranking algorithm. In AI search, hreflang tells AI retrieval systems which locale variant to select when multiple language versions of the same content exist — preventing the AI from serving your English page in response to a French-language query when a French-language version exists.</p>
+<p>Ahrefs' 15,000-prompt study measuring Google AI Overview citations found that 76% of AI Overview citations come from pages already ranking in Google's top 10. Strong multilingual ranking — which hreflang implementation directly supports — inherits the AI Overview citation advantage at the locale level. A French page that ranks top 5 for a French query because hreflang correctly signals its locale is far more likely to be cited in a French AI Overview response than the same page without hreflang, which may not rank for the French query at all.</p>
+<p>Three hreflang implementation requirements that are specifically important for AI citation in 2026:</p>
+<p><strong>Server-rendered, not client-rendered.</strong> If your CMS generates hreflang tags via JavaScript after page load, AI crawlers that do not execute JavaScript — which includes most of them — see no hreflang tags. The <a href="/resources/blog/how-ai-crawlers-index-your-site">AI crawlers guide</a> covers the server-rendering requirement in full. For multilingual sites, confirm hreflang tags appear in the initial HTML response using <code>curl -A "Googlebot" https://yourpage.com | grep "hreflang"</code>.</p>
+<p><strong>inLanguage field in Article schema, matching hreflang exactly.</strong> Hreflang declares language at the HTML tag level. Article schema's <code>inLanguage</code> field declares it at the content level. Both should use identical ISO 639-1 language codes. A page with <code>hreflang="fr"</code> and <code>"inLanguage": "fr"</code> sends a consistent double signal. A page with <code>hreflang="fr"</code> and no <code>inLanguage</code> declaration sends a weaker signal that AI retrieval systems may not correctly resolve.</p>
+<p><strong>Self-referencing hreflang on every page variant.</strong> Hreflang requires each language variant to declare itself and every other variant. A French page missing its own self-referencing hreflang — <code>hreflang="fr"</code> pointing to itself — has an implementation error that causes the entire hreflang cluster to be treated as unreliable by both Google's ranking algorithm and AI retrieval systems. The <a href="/resources/blog/schema-errors-aeo-diagnose-and-fix-guide">schema errors guide</a> covers hreflang as one of the ten most common AEO infrastructure failures.</p>
+
+<h2>What Are the Market-Specific Signals AI Engines Need?</h2>
+<p>Beyond language and hreflang, AI engines evaluating cross-market content look for four market-specific signals that translation cannot provide:</p>
+<p><strong>Local regulatory citations.</strong> A page targeting the German market that cites the Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin) for a financial topic, or the Bundesnetzagentur for a telecom topic, signals specifically German market relevance in a way that citing generic EU regulations does not. AI engines retrieving content for a German-language query on a regulated topic weight local regulatory authority references more heavily than generic EU or international equivalents.</p>
+<p><strong>Local data sources.</strong> Statistics from local statistical offices, local industry associations, or local market research firms signal market-specific research rather than globalised content. A page about UK ecommerce market size citing ONS data earns stronger UK market signals than the same page citing US or global ecommerce statistics. Use local sources for local market claims wherever they are available.</p>
+<p><strong>Local entity signals in Organisation schema.</strong> Your Organisation schema should include locale-specific fields: <code>areaServed</code> with the specific country or region, <code>address</code> with a local address if applicable, and <code>telephone</code> with the local format. Person schema for local authors should include <code>sameAs</code> links to their profiles on locally relevant professional platforms — XING for German markets, LinkedIn is global but should reference local professional associations where applicable.</p>
+<p><strong>Local example and case study references.</strong> A how-to guide that uses a German company as the example, references German market conditions, and links to a German case study earns stronger local market signals than the same guide with globalised examples. AI engines assess market specificity through the named entities in the content — local brand names, local market conditions, local regulatory examples — not just through language.</p>
+
+<h2>Which AI Engines Handle Multilingual Content Differently?</h2>
+<p>Engine-specific multilingual behaviour varies enough to require separate tracking for primary international markets:</p>
+<p><strong>Google AI Overviews and AI Mode.</strong> Run on Google's multilingual index, which has the deepest coverage of non-English content. Hreflang implementation has the strongest direct effect on Google's AI surfaces because Google's ranking algorithm — which AI Overviews pull from — uses hreflang for locale resolution. A properly localised page with correct hreflang consistently outperforms an English-language page for the same query in the target language market.</p>
+<p><strong>Perplexity.</strong> Does live multilingual retrieval through its own crawler. Perplexity responds to language-specific queries by retrieving content in that language first, then falling back to English-language content if localised content is weaker or absent. The fallback behaviour means English-language content with strong topic coverage can still earn Perplexity citations in non-English markets — but dedicated localised pages outperform the fallback when they are well-structured and properly signalled.</p>
+<p><strong>ChatGPT Search.</strong> Uses Bing's multilingual index for retrieval. Bing Webmaster Tools allows explicit locale targeting and sitemap submission per language — an additional locale signal that Google does not have an equivalent for. For ChatGPT citations in international markets, Bing Webmaster Tools setup with locale-specific sitemaps is a specific technical step beyond what Google-focused international SEO requires.</p>
+<p><strong>Claude.</strong> Uses Brave Search for web retrieval. Brave's multilingual crawler coverage is less comprehensive than Google's or Bing's for many non-English markets. For Claude citations in non-English markets, building a strong training-data presence — entity coverage in local Wikipedia editions, coverage in locally respected publications, Wikidata entries in the target language — matters more than technical hreflang implementation alone.</p>
+
+<h2>How Do You Track Multilingual Citation Rate?</h2>
+<p>Standard AEO tracking runs prompts in English across the five major AI engines. International AEO tracking requires running the equivalent prompts in each target language and market, then comparing results across markets. A brand that earns citations for "best AEO tool" in English but earns no citations for "meilleur outil AEO" in French has a specific French market gap that English-language prompt tracking cannot surface.</p>
+<p>The tracking discipline is the same as the English-language approach described in the <a href="/resources/blog/aeo-prompt-tracking-strategy">AEO prompt tracking guide</a>, applied to each target locale: identify 10-15 prompts in the target language representing queries your buyers run in that market, run them weekly across ChatGPT, Perplexity, and Google AI Mode, and record citation presence, competing sources, and citation tone.</p>
+<p>The SI-UK international case study in this series — <a href="/resources/blog/international-aeo-35-global-domains">how 35 global domains were managed for AI citation consistency</a> — covers the operational challenge of maintaining citation quality across many markets simultaneously. The core principle: each market requires its own prompt matrix, its own citation tracking, and its own freshness maintenance cadence. An international AEO programme cannot be managed from a single English-language dashboard.</p>
+<p>The NotioncCue Prompt Tracker supports non-English prompt tracking across all five engines — meaning you can run your French, German, Spanish, or Japanese prompt matrix alongside your English one, with results in the same dashboard. This is the infrastructure gap that most AEO tracking setups leave unfilled: English-only tracking makes international performance invisible until a competitor alerts you with a lost-deal conversation.</p>
+
+<div class="callout"><p>Multilingual AEO assessment starts with the same audit as any other market: confirm AI crawlers can access your localised pages (server-rendered content, no JS-gated hreflang), confirm schema declares language correctly, and run five prompts in each target language through Perplexity and Google AI Mode. Those ten minutes of manual checking surface whether localised pages are in the citation pool at all before you invest in localisation content quality improvements. Run the <a href="/resources/blog/aeo-audit-checklist-complete-guide-2026">AEO audit checklist</a> in each target language market as a separate audit — the technical checks are identical, but the language-specific elements need to be verified independently.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>Should non-English markets have separate domains, subdomains, or subdirectories?</strong><br/>For AI citation purposes, subdirectory (yourdomain.com/fr/) is the strongest architecture because it concentrates domain authority into a single entity. Separate country-code domains (yourdomain.fr) split authority across multiple entities and require independent entity-building in each market. Subdomains (fr.yourdomain.com) are intermediate — better than separate domains, weaker than subdirectories. Subdirectory architecture also makes it easier to link internal AEO pages across markets from a single domain, strengthening the topical cluster signals that support all language versions.</p>
+<p><strong>How do you handle machine-translated content for AEO?</strong><br/>Machine translation is insufficient for AI citation-worthy content in most markets. AI engines can detect low-quality translation through entity inconsistency, unnatural phrasing, and the absence of local signals. Pages that were machine-translated and not reviewed by a native speaker with market knowledge typically have weaker citation rates than original English pages for the same query, even in the target language market. Budget for human translation and localisation review for any page you expect to earn AI citations — the machine-translated version rarely passes the local relevance bar that AI engines apply to non-English content.</p>
+<p><strong>Do all AI engines treat hreflang equally for citation decisions?</strong><br/>No. Google AI surfaces use hreflang most directly because they pull from Google's hreflang-aware index. Bing/ChatGPT use Bing's locale targeting tools. Perplexity and Claude use their own crawlers which respect hreflang but apply it less precisely than Google. Across all engines, correctly implemented hreflang reduces the chance of an English-language page being served for a non-English query — but local content quality and market-specific entity signals ultimately determine citation selection more than the technical hreflang tag alone.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 57 — AggregateRating + Review Schema for AEO
+  // Primary: AggregateRating schema AEO, Review schema AI citations, G2 AEO
+  // Secondary: product reviews AI search, review schema AI citations 2026
+  // Interlinks: json-ld-schema, schema-errors-aeo, off-site-aeo,
+  //             entity-based-aeo, aeo-ecommerce, howto-schema-aeo
+  // Tool CTA: AI Crawler Audit (validate review schema delivery)
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'aggregaterating-review-schema-aeo-ai-citations',
+    emoji:          '⭐',
+    bg:             'rgba(255,196,92,.06)',
+    tag:            'Technical',
+    date:           'Jul 2, 2026',
+    title:          'AggregateRating and Review Schema for AEO: How Star Ratings Enter AI Citations',
+    excerpt:        'A 10% increase in G2 reviews correlates with a 2% increase in AI citation rates — social proof signals are being processed directly by citation algorithms. For comparison queries like "best running shoes under £100," AggregateRating schema determines whether your product makes the AI\'s shortlist. Here is the exact implementation with zero common errors.',
+    read:           '9 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>A 10% increase in G2 reviews correlates with a 2% increase in AI citation rates for B2B software, per She Innovates AI's 2026 structured data analysis. Product comparison queries — "best CRM for a 10-person sales team," "top running shoes under £100," "highest-rated project management tool" — pull directly from AggregateRating schema when generating shortlists. AI engines do not read the star rating on your page and infer a number. They read the machine-declared number in your schema and use it as a filter criterion.</p>
+<p>Review schema and AggregateRating schema serve different functions in AI retrieval and should be implemented separately rather than as a single block. AggregateRating declares the overall score and review count — the number the AI filters and ranks by. Review schema declares individual review content — the specific text AI engines extract when a buyer asks "what do users say about X?" Both matter, and both need to be in the server-rendered HTML where AI crawlers can find them.</p>
+<p>For most brands, the bigger problem is not implementation quality — it is the self-review trap and the stale review floor. Both cause AI engines to either ignore or down-weight review schema that was technically well-constructed.</p>
+
+<h2>What Is the Difference Between AggregateRating and Review Schema?</h2>
+<p>AggregateRating is a summary: it declares the average rating value, the number of reviews that produced it, the best possible rating, and the worst possible rating. It is a statistical summary for machine parsing. Review is an individual review: it declares the reviewer, the text they wrote, the date they wrote it, and the score they gave.</p>
+<p>For AI citation purposes, AggregateRating earns citations in comparison and ranking queries. Review earns citations when a buyer asks for user opinions or reported experiences. The cleanest implementation nests both inside a Product, LocalBusiness, or SoftwareApplication schema:</p>
+<pre><code>{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "NotioncCue",
+  "description": "AEO tracking platform that monitors AI citations across ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "49",
+    "priceCurrency": "USD"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "bestRating": "5",
+    "worstRating": "1",
+    "ratingCount": "247",
+    "reviewCount": "247"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Sarah Chen"
+      },
+      "datePublished": "2026-06-15",
+      "reviewBody": "Set up took 20 minutes. Within the first week we could see exactly which prompts we were winning and which competitors were beating us on. The Perplexity tracking is the most useful — it moves fastest and gives you the earliest signal on whether content changes are working.",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+  ]
+}</code></pre>
+<p>Three field requirements that differ from how most brands implement review schema:</p>
+<p><strong>bestRating and worstRating are required, not optional.</strong> Most implementations declare only ratingValue. Without bestRating and worstRating, AI engines cannot normalise the score — a 4.8 on a 10-point scale looks the same as a 4.8 on a 5-point scale without the context fields. Always declare all three: ratingValue, bestRating, worstRating.</p>
+<p><strong>ratingCount and reviewCount should match.</strong> ratingCount includes all ratings (star-only votes without written text). reviewCount counts only written reviews. For AI citation purposes, reviewCount is more important than ratingCount, because AI engines extracting "what do users say about X" need written text, not just scores. If your schema declares 247 ratings but only 12 written reviews, the discrepancy signals to AI engines that most of your rating signal comes from unverifiable votes rather than substantive reviews.</p>
+<p><strong>Use a period as the decimal separator, always.</strong> <code>"ratingValue": "4.8"</code> is correct. <code>"ratingValue": "4,8"</code> is invalid — Google's Rich Results Test fails it, and AI crawlers that respect Google's schema guidelines ignore it. This error appears most often on sites localised for European markets where the comma is the standard decimal separator.</p>
+
+<h2>What Is the Self-Review Trap and How Do You Avoid It?</h2>
+<p>Google's review schema guidelines state that pages where "the entity being reviewed controls the reviews about itself" are ineligible for star-rating rich results. In practice: a business publishing testimonials about itself on its own website in AggregateRating schema will not earn star-rating rich results. The same restriction affects AI citation confidence — AI engines applying the same guideline logic treat self-review schema as lower-trust than third-party review schema.</p>
+<p>Two legitimate paths around the self-review restriction. First, embed third-party review platform widgets with the reviews sourced externally. If you display your G2 reviews on your website using G2's embed, the reviews are authored on G2's platform — your website is a display surface, not the review origin. The AggregateRating schema on your product page declaring these reviews is reflecting data from an independent platform, which is legitimate under Google's schema guidelines.</p>
+<p>Second, use AggregateRating on product pages for customer product reviews (not company reviews). An ecommerce store where customers review individual products is the canonical correct use case — the store is not reviewing itself, customers are reviewing products. This is fully eligible for rich results and AI citation. The same AggregateRating schema pattern on a "testimonials about us" page is the self-review pattern that triggers the ineligibility flag.</p>
+<p>The SEO and AEO signal from third-party review platforms — G2, Capterra, Trustpilot, G2's January 2026 acquisition of Capterra means those two review pools will increasingly be treated as a combined entity — is more valuable than any on-site review schema. Per Topify's 2026 analysis, G2 holds 23.1% citation share across B2B and SaaS queries. Five review domains account for 88% of all review-platform links cited by AI engines for software categories. Your on-site schema is the supporting layer, not the primary review signal.</p>
+
+<h2>What Review Content Earns AI Citations?</h2>
+<p>Not all review text is equally citable by AI engines. Three patterns produce the most extractable review content:</p>
+<p><strong>Outcome-specific reviews with named metrics.</strong> "Great product!" earns no citation. "After switching from Competitor X to NotioncCue, our Perplexity citation rate increased from 8% to 31% over six weeks. The setup took one afternoon." earns citations for queries about AEO tool effectiveness because it is specific, measurable, and independently verifiable. Encourage reviewers on G2 and Trustpilot to document outcomes, timelines, and specific metrics rather than general satisfaction. Your review request template makes this happen — ask specifically: "What changed after you started using us? Can you mention a specific number or outcome?"</p>
+<p><strong>Use-case specific reviews.</strong> A review that says "perfect for a 15-person SaaS team tracking Perplexity citations" is more citable for the query "best citation tracking tool for SaaS teams" than a review saying "great for any business." Use-case specificity is what makes a review extractable for the precise query a buyer is running. Request reviews that describe the reviewer's company type and team size alongside the outcome.</p>
+<p><strong>Dated reviews.</strong> AI engines weight review recency. A product with 300 reviews from 2023 and no reviews in 2026 signals a product that has lost user traction, regardless of the overall rating. A product with 50 reviews where 30 were posted in the last three months signals active, current adoption. Build a review collection programme that generates a consistent stream of new reviews each month rather than a single review-collection campaign followed by dormancy.</p>
+
+<h2>How Do You Validate That Review Schema Is AI-Crawlable?</h2>
+<p>The same validation process that applies to all schema for AEO applies to review schema. The specific check: confirm the AggregateRating block appears in the server-rendered HTML response rather than only in JavaScript-rendered DOM.</p>
+<p>Run <code>curl -A "Googlebot" https://yourproductpage.com | grep -A 20 "AggregateRating"</code> in a terminal. If the AggregateRating JSON-LD block appears in the output, AI crawlers can read it. If it does not appear, your review schema is JavaScript-rendered and invisible to most AI crawlers — the same issue documented for all schema types in the <a href="/resources/blog/schema-errors-aeo-diagnose-and-fix-guide">schema errors guide</a>.</p>
+<p>Also validate through Google's Rich Results Test. Review and AggregateRating schema is eligible for star-rating rich results on product and local business pages — passing the Rich Results Test confirms the schema is valid and schema-eligible for both SERP features and AI citation signals simultaneously.</p>
+
+<div class="callout"><p>The NotioncCue AI Crawler Audit checks whether your review and rating schema appears in the initial HTML response accessible to PerplexityBot, GPTBot, ClaudeBot, and Googlebot. It also flags the most common review schema errors — missing bestRating and worstRating fields, comma decimal separators, and AggregateRating blocks that declare no written reviews — before you submit for re-crawl and wait three weeks to discover the schema was ignored. Run it before making schema changes to confirm the baseline, then run it again after to confirm the fix is in the crawlable HTML response.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>How many reviews does AggregateRating schema need before it affects AI citations?</strong><br/>Five is the practical minimum for safe implementation according to most schema practitioners' 2026 guidance. Below five, AggregateRating data is statistically unreliable and AI engines may ignore it. Above 50, the statistical weight becomes meaningful enough to influence comparison query results. Google's March 2026 schema update specifically flagged AggregateRating with unverifiable or very low review counts as facing enhanced scrutiny. Build to 25 to 50 reviews on your primary platform before investing heavily in on-site AggregateRating schema implementation.</p>
+<p><strong>Can you mark up reviews from Trustpilot or G2 in your own site's schema?</strong><br/>You can mark up the aggregate data sourced from third-party platforms — the average rating and review count — in your own site's AggregateRating schema, provided you attribute the source. Include a <code>source</code> field or a note in the description: "Based on 247 verified reviews on G2 as of July 2026." Do not reproduce the individual review text in your own site's Review schema if the original review was authored on a third-party platform — the original is owned by the review platform and reproduction raises copyright concerns. The aggregate data (score, count) is factual and markupable; individual review bodies should stay on the originating platform.</p>
+<p><strong>How does SoftwareApplication schema differ from Product schema for AEO?</strong><br/>SoftwareApplication schema includes fields specific to software products — <code>applicationCategory</code>, <code>operatingSystem</code>, <code>softwareVersion</code> — that help AI engines correctly classify your product for software-specific queries. AI engines answering "what is the best AEO tracking software" are looking for SoftwareApplication typed entities, not generic Product entities. Use SoftwareApplication for any web-based or desktop application, and nest AggregateRating and Review within it rather than using the generic Product type. The category-specific schema type produces more precise AI citation targeting for software comparison queries.</p>
+<p><strong>Does AggregateRating on a homepage improve citation rates for brand queries?</strong><br/>Limited. AggregateRating on a homepage declaring reviews of the company (not a specific product) runs into the self-review concern. AggregateRating on specific product pages or feature pages earns stronger citation signals because the reviewed entity is a concrete offering, not the company itself. For brand-level social proof that AI engines can cite, third-party platform presence — G2 company profile, Trustpilot page — earns more citation weight than any on-site declaration.</p>
+`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 58 — AEO for Podcasts
+  // Primary: podcast AEO, podcast transcripts AI citations, AudioObject schema
+  // Secondary: podcast AI search, PodcastEpisode schema, AI citation podcasts
+  // Interlinks: video-aeo-youtube, bluf-writing, how-ai-crawlers,
+  //             topical-authority-aeo, speakable-schema, llms-txt-what-it-does
+  // Tool CTAs: AI Topical Cluster Map (podcast as cluster hub) + llms.txt Generator
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'podcast-aeo-transcript-audioobject-schema-ai-citations',
+    emoji:          '🎙️',
+    bg:             'rgba(146,124,255,.06)',
+    tag:            'Technical',
+    date:           'Jul 2, 2026',
+    title:          'Podcast AEO: Why Your Audio Is Invisible to AI Engines (and the Fix Takes One Week)',
+    excerpt:        'AI engines cannot listen to your podcast. They read transcripts, metadata, and schema. A show with 50,000 downloads per episode but no structured transcript earns zero AI citations. A show with 400 listeners and corrected HTML transcripts plus AudioObject schema competes directly for citation in ChatGPT, Perplexity, and Google AI Overviews. The fix installs in one week.',
+    read:           '9 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>AI engines cannot listen. They have no audio processing layer for live retrieval. A podcast episode with 50,000 downloads earns zero AI citations if the only thing published alongside it is an embedded audio player and a subscribe link. The audio itself is a closed box to AI retrieval systems — regardless of how good the content is inside it.</p>
+<p>A Series A founder ran their podcast URL through Claude in March 2026 and asked what the show said about AI agent pricing. Claude returned a generic paragraph about industry pricing trends and declined to cite a single episode. The founder later discovered they had lost a deal to a competitor whose podcast episodes had transcript pages on their website. The buyer had asked an AI engine about AI agent pricing during vendor evaluation. The competitor's episode came up. The founder's did not.</p>
+<p>FORKOFF's 2026 podcast AEO audit data found that citation rate from Perplexity tripled within 45 days of implementing structured HTML transcripts, FAQPage schema, and AudioObject markup — with identical content, identical guests, and identical audio. The change was entirely structural.</p>
+
+<h2>Why Are Most Podcast Pages Invisible to AI Engines?</h2>
+<p>A typical podcast episode page contains: an embedded audio player, the episode title, a short description (usually 100 to 200 words), links to Apple Podcasts and Spotify, and sometimes a few bullet points of key topics. None of this gives AI engines enough structured, extractable text to cite the episode specifically.</p>
+<p>AI engines cite content because they can extract a specific, attributable passage that directly answers a query. A 200-word description of a 45-minute conversation does not contain extractable answers — it describes that answers exist without providing them. An AI engine retrieving sources for "how should early-stage SaaS handle AI agent pricing" needs the actual discussion, not a summary that the discussion occurred.</p>
+<p>The five podcast AEO failure patterns FORKOFF identified in 2026 audits: shipping the transcript as a PDF or behind a download form (invisible at citation time), writing FAQ content in body copy instead of FAQPage schema (readable by humans, not parseable by schema engines), generic episode titles with no named entities (Episode 47 earns zero citation targeting; a title naming the guest and the specific topic earns citation for queries about that person or topic), skipping AudioObject schema because PodcastEpisode schema alone feels sufficient (AI agents explicitly downgrade pages missing AudioObject and route them through the generic blog-post pipeline), and treating the podcast archive as a separate content silo from the rest of the website's topic cluster.</p>
+
+<h2>What Is the Seven-Step Podcast AEO Installation?</h2>
+<p>This protocol installs in one focused week on an existing show. The same principles apply to a show being built from scratch, but the retrofitting task on an existing archive can be done episode-by-episode over time.</p>
+<p><strong>Step 1: Structured HTML transcript, not PDF.</strong> The transcript must be in the page's HTML body, not a PDF attachment and not in a separate download. AI crawlers that do not process PDFs — which is most of them — need the text in crawlable HTML. Use speaker labels consistently ("Host:", "Guest:") and add light structure: paragraph breaks at topic transitions, timestamps every two to three minutes. Rev, Otter.ai, and Descript all produce accurate transcripts. Budget 15 to 30 minutes per episode for correction of brand names, technical terms, and product-specific vocabulary that auto-transcription gets wrong.</p>
+<p><strong>Step 2: Named-entity episode titles.</strong> Rename episodes that use generic titles. "Episode 47: A great conversation" earns no citation targeting. "Marc Benioff on AI agent pricing and the future of enterprise SaaS" earns citation for queries about that specific person and that specific topic. Named entities in titles — person names, company names, specific concepts — are the primary targeting signal for AI retrieval on podcast queries.</p>
+<p><strong>Step 3: 600 to 1,200 word show notes structured as article content.</strong> Show notes on most podcast pages are a bulleted list of topics. For AEO, rewrite show notes as 600 to 1,200 words of structured article content with BLUF-opening sections. Each section header should answer a specific question the episode addresses. The show notes are the AI citation target when the transcript is too long for reliable extraction — AI engines pull from show notes with higher frequency than from raw transcripts on long episodes. Apply the same structure from the <a href="/resources/blog/bluf-writing-technique-ai-citations-aeo">BLUF writing guide</a> to each major section of the show notes.</p>
+<p><strong>Step 4: FAQPage schema with questions from the episode.</strong> Extract five to eight questions the episode directly answers. Write answers in 40 to 60 words. Add FAQPage schema. This is the highest-density AI citation target on a podcast page — FAQPage schema converts podcast content into independently extractable Q&A units, exactly the format AI engines use when generating direct answers. The questions should be the exact queries buyers would run through Perplexity or ChatGPT that the episode answers.</p>
+<p><strong>Step 5: PodcastEpisode and AudioObject schema, combined in @graph.</strong> PodcastEpisode schema declares the episode's relationship to the podcast series. AudioObject schema tells AI engines that audio content exists on the page and what it covers. Both are required — PodcastEpisode alone is insufficient because AI agents explicitly downgrade pages missing the AudioObject hint:</p>
+<pre><code>{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "PodcastEpisode",
+      "@id": "https://notioncue.com/podcast/ep-12/#episode",
+      "name": "Sudhir Singh on AEO for SaaS: Citation Tracking from Zero",
+      "episodeNumber": 12,
+      "partOfSeries": {
+        "@type": "PodcastSeries",
+        "@id": "https://notioncue.com/podcast/#series",
+        "name": "The AEO Practitioner",
+        "url": "https://notioncue.com/podcast/"
+      },
+      "datePublished": "2026-07-02",
+      "description": "NotioncCue founder Sudhir Singh explains how B2B SaaS teams set up AEO citation tracking from scratch: prompt matrix design, Perplexity as the leading indicator, and why weekly tracking compounds faster than monthly sprints.",
+      "associatedMedia": { "@id": "https://notioncue.com/podcast/ep-12/#audio" }
+    },
+    {
+      "@type": "AudioObject",
+      "@id": "https://notioncue.com/podcast/ep-12/#audio",
+      "name": "Episode 12 Audio: AEO for SaaS from Zero",
+      "contentUrl": "https://notioncue.com/podcast/ep-12/audio.mp3",
+      "encodingFormat": "audio/mpeg",
+      "duration": "PT42M15S",
+      "uploadDate": "2026-07-02",
+      "transcript": "Host: Welcome back. Today we are talking about how SaaS teams set up AEO citation tracking from scratch..."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How long does it take to set up AEO citation tracking for the first time?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The technical setup — prompt matrix design, tracker configuration, first prompt run — takes one afternoon. Meaningful citation rate data appears within two to four weeks on Perplexity and three to six weeks on Google AI Overviews."
+          }
+        }
+      ]
+    }
+  ]
+}</code></pre>
+<p><strong>Step 6: Clip schema for chapter-level sub-citations.</strong> For episodes where specific chapters answer specific queries, add Clip objects within the AudioObject with <code>startOffset</code> and <code>endOffset</code> in seconds. This enables timestamped, segment-level citations in Google AI Overviews — the same mechanism as chapter-based citations on YouTube videos covered in the <a href="/resources/blog/video-aeo-youtube-videoobject-schema-ai-citations">video AEO guide</a>.</p>
+<p><strong>Step 7: Internal linking into the podcast cluster.</strong> Podcast episode pages should link to related blog posts and guides on your site, and those pages should link back to relevant podcast episodes. The podcast is not a separate channel from your written content — it is a content cluster hub. A blog post about AEO prompt tracking that links to the podcast episode on the same topic, and vice versa, creates a bidirectional cluster signal. The <a href="/resources/blog/topical-authority-aeo-content-cluster-strategy">topical authority guide</a> covers the cluster linking architecture. The <a href="/resources/blog/internal-linking-strategy-aeo-ai-citations">internal linking guide</a> covers the anchor text rules.</p>
+
+<h2>Does Your llms.txt Need to List Podcast Episodes?</h2>
+<p>For brands with active podcast archives, yes. The llms.txt file at your domain root is where AI agents doing agentic evaluation of your brand — the type of AI-driven evaluation covered in the <a href="/resources/blog/agentic-ai-search-what-it-means-for-aeo-2026">agentic AI search guide</a> — look for a curated map of your most important content. Podcast episodes that address core questions your buyers ask should appear in llms.txt with descriptions that match the query-intent of the episode.</p>
+<p>Entry format for a podcast episode in llms.txt:</p>
+<pre><code>- [AEO for SaaS: Citation Tracking from Zero (Ep. 12)](https://notioncue.com/podcast/ep-12/): How B2B SaaS teams set up AEO citation tracking, design prompt matrices, and use Perplexity as a leading indicator.</code></pre>
+<p>The description should be the one-sentence answer to "what does this episode tell me?" — the same format as the BLUF opening of a blog post, compressed to a single sentence. AI agents reading llms.txt to understand your content inventory will follow the link to the episode page when the description matches a buyer query. The NotioncCue llms.txt Generator builds a spec-compliant file from your page inventory, including podcast episode pages when they have proper titles and descriptions — which is another reason the named-entity episode title in Step 2 matters beyond just schema.</p>
+
+<div class="callout"><p>A podcast episode page where every element is in place — HTML transcript, FAQPage schema, AudioObject and PodcastEpisode schema, internal cluster links, named-entity title — functions as an AI citation hub for the specific topic the episode covers. The NotioncCue AI Topical Cluster Map identifies where podcast episodes fit within your existing content clusters and surfaces episode topics that have no written counterpart — meaning a listener who asks ChatGPT about that topic gets no citation at all. The map turns your podcast archive from a linear catalogue into a structured content surface with identifiable gaps to fill.</p></div>
+
+<h2>Frequently Asked Questions</h2>
+<p><strong>Do AI engines cite podcast content differently from blog content?</strong><br/>Yes, but the difference is almost entirely about the quality of the text layer, not the audio. A podcast episode page with a full HTML transcript, FAQPage schema, and AudioObject markup earns citations in the same way a blog post with FAQPage schema does. The audio is invisible to AI retrieval; the text layer is everything. Blog posts typically have a stronger citation baseline because their text layer is written content from the start, while podcast text layers require the additional step of transcript production and page structuring.</p>
+<p><strong>Should every podcast episode have its own dedicated page?</strong><br/>Yes, for any episode you want cited in AI search. An episode that lives only inside a podcast hosting app (Spotify, Apple Podcasts) has no crawlable page that AI engines can retrieve. The episode page on your own domain — with transcript, schema, and internal links — is the AI citation surface. Hosting platform pages are discovery surfaces for podcast audiences, not citation surfaces for AI engines.</p>
+<p><strong>How do you retroactively add AEO structure to a podcast archive?</strong><br/>Prioritise by episode topic relevance to your current buyer queries. Run your top 10 target prompts through Perplexity. For any prompt where a competitor's content is being cited, check whether you have a podcast episode on the same topic. If you do, apply the seven-step protocol to that episode first. Work backwards through the archive based on buyer-query relevance rather than episode chronology. A 10-episode prioritised retrofit based on current citation gaps produces measurable citation rate change within 30 days; a full archive retrofit done without prioritisation takes months and produces less predictable results.</p>
+<p><strong>Does transcribing guest interviews raise any copyright or consent issues?</strong><br/>Standard podcast interview practice typically includes consent to record and publish. Transcribing and publishing the transcript on your website as part of the episode page is generally covered by the same consent that allows audio distribution. If your show does not collect explicit transcript publication consent from guests, update your consent form to include it — most podcast consent agreements already cover this in the "distribute in all forms" language. For any episode where consent scope is unclear, have your guest confirm transcript publication in writing before publishing.</p>
+`,
+  },
 
 
   // ─────────────────────────────────────────────────────────────────────────
