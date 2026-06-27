@@ -131,9 +131,9 @@ export default function AEOGuidePage() {
               How ChatGPT, Perplexity, Gemini, Claude, Grok, and Copilot actually select and cite sources — and the exact technical and content changes that improve your odds with each one.
             </p>
             <div style={{display:'flex',gap:'1.2rem',flexWrap:'wrap',fontFamily:"'JetBrains Mono',monospace",fontSize:'.7rem',color:'var(--muted2)'}}>
-              <span>📖 ~5,000 words</span>
-              <span>🤖 6 engines covered</span>
-              <span>🛠 5 free tools linked</span>
+              <span>📖 ~15 Minutes Read</span>
+              <span>🤖 6 AI engines covered</span>
+              <span>🛠 5 free tools </span>
             </div>
           </div>
 

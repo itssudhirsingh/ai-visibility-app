@@ -1,15 +1,15 @@
 // app/page.tsx — SERVER COMPONENT (no 'use client')
-import { Suspense } from 'react'
-import HeroClient from '@/components/HeroClient'
+import HeroCanvas from '@/components/HeroCanvas'
+import HeroInput from '@/components/HeroInput'
 import FAQClient from '@/components/FAQClient'
 import SharedHeader from '@/components/SharedHeader'
 import SharedFooter from '@/components/SharedFooter'
 
 export const metadata = {
-  title: 'Notion Cue — 100% 🅵🆁🅴🅴 AI Visibility Tool Platform',
+  title: 'Notion Cue — 100% Free AI SEO Visibility Tool Platform',
   description: 'Track how often your website gets cited by ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude. Get your AEO score in 30 seconds.',
   openGraph: {
-    title: 'Notion Cue — 100% 🅵🆁🅴🅴 AI Visibility Tool Platform',
+    title: 'Notion Cue — 100% Free AI SEO Visibility Tool Platform',
     description: 'See how visible your brand is to AI engines. Scan your domain free.',
     type: 'website',
   },
@@ -163,9 +163,37 @@ export default function HomePage() {
         <SharedHeader />
 
         {/* ── HERO ── */}
-        <Suspense fallback={<div style={{minHeight:'100vh',background:'var(--bg)'}} />}>
-          <HeroClient />
-        </Suspense>
+        <section style={{minHeight:'100vh',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'8rem 2rem 5rem',position:'relative',overflow:'hidden',textAlign:'center'}}>
+          <HeroCanvas />
+          <div style={{position:'absolute',inset:0,zIndex:1,background:'radial-gradient(ellipse 80% 60% at 50% 50%,transparent 30%,rgba(4,3,12,.85) 70%,#04030c 100%)',pointerEvents:'none'}} />
+          <div style={{position:'relative',zIndex:2,maxWidth:'780px'}}>
+            <div style={{display:'inline-flex',alignItems:'center',gap:'.5rem',fontFamily:"'JetBrains Mono',monospace",fontSize:'.68rem',letterSpacing:'.14em',textTransform:'uppercase',color:'#22d3ee',border:'1px solid rgba(34,211,238,.2)',background:'rgba(34,211,238,.06)',padding:'.4rem 1rem',borderRadius:'100px',marginBottom:'2rem'}}>
+              <span style={{width:'6px',height:'6px',borderRadius:'50%',background:'#22d3ee',animation:'blink 2s ease-in-out infinite',display:'inline-block'}} />
+              Now tracking ChatGPT, Gemini, Perplexity &amp; Grok
+            </div>
+            <h1 style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'clamp(3rem,7vw,6.5rem)',lineHeight:.95,letterSpacing:'-.03em',marginBottom:'1.5rem'}}>
+              Is your site<br/>
+              <span style={{WebkitTextStroke:'1.5px rgba(255,255,255,.3)',color:'transparent'}}>visible</span> to<br/>
+              <span style={{color:'#c8f247'}}>AI engines?</span>
+            </h1>
+            <p style={{fontSize:'clamp(.95rem,2vw,1.15rem)',color:'rgba(255,255,255,0.88)',lineHeight:1.75,maxWidth:'540px',margin:'0 auto 2.5rem'}}>
+              Notion Cue tracks how often your website gets cited, mentioned, and recommended by large language models. Paste your URL and get your AI visibility score in seconds.
+            </p>
+            <div style={{maxWidth:'620px',margin:'0 auto 1.25rem'}}>
+              <HeroInput />
+            </div>
+            <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',letterSpacing:'.08em',color:'rgba(255,255,255,0.58)',display:'flex',alignItems:'center',justifyContent:'center',gap:'1.2rem',flexWrap:'wrap'}}>
+              {['Free forever plan','No credit card needed','Results in <30 seconds'].map(t=>(
+                <span key={t} style={{display:'flex',alignItems:'center',gap:'.35rem'}}>
+                  <span style={{color:'#c8f247'}}>✦</span>{t}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div style={{position:'absolute',bottom:'2rem',left:'50%',transform:'translateX(-50%)',zIndex:2,opacity:.3}}>
+            <div style={{width:'1px',height:'50px',background:'linear-gradient(to bottom,transparent,rgba(255,255,255,0.88))',animation:'lineGrow 2s ease-in-out infinite'}} />
+          </div>
+        </section>
 
         {/* ── MARQUEE ── */}
         <div style={{overflow:'hidden',borderTop:'1px solid var(--border)',borderBottom:'1px solid var(--border)',background:'var(--bg2)',padding:'1rem 0'}}>
@@ -704,7 +732,7 @@ export default function HomePage() {
               Start tracking your<br/><span style={{color:'var(--accent)'}}>AI visibility</span> today.
             </h2>
             <p style={{fontSize:'1rem',color:'var(--muted)',lineHeight:1.75,marginBottom:'2.5rem'}}>Over 3,400 SEO professionals already know where they stand in AI search. Do you?</p>
-            <HeroClient ctaOnly />
+            <HeroInput label="Analyse free" />
           </div>
         </div>
 
