@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+import { headers } from "next/headers";
 import "./globals.css";
 // app/layout.tsx
 export const dynamic = "force-dynamic";
@@ -17,13 +18,20 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
-  title: {
-    default: 'Notion Cue — 100% 🅵🆁🅴🅴 AI Visibility Tool Platform',
-    template: '%s — Notion Cue',  // auto appends on every page
-  },
-  description: 'Track how often your website gets cited by ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude.',
-  metadataBase: new URL('https://notioncue.com'),
+export async function generateMetadata(): Promise<Metadata> {
+  const headersList = await headers();
+  const pathname = headersList.get("x-canonical-path") ?? "/";
+  return {
+    title: {
+      default: 'Notion Cue — 100% Free AI SEO Visibility Tool ',
+      template: '%s — Notion Cue',
+    },
+    description: 'Track how often your website gets cited by ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude.',
+    metadataBase: new URL('https://notioncue.com'),
+    alternates: {
+      canonical: `https://notioncue.com${pathname}`,
+    },
+  };
 }
 
 export const viewport = {

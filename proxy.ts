@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { searchParams, pathname } = request.nextUrl;
 
   if (searchParams.has("_rsc")) {
@@ -9,7 +9,10 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(cleanUrl, { status: 301 });
   }
 
-  return NextResponse.next();
+  const response = NextResponse.next();
+  // Inject clean path (no query params) for canonical URL generation in layout
+  response.headers.set("x-canonical-path", pathname);
+  return response;
 }
 
 export const config = {

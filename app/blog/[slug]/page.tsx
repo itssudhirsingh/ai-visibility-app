@@ -22,6 +22,9 @@ export async function generateMetadata(
   return {
     title:       `${post.title} — NotionCue Blog`,
     description: post.excerpt,
+    alternates: {
+      canonical: `https://notioncue.com/blog/${slug}`,
+    },
     openGraph: {
       title:         post.title,
       description:   post.excerpt,

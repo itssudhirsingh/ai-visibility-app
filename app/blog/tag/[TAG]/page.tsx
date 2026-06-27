@@ -64,6 +64,9 @@ export async function generateMetadata(
   return {
     title: `${tag} — AI SEO articles & guides`,
     description: `All articles tagged ${tag}: research, case studies, and technical guides on Answer Engine Optimisation.`,
+    alternates: {
+      canonical: `https://notioncue.com/blog/tag/${tagSlug}`,
+    },
   }
 }
 

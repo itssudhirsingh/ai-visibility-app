@@ -4,6 +4,9 @@ Disallow: /api/
 Disallow: /*?
 Disallow: /*?_rsc=
 Disallow: /*?ref=
+Disallow: /*/view
+Disallow: /_next
+
 
 Sitemap: https://notioncue.com/sitemap.xml
 
