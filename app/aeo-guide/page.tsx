@@ -354,7 +354,7 @@ export default function AEOGuidePage() {
               <ToolCTA
                 icon="⚡" eyebrow="Free tool" title="llms.txt Generator"
                 desc="Generate a correctly formatted llms.txt file in seconds — pre-configured to allow GPTBot, PerplexityBot, ClaudeBot, and Google-Extended."
-                href="/resources/llms-text-generator" cta="Generate file" color="var(--accent)"
+                href="/llms-text-generator" cta="Generate file" color="var(--accent)"
               />
               <ToolCTA
                 icon="🤖" eyebrow="Free tool" title="Robots.txt Generator"
