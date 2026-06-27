@@ -1,36 +1,26 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    // Prevents RSC URLs from being publicly discoverable
-    serverActions: {
-      allowedOrigins: ["notioncue.com", "www.notioncue.com"],
-    },
-  },
-
+ 
   async headers() {
     return [
       {
-        // Apply to ALL routes
         source: "/:path*",
+        has: [{ type: "query", key: "_rsc" }],
         headers: [
           {
-            // Tells Google: only index the canonical clean URL
             key: "X-Robots-Tag",
-            value: "noindex",
+            value: "noindex, nofollow",
           },
           {
-            // Blocks RSC responses from being cached publicly
             key: "Cache-Control",
-            value: "private, no-store",
+            value: "private, no-store, no-cache",
           },
           {
-            // Prevents RSC payload URLs leaking via Referer
             key: "Referrer-Policy",
             value: "strict-origin-when-cross-origin",
           },
         ],
-        has: [{ type: "query", key: "_rsc" }],
       },
     ];
   },
