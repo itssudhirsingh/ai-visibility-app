@@ -162,8 +162,8 @@ export default function HomePage() {
 
         <SharedHeader />
 
-        {/* ── HERO ── */}
-        <section style={{minHeight:'100vh',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'8rem 2rem 5rem',position:'relative',overflow:'hidden',textAlign:'center'}}>
+        {/* ── HERO ── server-rendered so crawlers see the H1 + copy ── */}
+        <section className="hero" style={{minHeight:'88vh',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'8rem 2rem 5rem',position:'relative',overflow:'hidden',textAlign:'center'}}>
           <HeroCanvas />
           <div style={{position:'absolute',inset:0,zIndex:1,background:'radial-gradient(ellipse 80% 60% at 50% 50%,transparent 30%,rgba(4,3,12,.85) 70%,#04030c 100%)',pointerEvents:'none'}} />
           <div style={{position:'relative',zIndex:2,maxWidth:'780px'}}>
@@ -189,9 +189,6 @@ export default function HomePage() {
                 </span>
               ))}
             </div>
-          </div>
-          <div style={{position:'absolute',bottom:'2rem',left:'50%',transform:'translateX(-50%)',zIndex:2,opacity:.3}}>
-            <div style={{width:'1px',height:'50px',background:'linear-gradient(to bottom,transparent,rgba(255,255,255,0.88))',animation:'lineGrow 2s ease-in-out infinite'}} />
           </div>
         </section>
 

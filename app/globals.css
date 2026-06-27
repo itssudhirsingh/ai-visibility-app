@@ -181,6 +181,9 @@ html, body {
   /* Root font eases back so vw headings don't overflow */
   html { font-size: 16px; }
 
+  /* Hero: don't reserve a full screen of height on mobile/crawlers */
+  .hero { min-height: auto !important; padding: 6rem 1.25rem 3.5rem !important; }
+
   /* Nav — compact + hide middle links */
   nav { padding: 1rem 1.25rem !important; }
   nav > div:nth-child(2) { display: none !important; }
