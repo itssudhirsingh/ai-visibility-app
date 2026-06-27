@@ -19,18 +19,5 @@
         }
       ]
     }
-  ],
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "query",
-          "key": "_rsc"
-        }
-      ],
-      "destination": "/$1",
-      "permanent": true
-    }
   ]
 }
