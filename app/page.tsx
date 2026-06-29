@@ -130,7 +130,7 @@ export default function HomePage() {
     <>
         <JsonLd schema={[
           faqSchema(FAQS),
-          softwareAppSchema({ name: 'Notion Cue AI Visibility Scanner', description: 'Track how often your website gets cited by ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude.', path: '/', category: 'SEO' }),
+          softwareAppSchema({ name: 'Notion Cue AI Visibility Scanner', description: 'Track how often your website gets cited by ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude.', path: '/' }),
         ]} />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Epilogue:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
