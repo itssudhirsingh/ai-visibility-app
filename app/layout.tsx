@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
-import { headers } from "next/headers";
 import "./globals.css";
-// app/layout.tsx
-export const dynamic = "force-dynamic";
-export const fetchCache = "default-no-store";
+import JsonLd from "@/components/JsonLd";
+import { organizationSchema, websiteSchema } from "@/lib/schema";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,20 +17,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export async function generateMetadata(): Promise<Metadata> {
-  const headersList = await headers();
-  const pathname = headersList.get("x-canonical-path") ?? "/";
-  return {
-    title: {
-      default: 'Notion Cue — 100% Free AI SEO Visibility Tool ',
-      template: '%s — Notion Cue',
-    },
-    description: 'Track how often your website gets cited by ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude.',
-    metadataBase: new URL('https://notioncue.com'),
-    alternates: {
-      canonical: `https://notioncue.com${pathname}`,
-    },
-  };
+export const metadata = {
+  title: {
+    default: 'Notion Cue — 100% Free AI Visibility Tool Platform',
+    template: '%s — Notion Cue',  // auto appends on every page
+  },
+  description: 'Track how often your website gets cited by ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude.',
+  metadataBase: new URL('https://notioncue.com'),
 }
 
 export const viewport = {
@@ -50,6 +42,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <JsonLd schema={[organizationSchema(), websiteSchema()]} />
         {children}
         <SpeedInsights />
         <Analytics />
