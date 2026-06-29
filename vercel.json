@@ -19,5 +19,52 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/let-us-chat",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/capabilities",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/works",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/who-we-are",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/top-20-chatgpt-plugins-for-content-marketing",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/200-amazing-holiday-campaign-ideas",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/maximizing-content-performance",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/google-search-algorithm-update-and-history",
+      "destination": "/",
+      "permanent": true
+    }
   ]
 }
