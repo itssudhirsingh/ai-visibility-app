@@ -1,4 +1,4 @@
-// app/resources/aeo-guide/page.tsx — SERVER COMPONENT
+// app/aeo-guide/page.tsx — SERVER COMPONENT
 import SharedHeader from '@/components/SharedHeader'
 import SharedFooter from '@/components/SharedFooter'
 import SubNavClient from '@/components/SubNavClient'
@@ -359,7 +359,7 @@ export default function AEOGuidePage() {
               <ToolCTA
                 icon="🤖" eyebrow="Free tool" title="Robots.txt Generator"
                 desc="Build a robots.txt that correctly allows AI bots without accidentally blocking them through outdated disallow rules."
-                href="/resources/robots-txt" cta="Generate file" color="var(--violet)"
+                href="/robots-txt" cta="Generate file" color="var(--violet)"
               />
 
               <h2 id="g15">E-E-A-T for LLMs</h2>
