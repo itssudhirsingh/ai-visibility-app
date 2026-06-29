@@ -1,15 +1,17 @@
 // app/page.tsx — SERVER COMPONENT (no 'use client')
 import HeroCanvas from '@/components/HeroCanvas'
+import JsonLd from '@/components/JsonLd'
+import { faqSchema, softwareAppSchema } from '@/lib/schema'
 import HeroInput from '@/components/HeroInput'
 import FAQClient from '@/components/FAQClient'
 import SharedHeader from '@/components/SharedHeader'
 import SharedFooter from '@/components/SharedFooter'
 
 export const metadata = {
-  title: 'Notion Cue — 100% Free AI SEO Visibility Tool Platform',
+  title: 'Notion Cue — 100% Free AI Visibility Tool Platform',
   description: 'Track how often your website gets cited by ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude. Get your AEO score in 30 seconds.',
   openGraph: {
-    title: 'Notion Cue — 100% Free AI SEO Visibility Tool Platform',
+    title: 'Notion Cue — 100% Free AI Visibility Tool Platform',
     description: 'See how visible your brand is to AI engines. Scan your domain free.',
     type: 'website',
   },
@@ -105,14 +107,14 @@ const TOOLS = [
   {
     icon:'🗂️', title:'AEO Resource Library',
     desc:'Curated guides, checklists, and breakdowns on Answer Engine Optimisation — everything notioncue.com uses to track and grow AI visibility, in one place.',
-    cta:'Browse resources', href:'/aeo-guide', tag:'Core', c:'rgba(74,222,128,.2)',
+    cta:'Browse resources', href:'/resources', tag:'Core', c:'rgba(74,222,128,.2)',
   },
 ]
 
 const PLANS = [
   { plan:'Free', price:'0', desc:'Perfect for checking your own site and seeing where you stand.', features:['1 domain scan per day','AEO score for 3 LLMs','Basic citation count','llms.txt validator','7-day history'], cta:'Get started free', href:'/ai-visibility-tool', featured:false },
   { plan:'Pro', price:'49', desc:'For SEO professionals managing client sites and their own brands.', features:['10 domains included','All 6 LLMs tracked daily','Full citation context + sentiment','Competitor benchmarking (up to 5)','Content gap analysis','Weekly email digest reports','90-day history','CSV/PDF exports'], cta:'Start 14-day free trial', href:'/ai-visibility-tool', featured:true },
-  { plan:'Agency', price:'149', desc:'For agencies managing multiple client accounts at scale.', features:['Unlimited domains','All 6 LLMs + custom prompt testing','White-label reports for clients','Unlimited competitor tracking','API access (coming soon)','Priority Slack support','365-day history'], cta:'Contact sales', href:'/contact', featured:false },
+  { plan:'Agency', price:'149', desc:'For agencies managing multiple client accounts at scale.', features:['Unlimited domains','All 6 LLMs + custom prompt testing','White-label reports for clients','Unlimited competitor tracking','API access (coming soon)','Priority Slack support','365-day history'], cta:'Contact sales', href:'/resources/contact', featured:false },
 ]
 
 const FAQS = [
@@ -126,6 +128,10 @@ const FAQS = [
 export default function HomePage() {
   return (
     <>
+        <JsonLd schema={[
+          faqSchema(FAQS),
+          softwareAppSchema({ name: 'Notion Cue AI Visibility Scanner', description: 'Track how often your website gets cited by ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude.', path: '/', category: 'SEO' }),
+        ]} />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Epilogue:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
