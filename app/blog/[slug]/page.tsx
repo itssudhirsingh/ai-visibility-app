@@ -316,7 +316,7 @@ export default async function BlogPostPage(
           font-size: 9px;
           letter-spacing: .14em;
           text-transform: uppercase;
-          color: var(--muted2);
+          color: rgba(220,232,255,.62);
           margin-bottom: 12px;
         }
 
@@ -346,7 +346,7 @@ export default async function BlogPostPage(
           font-size: 9px;
         }
         .sidebar-row:last-child { border-bottom: none; padding-bottom: 0; }
-        .sidebar-row-label { color: var(--muted2); text-transform: uppercase; letter-spacing: .06em; }
+        .sidebar-row-label { color: rgba(220,232,255,.62); text-transform: uppercase; letter-spacing: .06em; }
         .sidebar-row-val { color: var(--text); text-align: right; }
 
         /* Share buttons in sidebar */
@@ -755,8 +755,8 @@ export default async function BlogPostPage(
                   />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', color: 'var(--muted2)' }}>Start</span>
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', color: 'var(--muted2)' }}>{post.read}</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', color: 'rgba(220,232,255,.62)' }}>Start</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '9px', color: 'rgba(220,232,255,.62)' }}>{post.read}</span>
                 </div>
               </div>
 
@@ -793,7 +793,7 @@ export default async function BlogPostPage(
                   <span className="tag" style={{ color: 'var(--lime)', background: 'var(--lime-dim)', border: '1px solid var(--lime-border)' }}>
                     AEO
                   </span>
-                  <span className="tag" style={{ color: 'var(--muted2)', background: 'rgba(255,255,255,.04)', border: '1px solid var(--line)' }}>
+                  <span className="tag" style={{ color: 'rgba(220,232,255,.68)', background: 'rgba(255,255,255,.05)', border: '1px solid rgba(220,235,255,.18)' }}>
                     2025
                   </span>
                 </div>
