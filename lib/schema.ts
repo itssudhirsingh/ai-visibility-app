@@ -245,12 +245,15 @@ export interface BlogPostSchemaOpts {
   slug:           string
   title:          string
   excerpt:        string
-  date:           string   // display date e.g. "Jun 8, 2026"
+  date:           string       // display date e.g. "Jun 8, 2026"
   author:         string
   authorRole?:    string
+  authorInitials?:string
   tag?:           string
-  read?:          string   // e.g. "8 min read"
-  image?:         string
+  read?:          string       // e.g. "8 min read"
+  content?:       string       // HTML body — used to extract wordCount + speakable cssSelector
+  image?:         string       // explicit OG image URL if available
+  dateModified?:  string       // separate modified date; defaults to date
 }
 
 /** Convert "Jun 8, 2026" → "2026-06-08" (ISO 8601) */
@@ -264,48 +267,154 @@ function toISO(displayDate: string): string {
   }
 }
 
+/** Strip HTML tags and return plain text */
+function stripHtml(html: string): string {
+  return html
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "\'")
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+/** Approximate word count from HTML content */
+function wordCount(html: string): number {
+  return stripHtml(html).split(/\s+/).filter(Boolean).length
+}
+
+/**
+ * Per-author @id anchors. Stable across all posts so Google
+ * merges them into a single Person entity.
+ */
+const AUTHOR_IDS: Record<string, string> = {
+  'Sudhir Singh':  `${SITE.url}/about#sudhir-singh`,
+  'Arun Mehta':   `${SITE.url}/about#arun-mehta`,
+  'Priya Kapoor': `${SITE.url}/about#priya-kapoor`,
+}
+
+function authorNode(name: string, role?: string) {
+  const id   = AUTHOR_IDS[name] ?? `${SITE.url}/about#${name.toLowerCase().replace(/\s+/g, '-')}`
+  const isNC = role ? (role.toLowerCase().includes('notioncue') || role.toLowerCase().includes('notion cue')) : false
+  // clean "· NotionCue" / "· NotioncCue" suffix from role for jobTitle
+  const jobTitle = role ? role.replace(/\s*·\s*Notioncue|\s*·\s*Notion\s*Cue/gi, '').trim() : undefined
+  return {
+    '@type':    'Person',
+    '@id':      id,
+    name,
+    url:        `${SITE.url}/about`,
+    ...(jobTitle          ? { jobTitle }             : {}),
+    ...(isNC              ? { worksFor: publisherRef } : {}),
+  }
+}
+
 export function blogPostSchema(post: BlogPostSchemaOpts) {
-  const url     = `${SITE.url}/blog/${post.slug}`
-  const isoDate = toISO(post.date)
+  const url          = `${SITE.url}/blog/${post.slug}`
+  const isoPublished = toISO(post.date)
+  const isoModified  = post.dateModified ? toISO(post.dateModified) : isoPublished
+  const words        = post.content ? wordCount(post.content) : undefined
+  const minutes      = post.read ? parseInt(post.read) || 5 : 5
+
+  // Image: explicit > og-image fallback > logo (always has an image node)
+  const imageNode = post.image
+    ? { '@type': 'ImageObject', '@id': `${url}#image`, url: post.image, contentUrl: post.image }
+    : {
+        '@type':      'ImageObject',
+        '@id':        `${url}#image`,
+        url:          SITE.ogImage,       // /og-image.png — 1200×630
+        contentUrl:   SITE.ogImage,
+        width:        1200,
+        height:       630,
+        caption:      post.title,
+      }
+
+  // Speakable — tells voice assistants + AI engines which parts to read aloud.
+  // Points to the excerpt paragraph and h2 headings (highest-signal text).
+  const speakable = {
+    '@type': 'SpeakableSpecification',
+    cssSelector: [
+      // excerpt is rendered in [data-speakable="excerpt"] on the page
+      '[data-speakable="excerpt"]',
+      // all h2 headings in the prose body
+      '.prose h2',
+    ],
+  }
 
   return {
-    '@context':     'https://schema.org',
-    '@type':        'BlogPosting',
-    '@id':          `${url}#article`,
-    headline:       post.title,
-    description:    post.excerpt,
+    '@context':        'https://schema.org',
+    '@type':           'BlogPosting',
+    '@id':             `${url}#article`,
+
+    // ── Core identity ──────────────────────────────────────────────────────
+    headline:          post.title,
+    name:              post.title,
+    description:       post.excerpt,
+    abstract:          post.excerpt,
     url,
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id':   url,
-    },
-    datePublished:  isoDate,
-    dateModified:   isoDate,
-    inLanguage:     SITE.inLanguage,
-    author: {
-      '@type':    'Person',
-      name:       post.author,
-      ...(post.authorRole ? { jobTitle: post.authorRole } : {}),
-      // Link to the org for authors who work for Notion Cue
-      ...(post.authorRole?.toLowerCase().includes('notioncue') || post.authorRole?.toLowerCase().includes('notion cue')
-        ? { worksFor: publisherRef }
-        : {}),
-    },
-    publisher:      publisherRef,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url, url },
+
+    // ── Dates ──────────────────────────────────────────────────────────────
+    datePublished:     isoPublished,
+    dateModified:      isoModified,
+
+    // ── Author ─────────────────────────────────────────────────────────────
+    author:            authorNode(post.author, post.authorRole),
+    contributor:       authorNode(post.author, post.authorRole),  // redundant but picked up by some parsers
+
+    // ── Publisher (the org with full @id linkage) ──────────────────────────
+    publisher:         publisherRef,
+    sourceOrganization: publisherRef,
+    copyrightHolder:   publisherRef,
+    copyrightYear:     new Date(isoPublished).getFullYear() || 2026,
+
+    // ── Blog membership ────────────────────────────────────────────────────
     isPartOf: {
-      '@type': 'Blog',
-      '@id':   `${SITE.url}/blog#blog`,
-      name:    'Notion Cue Blog',
-      url:     `${SITE.url}/blog`,
-      publisher: publisherRef,
+      '@type':     'Blog',
+      '@id':       `${SITE.url}/blog#blog`,
+      name:        'Notion Cue Blog',
+      url:         `${SITE.url}/blog`,
+      description: 'AEO strategy, AI citation tactics, and answer-engine optimisation guides.',
+      publisher:   publisherRef,
+      inLanguage:  SITE.inLanguage,
     },
-    ...(post.image    ? { image: { '@type': 'ImageObject', url: post.image, contentUrl: post.image } } : { image: logoObject }),
-    ...(post.tag      ? { articleSection: post.tag } : {}),
-    ...(post.read     ? { timeRequired:   `PT${post.read.match(/\d+/)?.[0] ?? '5'}M` } : {}),
-    keywords:       (post.tag ? [post.tag, ...SITE.keywords] : SITE.keywords).join(', '),
-    wordCount:      undefined,  // omit — we don't have this
-    copyrightHolder: publisherRef,
-    copyrightYear:   new Date(isoDate).getFullYear() || 2026,
+
+    // ── Image (logo-quality fallback guarantees a valid ImageObject) ───────
+    image:             imageNode,
+    thumbnailUrl:      imageNode.url,
+
+    // ── Content signals ────────────────────────────────────────────────────
+    ...(post.tag ? { articleSection: post.tag } : {}),
+    inLanguage:        SITE.inLanguage,
+    keywords:          (post.tag ? [post.tag, ...SITE.keywords] : SITE.keywords).join(', '),
+    ...(words         ? { wordCount: words }                       : {}),
+    timeRequired:      `PT${minutes}M`,
+    isFamilyFriendly:  true,
+
+    // ── Speakable (AEO gold — voice + AI reading signal) ──────────────────
+    speakable,
+
+    // ── Accessibility + licence ────────────────────────────────────────────
+    accessibilityFeature:  ['tableOfContents', 'readingOrder', 'structuredNavigation'],
+    license:               'https://creativecommons.org/licenses/by/4.0/',
+
+    // ── Breadcrumb embedded in the article node ────────────────────────────
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      '@id':   `${url}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE.url}/blog` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: url },
+      ],
+    },
+
+    // ── Potential action — share / cite signal ─────────────────────────────
+    potentialAction: {
+      '@type':  'ReadAction',
+      target:   [url],
+    },
   }
 }
 

@@ -2,6 +2,8 @@
 // SSR Server Component — no 'use client'
 
 import { notFound } from 'next/navigation'
+import JsonLd from '@/components/JsonLd'
+import { blogPostSchema, breadcrumbSchema } from '@/lib/schema'
 import Link from 'next/link'
 import SharedHeader from '@/components/SharedHeader'
 import SharedFooter from '@/components/SharedFooter'
@@ -19,17 +21,33 @@ export async function generateMetadata(
   const { slug } = await params
   const post = getPostBySlug(slug)
   if (!post) return {}
+  const url = `https://notioncue.com/blog/${post.slug}`
   return {
-    title:       `${post.title} — NotionCue Blog`,
+    title:       `${post.title} — Notion Cue Blog`,
     description: post.excerpt,
-    alternates: {
-      canonical: `https://notioncue.com/blog/${slug}`,
-    },
+    alternates:  { canonical: url },
     openGraph: {
-      title:         post.title,
-      description:   post.excerpt,
-      type:          'article',
-      publishedTime: post.date,
+      title:          post.title,
+      description:    post.excerpt,
+      type:           'article',
+      url,
+      publishedTime:  post.date,
+      authors:        [post.author],
+      tags:           [post.tag],
+      siteName:       'Notion Cue',
+      images: [{
+        url:    'https://notioncue.com/og-image.png',
+        width:  1200,
+        height: 630,
+        alt:    post.title,
+      }],
+    },
+    twitter: {
+      card:        'summary_large_image',
+      title:       post.title,
+      description: post.excerpt,
+      site:        '@notioncue',
+      images:      ['https://notioncue.com/og-image.png'],
     },
   }
 }
@@ -78,22 +96,10 @@ export default async function BlogPostPage(
   const ts = tagStyle(post.tag)
   const barColor = READ_BAR_COLOR[post.tag] ?? '#caff45'
 
-  const jsonLd = {
-    '@context':    'https://schema.org',
-    '@type':       'BlogPosting',
-    headline:      post.title,
-    description:   post.excerpt,
-    datePublished: post.date,
-    author: { '@type': 'Person', name: post.author, jobTitle: post.authorRole },
-    publisher: { '@type': 'Organization', name: 'NotionCue', url: 'https://notioncue.com' },
-  }
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd schema={blogPostSchema({ ...post })} />
+      <JsonLd schema={breadcrumbSchema([{ name: 'Blog', path: '/blog' }, { name: post.title, path: `/blog/${post.slug}` }])} />
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Epilogue:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@300;400;500&display=swap');
@@ -588,10 +594,13 @@ export default async function BlogPostPage(
             </h1>
 
             {/* Excerpt */}
-            <p style={{
-              fontSize: '1.05rem', color: 'rgba(220,232,255,.78)',
-              lineHeight: 1.78, marginBottom: 28,
-            }}>
+            <p
+              data-speakable="excerpt"
+              style={{
+                fontSize: '1.05rem', color: 'rgba(220,232,255,.78)',
+                lineHeight: 1.78, marginBottom: 28,
+              }}
+            >
               {post.excerpt}
             </p>
 
@@ -711,7 +720,7 @@ export default async function BlogPostPage(
                       {post.authorRole}
                     </div>
                     <p style={{ fontSize: '12px', color: 'var(--prose)', lineHeight: 1.72 }}>
-                      Senior SEO and AEO specialist with 12+ years across e-commerce, global education, and healthcare. Building NotionCue to track brand citations across ChatGPT, Perplexity, Gemini, and AI Overviews.
+                      Senior SEO and AEO specialist with 12+ years across e-commerce, global education, and healthcare. Building Notion Cue to track brand citations across ChatGPT, Perplexity, Gemini, and AI Overviews.
                     </p>
                     <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
                       <Link href="https://linkedin.com/in/sudhir-ks" style={{
@@ -725,7 +734,7 @@ export default async function BlogPostPage(
                         color: 'var(--lime)', border: '1px solid var(--lime-border)',
                         borderRadius: 100, padding: '4px 11px',
                         textTransform: 'uppercase', letterSpacing: '.06em',
-                      }}>NotionCue</Link>
+                      }}>Notion Cue</Link>
                     </div>
                   </div>
                 </div>
