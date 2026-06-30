@@ -794,7 +794,7 @@ export default async function BlogPostPage(
                     AEO
                   </span>
                   <span className="tag" style={{ color: 'rgba(220,232,255,.68)', background: 'rgba(255,255,255,.05)', border: '1px solid rgba(220,235,255,.18)' }}>
-                    2025
+                    2026
                   </span>
                 </div>
               </div>
