@@ -1,8 +1,10 @@
 'use client'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Logo from '@/components/logo'
+import { createClient } from '@/lib/superbase/client'
+import type { User } from '@supabase/supabase-js'
 
 // ─── Site structure ────────────────────────────────────────────────────────────
 const TOOLS = [
@@ -163,11 +165,33 @@ const TOOLS_COL2 = TOOLS.slice(7)
 
 export default function SharedHeader() {
   const pathname = usePathname()
+  const router = useRouter()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [toolsOpen, setToolsOpen]   = useState(false)
+  const [user, setUser] = useState<User | null>(null)
+  const [accountOpen, setAccountOpen] = useState(false)
+
+  // Track auth state — checks once on mount, then stays in sync with
+  // sign-in/sign-out events fired from anywhere in the app.
+  useEffect(() => {
+    const supabase = createClient()
+    supabase.auth.getUser().then(({ data }) => setUser(data.user))
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+    })
+    return () => listener.subscription.unsubscribe()
+  }, [])
+
+  async function handleSignOut() {
+    const supabase = createClient()
+    await supabase.auth.signOut()
+    setAccountOpen(false)
+    router.push('/')
+    router.refresh()
+  }
 
   // Close mobile menu on route change
-  useEffect(() => { setMobileOpen(false); setToolsOpen(false) }, [pathname])
+  useEffect(() => { setMobileOpen(false); setToolsOpen(false); setAccountOpen(false) }, [pathname])
 
   // Lock body scroll when mobile menu open
   useEffect(() => {
@@ -420,23 +444,56 @@ export default function SharedHeader() {
               </span>
             </div>
 
-            {/* CTA */}
-            <Link href="/ai-visibility-tool" className="sh-cta"
-              style={{
-                fontFamily:    "'Familjen Grotesk',sans-serif",
-                fontWeight:    700,
-                fontSize:      12,
-                color:         '#07100b',
-                background:    '#caff45',
-                padding:       '8px 16px',
-                borderRadius:  100,
-                textDecoration:'none',
-                whiteSpace:    'nowrap',
-                boxShadow:     '0 0 18px rgba(202,255,69,.16)',
-                transition:    'box-shadow .2s',
-              }}>
-              Dashboard →
-            </Link>
+            {/* CTA — auth-aware */}
+            {user ? (
+              <div style={{ position:'relative' }}>
+                <button
+                  onClick={() => setAccountOpen(o => !o)}
+                  style={{
+                    display:'flex', alignItems:'center', gap:'.5rem',
+                    fontFamily:"'JetBrains Mono',monospace", fontSize:12, fontWeight:500,
+                    color:'#f5f8ff', background:'rgba(255,255,255,.04)', border:'1px solid rgba(255,255,255,.1)',
+                    padding:'7px 14px', borderRadius:100, cursor:'pointer', whiteSpace:'nowrap',
+                  }}
+                >
+                  <span style={{ width:18, height:18, borderRadius:'50%', background:'#caff45', color:'#07100b', fontSize:9, fontWeight:700, display:'flex', alignItems:'center', justifyContent:'center' }}>
+                    {(user.email?.[0] || '?').toUpperCase()}
+                  </span>
+                  {user.email?.split('@')[0]}
+                </button>
+                {accountOpen && (
+                  <div style={{
+                    position:'absolute', top:'calc(100% + 8px)', right:0, minWidth:180,
+                    background:'#100e22', border:'1px solid rgba(255,255,255,.1)', borderRadius:10,
+                    padding:'6px', zIndex:50,
+                  }}>
+                    <Link href="/ai-visibility-tool" onClick={() => setAccountOpen(false)} style={{ display:'block', padding:'8px 10px', borderRadius:6, fontSize:13, color:'#f5f8ff', textDecoration:'none' }}>
+                      Dashboard
+                    </Link>
+                    <button onClick={handleSignOut} style={{ display:'block', width:'100%', textAlign:'left', padding:'8px 10px', borderRadius:6, fontSize:13, color:'#f87171', background:'transparent', border:'none', cursor:'pointer', fontFamily:'inherit' }}>
+                      Sign out
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link href="/login" className="sh-cta"
+                style={{
+                  fontFamily:    "'Familjen Grotesk',sans-serif",
+                  fontWeight:    700,
+                  fontSize:      12,
+                  color:         '#07100b',
+                  background:    '#caff45',
+                  padding:       '8px 16px',
+                  borderRadius:  100,
+                  textDecoration:'none',
+                  whiteSpace:    'nowrap',
+                  boxShadow:     '0 0 18px rgba(202,255,69,.16)',
+                  transition:    'box-shadow .2s',
+                }}>
+                Sign in →
+              </Link>
+            )}
 
             {/* ── Hamburger (mobile only) ── */}
             <button
@@ -601,22 +658,52 @@ export default function SharedHeader() {
             </div>
 
             {/* Mobile CTA */}
-            <Link href="/ai-visibility-tool"
-              style={{
-                display:       'block',
-                textAlign:     'center',
-                fontFamily:    "'Familjen Grotesk',sans-serif",
-                fontWeight:    700,
-                fontSize:      14,
-                color:         '#07100b',
-                background:    '#caff45',
-                padding:       '13px 24px',
-                borderRadius:  100,
-                textDecoration:'none',
-                boxShadow:     '0 0 24px rgba(202,255,69,.2)',
-              }}>
-              Open Dashboard →
-            </Link>
+            {user ? (
+              <>
+                <Link href="/ai-visibility-tool"
+                  style={{
+                    display:       'block',
+                    textAlign:     'center',
+                    fontFamily:    "'Familjen Grotesk',sans-serif",
+                    fontWeight:    700,
+                    fontSize:      14,
+                    color:         '#07100b',
+                    background:    '#caff45',
+                    padding:       '13px 24px',
+                    borderRadius:  100,
+                    textDecoration:'none',
+                    boxShadow:     '0 0 24px rgba(202,255,69,.2)',
+                  }}>
+                  Open Dashboard →
+                </Link>
+                <button onClick={handleSignOut}
+                  style={{
+                    display:'block', width:'100%', textAlign:'center', marginTop:10,
+                    fontFamily:"'JetBrains Mono',monospace", fontSize:12, color:'#f87171',
+                    background:'transparent', border:'1px solid rgba(248,113,113,.25)',
+                    borderRadius:100, padding:'10px 24px', cursor:'pointer',
+                  }}>
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <Link href="/login"
+                style={{
+                  display:       'block',
+                  textAlign:     'center',
+                  fontFamily:    "'Familjen Grotesk',sans-serif",
+                  fontWeight:    700,
+                  fontSize:      14,
+                  color:         '#07100b',
+                  background:    '#caff45',
+                  padding:       '13px 24px',
+                  borderRadius:  100,
+                  textDecoration:'none',
+                  boxShadow:     '0 0 24px rgba(202,255,69,.2)',
+                }}>
+                Sign in →
+              </Link>
+            )}
 
             {/* Status */}
             <div style={{
