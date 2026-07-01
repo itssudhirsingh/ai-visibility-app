@@ -44,10 +44,24 @@ function SignupForm() {
     setLoading(false)
 
     if (signUpError) {
+      // Supabase JS v2 sometimes returns the error body as an object
+      // in .message (e.g. rate-limit or duplicate-user responses from
+      // the Auth API). Safely coerce to a usable string first.
+      const rawMsg = typeof signUpError.message === 'string'
+        ? signUpError.message
+        : JSON.stringify(signUpError.message)
+
+      const msg = rawMsg.toLowerCase()
       setError(
-        signUpError.message.includes('already registered')
+        msg.includes('already registered') || msg.includes('user already exists') || msg.includes('email address is already registered')
           ? 'An account with this email already exists. Try signing in instead.'
-          : signUpError.message
+          : msg.includes('rate limit') || msg.includes('too many requests')
+          ? 'Too many attempts. Please wait a moment and try again.'
+          : msg.includes('password') && msg.includes('length')
+          ? 'Password must be at least 8 characters.'
+          : msg.includes('invalid email') || msg.includes('unable to validate email')
+          ? 'Please enter a valid email address.'
+          : rawMsg || 'Something went wrong. Please try again.'
       )
       return
     }

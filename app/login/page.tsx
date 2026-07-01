@@ -30,10 +30,19 @@ function LoginForm() {
     setLoading(false)
 
     if (signInError) {
+      const rawMsg = typeof signInError.message === 'string'
+        ? signInError.message
+        : JSON.stringify(signInError.message)
+
+      const msg = rawMsg.toLowerCase()
       setError(
-        signInError.message === 'Invalid login credentials'
+        msg.includes('invalid login credentials') || msg.includes('invalid email or password')
           ? 'Incorrect email or password.'
-          : signInError.message
+          : msg.includes('email not confirmed')
+          ? 'Please confirm your email before signing in. Check your inbox.'
+          : msg.includes('rate limit') || msg.includes('too many requests')
+          ? 'Too many attempts. Please wait a moment and try again.'
+          : rawMsg || 'Something went wrong. Please try again.'
       )
       return
     }
