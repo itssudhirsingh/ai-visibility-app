@@ -88,7 +88,7 @@ Return ONLY this JSON:
       temperature: 0.2,
       // Was 15000 — wildly oversized for a 4-field JSON response, costing
       // more per call than necessary with no quality benefit.
-      maxTokens: 1200,
+      maxTokens: 4000,
     });
 
     return NextResponse.json({ ...data, cwv, psi_error: psiError, url: targetUrl });
