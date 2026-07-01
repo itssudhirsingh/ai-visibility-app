@@ -13,7 +13,7 @@ export default function HeatmapClient() {
     if (!url.trim()) return
     setLoading(true); setError(''); setData(null)
     try {
-      const res = await fetch('/api/ai-visibility-heatmap', {
+      const res = await fetch('/api/visibility-heatmap', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url }),

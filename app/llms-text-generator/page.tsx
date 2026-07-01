@@ -31,56 +31,12 @@ interface GeneratedData {
   aeo_score_impact:      number
   pages_indexed:         number
   ai_engines_benefiting: string[]
+  content_fetched?:      boolean
+  fetch_warning?:        string | null
 }
 type TabId = 'standard' | 'full' | 'validation' | 'deploy'
 
 // ─── Fallback generator (used when API fails or JSON parse fails) ─────────────
-function makeFallback(domain: string, incBot: boolean, incBluf: boolean): GeneratedData {
-  const raw  = domain.split('.')[0]
-  const name = raw.charAt(0).toUpperCase() + raw.slice(1)
-  const botLine = incBot
-    ? `User-agent: GPTBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /`
-    : ''
-
-  const shortBluf = `${name} provides ${raw}‑focused products, docs, and support for its audience.`
-
-  const keyPages = [
-    { title: 'Home', url: `https://${domain}/`, note: 'Main landing page with overview' },
-    { title: 'About', url: `https://${domain}/about`, note: 'Company background and team' },
-    { title: 'Pricing', url: `https://${domain}/pricing`, note: 'Plans and pricing' },
-    { title: 'Blog', url: `https://${domain}/blog`, note: 'Articles and guides' },
-    { title: 'Contact', url: `https://${domain}/contact`, note: 'Support and contact channels' },
-  ]
-
-  const fileListMarkdown = keyPages.map(p => `- [${p.title}](${p.url}): ${p.note}`).join('\n')
-  const optionalListMarkdown = `- [Changelog](https://${domain}/changelog): Release notes and updates\n- [Docs](https://${domain}/docs): Detailed documentation`
-
-  const llmsTxt = `# ${name}\n\n> ${shortBluf}\n\n${name} publishes concise, human- and LLM-friendly markdown versions of key pages to help language models understand the site.\n\n${fileListMarkdown}\n\n## Optional\n\n${optionalListMarkdown}${botLine ? `\n\n## AI Crawler Hints\n\n${botLine}` : ''}`
-
-  const llmsFull = `# ${name} — Full llms index\n\n> ${shortBluf}\n\nThis extended index includes all primary pages and additional resources useful for LLM consumption. Where available, link targets end with a .md variant containing LLM-friendly markdown.\n\n## Key pages\n\n${fileListMarkdown}\n\n## Additional resources\n\n- [Support KB](https://${domain}/support): Knowledge base and FAQs\n- [API reference](https://${domain}/api): Developer API docs\n\n## Optional\n\n${optionalListMarkdown}\n\n${botLine ? `## AI Crawler Hints\n\n${botLine}` : ''}`
-
-  return {
-    company_name: name,
-    tagline: shortBluf,
-    category: 'Web',
-    key_topics: ['Products', 'Docs', 'Blog', 'Support'],
-    llms_txt: llmsTxt,
-    llms_full_txt: llmsFull,
-    validation: [
-      { check: 'H1 title present',      pass: true,    note: 'Top-level H1 with site name' },
-      { check: 'Blockquote tagline',     pass: true,    note: 'Concise one-line BLUF in a blockquote' },
-      { check: 'Key pages list',         pass: keyPages.length > 0, note: 'Markdown list of key pages with links' },
-      { check: 'Optional section',       pass: true,    note: 'Optional section present for secondary URLs' },
-      { check: 'AI crawler hints',       pass: !!botLine, note: botLine ? 'User-agent blocks included' : 'No crawler hints included' },
-      { check: 'Contact info included',  pass: true,    note: `Contact URL: https://${domain}/contact` },
-      { check: 'File size estimate',     pass: true,    note: 'Concise index — keeps within typical LLM context budgets' },
-    ],
-    aeo_score_impact:      8,
-    pages_indexed:         keyPages.length,
-    ai_engines_benefiting: ['ChatGPT', 'Perplexity', 'Claude', 'Gemini', 'Grok'],
-  }
-}
-
 // ─── Main page component ──────────────────────────────────────────────────────
 export default function LLMSTxtPage() {
   const router = useRouter()
@@ -177,12 +133,15 @@ export default function LLMSTxtPage() {
 
       const json = await res.json() as GeneratedData & { error?: string }
 
-      // Route returns { error: 'parse_failed' } when JSON extraction failed server-side
-      if (json.error) {
-        data = makeFallback(cleanDomain, incBot, incBluf)
-      } else {
-        data = json
-      }
+      // The API route (lib/ai.ts → callAIForJson) already retries once and
+      // attempts a JSON repair server-side before giving up — if it still
+      // couldn't get usable data, it returns a non-2xx status, which is
+      // already caught above by `if (!res.ok)`. A 200 response here is
+      // always real data (with content_fetched/fetch_warning indicating
+      // whether the homepage could be verified). We no longer silently
+      // swap in a client-side fabricated fallback on success — that masked
+      // failures behind content the user might mistake for real.
+      data = json
 
     } catch (err: unknown) {
       stopAnim()
@@ -604,6 +563,21 @@ export default function LLMSTxtPage() {
                       </div>
                     ))}
                   </div>
+
+                  {/* Fetch warning — shown when homepage couldn't be read,
+                      so the user knows the file below has placeholder content */}
+                  {result.fetch_warning && (
+                    <div style={{
+                      padding:'10px 14px',
+                      border:'1px solid rgba(248,113,113,.25)',
+                      background:'rgba(248,113,113,.06)',
+                      borderRadius:7, marginBottom:12,
+                      fontSize:10, color:'#f87171', lineHeight:1.7,
+                    }}>
+                      {mono('⚠ COULD NOT VERIFY SITE — ', { fontSize:9, letterSpacing:'.07em', color:'#f87171' })}
+                      {result.fetch_warning}
+                    </div>
+                  )}
 
                   {/* Company banner */}
                   {result.company_name && (

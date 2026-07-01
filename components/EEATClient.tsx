@@ -11,7 +11,7 @@ export function EEATClient() {
     if (!url.trim()) return
     setLoading(true); setError(''); setData(null)
     try {
-      const res = await fetch('/api/ai-eeat-checker', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url }) })
+      const res = await fetch('/api/eeat-audit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url }) })
       const json = await res.json()
       if (!res.ok) setError(json.error || 'Something went wrong.')
       else setData(json)

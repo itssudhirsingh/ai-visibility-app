@@ -15,7 +15,7 @@ export function SchemaClient() {
     if (!url.trim()) return
     setLoading(true); setError(''); setData(null)
     try {
-      const res = await fetch('/api/ai-schema-markup-generator', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url, schema_type: schemaType === 'Auto-detect' ? null : schemaType }) })
+      const res = await fetch('/api/schema-generator', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url, schema_type: schemaType === 'Auto-detect' ? null : schemaType }) })
       const json = await res.json()
       if (!res.ok) setError(json.error || 'Something went wrong.')
       else setData(json)

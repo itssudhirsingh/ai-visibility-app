@@ -134,6 +134,7 @@ function DashboardInner() {
   const [openProbe, setOpenProbe] = useState<number|null>(null)
   const [openComp, setOpenComp] = useState<number|null>(null)
   const [sidebarOpen, setSidebarOpen] = useState(false) // ← NEW
+  const [scanError, setScanError] = useState('')
 
   function showToast(msg: string) { setToast(msg); setTimeout(()=>setToast(''),2400) }
 
@@ -148,15 +149,25 @@ function DashboardInner() {
   async function runAnalysis(inputUrl?: string) {
     const target=(inputUrl||url).trim().replace(/^https?:\/\//,'')
     if(!target) return
-    setLoading(true); setView('overview')
+    setLoading(true); setView('overview'); setScanError('')
     setSidebarOpen(false) // ← NEW: close sidebar when scan starts
     try {
       const res=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:target})})
       const data=await res.json()
-      const r=normalize(data.error?{}:data)
+      if(!res.ok || data.error){
+        // Don't silently render a fabricated 0/100 "result" — that looks
+        // exactly like a real bad scan. Show an actual error instead.
+        setResult(null)
+        setScanError(data.error || `Could not analyse this domain (${res.status}). Please try again.`)
+        return
+      }
+      const r=normalize(data)
       setResult(r); setResultUrl(target)
       setRecentScans(prev=>[{url:target,score:r.score,time:'just now'},...prev.filter(s=>s.url!==target)].slice(0,5))
-    } catch { setResult(normalize({})); setResultUrl(target) }
+    } catch {
+      setResult(null)
+      setScanError('Could not reach the server. Check your connection and try again.')
+    }
     finally { setLoading(false) }
   }
 
@@ -512,7 +523,18 @@ function DashboardInner() {
             )}
 
             {/* ── Empty state ── */}
-            {!loading && !result && (
+            {!loading && scanError && (
+              <div style={{maxWidth:'600px',margin:'60px auto',textAlign:'center'}}>
+                <div style={{width:'56px',height:'56px',margin:'0 auto 18px',borderRadius:'50%',background:'rgba(248,113,113,.08)',border:'1px solid rgba(248,113,113,.25)',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f87171" strokeWidth="2"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
+                </div>
+                <div style={{fontFamily:'"Familjen Grotesk"',fontSize:'19px',fontWeight:700,marginBottom:'8px',color:'#f87171'}}>Scan failed</div>
+                <div style={{fontSize:'13px',color:'var(--muted)',lineHeight:1.6,marginBottom:'20px'}}>{scanError}</div>
+                <button onClick={()=>{setScanError('');runAnalysis()}} style={{border:'1px solid var(--line)',background:'rgba(255,255,255,.03)',color:'var(--text)',borderRadius:'7px',padding:'9px 18px',fontSize:'12px',fontFamily:'"JetBrains Mono"',cursor:'pointer'}}>Try again</button>
+              </div>
+            )}
+
+            {!loading && !result && !scanError && (
               <div style={{maxWidth:'600px',margin:'60px auto',textAlign:'center'}}>
                 <div style={{width:'80px',height:'80px',margin:'0 auto 20px',position:'relative',perspective:'600px',display:'flex',alignItems:'center',justifyContent:'center',animation:'floatY 5s ease-in-out infinite'}}>
                   {[{s:'100%',c:'rgba(69,228,255,.2)',d:'10s'},{s:'65%',c:'rgba(202,255,69,.3)',d:'7s',r:'reverse'}].map((r,i)=>(

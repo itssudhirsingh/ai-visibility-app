@@ -1,3 +1,5 @@
+import { callAIForJson, aiErrorResponse } from '@/lib/ai'
+
 export async function POST(req: Request) {
   try {
     const { url } = await req.json()
@@ -42,22 +44,10 @@ export async function POST(req: Request) {
     const hasPerplexityBot = /PerplexityBot/i.test(pageHtml)
 
     // ── 3. Call AI model ────────────────────────────────────────────────────
-    const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: 'deepseek-ai/deepseek-v4-flash',
-        messages: [
-          {
-            role: 'system',
-            content: 'You are an expert AI visibility and AEO analyst. Always respond with valid JSON only — no markdown, no code fences, no extra text.',
-          },
-          {
-            role: 'user',
-            content: `Analyse the AI visibility of this brand/domain: "${url}"
+    const data = await callAIForJson<Record<string, unknown>>({
+      apiKey,
+      system: 'You are an expert SEO AI visibility and AEO analyst. Always respond with valid JSON only — no markdown, no code fences, no extra text.',
+      user: `Analyse the AI visibility of this brand/domain: "${url}"
 
 Real page content detected:
 """
@@ -128,39 +118,14 @@ Return ONLY this exact JSON structure:
     {"engine": "Grok",       "query": "<realistic query>", "response": "<response excerpt>", "cited": <true|false>}
   ]
 }`,
-          },
-        ],
-        max_tokens: 4096,
-        temperature: 0.2,
-      }),
+      temperature: 0.2,
+      maxTokens: 4096,
     })
 
-    const rawText = await response.text()
-    console.log('NVIDIA status:', response.status)
-
-    if (!response.ok) {
-      console.error('NVIDIA API error:', rawText)
-      return Response.json({ error: `API error: ${rawText}` }, { status: 500 })
-    }
-
-    const json = JSON.parse(rawText)
-    const text = json.choices?.[0]?.message?.content
-
-    if (!text) {
-      console.error('Empty choices:', JSON.stringify(json))
-      return Response.json({ error: 'Empty response', raw: json }, { status: 500 })
-    }
-
-    const cleaned = text.replace(/```json/gi, '').replace(/```/g, '').trim()
-    const jsonStart = cleaned.indexOf('{')
-    const jsonEnd = cleaned.lastIndexOf('}')
-    if (jsonStart === -1 || jsonEnd === -1) return Response.json({ error: 'Model did not return JSON', raw: cleaned.slice(0, 300) }, { status: 500 })
-    const data = JSON.parse(cleaned.slice(jsonStart, jsonEnd + 1))
     return Response.json(data)
 
   } catch (err) {
-    console.error('API Error:', err)
-    return Response.json({ error: String(err) }, { status: 500 })
+    return aiErrorResponse(err)
   }
 }
 
