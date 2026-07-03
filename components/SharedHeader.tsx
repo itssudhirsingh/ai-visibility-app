@@ -151,11 +151,11 @@ const TOOLS = [
 ]
 
 const NAV_LINKS = [
-  { label: 'Cluster Map',    href: '/topic-cluster-generator' },
   { label: 'AI Visibility',  href: '/ai-visibility-tool' },
-  { label: 'AEO Guide',      href: '/aeo-guide' },
-  { label: 'Blog',           href: '/blog' },
-  { label: 'Changelog',      href: '/changelog' },
+  { label: 'AEO/GEO Guide',      href: '/aeo-guide' },
+  { label: 'Be AI Ready',           href: '/blog/is-your-website-agent-ready-complete-technical-guide-2026' },
+  { label: ' blog',      href: '/blog' },
+  { label: 'contact',      href: '/contact' },
   { label: 'About',          href: '/about' },
 ]
 

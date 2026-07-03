@@ -5969,6 +5969,255 @@ Disallow: /</code></pre>
 <p><strong>Should a small publisher pursue individual litigation against an AI company over unauthorised training use?</strong><br/>This is a significant legal and financial decision requiring qualified legal counsel specific to your jurisdiction and circumstances, and general content cannot responsibly substitute for that advice. What the current 2026 litigation landscape does show is a mixed picture: some cases have produced settlements that converted into ongoing commercial licensing relationships, as happened between Brazil's Folha and OpenAI, while others remain in active, extended discovery with no resolution yet in sight. The realistic operational takeaway for most smaller publishers is that this legal landscape remains genuinely unsettled, and building a resilient content and audience strategy that does not depend on a favourable outcome from litigation you may never pursue is the more reliable near-term path.</p>
 `,
   },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // POST 84 — Complete Agent-Ready Website Guide (Master Tutorial)
+  // Based on Cloudflare's isitagentready.com scanner (launched April 17, 2026)
+  // Covers all 5 categories, 16 checks: Discoverability, Content, Bot Access
+  // Control, API/Auth/MCP/Skill Discovery, Commerce
+  // Primary KW: agent ready website, is your site agent ready
+  // Tool CTA: AI Crawler Audit + llms.txt Generator
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug:           'is-your-website-agent-ready-complete-technical-guide-2026',
+    emoji:          '🤖',
+    bg:             'rgba(34,211,238,.06)',
+    tag:            'Technical',
+    date:           'Jul 9, 2026',
+    title:          'Is Your Website Agent-Ready? The Complete Technical Guide',
+    excerpt:        'Cloudflare\'s isitagentready.com scores any website from 0 to 100 across five categories and sixteen checks — Discoverability, Content, Bot Access Control, API/Auth/MCP/Skill Discovery, and Commerce. Most sites score under 30. This is the complete tutorial: what each check actually tests, why it matters, and exactly how to fix it, with working code for every single item.',
+    read:           '22 min read',
+    author:         'Sudhir Singh',
+    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    authorInitials: 'SS',
+    content: `
+<p>In April 2026, Cloudflare shipped a tool called isitagentready.com. Type in a URL, and it returns a score from 0 to 100 rating how prepared that site is for AI agents — not search engines, not chatbots answering questions, but autonomous agents that browse, evaluate, and act on a human's behalf. Most sites tested score somewhere around 20 to 30 out of 100, landing in a tier the tool labels "Bot-Aware": technically reachable by bots, but structurally unprepared for the agentic web that is arriving faster than most technical teams have planned for.</p>
+<p>The scanner emerged from a specific moment. On April 15, 2026, Cloudflare and OpenAI shipped competing Agent SDKs within hours of each other — what one analysis called "The Agent Runtime Wars." The core insight behind that release, and behind the scanner two days later, is a genuine architectural shift: AI models increasingly do not read your website directly. An agent runtime fetches your page, parses it, and decides what to execute, including whether to bother running your JavaScript at all. The runtime is the new gatekeeper, sitting between your content and the model that will eventually act on it.</p>
+<p>This guide walks through every single category and check the scanner tests, in the order they appear in a scan result, with the underlying standard, why it matters, and exact working implementation for each one. Where a standard is still an early-stage IETF draft rather than a ratified specification, that is called out explicitly, because implementation effort should be proportional to how settled a standard actually is.</p>
+
+<h2>What Does the Overall Agent-Ready Score Actually Measure?</h2>
+<p>The scanner aggregates five weighted categories into a single 0-100 score: Discoverability, Content, Bot Access Control, API/Auth/MCP/Skill Discovery, and an optional Commerce category for sites that sell products or services. Each category contains individual pass/fail or partial-credit checks, and the categories are not weighted equally — API/Auth/MCP/Skill Discovery carries the heaviest weight at six separate checks, reflecting where the scanner's authors believe the agentic web is heading fastest.</p>
+<p>Four score tiers appear in results: Bot-Aware (roughly 0-40, meaning your site is reachable but not structured for agents), and increasingly capable tiers above that as more checks pass. A score around 29, which is common for a well-built but agent-unoptimized modern SaaS site, typically reflects strong marks on basic discoverability (robots.txt, sitemap) and content readability, combined with near-total absence across the API, auth, and commerce discovery layers most sites have never heard of, let alone implemented.</p>
+
+<h2>Category 1: Discoverability — Can an Agent Even Find Your Site's Rules?</h2>
+<p>This category checks the most foundational layer: whether an agent, before doing anything else, can retrieve the basic machine-readable documents that describe what it is and is not allowed to do on your domain.</p>
+
+<h3>Check: robots.txt With Current Rules</h3>
+<p><strong>Goal:</strong> Publish robots.txt with current rules. <strong>How to implement:</strong> Include AI bot rules for GPTBot, ClaudeBot, and others. This is the most basic check in the entire scan, and it is also the one most sites get subtly wrong in ways covered in depth elsewhere in this series — duplicate user-agent blocks, an empty Allow directive, or a Cloudflare-managed rule silently overriding a manually written one. The fix is a single, clean robots.txt with one entry per user-agent, no duplicates, explicitly naming GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot, Claude-SearchBot, and Google-Extended rather than relying solely on a wildcard <code>User-agent: *</code> block, since AI-specific crawlers increasingly warrant AI-specific rules distinct from general web crawler policy.</p>
+
+<h3>Check: Sitemap Referenced From robots.txt</h3>
+<p><strong>Goal:</strong> Publish a sitemap and reference it from robots.txt. <strong>Result target:</strong> sitemap exists with valid structure. <strong>How to implement:</strong> add a <code>Sitemap:</code> directive pointing to your sitemap.xml at the bottom of robots.txt. This is standard technical SEO hygiene that most sites already have correctly configured, but it is worth explicitly verifying the sitemap is current, contains only canonical URLs, and does not silently 404 due to a CMS migration or CDN caching issue nobody has checked in months.</p>
+
+<h3>Check: Link Headers for Agent Discovery</h3>
+<p><strong>Goal:</strong> Include Link response headers for agent discovery, per RFC 9264. <strong>Result if failing:</strong> "No Link header found on homepage." <strong>How to implement:</strong> Add Link response headers on your homepage that point agents toward machine-readable resources — an API catalog, a webfinger endpoint, an ai.txt manifest. Google, Bing, and AI agent documentation increasingly reference the Link header format for agent discovery, and configuring this is typically a server or CDN edge-rule change rather than an application code change:</p>
+<pre><code>Link: <https://notioncue.com/.well-known/mcp.json>; rel="mcp-server",
+      <https://notioncue.com/.well-known/api-catalog>; rel="api-catalog"</code></pre>
+
+<h3>Check: DNS for AI Discovery (DNS-AID)</h3>
+<p><strong>Goal:</strong> Publish DNS AI Discovery records for DNS-based agent discovery. <strong>Result if failing:</strong> "DNS AI-Discovery (DNS-AID) records not found for domain." <strong>What it is:</strong> DNS-AID is an active IETF Internet-Draft (draft-mozleywilliams-dnsop-dnsaid, dated May 2026, with contributors from Infoblox, Deutsche Telekom, and Amazon) that standardizes publishing AI agents in DNS itself, so that other agents can discover them through the same distributed, cached, federated infrastructure that has resolved domain names for three decades. The Linux Foundation now governs the reference implementation, with founding members including Cloudflare, GoDaddy, Indeed, and Infoblox.</p>
+<p><strong>How discovery actually works:</strong> the specification defines three progressively broader lookup modes. A direct lookup by name works when the requester already knows both the organization and the specific agent. A capability search works when the requester knows the organization but not the specific agent — "does acme.example have any agent that does fraud detection?" And a domain-wide crawl of an agent index works when the requester knows only the required capability, not the organization at all. Records use SVCB (Service Binding) resource records, the same modern DNS record type browsers already use for HTTPS service discovery, with DNSSEC and DANE TLSA records layered on top for cryptographic trust.</p>
+<p><strong>How to implement a basic record</strong> using the deterministic naming pattern <code>_&lt;agent-name&gt;._&lt;protocol&gt;._agents.&lt;your-domain&gt;</code>:</p>
+<pre><code>_prompt-tracker._mcp._agents.notioncue.com. 3600 IN SVCB 1 agent.notioncue.com. (
+  alpn="mcp"
+  port=443
+  cap="https://notioncue.com/.well-known/mcp.json"
+)</code></pre>
+<p>An honest caveat worth stating clearly: DNS-AID is a draft standard, not yet a ratified RFC, and real-world adoption outside the founding member organizations remains early. Global DNSSEC adoption is also still low enough that a domain publishing DNS-AID records without properly maintained DNSSEC is publishing a discovery mechanism without the trust layer it depends on — worth implementing directionally, not worth over-investing engineering time in until the specification stabilizes further.</p>
+
+<h2>Category 2: Content — Can an Agent Actually Read What You Publish?</h2>
+<p>This category has a single check with an outsized practical impact on every other category.</p>
+
+<h3>Check: Markdown Negotiation via the Accept Header</h3>
+<p><strong>Goal:</strong> Return HTML as markdown when agents request it. <strong>Result if failing:</strong> "Site does not support Markdown negotiation." <strong>How to implement:</strong> enable Markdown for AI Agents with Accept: text/markdown. Your response should return a Markdown version of your HTML page when this header is present, and the default should remain HTML for regular browsers.</p>
+<p>This is Cloudflare's own proposal rather than a ratified IETF standard, though the underlying mechanism — HTTP content negotiation via the Accept header — is itself a decades-old, entirely standard HTTP feature. The logic is straightforward: an agent parsing a page for its semantic content, not its visual layout, gains almost nothing from wading through navigation markup, ad containers, and styling classes to extract the three paragraphs of actual substance. A clean Markdown response, requested explicitly via content negotiation, gives the agent exactly the content it needs with none of the parsing overhead. Most sites score zero on this check today, which makes it one of the highest-leverage, lowest-competition implementations available — a Cloudflare Worker or an edge function that detects the Accept header and serves a converted Markdown response is a self-contained, isolated change that does not touch your main application logic:</p>
+<pre><code>// Cloudflare Worker: serve Markdown when requested via Accept header
+export default {
+  async fetch(request, env) {
+    const accept = request.headers.get('Accept') || '';
+    const response = await fetch(request);
+    if (accept.includes('text/markdown')) {
+      const html = await response.text();
+      const markdown = convertHtmlToMarkdown(html); // your conversion function
+      return new Response(markdown, {
+        headers: { 'Content-Type': 'text/markdown; charset=utf-8' }
+      });
+    }
+    return response;
+  }
+};</code></pre>
+
+<h2>Category 3: Bot Access Control — Are You Actually Letting the Right Bots In?</h2>
+<p>This category checks whether your access-control configuration distinguishes between crawlers and agent categories with appropriate granularity, rather than treating all automated traffic as a single undifferentiated block.</p>
+
+<h3>Check: AI Bot Rules in robots.txt</h3>
+<p><strong>Goal:</strong> Add User-agent rules for AI crawlers like GPTBot, Claude-Web, and others. <strong>Result target:</strong> "Correct rules for AI bots (gptbot, google-extended, claud, anthropic-ai, perplexitybot, meta-externalagent) added." This overlaps with the Discoverability robots.txt check but scores it specifically for AI-crawler-name coverage rather than mere presence of the file — a site can pass the basic robots.txt check while still failing this one if it only ever addressed <code>User-agent: *</code> and never named a single AI crawler explicitly.</p>
+
+<h3>Check: Content Signals in robots.txt</h3>
+<p><strong>Goal:</strong> Declare AI content usage preferences with Content Signals in robots.txt. <strong>Result target:</strong> "Content Signals Found in robots.txt." Content Signals is the emerging directive format — covered in the robots.txt correction earlier in this series — that lets an operator declare per-use permissions distinct from crawl access itself: whether content may be used for search indexing, for real-time AI grounding, and for model training, each independently. Implementation is a single line added to your existing robots.txt:</p>
+<pre><code>User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /</code></pre>
+<p>This declaration format is explicitly framed, in the directive text itself, as an express reservation of rights under Article 4 of the EU's DSM Directive on copyright — meaning a website operator setting <code>ai-train=no</code> is making a legally meaningful assertion under EU law specifically about text-and-data-mining opt-out, not merely a polite technical request. Choose your values deliberately rather than copying a default: allowing <code>ai-input</code> (live retrieval for citation and grounding) while restricting <code>ai-train</code> is a coherent, common position for a publisher who wants AI visibility without unrestricted training-data harvesting.</p>
+
+<h3>Check: Web Bot Auth via Message Signatures Directory</h3>
+<p><strong>Goal:</strong> Let your site identify itself as a bot with Web Bot Auth. <strong>Note:</strong> "Web Bot Auth request signing (informational)". <strong>How to implement:</strong> publish a JWKS at <code>/.well-known/http-message-signatures-directory</code> so your site can identify itself when it sends bot or agent requests. Receiving agents can verify these signatures to trust it's really coming from you.</p>
+<p>This check is marked informational rather than scored, and the reason matters: Web Bot Auth is an active IETF draft (draft-meunier-web-bot-auth-architecture, version -05 as of March 2026, authored by Cloudflare's Thibault Meunier and Google's Sandor Major) that applies HTTP Message Signatures, RFC 9421, to automated traffic identity. Each bot operator generates an Ed25519 keypair, publishes the public key as a JSON Web Key Set at that well-known path, and signs every outbound request with a Signature-Agent header naming the domain to verify against. Cloudflare has fully implemented verification at its edge; AWS WAF and Akamai both support it; Google is actively experimenting with it for its own Google-Agent identity. The IETF working group's own milestones target standards-track publication in 2026 with a Best Current Practice document by August 2026 — real momentum, but still pre-ratification.</p>
+<p>The practical guidance for most site operators is the same regardless of whether you publish your own key directory: if you are on Cloudflare, Akamai, or another CDN with growing Web Bot Auth support, check the dashboard toggle for "verified bots" and enable it, since this lets you selectively trust cryptographically-verified agent traffic from OpenAI, Anthropic, and Google over easily-spoofed User-Agent strings alone. Publishing your own directory — proving your site's own outbound requests, if any, are genuine — matters primarily if your site itself operates agents making requests to other sites, which is a smaller subset of implementers than the receiving-and-verifying side.</p>
+
+<h2>Category 4: API, Auth, MCP & Skill Discovery — The Heaviest Category, and Where Almost Every Site Fails</h2>
+<p>Six checks live here, and this is where the scanner's April 2026 launch data showed the widest gap between what sites have implemented and what an agentic future actually requires.</p>
+
+<h3>Check: Machine-Readable API Catalog per RFC 9727</h3>
+<p><strong>Goal:</strong> Publish an API catalog for automated API discovery, per RFC 9727. <strong>How to implement:</strong> create a well-known catalog returning application/linkset+json array. Each entry should include an "anchor" URL for the API and link relations for service-desc (OpenAPI spec), service-doc (documentation), and status (health/uptime endpoint). RFC 9727 defines a lightweight, standardized discovery format at <code>/.well-known/api-catalog</code>:</p>
+<pre><code>{
+  "linkset": [
+    {
+      "anchor": "https://notioncue.com/api/v1",
+      "service-desc": [{ "href": "https://notioncue.com/api/v1/openapi.json" }],
+      "service-doc": [{ "href": "https://notioncue.com/docs/api" }],
+      "status": [{ "href": "https://notioncue.com/api/v1/health" }]
+    }
+  ]
+}</code></pre>
+
+<h3>Check: OAuth/OIDC Discovery Metadata</h3>
+<p><strong>Goal:</strong> Publish OAuth/OIDC discovery metadata so agents can authenticate with your APIs. <strong>Result if failing:</strong> "No OAuth/OIDC discovery metadata found." <strong>How to implement:</strong> if your API has protected APIs, add a well-known-oauth-authorization-server configuration (for OAuth 2.0) or well-known-openid-configuration (for OpenID Connect) so agents can programmatically discover your authorization endpoints, token endpoints, scopes, and grant types, per RFC 8414. Without this, an agent attempting to authenticate against your API has to be manually hardcoded with your specific endpoint URLs rather than discovering them automatically:</p>
+<pre><code>// GET /.well-known/oauth-authorization-server
+{
+  "issuer": "https://notioncue.com",
+  "authorization_endpoint": "https://notioncue.com/oauth/authorize",
+  "token_endpoint": "https://notioncue.com/oauth/token",
+  "scopes_supported": ["read:citations", "read:prompts", "write:prompts"],
+  "response_types_supported": ["code"],
+  "grant_types_supported": ["authorization_code", "refresh_token"]
+}</code></pre>
+
+<h3>Check: OAuth Protected Resource Metadata</h3>
+<p><strong>Goal:</strong> Publish OAuth Protected Resource Metadata so agents can discover how to authenticate. <strong>Note:</strong> "No OAuth Protected Resource Metadata found." <strong>How to implement:</strong> used specifically for protected resource metadata so your resource server identifies authorization server(s) URLs that can issue tokens for this resource, and scopes supported. This is the counterpart to the authorization-server metadata above, defined by RFC 9728, and it lives at a URL the resource server itself controls rather than the authorization server:</p>
+<pre><code>// GET /.well-known/oauth-protected-resource
+{
+  "resource": "https://notioncue.com/api/v1",
+  "authorization_servers": ["https://notioncue.com"],
+  "scopes_supported": ["read:citations", "read:prompts"],
+  "bearer_methods_supported": ["header"]
+}</code></pre>
+
+<h3>Check: Auth.md Agent Registration Metadata</h3>
+<p><strong>Goal:</strong> Publish Auth.md metadata with agent registration instructions. <strong>Note:</strong> "Auth.md not found." <strong>How to implement:</strong> serve auth.md at the site with agent registration instructions, publish at well-known-auth-protected-resource-authentication, and include instructions on register, auth flow, client types, and claim/scopes URLs where applicable. This is a newer, human-and-agent-readable Markdown convention — deliberately simpler than the structured JSON metadata formats above — intended as a fallback an agent can parse via natural-language understanding when the structured OAuth metadata endpoints are absent or incomplete. Publish a plain-language auth.md file at your domain root or under /.well-known/ describing, in prose, how an agent should register a client, which grant types you support, and where to find your scopes documentation.</p>
+
+<h3>Check: MCP Server Card</h3>
+<p><strong>Goal:</strong> Publish an MCP Server Card for agent discovery. <strong>Note:</strong> "MCP Server Card not found." <strong>How to implement:</strong> Serve an MCP Server Card (SEP-1649) at well-known-mcp-server-card.json. The schema is being standardized. This is one of the fastest-maturing standards on this list. Anthropic donated the Model Context Protocol to the newly formed Agentic AI Foundation under the Linux Foundation on December 9, 2025, with platinum members including AWS, Anthropic, Block, Bloomberg, Cloudflare, Google, Microsoft, and OpenAI. By Anthropic's January 2026 figures, the MCP ecosystem had reached 97 million monthly SDK downloads and more than 10,000 active public MCP servers. SEP-1649, the specification proposal for server discovery, was ratified as SEP-2127 and moved the canonical path to the simpler <code>/.well-known/mcp.json</code> (older drafts used the longer <code>/.well-known/mcp/server-card.json</code> path; both may still appear in the wild during the transition).</p>
+<p>If you run an MCP server, publish a card advertising its transport, endpoint, and capabilities without requiring a full connection handshake just to discover basic metadata:</p>
+<pre><code>// GET /.well-known/mcp.json
+{
+  "name": "NotioncCue MCP Server",
+  "description": "Query AI citation data, run prompt checks, and manage tracked prompts programmatically.",
+  "version": "1.2.0",
+  "serverUrl": "https://mcp.notioncue.com/mcp",
+  "transport": "streamable-http",
+  "auth": { "type": "oauth2" },
+  "tools": [
+    { "name": "get_citation_status", "description": "Check citation status for a tracked prompt" },
+    { "name": "run_prompt_check", "description": "Run an on-demand prompt check across all five AI engines" }
+  ]
+}</code></pre>
+<p>Even if you do not currently run an MCP server, this check functions as a forward-looking readiness signal — Claude Desktop, Cursor, and Cline all natively probe this well-known endpoint before offering a one-click connection to any domain a user points them at, so its absence is a missed integration opportunity as much as a missed audit point.</p>
+
+<h3>Check: Agent Skills Index</h3>
+<p><strong>Goal:</strong> Publish an agent skills discovery index. <strong>Note:</strong> "Agent Skills Index not found." <strong>How to implement:</strong> Publish a skills index at well-known-agent-skills-index.json (v2.0.0). Including a breadcrumb style entry with name, type, description, and each SKILL.md file location. This standard directly parallels the SKILL.md convention that has emerged for structuring reusable agent capabilities as discoverable, documented units — a website publishing an Agent Skills index is essentially saying "here is a directory of discrete, well-documented capabilities an agent can invoke on this domain, each with its own detailed instructions":</p>
+<pre><code>// GET /.well-known/agent-skills-index.json
+{
+  "version": "2.0.0",
+  "skills": [
+    {
+      "name": "citation-audit",
+      "type": "analysis",
+      "description": "Audit a domain's AI citation readiness across five engines",
+      "skillPath": "/skills/citation-audit/SKILL.md"
+    },
+    {
+      "name": "prompt-tracking-setup",
+      "type": "configuration",
+      "description": "Configure weekly prompt tracking for a new domain",
+      "skillPath": "/skills/prompt-tracking-setup/SKILL.md"
+    }
+  ]
+}</code></pre>
+
+<h3>Check: WebMCP for In-Page Agent Tools</h3>
+<p><strong>Goal:</strong> Support WebMCP to expose site tools to AI agents. <strong>Note:</strong> "No WebMCP interface detected on target page." <strong>How to implement:</strong> Implement the WebMCP API by calling navigator.modelContext.provideContext(). Each tool needs a name, description, inputSchema (JSON Schema), and an async execute function that either returns JSON or throws a structured JSON error.</p>
+<p>WebMCP is developed by the W3C's Web Machine Learning Community Group, with a draft dated mid-June 2026 — explicitly a Draft Community Group Report, not yet a ratified W3C Standard, and available behind an Origin Trial starting in Chrome 149 as of June 2026. Unlike every other check in this category, which concerns server-side discovery documents, WebMCP is a browser JavaScript API: it lets your page register callable tools directly in the browser's model-context runtime while the user is actively viewing the page, so an agent operating within that same browser session can invoke your page's own functions — booking a meeting, submitting a contact form, running a search — without needing a separate server-side MCP connection at all:</p>
+<pre><code>// Registers tools directly in the browser session
+if ('modelContext' in navigator) {
+  navigator.modelContext.provideContext({
+    tools: [
+      {
+        name: 'check_citation_rate',
+        description: 'Look up this domain\\'s current AI citation rate for a given prompt',
+        inputSchema: {
+          type: 'object',
+          properties: { prompt: { type: 'string' } },
+          required: ['prompt']
+        },
+        execute: async ({ prompt }) => {
+          const res = await fetch('/api/citation-check', {
+            method: 'POST',
+            body: JSON.stringify({ prompt })
+          });
+          return res.json();
+        }
+      }
+    ]
+  });
+}</code></pre>
+<p>Because it is browser-native and requires no server infrastructure beyond the page's existing JavaScript, WebMCP is genuinely one of the fastest checks on this entire list to implement for a modern JavaScript-heavy site — a few dozen lines added to an existing page — even though its status as a pre-standard Origin Trial means production reliance should be paired with a graceful fallback for browsers or agent runtimes that do not yet support it.</p>
+
+<h2>Category 5: Commerce — Can an Agent Actually Buy From You?</h2>
+<p>This category only applies to, and is only scored for, sites that sell products or services. It covers the agentic commerce protocol landscape at a level of technical depth most merchant-facing content has not yet reached.</p>
+
+<h3>Check: x402 Protocol for Agent-Native HTTP Payments</h3>
+<p><strong>Goal:</strong> Support x402 protocol for agent-native HTTP payments. <strong>Note:</strong> "x402 payment protocol not detected (not a commercial site)." <strong>How to implement:</strong> Add x402 middleware to your API routes to enable HTTP 402 for access via crypto. Use @coinbase/x402, x402-express, or x402-fastify with framework middleware.</p>
+<p>x402, created by Coinbase, revives the long-dormant HTTP 402 "Payment Required" status code specifically for machine-to-machine stablecoin micropayments — an API endpoint returns 402 with payment terms, the requesting agent's wallet signs an authorization, and the request retries with payment attached, all within a single HTTP round trip with no human checkout flow involved. The protocol reached V2 in December 2025 with wallet-based identity and multi-chain support across Base, Ethereum, Polygon, Solana, and others; Stripe integrated x402 for USDC settlement on Base in February 2026; and by April 2026 the ecosystem reported roughly 165 million agent transactions and around $50 million in cumulative volume, now governed by the Linux Foundation's dedicated x402 Foundation. This is the correct protocol specifically for API-call-level, sub-dollar, machine-to-machine payments — a price-comparison API charging a fraction of a cent per lookup, for instance — not for consumer retail checkout, which the other three commerce checks address instead:</p>
+<pre><code>import { paymentMiddleware } from 'x402-express';
+
+app.use('/api/premium-data', paymentMiddleware({
+  price: '$0.001',
+  network: 'base',
+  payTo: '0xYourWalletAddress'
+}));</code></pre>
+
+<h3>Check: MFP (Machine Payment Protocol / Machine-Fungible-Payment)</h3>
+<p><strong>Goal:</strong> Support MFP (Machine Payment Protocol) for agent-native HTTP payments. <strong>Note:</strong> "MFP payment discovery not detected on e-commerce site." <strong>How to implement:</strong> Publish an OpenAPI Extension via well-known JSON payload endpoints (payments) enable payment discovery which should have endpoints that expose price and payment requirements when using TapeScript, pypsp (for Python), or bpay (via Node) with middleware for Visa, Mastercard, or Open MFP payment protocol.</p>
+<p>This is the checklist's reference to what the industry more commonly calls MPP, the Machine Payments Protocol co-developed by Stripe and the stablecoin network Tempo, which launched its mainnet on March 18, 2026 with more than 100 integrated services at launch and confirmed partnerships spanning Stripe, Visa, Lightspark, Anthropic, OpenAI, Shopify, and Mastercard. Its core primitive, the "session," lets an agent pre-authorize a spending limit once and then stream many small, granular payments continuously within that session in either stablecoins or fiat, without a separate on-chain transaction per individual interaction — a meaningfully different model from x402's per-request settlement, better suited to sustained, ongoing machine-to-machine billing relationships rather than one-off microtransactions.</p>
+
+<h3>Check: Universal Commerce Protocol (UCP)</h3>
+<p><strong>Goal:</strong> Support content payments via the Universal Commerce Protocol. <strong>Note:</strong> "UCP profile not found via a discoverable resource." <strong>How to implement:</strong> Serve well-known-ucp with protocol version, capabilities, and endpoints, and ensure schema.org offers UCP metadata annotations.</p>
+<p>UCP is Google's open-source standard, launched January 11, 2026 at the NRF retail show, co-developed with Shopify, Etsy, Wayfair, Target, and Walmart, and endorsed by more than twenty additional organizations including Mastercard, Visa, Adyen, and American Express. It exists to solve what its own announcement calls the "N x N integration bottleneck" — the problem of every merchant needing a bespoke integration for every different AI shopping surface. A merchant that publishes UCP-compliant catalog metadata once becomes discoverable and purchasable across every UCP-consuming surface simultaneously, including Google's own Gemini app, AI Mode, and, as of Google I/O 2026, a cross-surface "Universal Cart" spanning Search, Gemini, YouTube, and Gmail. UCP relies on Google's separate Agent Payments Protocol, AP2, for the actual payment-authorization mandate; UCP itself standardizes catalog discovery, cart construction, and the merchant checkout journey rather than the money-movement layer.</p>
+
+<h3>Check: ACP (Agentic Commerce Protocol)</h3>
+<p><strong>Goal:</strong> Support ACP discovery to be visible in commerce agent runtimes. <strong>Note:</strong> "ACP discovery not detected via well-known route or header." <strong>How to implement:</strong> Add well-known.acp.json or an HTTP header pointing your service origin metadata service, expose an OpenAPI ref, and specify supported flows (checkout).</p>
+<p>ACP is OpenAI and Stripe's open-standard alternative, published under Apache 2.0 and defining a four-actor flow (buyer, agent, merchant, payment service provider) around a Shared Payment Token — a merchant-scoped, amount-scoped, time-limited, single-use token minted by the buyer's wallet provider that lets an agent complete checkout without the buyer's actual card details ever passing through the agent itself. ACP debuted alongside ChatGPT's Instant Checkout feature in February 2026, launching with US Etsy sellers and roughly a dozen Shopify merchants including Glossier, Vuori, and SKIMS. OpenAI subsequently scaled back the in-chat checkout experience in March 2026, pivoting toward dedicated retailer apps inside ChatGPT rather than a single universal checkout flow — but the underlying ACP standard continued independently, with PayPal, Salesforce, and Shopify all maintaining support, and the current stable specification (dated April 17, 2026) hosted publicly on GitHub under the Apache 2.0 license. The practical guidance for merchants: ACP and UCP are the only two protocols in this category with genuine overlap, since both standardize the checkout journey specifically; most large retailers are integrating both in parallel rather than betting on one, following the same logic that drove multi-channel strategies during the early mobile-commerce era.</p>
+
+<h2>How Do You Prioritise Fixing All of This?</h2>
+<p>Sixteen checks is a lot to action at once, and not every organisation needs every check equally. A practical prioritisation, based on effort-to-impact ratio rather than raw check count:</p>
+<p><strong>Do this week, regardless of business type:</strong> fix robots.txt duplication and add explicit AI crawler rules; add a Content-Signal directive with a deliberate policy; publish a current sitemap referenced from robots.txt; verify no Cloudflare-managed rule is silently overriding your intended configuration.</p>
+<p><strong>Do this month, if you run any API surface:</strong> publish the RFC 9727 API catalog; add OAuth/OIDC discovery metadata if your API requires authentication; publish an MCP Server Card even at a minimal level of detail, since Claude Desktop, Cursor, and other MCP-aware clients probe for it automatically.</p>
+<p><strong>Do this quarter, if you are JavaScript-heavy or content-focused:</strong> implement Markdown content negotiation via the Accept header, since this is currently scored at near-zero across the vast majority of sites and represents genuinely uncontested competitive ground; evaluate WebMCP for your highest-value interactive page flows.</p>
+<p><strong>Evaluate but do not rush, given draft-standard status:</strong> DNS-AID (still pre-RFC, low real-world adoption outside founding members); Web Bot Auth self-publishing (informational only in the current scanner, though CDN-side "verified bots" toggles are worth enabling immediately since that requires no publishing on your part); the full commerce protocol stack, which should be driven by actual product and payments team bandwidth rather than SEO-team urgency, given the genuine engineering complexity of wallet integration and PSP compliance underneath each one.</p>
+
+<h2>How NotioncCue Helps You Track Progress Across This Entire Checklist</h2>
+<p>Most of the checks in this guide are one-time or infrequent implementation work — publish a file, add a header, configure a middleware — rather than ongoing content production. What they share with everything else in this series is the same underlying requirement: an AI crawler or agent runtime has to actually be able to reach and correctly parse whatever you publish, which is precisely the layer the <strong>NotioncCue AI Crawler Audit</strong> verifies. After implementing any of the discovery documents in this guide — your MCP Server Card, your API catalog, your OAuth metadata — running the Crawler Audit confirms the file is reachable in the exact server-rendered form an agent runtime receives, not just correctly formatted according to a validator that never checks real-world crawler access.</p>
+<p>The <strong>NotioncCue llms.txt Generator</strong> complements the newer discovery standards covered here directly: llms.txt remains one of the most broadly supported, lowest-friction discovery documents across the agentic web, and building it alongside your MCP Server Card and Agent Skills index gives an agent runtime multiple, mutually-reinforcing entry points into understanding what your domain offers, rather than depending on any single still-maturing standard working perfectly on its own.</p>
+<p><a href="https://notioncue.com">Start your free NotioncCue trial</a> and pair a run of Cloudflare's isitagentready.com scanner with the NotioncCue AI Crawler Audit this week — the first tells you which discovery documents you are missing, the second confirms the ones you do publish are actually reaching the crawlers and agent runtimes you built them for.</p>
+
+<div class="callout"><p>Google's own official generative-AI-search guidance, published May 15, 2026, explicitly states that llms.txt, content chunking, and AI-specific markup are not required for generative AI search visibility specifically — a useful, calibrating counterpoint to this entire guide. The checklist covered here is about agent readiness broadly, including commerce, authentication, and tool-calling scenarios that sit outside pure search visibility. Do not conflate the two: a site can be excellently optimised for AI Overview and ChatGPT citation, covered throughout the rest of this series, while still scoring low on this agent-readiness scanner, because the scanner is testing a different, broader, and in several cases still-emerging layer of the agentic web.</p></div>
+
+<h2>Frequently Asked Questions About Agent-Ready Websites</h2>
+<p><strong>Do I need to implement every single check to be considered agent-ready?</strong><br/>No. The commerce category alone only applies to transactional businesses, and several checks — DNS-AID, Web Bot Auth self-publishing, WebMCP — remain pre-standard enough that early implementation is a forward-looking investment rather than an urgent gap. Prioritise the checks with ratified or near-ratified standards behind them (robots.txt, sitemap, RFC 9727 API catalog, RFC 8414/9728 OAuth metadata, MCP Server Cards) before investing heavily in the newest draft-stage protocols.</p>
+<p><strong>Will a high agent-readiness score improve my AI citation rate in ChatGPT or Perplexity?</strong><br/>Indirectly and partially. This checklist covers a broader agentic-web readiness layer — authentication, tool-calling, commerce — that is largely distinct from the citation-and-content-structure work covered throughout the rest of this series, which more directly drives AI Overview, Perplexity, and ChatGPT citation rate. A site can score well here while still needing the BLUF structure, schema, and E-E-A-T work covered elsewhere to actually earn citations. Think of this checklist as infrastructure for a different, adjacent use case: autonomous agents transacting and calling tools on your domain, not language models citing your content in a generated answer.</p>
+<p><strong>How often should I re-run this audit?</strong><br/>Quarterly is a reasonable cadence given how actively these standards are still evolving — several of the checks covered in this guide, including DNS-AID and WebMCP, were still in active draft revision through the first half of 2026, meaning the correct implementation details can shift meaningfully between quarters. A CMS migration, CDN provider change, or major framework upgrade is also worth triggering an immediate re-check, since several of these checks (robots.txt, Link headers, Markdown negotiation) are exactly the kind of configuration that silently breaks during infrastructure changes.</p>
+`,
+  },
   // ─────────────────────────────────────────────────────────────────────────
   // ➕ ADD NEW POSTS BELOW THIS LINE
   // Copy the block above, change the fields, save. Done.
