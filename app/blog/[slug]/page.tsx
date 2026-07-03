@@ -9,6 +9,8 @@ import SharedHeader from '@/components/SharedHeader'
 import SharedFooter from '@/components/SharedFooter'
 import { BLOG_POSTS, getPostBySlug, getRelatedPosts } from '../posts'
 import ReadingProgress from './ReadingProgress'
+import MarkdownToggle from '@/components/MarkdownToggle'
+import { htmlToMarkdown } from '@/lib/htmlToMarkdown'
 import type { Metadata } from 'next'
 
 export async function generateStaticParams() {
@@ -650,8 +652,21 @@ export default async function BlogPostPage(
         <div className="article-outer">
           <div className="article-layout">
 
-            {/* ── Main prose column ── */}
+         
+           {/* ── Main prose column ── */}
             <div style={{ minWidth: 0 }}>
+              <MarkdownToggle
+                slug={post.slug}
+                markdown={htmlToMarkdown(post.content, {
+                  title:      post.title,
+                  excerpt:    post.excerpt,
+                  author:     post.author,
+                  authorRole: post.authorRole,
+                  date:       post.date,
+                  tag:        post.tag,
+                  url:        `https://notioncue.com/blog/${post.slug}`,
+                })}
+              />
               <article
                 className="prose"
                 dangerouslySetInnerHTML={{ __html: post.content }}

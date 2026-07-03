@@ -298,7 +298,7 @@ const AUTHOR_IDS: Record<string, string> = {
 function authorNode(name: string, role?: string) {
   const id   = AUTHOR_IDS[name] ?? `${SITE.url}/about#${name.toLowerCase().replace(/\s+/g, '-')}`
   const isNC = role ? (role.toLowerCase().includes('notioncue') || role.toLowerCase().includes('notion cue')) : false
-  // clean "· NotionCue" / "· NotioncCue" suffix from role for jobTitle
+  // clean "· NotionCue" / "· NotionCue" suffix from role for jobTitle
   const jobTitle = role ? role.replace(/\s*·\s*Notioncue|\s*·\s*Notion\s*Cue/gi, '').trim() : undefined
   return {
     '@type':    'Person',
