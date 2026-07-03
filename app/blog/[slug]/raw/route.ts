@@ -12,7 +12,7 @@
 // a model to consume your content correctly.
 
 import { getPostBySlug } from '../../posts'
-import { htmlToMarkdown } from '@/lib/Htmltomarkdown'
+import { htmlToMarkdown } from '@/lib/htmlToMarkdown'
 
 export async function GET(
   _req: Request,
