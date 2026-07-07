@@ -4,6 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import JsonLd from "@/components/JsonLd";
+import { GoogleTagManager } from "@next/third-parties/google";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 
 
@@ -46,6 +47,7 @@ export default function RootLayout({
         {children}
         <SpeedInsights />
         <Analytics />
+        <GoogleTagManager gtmId="GTM-K4QVFK6" />
       </body>
     </html>
   );

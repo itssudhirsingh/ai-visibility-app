@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import SharedHeader from '@/components/SharedHeader'
 import SharedFooter from '@/components/SharedFooter'
+import NewsletterForm from '@/components/NewsletterForm'
 import { BLOG_POSTS, BLOG_TAGS } from './posts'
 import type { Metadata } from 'next'
 
@@ -311,7 +312,7 @@ export default function BlogIndexPage() {
             </div>
           </div>
 
-          {/* Newsletter */}
+        {/* Newsletter */}
           <div style={{ paddingBottom:48 }}>
             <div style={{ background:'linear-gradient(130deg,rgba(146,124,255,.1),rgba(202,255,69,.05))', border:'1px solid rgba(146,124,255,.2)', borderRadius:12, padding:'36px 40px' }}>
               <div className="newsletter-inner" style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:32 }}>
@@ -319,10 +320,7 @@ export default function BlogIndexPage() {
                   <div style={{ fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:700, fontSize:'1.3rem', marginBottom:6 }}>AEO updates, straight to your inbox.</div>
                   <p style={{ fontSize:'13px', color:'var(--muted)' }}>One email per week. LLM citation tracking, algorithm shifts, and what's working across our client portfolio.</p>
                 </div>
-                <div style={{ display:'flex', gap:8, flexShrink:0 }}>
-                  <input type="email" placeholder="your@email.com" style={{ background:'rgba(255,255,255,.05)', border:'1px solid var(--line2)', borderRadius:6, padding:'10px 14px', fontSize:'12px', color:'var(--text)', fontFamily:"'JetBrains Mono',monospace", width:200, outline:'none' }} />
-                  <button style={{ background:'var(--lime)', color:'var(--bg)', border:'none', borderRadius:6, padding:'10px 18px', fontFamily:"'JetBrains Mono',monospace", fontSize:'10px', letterSpacing:'.08em', textTransform:'uppercase', fontWeight:500, cursor:'pointer', whiteSpace:'nowrap' }}>Subscribe</button>
-                </div>
+                <NewsletterForm />
               </div>
             </div>
           </div>
