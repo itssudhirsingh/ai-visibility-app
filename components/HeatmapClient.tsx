@@ -12,6 +12,7 @@ export default function HeatmapClient() {
   async function run() {
     if (!url.trim()) return
     setLoading(true); setError(''); setData(null)
+    
     try {
       const res = await fetch('/api/visibility-heatmap', {
         method: 'POST',

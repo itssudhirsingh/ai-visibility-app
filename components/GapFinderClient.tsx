@@ -1,7 +1,11 @@
 'use client'
+import { useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase/client'
 import { useState } from 'react'
 
+
 export default function GapFinderClient() {
+  const router = useRouter()
   const [mode, setMode] = useState<'domain'|'niche'>('domain')
   const [domain, setDomain] = useState('')
   const [niche, setNiche] = useState('')
@@ -15,6 +19,9 @@ export default function GapFinderClient() {
 
   async function run() {
     setLoading(true); setError(''); setData(null)
+    const supabase = createClient()
+const { data: { user } } = await supabase.auth.getUser()
+if (!user) { router.push('/login?next=/ai-answer-gap-finder'); return }
     try {
       const competitor_domains = competitors.split('\n').map(u => u.trim()).filter(Boolean)
       const body = mode === 'domain' ? { domain, competitor_domains } : { niche, competitor_domains }
