@@ -3,8 +3,6 @@ import SharedFooter from '@/components/SharedFooter'
 import SubNavClient from '@/components/SubNavClient'
 import GapFinderClient from '@/components/GapFinderClient'
 import ClusterFAQClient from '@/components/ClusterFAQClient'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 
 export const metadata = {
   title: 'AI Answer Gap Finder — Find Questions AI Engines Answer Where No Brand Is Cited — Notion Cue',
