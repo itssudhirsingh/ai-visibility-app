@@ -150,17 +150,29 @@ function DashboardInner() {
     const target=(inputUrl||url).trim().replace(/^https?:\/\//,'')
     if(!target) return
     setLoading(true); setView('overview'); setScanError('')
-    setSidebarOpen(false) // ← NEW: close sidebar when scan starts
+    setSidebarOpen(false) 
     try {
       const res=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:target})})
-      const data=await res.json()
-      if(!res.ok || data.error){
-        // Don't silently render a fabricated 0/100 "result" — that looks
-        // exactly like a real bad scan. Show an actual error instead.
+      
+      // Get the response as raw text first
+      const text = await res.text()
+      let data
+      
+      // Try to parse the JSON. If it's HTML, it will fail here safely.
+      try {
+        data = JSON.parse(text)
+      } catch (err) {
         setResult(null)
-        setScanError(data.error || `Could not analyse this domain (${res.status}). Please try again.`)
+        setScanError(`The server timed out or returned an error (${res.status}). Try scanning again.`)
         return
       }
+
+      if(!res.ok || data?.error){
+        setResult(null)
+        setScanError(data?.error || `Could not analyse this domain (${res.status}). Please try again.`)
+        return
+      }
+      
       const r=normalize(data)
       setResult(r); setResultUrl(target)
       setRecentScans(prev=>[{url:target,score:r.score,time:'just now'},...prev.filter(s=>s.url!==target)].slice(0,5))

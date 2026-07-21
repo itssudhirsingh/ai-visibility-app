@@ -1,5 +1,8 @@
 import { callAIForJson, aiErrorResponse } from '@/lib/ai'
 
+// Allow the serverless function to run for up to 60 seconds
+export const maxDuration = 60
+
 export async function POST(req: Request) {
   try {
     const { url } = await req.json()
