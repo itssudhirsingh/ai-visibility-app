@@ -13,7 +13,7 @@ export async function POST(req: Request) {
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'deepseek-ai/deepseek-v4-flash',
+        model: 'meta/llama-3.1-8b-instruct',
         messages: [
           {
             role: 'system',
