@@ -1,6 +1,6 @@
 // lib/ai.ts — shared helper for all NotionCue tool API routes.
 //
-// Every tool route calls DeepSeek-V4-Flash via the NVIDIA-compatible
+// Every tool route calls Llama 3.1 via the NVIDIA-compatible
 // /chat/completions endpoint, then parses the response as JSON. This
 // file centralises that call so every route gets, for free:
 //
@@ -15,7 +15,7 @@
 //      `String(err)` stack traces leaking to the client.
 
 const NVIDIA_ENDPOINT = 'https://integrate.api.nvidia.com/v1/chat/completions'
-const DEFAULT_MODEL = 'deepseek-ai/deepseek-v4-flash'
+const DEFAULT_MODEL = 'meta/llama-3.1-8b-instruct' // ← Changed to the faster Llama model
 
 export class AICallError extends Error {
   status: number
@@ -32,7 +32,7 @@ interface CallOpts {
   temperature?: number
   maxTokens?: number
   model?: string
-  /** Timeout for the NVIDIA call itself, ms. Default 25s — DeepSeek-V4-Flash
+  /** Timeout for the NVIDIA call itself, ms. Default 25s — Llama 3.1
    *  is fast; this is generous headroom before Vercel's own function timeout. */
   timeoutMs?: number
 }
@@ -60,8 +60,8 @@ function extractJsonBlock(raw: string): string {
 }
 
 /**
- * Best-effort repair for the handful of malformations DeepSeek
- * occasionally produces under load: trailing commas before a closing
+ * Best-effort repair for the handful of malformations LLMs
+ * occasionally produce under load: trailing commas before a closing
  * bracket, and an unterminated string at the very end (from truncation).
  * This is NOT a general JSON5 parser — it only handles the patterns
  * we've actually seen, and falls through to the original string if a
@@ -98,7 +98,7 @@ function parseJsonLoose(raw: string): unknown | null {
 async function singleCall(opts: CallOpts): Promise<string> {
   const {
     apiKey, system, user,
-    temperature = 0.3, maxTokens = 2000,
+    temperature = 0.3, maxTokens = 4096,
     model = DEFAULT_MODEL, timeoutMs = 25000,
   } = opts
 
@@ -118,6 +118,7 @@ async function singleCall(opts: CallOpts): Promise<string> {
         ],
         temperature,
         max_tokens: maxTokens,
+        response_format: { type: 'json_object' }, // ← Added to enforce JSON structure
       }),
       signal: AbortSignal.timeout(timeoutMs),
     })
@@ -165,7 +166,7 @@ export async function callAIForJson<T = unknown>(opts: CallOpts): Promise<T> {
     const parsed = parseJsonLoose(text)
     if (parsed !== null) return parsed as T
     // First attempt failed to parse — retry once before giving up.
-    // (No extra delay: DeepSeek-V4-Flash is fast and this is a
+    // (No extra delay: Llama 3.1 is fast and this is a
     // best-effort recovery, not a backoff strategy for rate limits.)
   }
 
