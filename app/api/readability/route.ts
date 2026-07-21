@@ -38,7 +38,7 @@ export async function POST(req: Request) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
       body: JSON.stringify({
-        model: 'deepseek-ai/deepseek-v4-flash',
+        model: 'meta/llama-3.1-8b-instruct',
         messages: [
           { role: 'system', content: 'You are an AEO content analyst. Score content for AI engine readability and citation likelihood. Always respond with valid JSON only — no markdown, no code fences.' },
           { role: 'user', content: `Analyse this content for AI readability and AEO citation potential:

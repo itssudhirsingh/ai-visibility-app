@@ -40,7 +40,7 @@ export async function POST(req: Request) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
       body: JSON.stringify({
-        model: 'deepseek-ai/deepseek-v4-flash',
+        model: 'meta/llama-3.1-8b-instruct',
         messages: [
           { role: 'system', content: 'You are an E-E-A-T and AEO authority expert. Always respond with valid JSON only — no markdown, no code fences.' },
           { role: 'user', content: `Audit the E-E-A-T signals for "${targetUrl}".

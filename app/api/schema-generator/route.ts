@@ -32,7 +32,7 @@ export async function POST(req: Request) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
       body: JSON.stringify({
-        model: 'deepseek-ai/deepseek-v4-flash',
+        model: 'meta/llama-3.1-8b-instruct',
         messages: [
           { role: 'system', content: 'You are a structured data and schema markup expert specialising in AEO. Always respond with valid JSON only — no markdown, no code fences.' },
           { role: 'user', content: `Generate schema markup for "${targetUrl}".

@@ -50,7 +50,7 @@ Reply with ONLY this JSON object. Keep all values on ONE LINE — no line breaks
       'Authorization': `Bearer ${apiKey}`
     },
     body: JSON.stringify({
-      model: 'google/gemma-4-31b-it',
+      model: 'meta/llama-3.1-8b-instruct',
       messages: [
         {
           role: 'system',
