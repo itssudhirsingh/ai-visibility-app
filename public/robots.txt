@@ -1,4 +1,3 @@
-# ── Default: allow everything except infra/internal paths ──
 User-agent: *
 Allow: /
 Disallow: /api/
@@ -9,8 +8,8 @@ Disallow: /*/view
 Disallow: /_next
 Disallow: /blog/*/raw
 
-# ── AI live-retrieval / search crawlers (power citations in ChatGPT,
-#    Perplexity, Claude, Google AI Overviews) — explicitly allowed ──
+Sitemap: https://notioncue.com/sitemap.xml
+
 User-agent: GPTBot
 Allow: /
 
@@ -57,4 +56,3 @@ Allow: /
 # User-agent: meta-externalagent
 # Disallow: /
 
-Sitemap: https://notioncue.com/sitemap.xml
