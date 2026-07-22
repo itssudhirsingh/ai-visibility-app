@@ -1,3 +1,7 @@
+import { callAIForJson, aiErrorResponse } from '@/lib/ai'
+
+export const maxDuration = 60
+
 export async function POST(req: Request) {
   try {
     const { domain, niche, competitor_domains } = await req.json()
@@ -30,22 +34,9 @@ export async function POST(req: Request) {
       } catch { /* silent */ }
     }
 
-    const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: 'meta/llama-3.1-8b-instruct',
-        messages: [
-          {
-            role: 'system',
-            content: 'You are an AEO content strategist who specialises in finding questions AI engines answer where no brand is consistently cited. Always respond with valid JSON only — no markdown, no code fences.',
-          },
-          {
-            role: 'user',
-            content: `Find AI answer gaps for:
+    const systemPrompt = 'You are an AEO content strategist who specialises in finding questions AI engines answer where no brand is consistently cited. Always respond with valid JSON only — no markdown, no code fences.'
+
+    const userPrompt = `Find AI answer gaps for:
 Domain: ${targetDomain || 'not provided'}
 Niche / topic: ${niche || 'infer from page content'}
 Competitor domains to compare: ${competitor_domains?.join(', ') || 'none provided'}
@@ -78,29 +69,20 @@ Return ONLY this JSON:
   ],
   "quick_wins": ["<slug 1>", "<slug 2>", "<slug 3>"],
   "summary": "<2-3 sentence overview of the biggest gap clusters in this niche>"
-}`,
-          },
-        ],
-        max_tokens: 3000,
-        temperature: 0.3,
-      }),
+}`
+
+    // Use the shared helper to handle the call, parsing, and retries
+    const data = await callAIForJson({
+      apiKey,
+      system: systemPrompt,
+      user: userPrompt,
+      temperature: 0.3,
+      maxTokens: 3000,
     })
 
-    const rawText = await response.text()
-    if (!response.ok) return Response.json({ error: rawText }, { status: 500 })
-
-    const json = JSON.parse(rawText)
-    const text = json.choices?.[0]?.message?.content
-    if (!text) return Response.json({ error: 'Empty response' }, { status: 500 })
-
-    const cleaned = text.replace(/```json/gi, '').replace(/```/g, '').trim()
-    const jsonStart = cleaned.indexOf('{')
-    const jsonEnd = cleaned.lastIndexOf('}')
-    if (jsonStart === -1 || jsonEnd === -1) return Response.json({ error: 'Model did not return JSON', raw: cleaned.slice(0, 300) }, { status: 500 })
-    const data = JSON.parse(cleaned.slice(jsonStart, jsonEnd + 1))
     return Response.json(data)
+
   } catch (err) {
-    console.error('Gap finder error:', err)
-    return Response.json({ error: String(err) }, { status: 500 })
+    return aiErrorResponse(err)
   }
 }
