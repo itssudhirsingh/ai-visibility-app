@@ -6420,7 +6420,7 @@ app.use('/api/premium-data', paymentMiddleware({
     emoji:          '🌐',
     bg:             'rgba(200,242,71,.06)',
     tag:            'Technical',
-    date:           'Jul 10, 2026',
+    date:           'June 29, 2026',
     title:          'Query Fan-Out: Google\'s Own Explanation of How AI Overviews Actually Find Your Content',
     excerpt:        'Google\'s own May 2026 documentation confirms, in plain language, that AI Overviews and AI Mode issue multiple related searches across subtopics and data sources before generating a single response. This is why a page that ranks fifth for a broad query, but contains one exceptionally specific paragraph, can still earn a citation the broad-query ranking alone would never predict.',
     read:           '9 min read',
