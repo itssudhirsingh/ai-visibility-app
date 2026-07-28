@@ -151,8 +151,7 @@ const TOOLS = [
 ]
 
 const NAV_LINKS = [
-  { label: 'AI Visibility',  href: '/ai-visibility-tool' },
-  { label: 'AI SEO/AEO/GEO Guide',      href: '/aeo-guide' },
+  { label: 'AI SEO Guide',      href: '/aeo-guide' },
   { label: 'Be AI Ready',           href: '/blog/is-your-website-agent-ready-complete-technical-guide-2026' },
   { label: ' Blog',      href: '/blog' },
   { label: 'Contact',      href: '/contact' },
