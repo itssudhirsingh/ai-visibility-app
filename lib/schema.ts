@@ -33,9 +33,9 @@ export const SITE = {
   ],
   founderSameAs: [
     'https://linkedin.com/in/sudhir-ks',
-    'https://twitter.com/webmastersudhir',
+    'https://twitter.com/websudhir',
   ],
-  inLanguage:  'en',
+ 
   areaServed:  'Worldwide',
 }
 
@@ -92,7 +92,6 @@ export function organizationSchema() {
     email:           SITE.email,
     foundingDate:    SITE.foundingDate,
     areaServed:      SITE.areaServed,
-    inLanguage:      SITE.inLanguage,
     keywords:        SITE.keywords.join(', '),
     founder:         founderObject,
     employee:        founderObject,     // founder is the known employee
@@ -141,7 +140,6 @@ export function websiteSchema() {
     alternateName: SITE.alternateName,
     url:         SITE.url,
     description: SITE.description,
-    inLanguage:  SITE.inLanguage,
     publisher:   publisherRef,
     potentialAction: [
       {
@@ -211,10 +209,9 @@ export function softwareAppSchema(opts: ToolSchemaOpts) {
     abstract:                 opts.abstract ?? opts.description,
     url,
     applicationCategory:      'BusinessApplication',
-    applicationSubCategory:   'SEO / AEO Tool',
+    applicationSubCategory:   'AI SEO / AEO Tool',
     operatingSystem:          'Any — runs in a web browser',
     browserRequirements:      'Requires JavaScript',
-    inLanguage:               SITE.inLanguage,
     isAccessibleForFree:      true,
     offers: {
       '@type':          'Offer',
@@ -377,7 +374,6 @@ export function blogPostSchema(post: BlogPostSchemaOpts) {
       url:         `${SITE.url}/blog`,
       description: 'AEO strategy, AI citation tactics, and answer-engine optimisation guides.',
       publisher:   publisherRef,
-      inLanguage:  SITE.inLanguage,
     },
 
     // ── Image (logo-quality fallback guarantees a valid ImageObject) ───────
@@ -386,7 +382,6 @@ export function blogPostSchema(post: BlogPostSchemaOpts) {
 
     // ── Content signals ────────────────────────────────────────────────────
     ...(post.tag ? { articleSection: post.tag } : {}),
-    inLanguage:        SITE.inLanguage,
     keywords:          (post.tag ? [post.tag, ...SITE.keywords] : SITE.keywords).join(', '),
     ...(words         ? { wordCount: words }                       : {}),
     timeRequired:      `PT${minutes}M`,
@@ -445,7 +440,6 @@ export function articleSchema(opts: ArticleSchemaOpts) {
     description:    opts.description,
     url,
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-    inLanguage:     SITE.inLanguage,
     author: opts.author
       ? { '@type': 'Person', name: opts.author, worksFor: publisherRef }
       : founderObject,
@@ -483,7 +477,6 @@ export function collectionSchema(opts: {
     name:           opts.name,
     description:    opts.description,
     url,
-    inLanguage:     SITE.inLanguage,
     isPartOf:       websiteRef,
     publisher:      publisherRef,
     ...(opts.about ? { about: { '@type': 'Thing', name: opts.about } } : {}),
@@ -551,7 +544,6 @@ export function webPageSchema(opts: {
     name:           opts.name,
     description:    opts.description,
     url,
-    inLanguage:     SITE.inLanguage,
     isPartOf:       websiteRef,
     publisher:      publisherRef,
     author:         publisherRef,
@@ -580,7 +572,6 @@ export function howToSchema(opts: {
     name:         opts.name,
     description:  opts.description,
     url,
-    inLanguage:   SITE.inLanguage,
     publisher:    publisherRef,
     ...(opts.totalTime ? { totalTime: opts.totalTime } : {}),
     step: opts.steps.map((s, i) => ({
