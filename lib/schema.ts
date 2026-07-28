@@ -27,13 +27,13 @@ export const SITE = {
   description: 'Track how often your website gets cited by ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude. Get your AEO score in 30 seconds.',
   keywords:    ['AEO', 'Answer Engine Optimisation', 'AI visibility', 'AI SEO', 'ChatGPT citations', 'llms.txt'],
   sameAs: [
-    'https://twitter.com/notioncue',
+    'https://x.com/notioncue',
     'https://www.linkedin.com/company/notioncue',
     'https://www.crunchbase.com/organization/notioncue',
   ],
   founderSameAs: [
     'https://linkedin.com/in/sudhir-ks',
-    'https://twitter.com/websudhir',
+    'https://x.com/websudhir',
   ],
  
   areaServed:  'Worldwide',

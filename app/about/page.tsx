@@ -52,13 +52,13 @@ const TEAM = [
     links: [{ label: 'LinkedIn', href: 'https://linkedin.com/in/sudhir-ks' }, { label: 'Blog', href: '/blog' }],
   },
   {
-    initials: 'AM', name: 'Arun Mehta', role: 'Head of Research',
+    initials: 'VP', name: 'Vikas Pandey', role: 'Head of Research',
     gradient: 'linear-gradient(135deg, #45e4ff, #927cff)',
     bio: "Former data scientist at a Fortune 500 media group. Leads Notion Cue's LLM citation research, including the structured data correlation study across 50,000 URLs that underpins the AEO scoring model.",
     links: [{ label: 'Research', href: '/blog' }],
   },
   {
-    initials: 'PK', name: 'Priya Kapoor', role: 'Senior Strategist',
+    initials: 'AM', name: 'Apurva Mishra', role: 'Senior Strategist',
     gradient: 'linear-gradient(135deg, #ffc45c, #52e38e)',
     bio: "AEO strategist with a background in international SEO across 35 global domains. Runs client strategy, writes the AEO playbooks published in the blog, and led the case study showing 340% AI-referred session growth for The Dress Outlet.",
     links: [{ label: 'Case Studies', href: '/blog' }],
