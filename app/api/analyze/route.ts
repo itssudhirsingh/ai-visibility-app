@@ -1,11 +1,9 @@
 import { callAIForJson, aiErrorResponse } from '@/lib/ai'
 
-// Allow the serverless function to run for up to 60 seconds
-export const maxDuration = 60
-
 export async function POST(req: Request) {
   try {
-    const { url } = await req.json()
+    const body = await req.json()
+    const { url, country = 'Global' } = body
     if (!url) return Response.json({ error: 'URL is required' }, { status: 400 })
 
     const apiKey = process.env.NVIDIA_API_KEY || process.env.OPENAI_API_KEY
@@ -31,7 +29,6 @@ export async function POST(req: Request) {
         .trim()
         .slice(0, 5000)
     } catch {
-      // Page fetch failed — model will work from domain name only
       pageText = `Could not fetch page content for ${url}.`
     }
 
@@ -49,15 +46,15 @@ export async function POST(req: Request) {
     // ── 3. Call AI model ────────────────────────────────────────────────────
     const data = await callAIForJson<Record<string, unknown>>({
       apiKey,
-      system: 'You are an expert SEO AI visibility and AEO analyst. Always respond with valid JSON only — no markdown, no code fences, no extra text.',
-      user: `Analyse the AI visibility of this brand/domain: "${url}"
+      system: 'You are an expert AI visibility and AEO analyst. Always respond with valid JSON only — no markdown, no code fences, no extra text.',
+      user: `Analyse the AI visibility of this brand/domain: "${url}" in the region: "${country}"
 
-Real page content detected:
+Real page content:
 """
 ${pageText}
 """
 
-Technical signals detected from the actual page:
+Technical signals from the actual page:
 - HTTPS/SSL: ${hasSSL}
 - FAQPage schema: ${hasFaqSchema}
 - HowTo schema: ${hasHowToSchema}
@@ -67,18 +64,18 @@ Technical signals detected from the actual page:
 - robots.txt mentions: ${hasRobotsTxt}
 - GPTBot access: ${hasGPTBot}
 - PerplexityBot access: ${hasPerplexityBot}
+- Country/Region: ${country}
 
-Use the page content and detected signals above to produce ACCURATE analysis. Do NOT rely solely on brand reputation.
-
-Return ONLY this exact JSON structure:
+Return ONLY this exact JSON:
 
 {
-  "score": <number 1-100, overall AEO score based on page content and signals>,
-  "mentions": <estimated monthly AI mentions, be conservative if unknown brand>,
+  "score": <number 1-100>,
+  "mentions": <estimated monthly AI mentions>,
   "sentiment": "<positive|neutral|negative>",
   "engines_citing": "<X/6>",
+  "country": "${country}",
   "engines": [
-    {"n": "ChatGPT",    "s": <score 1-100>, "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<2-3 sentence description based on page content>", "citations": ["<snippet from actual page>"]},
+    {"n": "ChatGPT",    "s": <score 1-100>, "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<2-3 sentence description>", "citations": ["<snippet>"]},
     {"n": "Perplexity", "s": <score>,       "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<description>", "citations": ["<snippet>"]},
     {"n": "Gemini",     "s": <score>,       "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<description>", "citations": ["<snippet>"]},
     {"n": "Claude",     "s": <score>,       "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<description>", "citations": ["<snippet>"]},
@@ -86,12 +83,12 @@ Return ONLY this exact JSON structure:
     {"n": "Copilot",    "s": <score>,       "sentiment": "<positive|neutral|negative>", "status": "<CITED|NOT CITED|LOW>", "desc": "<description>", "citations": ["<snippet>"]}
   ],
   "comps": [
-    {"n": "<real competitor domain in same space>", "s": <score>, "gap": "<specific gap vs the analysed site>"},
-    {"n": "<real competitor domain>",               "s": <score>, "gap": "<specific gap>"},
-    {"n": "<real competitor domain>",               "s": <score>, "gap": "<specific gap>"}
+    {"n": "<real competitor domain>", "s": <score>, "mentions": <number>, "gap": "<specific gap vs analysed site>"},
+    {"n": "<real competitor domain>", "s": <score>, "mentions": <number>, "gap": "<specific gap>"},
+    {"n": "<real competitor domain>", "s": <score>, "mentions": <number>, "gap": "<specific gap>"}
   ],
   "fixes": [
-    {"priority": "HIGH", "title": "<fix title>", "desc": "<actionable description based on detected signals>"},
+    {"priority": "HIGH", "title": "<fix title>", "desc": "<actionable description>"},
     {"priority": "HIGH", "title": "<fix title>", "desc": "<actionable description>"},
     {"priority": "MED",  "title": "<fix title>", "desc": "<actionable description>"},
     {"priority": "LOW",  "title": "<fix title>", "desc": "<actionable description>"}
@@ -106,19 +103,52 @@ Return ONLY this exact JSON structure:
     {"label": "PerplexityBot access",  "status": "${hasPerplexityBot ? 'pass' : 'fail'}"},
     {"label": "GPTBot access",         "status": "${hasGPTBot        ? 'pass' : 'fail'}"}
   ],
-  "llms_txt": {"exists": ${hasLlmsTxt}, "valid": ${hasLlmsTxt}, "content": "<first 300 chars of llms.txt if it exists, else empty string>"},
-  "bluf": {"score": <0-100>, "headline": "<actual H1 text from page or paraphrase>", "issues": ["<specific issue from actual content>", "<issue>"]},
+  "llms_txt": {"exists": ${hasLlmsTxt}, "valid": ${hasLlmsTxt}, "content": "<first 300 chars if exists, else empty>"},
+  "bluf": {"score": <0-100>, "headline": "<actual H1 from page or paraphrase>", "issues": ["<specific issue>", "<issue>"]},
+  "query_probes": [
+    {
+      "engine": "ChatGPT",
+      "query": "<realistic question someone would ask about this niche>",
+      "volume": "<high|medium|low>",
+      "response": "<realistic 2-3 sentence AI response — mention brand if score>=65, otherwise cite a competitor>",
+      "cited": <true|false>,
+      "position": <1-5 or null if not cited>
+    },
+    {
+      "engine": "Perplexity",
+      "query": "<different realistic question for this niche>",
+      "volume": "<high|medium|low>",
+      "response": "<realistic AI response>",
+      "cited": <true|false>,
+      "position": <1-5 or null>
+    },
+    {
+      "engine": "Gemini",
+      "query": "<different realistic question>",
+      "volume": "<high|medium|low>",
+      "response": "<realistic AI response>",
+      "cited": <true|false>,
+      "position": <1-5 or null>
+    },
+    {
+      "engine": "Grok",
+      "query": "<different realistic question>",
+      "volume": "<high|medium|low>",
+      "response": "<realistic AI response>",
+      "cited": <true|false>,
+      "position": <1-5 or null>
+    }
+  ],
   "weekly_trend": [
-    {"week": "W1", "score": <score minus 3-8 points>},
-    {"week": "W2", "score": <score minus 1-4 points>},
-    {"week": "W3", "score": <score minus 1-2 points>},
+    {"week": "W1", "score": <score minus 3-8>},
+    {"week": "W2", "score": <score minus 1-4>},
+    {"week": "W3", "score": <score minus 1-2>},
     {"week": "W4", "score": <current score>}
   ],
-  "query_probes": [
-    {"engine": "ChatGPT",    "query": "<realistic query someone would ask about this site's topic>", "response": "<realistic AI response excerpt, mention brand if score>=65>", "cited": <true|false>},
-    {"engine": "Perplexity", "query": "<realistic query>", "response": "<response excerpt>", "cited": <true|false>},
-    {"engine": "Gemini",     "query": "<realistic query>", "response": "<response excerpt>", "cited": <true|false>},
-    {"engine": "Grok",       "query": "<realistic query>", "response": "<response excerpt>", "cited": <true|false>}
+  "opportunities": [
+    {"query": "<high-volume prompt where competitors are cited but not you>", "volume": "high", "competitor": "<who shows up instead>"},
+    {"query": "<prompt>", "volume": "medium", "competitor": "<competitor>"},
+    {"query": "<prompt>", "volume": "medium", "competitor": "<competitor>"}
   ]
 }`,
       temperature: 0.2,
@@ -132,13 +162,9 @@ Return ONLY this exact JSON structure:
   }
 }
 
-// ── Helper: HEAD check for a URL ─────────────────────────────────────────────
 async function checkUrl(url: string): Promise<boolean> {
   try {
-    const res = await fetch(url, {
-      method: 'HEAD',
-      signal: AbortSignal.timeout(4000),
-    })
+    const res = await fetch(url, { method: 'HEAD', signal: AbortSignal.timeout(4000) })
     return res.ok
   } catch {
     return false
