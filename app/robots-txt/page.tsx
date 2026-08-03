@@ -1,155 +1,227 @@
-'use client'
-import { useState } from 'react'
-import { useRouter, usePathname } from 'next/navigation'
 import SharedHeader from '@/components/SharedHeader'
 import SharedFooter from '@/components/SharedFooter'
+import SubNavClient from '@/components/SubNavClient'
+import ClusterFAQClient from '@/components/ClusterFAQClient'
+import type { Metadata } from 'next'
+import React from 'react'
 
-const SUB_NAV = [
-  { label: 'AEO Guide',          href: '/aeo-guide' },
-  { label: 'llms.txt Generator', href: '/llms-text-generator' },
-  { label: 'Robots.txt Generator', href: '/robots-txt' },
-  { label: 'BLUF Templates',     href: '/bluf-templates' },
-  { label: 'Blog',               href: '/blog' },
-  { label: 'Changelog',          href: '/changelog' },
-  { label: 'About',              href: '/about' },
-  { label: 'Privacy',            href: '/privacy' },
-  { label: 'Terms',              href: '/terms' },
-  { label: 'Contact',            href: '/contact' },
+export const metadata: Metadata = {
+  title: 'Free Robots.txt Generator for AI Bots — ChatGPT, Perplexity, Gemini | Notion Cue',
+  description: 'Generate a robots.txt file that correctly allows or blocks AI crawlers — GPTBot, PerplexityBot, ClaudeBot, GoogleBot, Anthropic-AI and more. Blocking the wrong bots silently kills your AI visibility. Free, instant.',
+  keywords: ['robots.txt generator','AI bots robots.txt','GPTBot robots.txt','block AI crawlers','allow ChatGPT crawling','PerplexityBot robots.txt','AEO robots.txt'],
+  alternates: { canonical: 'https://notioncue.com/robots-txt' },
+  openGraph: {
+    title: 'Free Robots.txt Generator for AI Bots',
+    description: 'Configure AI crawler access in seconds. Allow GPTBot, PerplexityBot, ClaudeBot and more — or block them by choice. Instant download.',
+    type: 'website',
+    url: 'https://notioncue.com/robots-txt',
+  },
+}
+
+const FAQS = [
+  { q: 'Which AI crawlers does robots.txt control?', a: 'All major AI engines respect robots.txt: GPTBot (OpenAI/ChatGPT), PerplexityBot (Perplexity), ClaudeBot (Anthropic), Googlebot (Google AI Overviews and AI Mode), Bingbot (Copilot), and Grok-Bot (xAI). If your robots.txt uses a wildcard Disallow: / or blocks these agents specifically, those engines cannot crawl or cite your content — regardless of how good it is.' },
+  { q: 'Should I block or allow AI crawlers?', a: 'For most brands, allowing AI crawlers is the correct choice — it is a prerequisite for AI citations. If your robots.txt blocks GPTBot, ChatGPT cannot index your pages and will never cite you, regardless of content quality, schema markup, or any other AEO work. The only valid reason to block AI crawlers is if you actively do not want your content used in AI training data — a legitimate concern for some publishers and data-sensitive businesses.' },
+  { q: 'Does blocking GPTBot stop ChatGPT from using my content?', a: 'It stops ChatGPT from crawling your pages going forward, but it does not remove content already in OpenAI\'s training data. For content removal from training data, you need to use OpenAI\'s opt-out process directly. For citation removal, blocking GPTBot prevents new indexing but doesn\'t erase existing citations immediately.' },
+  { q: 'What\'s the difference between robots.txt and llms.txt?', a: 'robots.txt controls whether AI crawlers can access your pages at all — it\'s a permission gate. llms.txt is a separate file that tells AI engines what your site is about and how to categorise and cite it — it\'s a guidance document. Both work together: robots.txt opens the door, llms.txt tells the crawler where to go once inside.' },
+  { q: 'Will this affect my Google rankings?', a: 'Blocking Googlebot in robots.txt will prevent Google from indexing your pages, which will remove them from search results. Do not use Disallow: / for Googlebot unless you intentionally want pages de-indexed. The generator creates targeted, agent-specific rules so your Googlebot access is never accidentally blocked.' },
+  { q: 'How quickly does a robots.txt change take effect?', a: 'Most AI crawlers respect robots.txt changes within 24–48 hours. Googlebot may take 1–7 days depending on your crawl budget. Changes that allow previously blocked content will trigger recrawling, which can take weeks to fully propagate through training data — but citation improvements from newly allowed pages can appear on Perplexity in days.' },
 ]
 
-export default function robotsTxtPage() {
-  const router = useRouter()
-  const path = usePathname()
-  const [robotsForm, setrobotsForm] = useState({ name:'', domain:'', desc:'', email:'', lang:'en', gpt:true, gem:true, plex:true, claude:true, cop:true, allow:'', disallow:'' })
-  const [robotsOutput, setrobotsOutput] = useState('')
-  const [robotsRaw, setrobotsRaw] = useState('')
-  const [copied, setCopied] = useState('')
+const AI_BOTS = [
+  { agent: 'GPTBot',         engine: 'ChatGPT (OpenAI)',    risk: 'HIGH',   note: 'Blocking silently kills ChatGPT citations. Most commonly blocked by accident via wildcard rules.' },
+  { agent: 'PerplexityBot',  engine: 'Perplexity',          risk: 'HIGH',   note: 'Perplexity crawls in near real-time. Missing this is the fastest way to disappear from Perplexity answers.' },
+  { agent: 'ClaudeBot',      engine: 'Anthropic Claude',    risk: 'HIGH',   note: 'Used by Claude for Browsing and citation. Separate from CCBot (training data only).' },
+  { agent: 'Googlebot',      engine: 'AI Overviews + AI Mode', risk: 'HIGH', note: 'Drives all Google AI features. Blocking this removes you from Google entirely, not just AI.' },
+  { agent: 'Bingbot',        engine: 'Copilot (Microsoft)', risk: 'MED',    note: 'Copilot is powered by Bing index. Block Bingbot and Copilot cannot cite you.' },
+  { agent: 'Grok-Bot',       engine: 'Grok (xAI)',          risk: 'MED',    note: 'Newer agent — often missing from legacy robots.txt files. Add explicitly to cover xAI.' },
+  { agent: 'CCBot',          engine: 'Common Crawl (training)', risk: 'LOW', note: 'Used for AI training data, not live citation. Blocking this does not prevent citations but may affect future model training.' },
+  { agent: 'anthropic-ai',   engine: 'Anthropic (training)', risk: 'LOW',   note: 'Anthropic\'s training crawler. Separate from ClaudeBot which drives live citations.' },
+]
 
-  function copy(text: string, key: string) {
-    navigator.clipboard.writeText(text)
-    setCopied(key); setTimeout(()=>setCopied(''),2000)
+export default function RobotsTxtPage() {
+  const faqSchema = {
+    '@context': 'https://schema.org', '@type': 'FAQPage',
+    mainEntity: FAQS.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
   }
-
-  function generaterobots() {
-    const { name, domain, desc, email, lang, gpt, gem, plex, claude, cop, allow, disallow } = robotsForm
-    const d = domain || 'yourdomain.com'
-    const bots = [
-      gpt   && {a:'GPTBot',         n:'OpenAI / ChatGPT'},
-      gem   && {a:'Google-Extended',n:'Google / Gemini'},
-      plex  && {a:'PerplexityBot',  n:'Perplexity'},
-      claude&& {a:'ClaudeBot',      n:'Anthropic / Claude'},
-      cop   && {a:'bingbot',        n:'Microsoft / Copilot'},
-    ].filter(Boolean) as {a:string;n:string}[]
-    const blocked = [!gpt&&'GPTBot',!gem&&'Google-Extended',!plex&&'PerplexityBot',!claude&&'ClaudeBot',!cop&&'bingbot'].filter(Boolean) as string[]
-    const allows = allow.split('\n').map(l=>l.trim()).filter(Boolean)
-    const disallows = disallow.split('\n').map(l=>l.trim()).filter(Boolean)
-    let out = `# robots.txt — generated by Notion Cue\n# Place at: https://${d}/robots.txt\n# Generated: ${new Date().toISOString().split('T')[0]}\n\n# ── Site Information ──\nName: ${name||'Your Site'}\n`
-    if(desc) out+=`Description: ${desc}\n`
-    out+=`Domain: https://${d}\n`
-    if(email) out+=`Contact: ${email}\n`
-    out+=`Language: ${lang}\n`
-    if(bots.length) {
-      out+=`\n# ── AI Bot Permissions ──`
-      bots.forEach(b => {
-        out+=`\n\n# ${b.n}\nUser-agent: ${b.a}\n`
-        if(allows.length) allows.forEach(p=>out+=`Allow: ${p}\n`)
-        else out+=`Allow: /\n`
-        if(disallows.length) disallows.forEach(p=>out+=`Disallow: ${p}\n`)
-      })
-    }
-    if(blocked.length) {
-      out+=`\n\n# ── Blocked AI Bots ──`
-      blocked.forEach(b=>out+=`\n\nUser-agent: ${b}\nDisallow: /\n`)
-    }
-    setrobotsRaw(out)
-    setrobotsOutput(out.replace(/^(#.*)$/gm,'<span style="color:var(--muted2)">$1</span>').replace(/^(Name|Description|Domain|Contact|Language|User-agent|Allow|Disallow):/gm,'<span style="color:var(--cyan)">$1</span>:').replace(/: (.+)/g,(_,v)=>`: <span style="color:var(--accent)">${v}</span>`))
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://notioncue.com' },
+      { '@type': 'ListItem', position: 2, name: 'Robots.txt Generator', item: 'https://notioncue.com/robots-txt' },
+    ]
   }
 
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Epilogue:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
-        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-        :root{--bg:#04030c;--card:#100e22;--border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.16);--text:#ede9ff;--muted:rgba(255,255,255,0.88);--muted2:rgba(255,255,255,0.58);--accent:#c8f247;--violet:#7b6cff;--cyan:#22d3ee;--green:#4ade80}
-        html{scroll-behavior:smooth}
-        body{background:var(--bg);color:var(--text);font-family:'Epilogue',sans-serif;font-weight:300;overflow-x:hidden}
-        button,input,textarea,select{font-family:inherit;cursor:pointer}
-        input:focus,textarea:focus,select:focus,button:focus{outline:none}
-        input[type=checkbox]{width:14px;height:14px;accent-color:var(--accent)}
-        ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
-      `}</style>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <style>{PAGE_STYLES}</style>
 
-      <div style={{background:'var(--bg)',minHeight:'100vh',color:'var(--text)'}}>
+      <div style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)' }}>
         <SharedHeader />
+        <SubNavClient />
 
-        {/* Sub-nav */}
-        <div style={{position:'sticky',top:'65px',zIndex:700,background:'rgba(4,3,12,.9)',backdropFilter:'blur(16px)',borderBottom:'1px solid var(--border)',padding:'.6rem 3.5rem',display:'flex',gap:0,overflowX:'auto',marginTop:'65px'}}>
-          {SUB_NAV.map(n=>(
-            <button key={n.href} onClick={()=>router.push(n.href)} style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',letterSpacing:'.06em',textTransform:'uppercase',padding:'.55rem 1rem',background:'none',border:'none',borderBottom:path===n.href?'2px solid var(--accent)':'2px solid transparent',color:path===n.href?'var(--accent)':'var(--muted)',whiteSpace:'nowrap',transition:'all .2s'}}>
-              {n.label}
-            </button>
-          ))}
-        </div>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 3.5rem' }}>
 
-        <div style={{maxWidth:'1200px',margin:'0 auto',padding:'0 3.5rem'}}>
-          <div style={{padding:'6rem 0 4rem',borderBottom:'1px solid var(--border)'}}>
-            <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.68rem',letterSpacing:'.18em',textTransform:'uppercase',color:'var(--violet)',marginBottom:'.75rem'}}>Tools</div>
-            <h1 style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'clamp(2.5rem,6vw,5rem)',lineHeight:.95,letterSpacing:'-.03em',marginBottom:'1.25rem'}}>robots.txt<br/><span style={{color:'var(--accent)'}}>Generator</span></h1>
-            <p style={{fontSize:'1.05rem',color:'var(--muted)',lineHeight:1.75,maxWidth:'520px'}}>Build a properly formatted robots.txt file in seconds. Configure bot permissions, site metadata, and allowed paths — then copy or download your file.</p>
+          {/* Hero */}
+          <div style={{ padding: '6rem 0 3rem', borderBottom: '1px solid var(--border)' }}>
+            <div style={EYEBROW}>Free Tool</div>
+            <h1 style={H1}>Robots.txt<br /><span style={{ color: 'var(--accent)' }}>Generator</span></h1>
+            <p style={LEAD}>
+              Generate a robots.txt file that correctly configures AI crawler access — GPTBot, PerplexityBot, ClaudeBot, Googlebot and more. A misconfigured robots.txt is the most common reason brands rank on Google but disappear entirely from AI answers. Fix it in 30 seconds.
+            </p>
           </div>
 
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'2rem',padding:'4rem 0 6rem',alignItems:'start'}}>
-            {/* Form */}
-            <div style={{background:'var(--card)',border:'1px solid var(--border)',borderRadius:'14px',padding:'2rem',display:'flex',flexDirection:'column',gap:'1.25rem'}}>
-              <div style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'1rem',marginBottom:'.25rem'}}>Site Information</div>
-              {[{id:'name',label:'Site name',placeholder:'Notion Cue'},{id:'domain',label:'Domain',placeholder:'yourdomain.com'},{id:'desc',label:'Description (optional)',placeholder:'AI visibility platform for SEO professionals'},{id:'email',label:'Contact email (optional)',placeholder:'hello@yourdomain.com'}].map(f=>(
-                <div key={f.id} style={{display:'flex',flexDirection:'column',gap:'.3rem'}}>
-                  <label style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--muted2)'}}>{f.label}</label>
-                  <input placeholder={f.placeholder} value={(robotsForm as any)[f.id]} onChange={e=>setrobotsForm(p=>({...p,[f.id]:e.target.value}))}
-                    style={{background:'rgba(255,255,255,.04)',border:'1px solid var(--border-h)',borderRadius:'8px',padding:'.65rem 1rem',color:'var(--text)',fontSize:'.82rem',fontFamily:"'JetBrains Mono',monospace"}} />
-                </div>
-              ))}
-              <div style={{display:'flex',flexDirection:'column',gap:'.3rem'}}>
-                <label style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--muted2)'}}>Language</label>
-                <select value={robotsForm.lang} onChange={e=>setrobotsForm(p=>({...p,lang:e.target.value}))} style={{background:'rgba(255,255,255,.04)',border:'1px solid var(--border-h)',borderRadius:'8px',padding:'.65rem 1rem',color:'var(--text)',fontSize:'.82rem'}}>
-                  {[['en','English'],['es','Spanish'],['fr','French'],['de','German'],['ja','Japanese'],['zh','Chinese']].map(([v,l])=><option key={v} value={v} style={{background:'#100e22'}}>{l}</option>)}
-                </select>
+          {/* Generator placeholder — replace with actual RobotsTxtClient when built */}
+          <div style={{ padding: '3rem 0 4rem', borderBottom: '1px solid var(--border)' }}>
+            <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: '14px', padding: '2rem', maxWidth: 640 }}>
+              <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.65rem', letterSpacing: '.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,.45)', marginBottom: '1.25rem' }}>Configure AI crawler access</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '.65rem', marginBottom: '1.5rem' }}>
+                {AI_BOTS.slice(0, 6).map(b => (
+                  <div key={b.agent} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '.65rem .85rem', background: 'rgba(255,255,255,.03)', border: '1px solid var(--border)', borderRadius: '8px' }}>
+                    <div>
+                      <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.75rem', color: 'var(--text)', marginBottom: '.15rem' }}>{b.agent}</div>
+                      <div style={{ fontSize: '.72rem', color: 'rgba(255,255,255,.5)' }}>{b.engine}</div>
+                    </div>
+                    <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
+                      <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.55rem', textTransform: 'uppercase', color: b.risk === 'HIGH' ? '#f87171' : b.risk === 'MED' ? '#c8f247' : 'rgba(255,255,255,.4)', background: b.risk === 'HIGH' ? 'rgba(248,113,113,.08)' : b.risk === 'MED' ? 'rgba(200,242,71,.08)' : 'rgba(255,255,255,.04)', border: `1px solid ${b.risk === 'HIGH' ? 'rgba(248,113,113,.2)' : b.risk === 'MED' ? 'rgba(200,242,71,.2)' : 'rgba(255,255,255,.1)'}`, padding: '.15rem .45rem', borderRadius: '4px' }}>{b.risk}</span>
+                      <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.65rem', color: '#4ade80' }}>Allow</span>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div style={{height:'1px',background:'var(--border)'}} />
-              <div style={{fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:600,fontSize:'1rem'}}>AI Bot Permissions</div>
-              {[{key:'gpt',label:'GPTBot (OpenAI / ChatGPT)'},{key:'gem',label:'Google-Extended (Gemini)'},{key:'plex',label:'PerplexityBot (Perplexity)'},{key:'claude',label:'ClaudeBot (Anthropic / Claude)'},{key:'cop',label:'bingbot (Microsoft / Copilot)'}].map(b=>(
-                <label key={b.key} style={{display:'flex',alignItems:'center',gap:'.75rem',cursor:'pointer',fontSize:'.85rem',color:'var(--muted)'}}>
-                  <input type="checkbox" checked={(robotsForm as any)[b.key]} onChange={e=>setrobotsForm(p=>({...p,[b.key]:e.target.checked}))} />
-                  {b.label}
-                </label>
-              ))}
-              <div style={{height:'1px',background:'var(--border)'}} />
-              {[{id:'allow',label:'Allowed paths (one per line)',placeholder:'/\n/blog\n/products'},{id:'disallow',label:'Blocked paths (one per line)',placeholder:'/admin\n/private'}].map(f=>(
-                <div key={f.id} style={{display:'flex',flexDirection:'column',gap:'.3rem'}}>
-                  <label style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',letterSpacing:'.08em',textTransform:'uppercase',color:'var(--muted2)'}}>{f.label}</label>
-                  <textarea placeholder={f.placeholder} value={(robotsForm as any)[f.id]} onChange={e=>setrobotsForm(p=>({...p,[f.id]:e.target.value}))} rows={3}
-                    style={{background:'rgba(255,255,255,.04)',border:'1px solid var(--border-h)',borderRadius:'8px',padding:'.65rem 1rem',color:'var(--text)',fontSize:'.75rem',fontFamily:"'JetBrains Mono',monospace",resize:'vertical'}} />
-                </div>
-              ))}
-              <button onClick={generaterobots} style={{width:'100%',padding:'.85rem',background:'var(--accent)',color:'var(--bg)',border:'none',borderRadius:'100px',fontFamily:"'Familjen Grotesk',sans-serif",fontWeight:700,fontSize:'.85rem'}}>Generate robots.txt</button>
-            </div>
-
-            {/* Output */}
-            <div style={{background:'#0a0818',border:'1px solid var(--border)',borderRadius:'14px',overflow:'hidden',position:'sticky',top:'120px'}}>
-              <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'.8rem 1.25rem',borderBottom:'1px solid var(--border)',background:'rgba(255,255,255,.02)'}}>
-                <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.65rem',color:'var(--muted2)',letterSpacing:'.08em'}}>robots.txt — output</span>
-                <div style={{display:'flex',gap:'.5rem'}}>
-                  <button onClick={()=>copy(robotsRaw,'robots')} style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',color:'var(--violet)',background:'none',border:'none',cursor:'pointer',padding:'.2rem .5rem',borderRadius:'3px'}}>{copied==='robots'?'Copied!':'Copy file'}</button>
-                  <button onClick={()=>{const b=new Blob([robotsRaw],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='robots.txt';a.click()}} style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'.6rem',color:'var(--accent)',background:'none',border:'none',cursor:'pointer',padding:'.2rem .5rem',borderRadius:'3px'}}>Download</button>
-                </div>
-              </div>
-              <pre style={{padding:'1.25rem',fontFamily:"'JetBrains Mono',monospace",fontSize:'.75rem',lineHeight:1.8,color:'var(--muted)',minHeight:'360px',whiteSpace:'pre-wrap',wordBreak:'break-word'}} dangerouslySetInnerHTML={{__html:robotsOutput||'<span style="color:var(--muted2)">Fill in the form and click Generate to see your robots.txt output here.</span>'}} />
+              <button style={{ background: 'var(--accent)', color: '#07100b', border: 'none', borderRadius: '10px', padding: '.85rem 1.75rem', fontFamily: "'Familjen Grotesk',sans-serif", fontWeight: 700, fontSize: '.9rem', cursor: 'pointer' }}>
+                Generate robots.txt →
+              </button>
             </div>
           </div>
-        </div>
 
+          {/* AI bots reference */}
+          <section style={SECTION}>
+            <div style={EYEBROW}>AI bot reference</div>
+            <h2 style={H2}>Every AI crawler you need to know,<br /><span style={{ color: 'var(--muted)' }}>ranked by citation impact.</span></h2>
+            <p style={{ ...PROSE, maxWidth: 680, marginBottom: '2rem' }}>
+              Each AI engine sends its own crawler with a distinct user-agent string. Your robots.txt must explicitly name these agents — a generic Disallow: / rule blocks all of them simultaneously, and many legacy robots.txt files from 2022–2023 were written before most of these crawlers existed.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 60px 1fr', gap: '1rem', padding: '.6rem 1rem', background: 'rgba(255,255,255,.02)', borderRadius: '8px 8px 0 0', borderBottom: '1px solid var(--border)' }}>
+                {['Bot name', 'Powers', 'Risk', 'Note'].map(h => (
+                  <div key={h} style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.6rem', letterSpacing: '.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,.4)' }}>{h}</div>
+                ))}
+              </div>
+              {AI_BOTS.map((b, i) => (
+                <div key={b.agent} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 60px 1fr', gap: '1rem', padding: '.75rem 1rem', background: 'var(--card)', border: '1px solid var(--border)', borderRadius: i === AI_BOTS.length - 1 ? '0 0 8px 8px' : '0', alignItems: 'start' }}>
+                  <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.78rem', color: 'var(--text)' }}>{b.agent}</div>
+                  <div style={{ fontSize: '.8rem', color: 'rgba(255,255,255,.65)' }}>{b.engine}</div>
+                  <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.58rem', textTransform: 'uppercase', color: b.risk === 'HIGH' ? '#f87171' : b.risk === 'MED' ? '#c8f247' : 'rgba(255,255,255,.4)', background: b.risk === 'HIGH' ? 'rgba(248,113,113,.08)' : b.risk === 'MED' ? 'rgba(200,242,71,.08)' : 'rgba(255,255,255,.04)', border: `1px solid ${b.risk === 'HIGH' ? 'rgba(248,113,113,.2)' : b.risk === 'MED' ? 'rgba(200,242,71,.2)' : 'rgba(255,255,255,.1)'}`, padding: '.15rem .45rem', borderRadius: '4px', alignSelf: 'start' }}>{b.risk}</span>
+                  <div style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.55)', lineHeight: 1.55 }}>{b.note}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Why robots.txt matters for AEO */}
+          <section style={SECTION}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
+              <div>
+                <div style={EYEBROW}>The silent AEO killer</div>
+                <h2 style={H2}>Good content, great schema,<br /><span style={{ color: 'var(--muted)' }}>zero citations — here's why.</span></h2>
+                <p style={PROSE}>
+                  The most common AEO diagnostic finding is a brand that has correctly implemented schema markup, maintains an active content strategy, and has strong E-E-A-T signals — but still gets zero citations from ChatGPT or Perplexity. The culprit, in almost every case, is a robots.txt file that blocks the relevant AI crawler.
+                </p>
+                <p style={PROSE}>
+                  This happens because most robots.txt files were written for the Google-and-Bing era of 2015–2022. The bot names GPTBot, PerplexityBot, and ClaudeBot didn't exist then. Many sites use wildcard rules or blocking patterns that silently catch all new crawlers — including every AI bot launched in the last three years.
+                </p>
+                <p style={PROSE}>
+                  Fixing robots.txt is the fastest AEO win available. A single file change can immediately restore AI crawler access, and citation improvements from newly accessible content can appear on Perplexity within days. Use the <a href="/llms-txt-live-validator" style={{ color: 'var(--violet)' }}>llms.txt Validator</a> to confirm your configuration after updating.
+                </p>
+              </div>
+              <div>
+                <div style={{ background: 'rgba(248,113,113,.04)', border: '1px solid rgba(248,113,113,.15)', borderRadius: '14px', padding: '1.5rem', marginBottom: '1rem' }}>
+                  <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.62rem', letterSpacing: '.08em', textTransform: 'uppercase', color: '#f87171', marginBottom: '1rem' }}>Common robots.txt mistakes</div>
+                  {[
+                    { mistake: 'User-agent: * / Disallow: /', effect: 'Blocks all crawlers including every AI bot' },
+                    { mistake: 'Missing GPTBot entirely', effect: 'ChatGPT cannot cite you — it defaults to blocked' },
+                    { mistake: 'Blocking /api/ paths', effect: 'Some AI crawlers use API endpoints for structured data' },
+                    { mistake: 'Using noindex meta instead of robots.txt', effect: 'Meta noindex doesn\'t block crawling, only indexing' },
+                  ].map((m, i) => (
+                    <div key={i} style={{ padding: '.6rem 0', borderBottom: i < 3 ? '1px solid rgba(255,255,255,.06)' : 'none' }}>
+                      <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.7rem', color: '#f87171', marginBottom: '.2rem' }}>{m.mistake}</div>
+                      <div style={{ fontSize: '.78rem', color: 'rgba(255,255,255,.6)' }}>{m.effect}</div>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ background: 'rgba(74,222,128,.04)', border: '1px solid rgba(74,222,128,.15)', borderRadius: '14px', padding: '1.5rem' }}>
+                  <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.62rem', letterSpacing: '.08em', textTransform: 'uppercase', color: '#4ade80', marginBottom: '.85rem' }}>Correct configuration (example)</div>
+                  <pre style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.72rem', color: 'rgba(255,255,255,.75)', lineHeight: 1.75, margin: 0 }}>{`User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Grok-Bot
+Allow: /
+
+User-agent: *
+Disallow: /admin/
+Disallow: /api/private/`}</pre>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Robots.txt + llms.txt together */}
+          <section style={SECTION}>
+            <div style={EYEBROW}>The full AEO crawler setup</div>
+            <h2 style={H2}>robots.txt + llms.txt<br /><span style={{ color: 'var(--muted)' }}>work as a pair.</span></h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', marginTop: '2rem' }}>
+              {[
+                { step: '01', title: 'Configure robots.txt', desc: 'Allow GPTBot, PerplexityBot, ClaudeBot and other AI agents. This opens the door for crawlers.', href: '/robots-txt', cta: 'Generate robots.txt' },
+                { step: '02', title: 'Add llms.txt', desc: 'Create the AI-readable index of your site that tells crawlers what you cover and how to cite you.', href: '/llms-text-generator', cta: 'Generate llms.txt' },
+                { step: '03', title: 'Validate setup', desc: 'Use the live validator to confirm both files are correctly configured and AI bots can access all key pages.', href: '/llms-txt-live-validator', cta: 'Validate now' },
+              ].map(s => (
+                <div key={s.step} style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: '14px', padding: '1.5rem' }}>
+                  <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '1.4rem', fontWeight: 500, color: 'var(--accent)', marginBottom: '.75rem' }}>{s.step}</div>
+                  <div style={{ fontFamily: "'Familjen Grotesk',sans-serif", fontWeight: 600, fontSize: '.95rem', marginBottom: '.5rem' }}>{s.title}</div>
+                  <p style={{ fontSize: '.82rem', color: 'rgba(255,255,255,.65)', lineHeight: 1.6, marginBottom: '1rem' }}>{s.desc}</p>
+                  <a href={s.href} style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.62rem', letterSpacing: '.04em', color: 'var(--violet)', textDecoration: 'none' }}>{s.cta} →</a>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* FAQ */}
+          <section style={{ padding: '5rem 0 6rem' }}>
+            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+              <div style={EYEBROW}>FAQ</div>
+              <h2 style={{ ...H2, marginBottom: 0 }}>Common <span style={{ color: 'var(--muted)' }}>questions.</span></h2>
+            </div>
+            <ClusterFAQClient faqs={FAQS} />
+          </section>
+
+        </div>
         <SharedFooter />
       </div>
     </>
   )
 }
+
+const PAGE_STYLES = `
+  @import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Epilogue:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#04030c;--card:#100e22;--border:rgba(255,255,255,0.07);--text:#ffffff;--muted:rgba(255,255,255,0.88);--accent:#c8f247;--violet:#7b6cff;}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Epilogue',sans-serif;font-weight:300;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}button,select{cursor:pointer;font-family:inherit}
+  input:focus,button:focus{outline:none}
+  ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
+`
+const EYEBROW: React.CSSProperties = { fontFamily: "'JetBrains Mono',monospace", fontSize: '.68rem', letterSpacing: '.18em', textTransform: 'uppercase', color: 'var(--violet)', marginBottom: '.75rem' }
+const H1: React.CSSProperties = { fontFamily: "'Familjen Grotesk',sans-serif", fontWeight: 700, fontSize: 'clamp(2.5rem,6vw,4.5rem)', lineHeight: 1, letterSpacing: '-.03em', marginBottom: '1.25rem' }
+const H2: React.CSSProperties = { fontFamily: "'Familjen Grotesk',sans-serif", fontWeight: 700, fontSize: 'clamp(1.8rem,3vw,2.6rem)', lineHeight: 1.1, letterSpacing: '-.02em', marginBottom: '1.25rem' }
+const LEAD: React.CSSProperties = { fontSize: '1.05rem', color: 'rgba(255,255,255,0.88)', lineHeight: 1.75, maxWidth: '620px' }
+const PROSE: React.CSSProperties = { fontSize: '.93rem', color: 'rgba(255,255,255,0.82)', lineHeight: 1.85, marginBottom: '1rem' }
+const SECTION: React.CSSProperties = { padding: '5rem 0', borderBottom: '1px solid var(--border)' }

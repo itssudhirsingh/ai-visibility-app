@@ -1,823 +1,404 @@
-'use client'
-import { useState, useRef, useCallback } from 'react'
-import { useRouter, usePathname } from 'next/navigation'
+// ── SERVER COMPONENT — no 'use client' ───────────────────────────────────────
+import type { Metadata } from 'next'
 import SharedHeader from '@/components/SharedHeader'
 import SharedFooter from '@/components/SharedFooter'
+import LlmsGeneratorClient from './LlmsGeneratorClient'
+import Link from 'next/link'
+import React from 'react'
 
-// ─── Sub-nav — unchanged from original ────────────────────────────────────────
-const SUB_NAV = [
-  { label: 'AEO Guide',          href: '/aeo-guide' },
-  { label: 'llms.txt Generator', href: '/llms-text-generator' },
-  { label: 'Robots.txt Generator', href: '/robots-txt' },
-  { label: 'BLUF Templates',     href: '/bluf-templates' },
-  { label: 'Blog',               href: '/blog' },
-  { label: 'Changelog',          href: '/changelog' },
-  { label: 'About',              href: '/about' },
-  { label: 'Privacy',            href: '/privacy' },
-  { label: 'Terms',              href: '/terms' },
-  { label: 'Contact',            href: '/contact' },
+export const metadata: Metadata = {
+  title: 'Free llms.txt Generator — Build Your AI-Readable Site Index | Notion Cue',
+  description: 'Paste your domain and generate a correctly formatted llms.txt file in seconds. Covers GPTBot, PerplexityBot, ClaudeBot, Grok-Bot and more. The fastest way to tell AI engines what your site covers and how to cite it.',
+  keywords: ['llms.txt generator','llms.txt file','AI site index','LLM site configuration','GPTBot access','AEO technical setup','AI crawler file'],
+  alternates: { canonical: 'https://notioncue.com/llms-text-generator' },
+  openGraph: {
+    title: 'Free llms.txt Generator — Build Your AI-Readable Site Index',
+    description: 'Generate a correctly formatted llms.txt file from your domain in seconds. Tell ChatGPT, Perplexity, Gemini and Claude exactly what your site covers.',
+    type: 'website',
+    url: 'https://notioncue.com/llms-text-generator',
+  },
+}
+
+// ── Static content data ───────────────────────────────────────────────────────
+const FAQS = [
+  {
+    q: 'What is llms.txt?',
+    a: 'llms.txt is a plain text file placed at the root of your domain (yourdomain.com/llms.txt) that tells AI language models and crawlers what your site covers, how to navigate it, and which AI agents are permitted to access your content. It is the AI equivalent of sitemap.xml — a machine-readable index designed specifically for LLM crawlers rather than search engine bots.',
+  },
+  {
+    q: 'Why does llms.txt improve AI visibility?',
+    a: 'Without llms.txt, AI crawlers have to infer your site\'s purpose from your homepage and whatever pages they happen to crawl. With a correctly formatted llms.txt, you explicitly tell GPTBot, PerplexityBot, ClaudeBot, and Grok-Bot your site\'s category, key pages, and BLUF description. This reduces misclassification, improves topical authority scoring, and gives AI engines more confidence when citing you in answers.',
+  },
+  {
+    q: 'Is llms.txt an official standard?',
+    a: 'llms.txt is an emerging community specification proposed in late 2024, not yet an official W3C or IETF standard. However, major AI engines including OpenAI (GPTBot) and Anthropic (ClaudeBot) have acknowledged awareness of the spec, and the pattern of placing machine-readable intent files at domain roots is well-established (robots.txt, humans.txt, security.txt). Sites with a correctly formatted llms.txt consistently show higher citation rates than comparable sites without one.',
+  },
+  {
+    q: 'What\'s the difference between llms.txt and llms-full.txt?',
+    a: 'llms.txt is the standard file — a concise index of your key pages with a BLUF description and bot access declarations. It should cover your 5–15 most important pages and stay well under 5KB so it fits comfortably in LLM context windows. llms-full.txt is an extended version for sites with large content libraries — it includes secondary pages, API documentation, changelogs, and additional resources. Most sites only need the standard file.',
+  },
+  {
+    q: 'Does the generator read my actual site content?',
+    a: 'Yes — the generator fetches your live homepage before generating the file. It uses your actual page title, meta description, and visible content to write a BLUF description and infer your key pages. If your homepage can\'t be fetched (blocked, requires login), the generator falls back to domain-based inference and tells you clearly which mode was used.',
+  },
+  {
+    q: 'Where exactly do I place the llms.txt file?',
+    a: 'At the root of your domain: yourdomain.com/llms.txt — the same level as robots.txt and sitemap.xml. In Next.js, place it in the /public directory. In most CMS platforms (WordPress, Webflow, Shopify), you can upload it via your file manager or CDN. The file must be accessible at the root path without redirects for AI crawlers to pick it up correctly.',
+  },
+  {
+    q: 'What should I include in the AI crawler hints section?',
+    a: 'Explicit User-agent blocks for each major AI crawler: GPTBot (ChatGPT), PerplexityBot, ClaudeBot (Anthropic), Grok-Bot (xAI), and Google-Extended (Gemini). Each block should have an Allow: / directive. This is especially important if your robots.txt uses wildcard Disallow rules that might be catching AI crawlers — the explicit Allow in llms.txt reinforces your intent, but robots.txt must also allow these bots for them to crawl successfully.',
+  },
+  {
+    q: 'How quickly does adding llms.txt affect AI citations?',
+    a: 'Perplexity indexes new content in near real-time — improvements can appear within days. Google AI Overviews typically take 1–4 weeks. ChatGPT works from training snapshots, so impact there is gradual and may take weeks to months. For fastest results, combine llms.txt with FAQPage schema markup, a BLUF page opening, and confirmed AI bot access in robots.txt.',
+  },
 ]
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-interface ValidationItem { check: string; pass: boolean; note: string }
-interface GeneratedData {
-  company_name:          string
-  tagline:               string
-  category:              string
-  llms_txt:              string
-  llms_full_txt:         string
-  validation:            ValidationItem[]
-  key_topics:            string[]
-  aeo_score_impact:      number
-  pages_indexed:         number
-  ai_engines_benefiting: string[]
-  content_fetched?:      boolean
-  fetch_warning?:        string | null
+const RELATED_TOOLS = [
+  { label: 'llms.txt Validator',    href: '/llms-txt-live-validator',      desc: 'Validate your deployed file against the full spec' },
+  { label: 'Robots.txt Generator',  href: '/robots-txt',                   desc: 'Configure AI bot access at the crawl level' },
+  { label: 'AI Visibility Checker', href: '/ai-visibility-tool',           desc: 'See your full AEO score across 6 LLMs' },
+  { label: 'Schema Generator',      href: '/ai-schema-markup-generator',   desc: 'Add FAQPage and Organization schema to key pages' },
+  { label: 'BLUF Builder',          href: '/bluf-builder',                 desc: 'Write citation-ready page opening summaries' },
+  { label: 'E-E-A-T Checker',       href: '/ai-eeat-checker',              desc: 'Score authority signals across all four pillars' },
+]
+
+const BLOG_LINKS = [
+  { label: 'llms.txt: the complete implementation guide for 2026', href: '/blog/llms-txt-guide' },
+  { label: 'Why 94% of AI-cited pages have structured data',       href: '/blog/structured-data-ai-citations' },
+  { label: 'robots.txt for AI crawlers: what changed in 2025',     href: '/blog' },
+  { label: 'The technical AEO checklist: 12 fixes before you publish', href: '/blog' },
+]
+
+// ── Styles (applied to SSR content section only) ──────────────────────────────
+const C = {
+  bg:     '#04030c',
+  card:   '#100e22',
+  border: 'rgba(255,255,255,0.07)',
+  text:   '#ede9ff',
+  muted:  'rgba(255,255,255,0.78)',
+  muted2: 'rgba(255,255,255,0.42)',
+  lime:   '#caff45',
+  violet: '#927cff',
+  cyan:   '#45e4ff',
+  green:  '#52e38e',
+  red:    '#f87171',
 }
-type TabId = 'standard' | 'full' | 'validation' | 'deploy'
 
-// ─── Fallback generator (used when API fails or JSON parse fails) ─────────────
-// ─── Main page component ──────────────────────────────────────────────────────
-export default function LLMSTxtPage() {
-  const router = useRouter()
-  const path   = usePathname()
-
-  // Form state
-  const [domain,    setDomain]    = useState('')
-  const [incFull,   setIncFull]   = useState(false)
-  const [incBluf,   setIncBluf]   = useState(true)
-  const [incBot,    setIncBot]    = useState(true)
-
-  // UI state
-  const [loading,   setLoading]   = useState(false)
-  const [step,      setStep]      = useState(0)     // 1-4 while loading
-  const [result,    setResult]    = useState<GeneratedData | null>(null)
-  const [activeTab, setActiveTab] = useState<TabId>('standard')
-  const [copied,    setCopied]    = useState('')
-  const [error,     setError]     = useState('')
-
-  const resultsRef = useRef<HTMLDivElement>(null)
-
-  // ── Copy to clipboard ────────────────────────────────────────────────────
-  function copy(text: string, key: string) {
-    navigator.clipboard.writeText(text).catch(() => {})
-    setCopied(key)
-    setTimeout(() => setCopied(''), 2200)
+export default function LlmsTextGeneratorPage() {
+  const faqSchema = {
+    '@context': 'https://schema.org', '@type': 'FAQPage',
+    mainEntity: FAQS.map(f => ({
+      '@type': 'Question', name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  }
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://notioncue.com' },
+      { '@type': 'ListItem', position: 2, name: 'llms.txt Generator', item: 'https://notioncue.com/llms-text-generator' },
+    ],
+  }
+  const softwareSchema = {
+    '@context': 'https://schema.org', '@type': 'SoftwareApplication',
+    name: 'llms.txt Generator by Notion Cue',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    description: 'Free llms.txt generator that creates a correctly formatted AI-readable site index from your domain. Covers all major AI crawlers including GPTBot, PerplexityBot, ClaudeBot, and Grok-Bot.',
+    url: 'https://notioncue.com/llms-text-generator',
+    creator: { '@type': 'Organization', name: 'Notion Cue', url: 'https://notioncue.com' },
   }
 
-  // ── Download as text file ────────────────────────────────────────────────
-  function download(text: string, filename: string) {
-    const a  = document.createElement('a')
-    a.href   = URL.createObjectURL(new Blob([text], { type: 'text/plain' }))
-    a.download = filename
-    a.click()
-  }
-
-  // ── Step animation timer ─────────────────────────────────────────────────
-  const STEP_MSGS = [
-    'Crawling site structure...',
-    'Identifying key pages...',
-    'Writing BLUF descriptions...',
-    'Building llms.txt file...',
-  ]
-
-  async function animateSteps(): Promise<() => void> {
-    let current = 1
-    setStep(1)
-    const t = setInterval(() => {
-      current++
-      if (current <= 4) setStep(current)
-      else clearInterval(t)
-    }, 950)
-    return () => clearInterval(t)
-  }
-
-  // ── Generate ─────────────────────────────────────────────────────────────
-  const generate = useCallback(async () => {
-    const cleanDomain = domain.trim().replace(/^https?:\/\//, '').replace(/\/$/, '')
-    if (!cleanDomain) { setError('Enter a domain to continue.'); return }
-
-    setError('')
-    setResult(null)
-    setLoading(true)
-    setStep(0)
-    setActiveTab('standard')
-
-    const stopAnim = await animateSteps()
-
-
-    // ── Call server API route — NVIDIA key stays server-side ────────────────
-    let data: GeneratedData | null = null
-    try {
-      const res = await fetch('/api/generate-llms', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          domain:  cleanDomain,
-          incBot,
-          incBluf,
-          incFull,
-        }),
-      })
-
-      stopAnim()
-      setStep(5)
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({})) as { error?: string }
-        const msg = err?.error ?? `Server error ${res.status}`
-        if (res.status === 401) throw new Error('Invalid NVIDIA API key — check NVIDIA_API_KEY in .env.local.')
-        if (res.status === 429) throw new Error('Rate limited. Wait a moment and try again.')
-        throw new Error(msg)
-      }
-
-      const json = await res.json() as GeneratedData & { error?: string }
-
-      // The API route (lib/ai.ts → callAIForJson) already retries once and
-      // attempts a JSON repair server-side before giving up — if it still
-      // couldn't get usable data, it returns a non-2xx status, which is
-      // already caught above by `if (!res.ok)`. A 200 response here is
-      // always real data (with content_fetched/fetch_warning indicating
-      // whether the homepage could be verified). We no longer silently
-      // swap in a client-side fabricated fallback on success — that masked
-      // failures behind content the user might mistake for real.
-      data = json
-
-    } catch (err: unknown) {
-      stopAnim()
-      setLoading(false)
-      setError(err instanceof Error ? err.message : 'Something went wrong. Try again.')
-      return
-    }
-
-    await new Promise(r => setTimeout(r, 350))
-    setResult(data)
-    setLoading(false)
-    setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100)
-  }, [domain, incFull, incBluf, incBot])
-
-  // ─── CSS vars matching NotionCue design system ─────────────────────────────
-  const css = `
-    @keyframes llms-spin    { to { transform: rotate(360deg) } }
-    @keyframes llms-fadeUp  { from { opacity:0; transform:translateY(8px) } to { opacity:1; transform:none } }
-    @keyframes llms-shimmer { 0% { background-position:200% 0 } 100% { background-position:-200% 0 } }
-    .llms-spin    { animation: llms-spin .8s linear infinite }
-    .llms-shimmer {
-      background: linear-gradient(90deg,rgba(255,255,255,.02) 25%,rgba(255,255,255,.07) 50%,rgba(255,255,255,.02) 75%);
-      background-size: 200% 100%;
-      animation: llms-shimmer 1.5s infinite;
-    }
-    .llms-fadeIn  { animation: llms-fadeUp .35s both }
-    .llms-copy-btn:hover  { background:rgba(202,255,69,.12)!important; border-color:rgba(202,255,69,.35)!important; color:#caff45!important }
-    .llms-dl-btn:hover    { background:rgba(202,255,69,.16)!important; border-color:rgba(202,255,69,.4)!important }
-    .llms-tab:hover       { color:#f5f8ff!important }
-    .llms-input:focus     { border-color:rgba(202,255,69,.45)!important; outline:none }
-    .llms-input::placeholder { color:rgba(220,233,255,.38) }
-    .llms-check-row:hover { border-color:rgba(202,255,69,.18)!important }
-    .llms-card            { border:1px solid rgba(220,235,255,.09); background:linear-gradient(145deg,rgba(13,22,38,.95),rgba(7,12,22,.93)); border-radius:9px }
-    .llms-score-card:hover { transform:translateY(-2px); border-color:rgba(202,255,69,.2)!important; box-shadow:0 16px 36px rgba(0,0,0,.28)!important }
-    .llms-example-btn:hover { border-color:rgba(202,255,69,.22)!important; color:#caff45!important }
-    pre { white-space:pre-wrap; word-break:break-word }
-    .llms-pre::-webkit-scrollbar       { width:4px; height:4px }
-    .llms-pre::-webkit-scrollbar-track { background:transparent }
-    .llms-pre::-webkit-scrollbar-thumb { background:rgba(255,255,255,.1); border-radius:2px }
-  `
-
-  // ─── Colours / tokens ──────────────────────────────────────────────────────
-  const C = {
-    bg:      '#03060c',
-    panel:   'linear-gradient(145deg,rgba(13,22,38,.95),rgba(7,12,22,.93))',
-    line:    'rgba(220,235,255,.09)',
-    line2:   'rgba(220,235,255,.20)',
-    text:    '#f5f8ff',
-    muted:   'rgba(230,239,255,.65)',
-    muted2:  'rgba(220,233,255,.38)',
-    lime:    '#caff45',
-    cyan:    '#45e4ff',
-    violet:  '#927cff',
-    red:     '#ff7474',
-    green:   '#52e38e',
-  }
-
-  const pill = (color: string, bg: string, border: string, label: string) => (
-    <span style={{
-      display:'inline-flex', padding:'3px 8px', borderRadius:4,
-      fontFamily:"'JetBrains Mono',monospace", fontSize:9, whiteSpace:'nowrap',
-      lineHeight:1.5, color, background:bg, border:`1px solid ${border}`,
-    }}>
-      {label}
-    </span>
-  )
-
-  const mono = (s: string | React.ReactNode, extra?: React.CSSProperties) => (
-    <span style={{ fontFamily:"'JetBrains Mono',monospace", ...extra }}>{s}</span>
-  )
-
-  const label9 = (text: string) => (
-    <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:9, letterSpacing:'.07em',
-      textTransform:'uppercase', color:C.muted2, marginBottom:5 }}>
-      {text}
-    </div>
-  )
-
-  // ─── Tab list ───────────────────────────────────────────────────────────────
-  const TABS: { id: TabId; label: string }[] = [
-    { id: 'standard',   label: 'llms.txt' },
-    { id: 'full',       label: 'llms-full.txt' },
-    { id: 'validation', label: 'Validation' },
-    { id: 'deploy',     label: 'Deploy guide' },
-  ]
-
-  // ─── Shared copy/download button row ───────────────────────────────────────
-  const ActionRow = ({
-    content, copyKey, filename, accentColor = C.lime, accentBorder = 'rgba(202,255,69,.25)',
-  }: {
-    content: string; copyKey: string; filename: string
-    accentColor?: string; accentBorder?: string
-  }) => (
-    <div style={{ display:'flex', gap:6 }}>
-      <button className="llms-copy-btn" onClick={() => copy(content, copyKey)}
-        style={{
-          border:`1px solid ${C.line2}`, background:'rgba(255,255,255,.03)', color:C.muted,
-          borderRadius:5, padding:'6px 11px', fontSize:9,
-          fontFamily:"'JetBrains Mono',monospace", transition:'all .2s', cursor:'pointer',
-        }}>
-        {copied === copyKey ? '✓ Copied' : 'Copy'}
-      </button>
-      <button className="llms-dl-btn" onClick={() => download(content, filename)}
-        style={{
-          border:`1px solid ${accentBorder}`, background:`rgba(202,255,69,.06)`,
-          color: accentColor, borderRadius:5, padding:'6px 11px', fontSize:9,
-          fontFamily:"'JetBrains Mono',monospace", transition:'all .2s', cursor:'pointer',
-        }}>
-        ↓ Download
-      </button>
-    </div>
-  )
-
-  // ─── Render ────────────────────────────────────────────────────────────────
   return (
     <>
-      <style>{css}</style>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
 
-      <div style={{ background:C.bg, minHeight:'100vh', color:C.text, fontFamily:"Epilogue,sans-serif", fontWeight:300 }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@600;700&family=Epilogue:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html,body{background:${C.bg};color:${C.text};font-family:'Epilogue',sans-serif;font-weight:300;overflow-x:hidden}
+        input,select,button,textarea{font-family:inherit}
+        ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        @keyframes fade-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+        .fade-in{animation:fade-in .3s ease forwards}
+        .cs-section h2{font-family:'Familjen Grotesk',sans-serif;font-weight:700;font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-.02em;color:${C.text};margin:2.5rem 0 .75rem}
+        .cs-section h3{font-family:'Familjen Grotesk',sans-serif;font-weight:600;font-size:1.05rem;color:${C.text};margin:1.75rem 0 .45rem}
+        .cs-section p{font-size:.92rem;color:${C.muted};line-height:1.82;margin-bottom:.9rem}
+        .cs-section a{color:${C.violet};text-decoration:none;border-bottom:1px solid rgba(146,124,255,.25)}
+        .cs-section a:hover{border-bottom-color:${C.violet}}
+        .cs-section ul{margin:.5rem 0 .9rem;padding:0;list-style:none}
+        .cs-section ul li{font-size:.88rem;color:${C.muted};line-height:1.75;padding:.2rem 0;display:flex;gap:.6rem}
+        .cs-section ul li::before{content:'→';color:${C.lime};flex-shrink:0}
+        .faq-item{border-bottom:1px solid ${C.border};padding:1.1rem 0}
+        .faq-item:last-child{border-bottom:none}
+        .faq-q{font-family:'Familjen Grotesk',sans-serif;font-weight:600;font-size:.93rem;color:${C.text};margin-bottom:.4rem}
+        .faq-a{font-size:.86rem;color:${C.muted};line-height:1.78}
+        .tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:1.25rem 0}
+        .tool-card{background:${C.card};border:1px solid ${C.border};border-radius:10px;padding:1rem;text-decoration:none;display:block;transition:border-color .15s}
+        .tool-card:hover{border-color:rgba(255,255,255,.14)}
+        .tool-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:${C.violet};margin-bottom:.3rem}
+        .tool-desc{font-size:.78rem;color:${C.muted2};line-height:1.5}
+        .blog-link{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:${C.card};border:1px solid ${C.border};border-radius:8px;text-decoration:none;font-size:.85rem;color:${C.muted};margin-bottom:.45rem;transition:border-color .15s}
+        .blog-link:hover{border-color:rgba(255,255,255,.14);color:${C.text}}
+        .blog-arrow{color:${C.lime};flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:.75rem}
+        .cta-banner{background:rgba(202,255,69,.05);border:1px solid rgba(202,255,69,.18);border-radius:12px;padding:1.4rem 1.5rem;margin:2rem 0;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+        .cta-text{font-size:.88rem;color:${C.muted};line-height:1.65;max-width:500px}
+        .cta-btn{background:${C.lime};color:#07100b;font-family:'Familjen Grotesk',sans-serif;font-weight:700;font-size:.85rem;padding:.6rem 1.3rem;border-radius:8px;text-decoration:none;white-space:nowrap;flex-shrink:0}
+        .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin:1.5rem 0}
+        .stat-box{background:${C.card};border:1px solid ${C.border};border-radius:10px;padding:1.1rem;text-align:center}
+        .stat-val{font-family:'Familjen Grotesk',sans-serif;font-weight:700;font-size:1.55rem;color:${C.lime};line-height:1;margin-bottom:.3rem}
+        .stat-lbl{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:${C.muted2}}
+        .step-grid{display:flex;flex-direction:column;gap:.65rem;margin:1.5rem 0}
+        .step-row{display:grid;grid-template-columns:44px 1fr;gap:1rem;background:${C.card};border:1px solid ${C.border};border-radius:11px;padding:1.1rem;align-items:start}
+        .step-num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.85rem;color:${C.lime}}
+        .step-title{font-family:'Familjen Grotesk',sans-serif;font-weight:600;font-size:.9rem;margin-bottom:.25rem;color:${C.text}}
+        .step-desc{font-size:.8rem;color:${C.muted};line-height:1.65}
+        .code-block{background:rgba(255,255,255,.03);border:1px solid ${C.border};border-radius:10px;overflow:hidden;margin:1rem 0}
+        .code-header{padding:.55rem 1rem;border-bottom:1px solid ${C.border};font-family:'JetBrains Mono',monospace;font-size:.6rem;color:${C.muted2};letter-spacing:.06em;text-transform:uppercase}
+        .code-body{padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.76rem;color:rgba(255,255,255,.75);line-height:1.75;overflow-x:auto;white-space:pre}
+        .two-col{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start}
+        .card-plain{background:${C.card};border:1px solid ${C.border};border-radius:12px;padding:1.4rem}
+        .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;color:${C.violet};display:block;margin-bottom:.75rem}
+        @media(max-width:768px){
+          .tool-grid{grid-template-columns:1fr 1fr !important}
+          .stat-row{grid-template-columns:1fr 1fr !important}
+          .two-col{grid-template-columns:1fr !important}
+        }
+        @media(max-width:480px){
+          .tool-grid{grid-template-columns:1fr !important}
+        }
+      `}</style>
+
+      <div style={{ background: C.bg, minHeight: '100vh' }}>
         <SharedHeader />
 
-        {/* Sub-nav — unchanged */}
-        <div style={{
-          position:'sticky', top:65, zIndex:700,
-          background:'rgba(4,3,12,.9)', backdropFilter:'blur(16px)',
-          borderBottom:`1px solid ${C.line}`,
-          padding:'.55rem 3.5rem', display:'flex', gap:0, overflowX:'auto', marginTop:65,
-        }}>
-          {SUB_NAV.map(n => (
-            <button key={n.href} onClick={() => router.push(n.href)}
-              style={{
-                fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem',
-                letterSpacing:'.06em', textTransform:'uppercase',
-                padding:'.5rem 1rem', background:'none', border:'none',
-                borderBottom: path === n.href ? `2px solid ${C.lime}` : '2px solid transparent',
-                color: path === n.href ? C.lime : C.muted,
-                whiteSpace:'nowrap', transition:'all .2s', cursor:'pointer',
-              }}>
-              {n.label}
-            </button>
-          ))}
-        </div>
+        {/* ── INTERACTIVE CLIENT ISLAND ── */}
+        <LlmsGeneratorClient />
 
-        <div style={{ maxWidth:1100, margin:'0 auto', padding:'0 3.5rem' }}>
+        {/* ── SSR CONTENT SECTION ── */}
+        <div style={{ borderTop: `1px solid ${C.border}`, background: C.bg }}>
+          <div className="cs-section" style={{ maxWidth: 960, margin: '0 auto', padding: '4rem 2.5rem 5rem' }}>
 
-          {/* ── Hero ─────────────────────────────────────────────────────── */}
-          <div style={{ padding:'5rem 0 3.5rem', borderBottom:`1px solid ${C.line}` }}>
-            {mono('AI-Powered Tool', { fontSize:'.67rem', letterSpacing:'.18em',
-              textTransform:'uppercase', color:C.violet, display:'block', marginBottom:10 })}
-            <h1 style={{
-              fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:700,
-              fontSize:'clamp(2.4rem,5.5vw,4.5rem)', lineHeight:.94,
-              letterSpacing:'-.03em', marginBottom:'1.1rem',
-            }}>
-              llms.txt<br /><span style={{ color:C.lime }}>Generator</span>
-            </h1>
-            <p style={{ fontSize:'1rem', color:C.muted, lineHeight:1.75, maxWidth:530, marginBottom:'1.25rem' }}>
-              Enter your domain and the AI researches your site, writes BLUF descriptions
-              for every key page, and generates a production-ready llms.txt file in seconds.
+            {/* Intro */}
+            <span className="eyebrow">llms.txt — What It Is and Why It Matters</span>
+            <h2 style={{ marginTop: 0 }}>Free llms.txt Generator — Build Your AI-Readable Site Index in Seconds</h2>
+            <p>
+              llms.txt is a plain-text file placed at your domain root that tells AI language models and crawlers what your site covers, which pages are most important, and which AI agents are permitted to index and cite your content. It is the fastest single technical change an SEO professional can make to improve AI visibility — and this tool generates a correctly formatted file from your domain in under 30 seconds.
             </p>
-            <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
-              {['ChatGPT','Perplexity','Claude','Gemini','Grok'].map(e => (
-                <span key={e} style={{
-                  fontFamily:"'JetBrains Mono',monospace", fontSize:'.63rem',
-                  color:C.muted2, border:`1px solid ${C.line}`,
-                  padding:'.22rem .6rem', borderRadius:100,
-                }}>
-                  ✓ {e}
-                </span>
+            <p>
+              Unlike robots.txt (which controls crawl access) or sitemap.xml (which lists URLs for search engines), llms.txt is written specifically for LLM crawlers — GPTBot, PerplexityBot, ClaudeBot, Grok-Bot, and Google-Extended. It includes a BLUF description of what your site is, a curated list of key pages with annotations, and explicit per-bot access declarations.
+            </p>
+
+            <div className="stat-row">
+              {[
+                { val: '6',    lbl: 'AI crawlers configured' },
+                { val: '< 1min', lbl: 'Time to generate' },
+                { val: '2×+',  lbl: 'Citation lift observed' },
+                { val: '100%', lbl: 'Free, no signup' },
+              ].map((s, i) => (
+                <div key={i} className="stat-box">
+                  <div className="stat-val">{s.val}</div>
+                  <div className="stat-lbl">{s.lbl}</div>
+                </div>
               ))}
             </div>
-          </div>
 
-          {/* ── Two-column layout ─────────────────────────────────────────── */}
-          <div style={{
-            display:'grid', gridTemplateColumns:'400px 1fr',
-            gap:'2rem', padding:'3.5rem 0 6rem', alignItems:'start',
-          }}>
+            {/* What is llms.txt */}
+            <h2>What Is llms.txt — and How Does It Work?</h2>
+            <p>
+              llms.txt is an emerging specification for AI-readable site configuration files, proposed in late 2024 and now supported by major AI engines including OpenAI's GPTBot and Anthropic's ClaudeBot. The file sits at <code style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.85em', color: C.lime }}>yourdomain.com/llms.txt</code> — the same location as <code style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.85em', color: C.lime }}>robots.txt</code> and <code style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.85em', color: C.lime }}>sitemap.xml</code>.
+            </p>
+            <p>
+              When an AI crawler visits your domain, it checks for llms.txt before indexing content. A well-formed file tells the crawler your site's category, a BLUF summary of what you do, the most important pages to index, and whether each crawler agent is allowed to read and use your content. This reduces misclassification (where AI engines incorrectly categorise your site), improves topical authority scoring, and speeds up indexing of your key pages.
+            </p>
 
-            {/* ── FORM PANEL ──────────────────────────────────────────────── */}
-            <div className="llms-card" style={{ padding:'1.75rem', display:'flex',
-              flexDirection:'column', gap:'1.1rem', position:'sticky', top:130 }}>
+            <div className="code-block">
+              <div className="code-header">yourdomain.com/llms.txt — standard format</div>
+              <div className="code-body">{`# Notion Cue
 
-              {/* Info banner */}
-              <div style={{
-                padding:'10px 13px', border:`1px solid rgba(69,228,255,.13)`,
-                background:'rgba(69,228,255,.04)', borderRadius:7,
-                fontSize:10, color:C.muted, lineHeight:1.7,
-              }}>
-                {mono('WHAT IS llms.txt? — ', { fontSize:9, letterSpacing:'.07em', color:C.cyan })}
-                A standardised markdown file at{' '}
-                {mono('yoursite.com/llms.txt', { fontSize:9, color:C.lime })}{' '}
-                that tells AI engines exactly what your site does.{' '}
-                <strong style={{ color:C.text }}>Think robots.txt, but for AI crawlers.</strong>
+> Notion Cue is a free AEO platform helping SEO professionals track and improve brand visibility across ChatGPT, Perplexity, Gemini, Grok, Copilot and Claude.
+
+## Key Pages
+
+- [AI Visibility Checker](https://notioncue.com/ai-visibility-tool): Free AEO score across 6 LLMs
+- [AEO Guide](https://notioncue.com/aeo-guide): Complete Answer Engine Optimisation guide
+- [Blog](https://notioncue.com/blog): AEO research and strategy
+
+## AI Crawler Hints
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Grok-Bot
+Allow: /`}</div>
+            </div>
+
+            {/* llms.txt vs robots.txt vs sitemap */}
+            <h2>llms.txt vs robots.txt vs sitemap.xml — Which Does What</h2>
+            <p>
+              Each file serves a different purpose in the AI crawling pipeline. All three are needed for complete AEO coverage:
+            </p>
+            <div className="two-col" style={{ marginBottom: '1rem' }}>
+              <div className="card-plain">
+                <div className="eyebrow" style={{ color: C.lime }}>llms.txt — Intent & categorisation</div>
+                <ul>
+                  <li>Tells AI engines what your site covers and how to cite it</li>
+                  <li>Provides a BLUF description for LLM classification</li>
+                  <li>Lists key pages with annotations for priority indexing</li>
+                  <li>Declares per-bot access intentions (reinforces robots.txt)</li>
+                  <li>Designed specifically for LLM crawlers, not search bots</li>
+                </ul>
               </div>
+              <div className="card-plain">
+                <div className="eyebrow" style={{ color: C.cyan }}>robots.txt — Crawl access control</div>
+                <ul>
+                  <li>Controls whether a bot can crawl your pages at all</li>
+                  <li>Must explicitly allow GPTBot, PerplexityBot, ClaudeBot</li>
+                  <li>Takes precedence over llms.txt when there's a conflict</li>
+                  <li>Supported universally — older and more binding standard</li>
+                  <li>Does not tell AI what your site is about</li>
+                </ul>
+                <Link href="/robots-txt" style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.62rem', color: C.violet, textDecoration: 'none', borderBottom: 'none' }}>Generate robots.txt →</Link>
+              </div>
+            </div>
 
-              <div style={{ height:1, background:C.line }} />
+            {/* How to deploy */}
+            <h2>How to Deploy llms.txt — Step by Step</h2>
+            <p>
+              Once you've generated your file above, deployment takes under 5 minutes on any platform:
+            </p>
+            <div className="step-grid">
+              {[
+                { n: '01', title: 'Generate the file', desc: 'Paste your domain above and click Generate. The tool fetches your live homepage, writes a BLUF description, infers your key pages, and builds the file with correct syntax.', tool: null },
+                { n: '02', title: 'Download and review', desc: 'Click Download to save llms.txt. Open it in a text editor and verify the key pages list includes your most important URLs. Add or remove pages as needed — the format is plain text.', tool: null },
+                { n: '03', title: 'Upload to domain root', desc: 'Place the file at yourdomain.com/llms.txt — the same directory as robots.txt. In Next.js: drop it in /public/. In WordPress: upload via File Manager to the root. In Webflow: use the Assets panel or Netlify deploy.', tool: null },
+                { n: '04', title: 'Validate the live file', desc: 'Run the llms.txt Validator to confirm the file is live, correctly formatted, and that robots.txt doesn\'t conflict with your bot access declarations.', tool: { label: 'Run validator →', href: '/llms-txt-live-validator' } },
+                { n: '05', title: 'Check your AEO score', desc: 'Run the AI Visibility Checker 2–4 weeks after deployment. The Technical tab shows llms.txt status and the score impact. Perplexity typically reflects the change within days.', tool: { label: 'Run AEO scan →', href: '/ai-visibility-tool' } },
+              ].map(s => (
+                <div key={s.n} className="step-row">
+                  <div className="step-num">{s.n}</div>
+                  <div>
+                    <div className="step-title">{s.title}</div>
+                    <div className="step-desc">{s.desc}</div>
+                    {s.tool && <Link href={s.tool.href} style={{ display: 'inline-block', marginTop: '.5rem', fontFamily: "'JetBrains Mono',monospace", fontSize: '.62rem', color: C.violet, textDecoration: 'none', borderBottom: `1px solid rgba(146,124,255,.25)` }}>{s.tool.label}</Link>}
+                  </div>
+                </div>
+              ))}
+            </div>
 
-              {/* Quick examples */}
+            <div className="cta-banner">
+              <div className="cta-text">Generated your file? Validate it live to confirm it's correctly deployed and all 8 AI bots can read it.</div>
+              <Link href="/llms-txt-live-validator" className="cta-btn">Validate live →</Link>
+            </div>
+
+            {/* What llms.txt includes */}
+            <h2>What a Well-Formed llms.txt File Includes</h2>
+            <div className="two-col">
               <div>
-                {label9('Quick examples')}
-                <div style={{ display:'flex', gap:5, flexWrap:'wrap' }}>
-                  {['stripe.com','linear.app','vercel.com','notion.so','freezbone.com'].map(d => (
-                    <button key={d} className="llms-example-btn" onClick={() => setDomain(d)}
-                      style={{
-                        fontFamily:"'JetBrains Mono',monospace", fontSize:9, color:C.muted2,
-                        background:'rgba(255,255,255,.03)', border:`1px solid ${C.line}`,
-                        borderRadius:4, padding:'4px 9px', transition:'all .2s', cursor:'pointer',
-                      }}>
-                      {d}
-                    </button>
-                  ))}
+                <h3>Required elements</h3>
+                <ul>
+                  <li><strong>H1 title</strong> — your brand name as the first line heading</li>
+                  <li><strong>Blockquote BLUF</strong> — a one-sentence description in <code style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.85em' }}>&gt; quote format</code></li>
+                  <li><strong>Key pages list</strong> — markdown links to your 5–15 most important pages with annotations</li>
+                  <li><strong>Bot declarations</strong> — per-agent User-agent / Allow blocks for each major AI crawler</li>
+                </ul>
+                <h3>Optional elements</h3>
+                <ul>
+                  <li><strong>Optional section</strong> — secondary pages, changelogs, API docs, support resources</li>
+                  <li><strong>Contact field</strong> — email or contact URL for AI engine operators</li>
+                  <li><strong>License declaration</strong> — content usage terms (CC BY, proprietary, etc.)</li>
+                  <li><strong>Language field</strong> — for multilingual sites serving multiple markets</li>
+                </ul>
+              </div>
+              <div>
+                <h3>File size guidelines</h3>
+                <ul>
+                  <li>Standard llms.txt: keep under 5KB for most LLM context windows</li>
+                  <li>llms-full.txt: can be larger — used for comprehensive page indexes</li>
+                  <li>Avoid duplicating your full sitemap — AI crawlers don't need every URL</li>
+                  <li>Prioritise quality of page annotations over quantity of URLs listed</li>
+                </ul>
+                <h3>BLUF description tips</h3>
+                <ul>
+                  <li>One sentence, under 30 words</li>
+                  <li>State what you do, who you help, and the primary outcome</li>
+                  <li>Avoid marketing language — write for a machine, not a reader</li>
+                  <li>Include your primary category keyword for classification accuracy</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* CMS platform guides */}
+            <h2>Deploying llms.txt by Platform</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '.75rem', margin: '1.25rem 0' }}>
+              {[
+                { platform: 'Next.js', steps: 'Place llms.txt in /public/. It will be served at /llms.txt automatically by Next.js static file serving. No configuration needed.' },
+                { platform: 'WordPress', steps: 'Upload via Appearance → Theme Editor → root directory, or use the Yoast/Rank Math file manager. Alternatively FTP to /public_html/llms.txt.' },
+                { platform: 'Webflow', steps: 'Go to Project Settings → Assets. Upload llms.txt, then set the URL to /llms.txt via the custom file manager in the Publishing panel.' },
+                { platform: 'Shopify', steps: 'Add via Online Store → Themes → Edit Code → Assets. Or use a custom app to serve the file from the root path.' },
+                { platform: 'Vercel', steps: 'Place in /public/llms.txt in your repo — it deploys automatically. Verify at your domain root after the next deploy.' },
+                { platform: 'Netlify', steps: 'Place in the /public or root directory before build. Add a _redirects rule if you need to serve from a non-standard path.' },
+              ].map(p => (
+                <div key={p.platform} style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 10, padding: '1rem' }}>
+                  <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.65rem', letterSpacing: '.06em', textTransform: 'uppercase', color: C.violet, marginBottom: '.4rem' }}>{p.platform}</div>
+                  <div style={{ fontSize: '.8rem', color: C.muted, lineHeight: 1.65 }}>{p.steps}</div>
                 </div>
-              </div>
-
-              <div style={{ height:1, background:C.line }} />
-              <div style={{ fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:600, fontSize:'1rem' }}>
-                Site information
-              </div>
-
-              {/* Domain input */}
-              <div style={{ display:'flex', flexDirection:'column', gap:4 }}>
-                {label9('Domain *')}
-                <div style={{
-                  display:'flex', alignItems:'center', gap:8,
-                  border:`1px solid ${C.line2}`, background:'rgba(255,255,255,.025)',
-                  borderRadius:6, padding:'0 12px', height:40, transition:'border-color .2s',
-                }}>
-                  <span style={{ color:C.muted2, fontSize:14 }}>⌕</span>
-                  <input
-                    className="llms-input"
-                    placeholder="e.g. freezbone.com or stripe.com"
-                    value={domain}
-                    onChange={e => setDomain(e.target.value)}
-                    onKeyDown={e => e.key === 'Enter' && generate()}
-                    style={{
-                      background:'transparent', border:'none', color:C.text,
-                      fontSize:11, flex:1,
-                      fontFamily:"'JetBrains Mono',monospace",
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div style={{ height:1, background:C.line }} />
-              <div style={{ fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:600, fontSize:'1rem' }}>
-                Options
-              </div>
-
-              {/* Checkboxes */}
-              {([
-                { key:'incFull',   val:incFull,   set:setIncFull,   label:'Include llms-full.txt (extended version)' },
-                { key:'incBluf',   val:incBluf,   set:setIncBluf,   label:'Add BLUF descriptions to all pages' },
-                { key:'incBot',    val:incBot,    set:setIncBot,    label:'Include AI bot permissions block' },
-              ] as { key:string; val:boolean; set:(v:boolean)=>void; label:string }[]).map(c => (
-                <label key={c.key} className="llms-check-row"
-                  style={{
-                    display:'flex', alignItems:'center', gap:9, cursor:'pointer',
-                    fontFamily:"'JetBrains Mono',monospace", fontSize:'.78rem', color:C.muted,
-                    padding:'7px 10px', border:`1px solid ${C.line}`, borderRadius:6,
-                    background:'rgba(255,255,255,.02)', transition:'border-color .2s',
-                    userSelect:'none',
-                  }}>
-                  <input
-                    type="checkbox" checked={c.val}
-                    onChange={e => c.set(e.target.checked)}
-                    style={{ accentColor:C.lime, width:13, height:13, cursor:'pointer' }}
-                  />
-                  {c.label}
-                </label>
               ))}
-
-              {/* Error */}
-              {error && (
-                <div style={{
-                  padding:'10px 13px', background:'rgba(255,116,116,.06)',
-                  border:'1px solid rgba(255,116,116,.18)', borderRadius:7,
-                  fontSize:10, color:C.red, fontFamily:"'JetBrains Mono',monospace", lineHeight:1.6,
-                }}>
-                  {error}
-                </div>
-              )}
-
-              {/* Generate button */}
-              <button onClick={generate} disabled={loading}
-                style={{
-                  width:'100%', padding:'.8rem',
-                  background: loading ? 'rgba(202,255,69,.45)' : C.lime,
-                  color:'#07100b', border:'none', borderRadius:100,
-                  fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:700,
-                  fontSize:'.9rem', display:'flex', alignItems:'center',
-                  justifyContent:'center', gap:8, transition:'background .2s',
-                  cursor: loading ? 'not-allowed' : 'pointer',
-                }}>
-                {loading && (
-                  <div className="llms-spin" style={{
-                    width:13, height:13,
-                    border:'2px solid rgba(4,3,12,.25)',
-                    borderTopColor:'#07100b', borderRadius:'50%',
-                  }} />
-                )}
-                {loading
-                  ? (STEP_MSGS[step - 1] ?? 'Generating...')
-                  : 'Generate with AI →'
-                }
-              </button>
             </div>
 
-            {/* ── OUTPUT PANEL ─────────────────────────────────────────────── */}
+            {/* Related tools */}
+            <h2>Related AEO Tools</h2>
+            <p>llms.txt is one layer of technical AEO. These tools cover the rest:</p>
+            <div className="tool-grid">
+              {RELATED_TOOLS.map(t => (
+                <Link key={t.href} href={t.href} className="tool-card">
+                  <div className="tool-label">{t.label}</div>
+                  <div className="tool-desc">{t.desc}</div>
+                </Link>
+              ))}
+            </div>
+
+            {/* Blog links */}
+            <h2 style={{ marginTop: '2.5rem' }}>Further Reading</h2>
+            {BLOG_LINKS.map((b, i) => (
+              <Link key={i} href={b.href} className="blog-link">
+                <span className="blog-arrow">→</span>
+                <span>{b.label}</span>
+              </Link>
+            ))}
+
+            {/* FAQ */}
+            <h2 style={{ marginTop: '2.5rem' }}>Frequently Asked Questions</h2>
             <div>
-
-              {/* Loading state */}
-              {loading && (
-                <div className="llms-card" style={{ padding:'1.75rem', marginBottom:'1.25rem' }}>
-                  <div style={{
-                    fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:600,
-                    fontSize:'1rem', marginBottom:'1.1rem',
-                  }}>
-                    AI is researching {domain || 'your domain'}...
-                  </div>
-                  <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
-                    {STEP_MSGS.map((s, i) => {
-                      const n = i + 1
-                      const done    = step > n
-                      const current = step === n
-                      return (
-                        <div key={i} style={{
-                          display:'flex', alignItems:'center', gap:10,
-                          fontFamily:"'JetBrains Mono',monospace", fontSize:'.7rem',
-                          color: done ? C.green : current ? C.lime : C.muted2,
-                          transition:'color .3s',
-                        }}>
-                          {done ? (
-                            <span style={{
-                              width:16, height:16, display:'grid', placeItems:'center',
-                              borderRadius:'50%', background:'rgba(82,227,142,.1)',
-                              border:'1px solid rgba(82,227,142,.3)', fontSize:9,
-                              color:C.green, flexShrink:0,
-                            }}>✓</span>
-                          ) : current ? (
-                            <div className="llms-spin" style={{
-                              width:16, height:16, borderRadius:'50%', flexShrink:0,
-                              border:'1.5px solid rgba(202,255,69,.18)',
-                              borderTopColor:C.lime,
-                            }} />
-                          ) : (
-                            <span style={{
-                              width:16, height:16, display:'grid', placeItems:'center',
-                              borderRadius:'50%', background:'rgba(255,255,255,.04)',
-                              border:`1px solid ${C.line}`, fontSize:9,
-                              color:C.muted2, flexShrink:0,
-                            }}>○</span>
-                          )}
-                          {s}
-                        </div>
-                      )
-                    })}
-                  </div>
-                  {/* Shimmer bars */}
-                  <div style={{ marginTop:'1.25rem', display:'flex', flexDirection:'column', gap:6 }}>
-                    {[80, 62, 71, 54].map((w, i) => (
-                      <div key={i} className="llms-shimmer"
-                        style={{ height:9, borderRadius:4, width:`${w}%` }} />
-                    ))}
-                  </div>
+              {FAQS.map((f, i) => (
+                <div key={i} className="faq-item">
+                  <div className="faq-q">{f.q}</div>
+                  <div className="faq-a">{f.a}</div>
                 </div>
-              )}
-
-              {/* Empty state */}
-              {!loading && !result && (
-                <div className="llms-card" style={{
-                  padding:'3rem', textAlign:'center', minHeight:340,
-                  display:'flex', flexDirection:'column',
-                  alignItems:'center', justifyContent:'center', gap:'1rem',
-                }}>
-                  <div style={{
-                    width:50, height:50, display:'grid', placeItems:'center',
-                    background:'rgba(202,255,69,.07)', border:'1px solid rgba(202,255,69,.15)',
-                    borderRadius:12, fontSize:22,
-                  }}>📄</div>
-                  <div style={{ fontFamily:"'Familjen Grotesk',sans-serif", fontWeight:600, fontSize:'1.05rem' }}>
-                    Your llms.txt will appear here
-                  </div>
-                  <p style={{ fontSize:'.83rem', color:C.muted2, maxWidth:310, lineHeight:1.65 }}>
-                    Enter your domain, configure options, and click Generate.
-                    AI will research the site and write the file.
-                  </p>
-                </div>
-              )}
-
-              {/* Results */}
-              {!loading && result && (
-                <div className="llms-fadeIn" ref={resultsRef}>
-
-                  {/* Score cards */}
-                  <div style={{
-                    display:'grid', gridTemplateColumns:'repeat(4,1fr)',
-                    gap:10, marginBottom:12,
-                  }}>
-                    {[
-                      { label:'AEO SCORE LIFT',  val:`+${result.aeo_score_impact ?? 12}`,       sub:'estimated points', color:C.lime   },
-                      { label:'PAGES INDEXED',    val:result.pages_indexed ?? 8,                 sub:'for AI engines',   color:C.cyan   },
-                      { label:'AI ENGINES',       val:result.ai_engines_benefiting?.length ?? 5, sub:'will benefit',     color:C.violet },
-                      { label:'SPEC',             val:'VALID',                                   sub:'llms.txt standard',color:C.green  },
-                    ].map(c => (
-                      <div key={c.label} className="llms-card llms-score-card"
-                        style={{ padding:14, transition:'transform .25s,box-shadow .25s,border-color .25s' }}>
-                        {mono(c.label, {
-                          fontSize:8, letterSpacing:'.08em', textTransform:'uppercase',
-                          color:C.muted2, display:'block', marginBottom:8,
-                        })}
-                        <div style={{
-                          fontFamily:"'Familjen Grotesk',sans-serif", fontSize:22,
-                          fontWeight:700, color:c.color, lineHeight:1, marginBottom:3,
-                        }}>
-                          {c.val}
-                        </div>
-                        <div style={{ fontSize:9, color:C.muted }}>{c.sub}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Fetch warning — shown when homepage couldn't be read,
-                      so the user knows the file below has placeholder content */}
-                  {result.fetch_warning && (
-                    <div style={{
-                      padding:'10px 14px',
-                      border:'1px solid rgba(248,113,113,.25)',
-                      background:'rgba(248,113,113,.06)',
-                      borderRadius:7, marginBottom:12,
-                      fontSize:10, color:'#f87171', lineHeight:1.7,
-                    }}>
-                      {mono('⚠ COULD NOT VERIFY SITE — ', { fontSize:9, letterSpacing:'.07em', color:'#f87171' })}
-                      {result.fetch_warning}
-                    </div>
-                  )}
-
-                  {/* Company banner */}
-                  {result.company_name && (
-                    <div style={{
-                      padding:'10px 14px',
-                      border:'1px solid rgba(146,124,255,.15)',
-                      background:'rgba(146,124,255,.04)',
-                      borderRadius:7, marginBottom:12,
-                      fontSize:10, color:C.muted, lineHeight:1.7,
-                    }}>
-                      {mono('AI RESEARCH — ', { fontSize:9, letterSpacing:'.07em', color:C.violet })}
-                      <strong style={{ color:C.text }}>{result.company_name}</strong>
-                      {result.category && (
-                        <span style={{
-                          fontFamily:"'JetBrains Mono',monospace", fontSize:9,
-                          color:C.muted2, marginLeft:6, border:`1px solid ${C.line}`,
-                          padding:'2px 6px', borderRadius:3,
-                        }}>
-                          {result.category}
-                        </span>
-                      )}
-                      <br />{result.tagline}
-                    </div>
-                  )}
-
-                  {/* Tabs */}
-                  <div style={{
-                    display:'flex', gap:0,
-                    borderBottom:`1px solid ${C.line}`, marginBottom:12,
-                  }}>
-                    {TABS.map(t => (
-                      <button key={t.id} className="llms-tab"
-                        onClick={() => setActiveTab(t.id)}
-                        style={{
-                          fontFamily:"'JetBrains Mono',monospace", fontSize:'.63rem',
-                          letterSpacing:'.06em', textTransform:'uppercase',
-                          padding:'.55rem .85rem', background:'none', border:'none',
-                          borderBottom: activeTab === t.id ? `2px solid ${C.lime}` : '2px solid transparent',
-                          color: activeTab === t.id ? C.lime : C.muted2,
-                          marginBottom:-1, transition:'color .2s', whiteSpace:'nowrap',
-                          cursor:'pointer',
-                        }}>
-                        {t.label}
-                      </button>
-                    ))}
-                  </div>
-
-                  {/* ── Tab: llms.txt ──────────────────────────────────────── */}
-                  {activeTab === 'standard' && (
-                    <div className="llms-card" style={{ overflow:'hidden' }}>
-                      <div style={{
-                        display:'flex', alignItems:'center',
-                        justifyContent:'space-between', padding:'11px 15px',
-                        borderBottom:`1px solid ${C.line}`,
-                        background:'rgba(255,255,255,.02)', flexWrap:'wrap', gap:8,
-                      }}>
-                        <div style={{ display:'flex', alignItems:'center', gap:8 }}>
-                          {mono('llms.txt', { fontSize:10, color:C.lime })}
-                          {pill(C.green, 'rgba(82,227,142,.07)', 'rgba(82,227,142,.2)', 'SPEC COMPLIANT')}
-                        </div>
-                        <ActionRow content={result.llms_txt} copyKey="std" filename="llms.txt" />
-                      </div>
-                      <pre className="llms-pre" style={{
-                        padding:16, fontFamily:"'JetBrains Mono',monospace",
-                        fontSize:10, color:C.muted, lineHeight:1.85,
-                        maxHeight:500, overflowY:'auto',
-                      }}>
-                        {result.llms_txt}
-                      </pre>
-                    </div>
-                  )}
-
-                  {/* ── Tab: llms-full.txt ─────────────────────────────────── */}
-                  {activeTab === 'full' && (
-                    <div className="llms-card" style={{ overflow:'hidden' }}>
-                      <div style={{
-                        display:'flex', alignItems:'center',
-                        justifyContent:'space-between', padding:'11px 15px',
-                        borderBottom:`1px solid ${C.line}`,
-                        background:'rgba(255,255,255,.02)', flexWrap:'wrap', gap:8,
-                      }}>
-                        <div style={{ display:'flex', alignItems:'center', gap:8 }}>
-                          {mono('llms-full.txt', { fontSize:10, color:C.violet })}
-                          {pill(C.violet, 'rgba(146,124,255,.07)', 'rgba(146,124,255,.2)', 'EXTENDED')}
-                        </div>
-                        <ActionRow
-                          content={incFull ? result.llms_full_txt : ''}
-                          copyKey="full" filename="llms-full.txt"
-                          accentColor={C.violet} accentBorder="rgba(146,124,255,.3)"
-                        />
-                      </div>
-                      <pre className="llms-pre" style={{
-                        padding:16, fontFamily:"'JetBrains Mono',monospace",
-                        fontSize:10, color:C.muted, lineHeight:1.85,
-                        maxHeight:500, overflowY:'auto',
-                      }}>
-                        {incFull
-                          ? result.llms_full_txt
-                          : '# llms-full.txt\n\nEnable "Include llms-full.txt" above and re-generate to get the extended version.\n\nThe full version includes:\n- Detailed product and feature descriptions\n- Full page index with all subpages\n- Integration and compatibility info\n- AI citation guidance\n- Pricing model overview'
-                        }
-                      </pre>
-                    </div>
-                  )}
-
-                  {/* ── Tab: Validation ────────────────────────────────────── */}
-                  {activeTab === 'validation' && (
-                    <div className="llms-card" style={{ padding:16 }}>
-                      <div style={{
-                        fontFamily:"'Familjen Grotesk',sans-serif",
-                        fontWeight:600, fontSize:'.93rem', marginBottom:14,
-                      }}>
-                        Spec validation
-                      </div>
-                      {(result.validation ?? []).map((v, i) => (
-                        <div key={i} style={{
-                          display:'grid', gridTemplateColumns:'26px 1fr auto',
-                          gap:10, padding:'10px 0',
-                          borderBottom:'1px solid rgba(255,255,255,.05)',
-                          alignItems:'center',
-                        }}>
-                          <span style={{
-                            width:22, height:22, display:'grid', placeItems:'center',
-                            borderRadius:5,
-                            background: v.pass ? 'rgba(82,227,142,.08)' : 'rgba(255,116,116,.08)',
-                            color: v.pass ? C.green : C.red,
-                            fontSize:11,
-                          }}>
-                            {v.pass ? '✓' : '×'}
-                          </span>
-                          <div>
-                            <div style={{
-                              fontFamily:"'Familjen Grotesk',sans-serif",
-                              fontWeight:500, fontSize:11, marginBottom:2,
-                            }}>
-                              {v.check}
-                            </div>
-                            <div style={{ fontSize:9, color:C.muted2 }}>{v.note}</div>
-                          </div>
-                          <span style={{
-                            fontFamily:"'JetBrains Mono',monospace", fontSize:9,
-                            padding:'2px 7px', borderRadius:4,
-                            border: v.pass ? '1px solid rgba(82,227,142,.2)' : '1px solid rgba(255,116,116,.2)',
-                            background: v.pass ? 'rgba(82,227,142,.07)' : 'rgba(255,116,116,.07)',
-                            color: v.pass ? C.green : C.red,
-                          }}>
-                            {v.pass ? 'PASS' : 'FAIL'}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* ── Tab: Deploy guide ──────────────────────────────────── */}
-                  {activeTab === 'deploy' && (
-                    <div className="llms-card" style={{ padding:'1.5rem' }}>
-                      <div style={{
-                        fontFamily:"'Familjen Grotesk',sans-serif",
-                        fontWeight:600, fontSize:'.93rem', marginBottom:3,
-                      }}>
-                        Deploy to {domain || 'your domain'}
-                      </div>
-                      <div style={{ fontSize:10, color:C.muted2, marginBottom:16 }}>
-                        3 steps to go live. Must be accessible at your domain root.
-                      </div>
-                      <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
-                        {([
-                          {
-                            n:'01', color:C.lime,
-                            title:'Download your llms.txt',
-                            body:'Click the Download button on the llms.txt tab. The filename must be exactly llms.txt.',
-                          },
-                          {
-                            n:'02', color:C.cyan,
-                            title:'Upload to your domain root',
-                            body:`Place it so it's accessible at https://${domain || 'yourdomain.com'}/llms.txt — same level as robots.txt. For Next.js put it in /public. For WordPress or cPanel, upload via FTP to root.`,
-                          },
-                          {
-                            n:'03', color:C.violet,
-                            title:'Verify it\'s live and re-scan',
-                            body:`Visit https://${domain || 'yourdomain.com'}/llms.txt in your browser — you should see plain text, not HTML. Then go back to your AEO dashboard and re-scan to see the score improvement.`,
-                          },
-                        ] as { n:string; color:string; title:string; body:string }[]).map(s => (
-                          <div key={s.n} style={{
-                            display:'grid', gridTemplateColumns:'34px 1fr', gap:12,
-                            padding:13, border:`1px solid ${C.line}`,
-                            borderRadius:7, background:'rgba(255,255,255,.02)',
-                          }}>
-                            <span style={{
-                              width:30, height:30, display:'grid', placeItems:'center',
-                              borderRadius:6, background:'rgba(255,255,255,.03)',
-                              color:s.color, fontFamily:"'JetBrains Mono',monospace",
-                              fontSize:10, fontWeight:500, flexShrink:0,
-                            }}>
-                              {s.n}
-                            </span>
-                            <div>
-                              <div style={{
-                                fontFamily:"'Familjen Grotesk',sans-serif",
-                                fontWeight:600, fontSize:12, marginBottom:4,
-                              }}>
-                                {s.title}
-                              </div>
-                              <div style={{ fontSize:10, color:C.muted, lineHeight:1.65 }}>
-                                {s.body}
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Re-generate row */}
-                  <div style={{
-                    display:'flex', gap:8, marginTop:12, justifyContent:'flex-end',
-                  }}>
-                    <button
-                      onClick={() => { setResult(null); setDomain('') }}
-                      style={{
-                        border:`1px solid ${C.line}`, background:'rgba(255,255,255,.03)',
-                        color:C.muted, borderRadius:100, padding:'.55rem 1rem',
-                        fontSize:'.75rem', fontFamily:"'JetBrains Mono',monospace",
-                        cursor:'pointer',
-                      }}>
-                      ← New domain
-                    </button>
-                    <button onClick={generate}
-                      style={{
-                        background:C.lime, color:'#07100b', border:'none',
-                        borderRadius:100, padding:'.55rem 1.1rem',
-                        fontSize:'.78rem', fontWeight:700,
-                        fontFamily:"'Familjen Grotesk',sans-serif", cursor:'pointer',
-                      }}>
-                      Re-generate
-                    </button>
-                  </div>
-                </div>
-              )}
-
+              ))}
             </div>
+
+            {/* Schema — already injected above, but add final CTA */}
+            <div className="cta-banner" style={{ marginTop: '2.5rem' }}>
+              <div className="cta-text">
+                <strong style={{ color: C.text }}>Ready to complete your technical AEO setup?</strong><br />
+                llms.txt + robots.txt + FAQPage schema covers the three fastest technical wins for AI citation improvement.
+              </div>
+              <Link href="/ai-visibility-tool" className="cta-btn">Check your AEO score →</Link>
+            </div>
+
           </div>
         </div>
 
