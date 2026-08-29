@@ -150,7 +150,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title:          'llms.txt: the complete technical guide to AI crawler permissions in 2026',
     excerpt:        'Which bots respect it, which ignore it, what format actually works, and why getting this wrong can silently exclude you from AI training pipelines.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
+    author:         'Apurva Mishra',
     authorRole:     'Technical Lead · NotionCue',
     authorInitials: 'SS',
     content: `
@@ -290,7 +290,7 @@ Allow: /</code></pre>
     title:          'Core Web Vitals and AI citations: the surprising connection between page speed and LLM visibility',
     excerpt:        'Perplexity and real-time AI crawlers actively penalise slow pages. Our data shows domains with Good CWV scores get cited 2.1x more often.',
     read:           '7 min read',
-    author:         'Sudhir Singh',
+    author:         'Apurva Mishra',
     authorRole:     'Technical Lead · NotionCue',
     authorInitials: 'SS',
     content: `
@@ -333,8 +333,8 @@ Allow: /</code></pre>
     title:          'How AI Crawlers Index Your Site (And Why Your robots.txt May Be the Problem)',
     excerpt:        'Before your content reaches ChatGPT, Perplexity, or Claude as a cited answer, a bot has to fetch your page. Most sites are blocking the wrong bots without knowing it.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Before any of your AEO content work pays off, a bot has to fetch your page first.</p>
@@ -426,8 +426,8 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
     title:          'Your llms.txt File Probably Isn\'t Doing What You Think',
     excerpt:        'Three major studies, 300,000+ domains analysed, and one finding: llms.txt does not directly move AI citation rates. Here is what it is actually good for.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>There is a version of this file that does something useful. There is also a version that takes thirty minutes to build, sits at your domain root untouched, and accomplishes nothing. Most sites have the second version.</p>
@@ -487,8 +487,8 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
     title:          'Your Page Ranked Last Month. AI Stopped Citing It This Month. Here Is Why.',
     excerpt:        'Google Analytics shows nothing wrong. The page still ranks. But your brand has vanished from AI-generated answers. This is citation decay, and it is the AEO problem most teams find out about six months too late.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Google Analytics shows nothing wrong. The page still ranks. Backlinks are intact. Traffic from search is steady. But run the same prompts you ran three months ago through ChatGPT, Perplexity, or Claude, and your brand is gone from the answers. A competitor is there instead.</p>
@@ -532,8 +532,8 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
     title:          'How to Build a Prompt Tracking Strategy That Actually Tells You Something',
     excerpt:        'Most teams count brand mentions, call it a metric, and wonder why nothing improves. Prompt tracking is not keyword rank tracking with a different interface. Here is how to build a set that produces signal.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Most teams setting up AI search tracking make the same mistake early on. They build a list of prompts that feel relevant, run them through one tool, count how many times the brand shows up, and treat that number as a performance metric. That number means almost nothing on its own.</p>
@@ -582,8 +582,8 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
     title:          'JSON-LD Schema for AEO: The Types That Actually Move Citation Rates',
     excerpt:        'Pages with well-implemented structured data earn AI citations at 2.8x the rate of unstructured equivalents. Here are the five schema types that drive that gap, in priority order, with copy-paste JSON-LD for each.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Schema markup does not guarantee AI citations. Nothing does. But pages with well-implemented structured data earn citations at measurably higher rates than equivalent pages without it. AirOps research from 2026 puts pages with clean structured data at 2.8 times the citation rate of poorly structured equivalents.</p>
@@ -614,7 +614,7 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
   "dateModified": "2026-06-23",
   "author": {
     "@type": "Person",
-    "name": "Sudhir Singh",
+    "name": "Apurva Mishra",
     "sameAs": "https://www.linkedin.com/in/sudhir-ks"
   },
   "publisher": {
@@ -646,7 +646,7 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": "https://notioncue.com/about/#person",
-  "name": "Sudhir Singh",
+  "name": "Apurva Mishra",
   "jobTitle": "Senior SEO and AEO Specialist",
   "sameAs": ["https://www.linkedin.com/in/sudhir-ks"],
   "knowsAbout": [
@@ -684,8 +684,8 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
     title:          'Off-Site AEO: Why 68% of AI Citations Come From Sources You Do Not Own',
     excerpt:        'A content strategy living entirely on your own domain has a structural ceiling. Reddit, review platforms, Wikipedia, and editorial coverage are where AI engines do most of their sourcing.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Most AEO content focuses on your own site, what is on the page, how the schema is structured, how fast it loads, whether the crawler can get in. That work matters. But 68% of AI citations in 2026 come from sources you do not control.</p>
@@ -733,8 +733,8 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
     title:          'AEO vs SEO in 2026: What Still Overlaps and What Has Genuinely Split',
     excerpt:        'The framing that AEO replaces SEO is wrong. The framing that AEO is just SEO with a different name is equally wrong. Here is exactly where they share foundations and where they have genuinely diverged.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>The framing that AEO replaces SEO is wrong. The framing that AEO is just SEO with a different name is equally wrong. The honest answer is somewhere between those two, and it has practical consequences for how you allocate time and budget.</p>
@@ -771,8 +771,8 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
     title:          'How to Write Content AI Engines Actually Extract and Cite',
     excerpt:        'Most content that fails to get cited is not bad content. It is content written for a human reader that an AI retrieval system cannot efficiently parse. The fix is structural, not qualitative.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Most content that fails to get cited is not bad content. It is content written for a human reader that an AI retrieval system cannot efficiently parse. The distinction matters because the fix is structural, not qualitative. You do not need to rewrite your expertise. You need to repackage it in a format that lets AI engines extract a clean, self-contained answer without inference work.</p>
@@ -824,8 +824,8 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
     title:          'AI Is Describing Your Brand Wrong. Here Is How to Find It and Fix It.',
     excerpt:        'Hallucination rates on brand-specific information run between 20% and 76% depending on the engine. For brands that have not built a systematic evidence layer, the AI\'s best guess is often wrong in ways that are commercially damaging and completely invisible unless you run the prompts yourself.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>A prospect asks ChatGPT about your pricing. The answer comes back with a plan you discontinued eighteen months ago. A journalist uses Perplexity to research your company before a call. The description it returns is half accurate, half a blend of you and a competitor with a similar name. A buyer asks Claude whether your product integrates with a platform they use. It says no. The integration has existed for two years.</p>
@@ -875,8 +875,8 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
     title:          'Local Business AEO: What Changes When You Have a Physical Location',
     excerpt:        '59% of ChatGPT searches involve local intent. AI Overviews appear in 92–97% of local informational queries. Most local businesses have no strategy for appearing in those answers. Here is what actually works.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>A buyer in Delhi asks ChatGPT for the best biometric hardware supplier nearby. A homeowner asks Perplexity which plumber handles emergency callouts in their area. A patient asks Google AI Overviews which dental clinic takes walk-ins on weekends.</p>
@@ -959,8 +959,8 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
     title:          'AEO Content Gap Analysis: Finding What AI Is Answering Without You',
     excerpt:        'Traditional content gap analysis tells you which keywords your competitors rank for. AEO content gap analysis tells you which questions AI engines are answering with your competitors when you are the right source. The two processes are not the same.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Traditional content gap analysis tells you which keywords your competitors rank for that you do not. You export, filter, prioritise, and create. AEO content gap analysis asks a different question: which questions are AI engines answering with your competitors when you are the right source?</p>
@@ -1037,8 +1037,8 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
     title:          'AI Share of Voice: What It Is, How to Measure It, and What a Good Score Looks Like',
     excerpt:        'When buyers ask ChatGPT, Perplexity, or Claude about your category, how often does your brand appear compared to competitors? AI Share of Voice is the metric that answers that question, and the average brand mention rate across AI engines sits at just 17.2%.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>When buyers ask ChatGPT, Perplexity, or Claude about your category, how often does your brand appear compared to competitors? That question did not have a clean answer two years ago. In 2026 it does, and the metric is AI Share of Voice.</p>
@@ -1121,8 +1121,8 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
     title:          'Google AI Mode: The Technical AEO Guide Every SEO Needs in 2026',
     excerpt:        'AI Mode replaced the traditional results page entirely in May 2026. Only 14% of URLs cited in AI Mode overlap with AI Overview citations. Neither maps to traditional organic rankings. Here is exactly how the retrieval works and what you need to change.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Google AI Mode crossed one billion monthly users before Google I/O 2026 on May 19. At I/O, Google made it the default search experience globally, powered by Gemini 3.5 Flash. The traditional results page, with its ten blue links, no longer appears in AI Mode. You get cited or you get nothing.</p>
@@ -1197,8 +1197,8 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
     title:          'Entity-Based AEO: How AI Knowledge Graphs Decide Whether to Trust Your Brand',
     excerpt:        'AI engines do not retrieve content from domains. They retrieve content from entities they trust. Your brand is an entity in an AI knowledge graph, whether you have built it deliberately or not. Here is what that graph contains about you and how to fix it.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>AI engines do not retrieve content from domains. They retrieve content from entities they trust. Your brand, your products, your authors, and your topic coverage are all nodes in a knowledge graph that AI systems consult before deciding whether your content is worth citing.</p>
@@ -1267,7 +1267,7 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": "https://notioncue.com/about/#person",
-  "name": "Sudhir Singh",
+  "name": "Apurva Mishra",
   "jobTitle": "Senior SEO and AEO Specialist",
   "url": "https://notioncue.com/about",
   "sameAs": [
@@ -1325,8 +1325,8 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
     title:          'Topical Authority for AEO: How to Build Content Clusters That Get Cited Across AI Engines',
     excerpt:        'A site with thirty tightly interconnected articles on one subject gets cited far more often than a site with one comprehensive guide. This is how AI engines measure topical authority, and this is the architecture that builds it.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>A site with thirty tightly interconnected articles on one subject gets cited far more often than a site with one comprehensive guide and nothing else. Pages updated within the last two months earn an average of 5.0 AI citations versus 3.9 for pages older than two years, according to SE Ranking's 2026 data. But freshness alone does not explain the gap. The deeper variable is topical authority: how confidently an AI system can associate your domain with expertise on a specific subject area.</p>
@@ -1398,8 +1398,8 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
     title:          'E-E-A-T for AEO: The Trust Signals That Determine Whether AI Engines Cite You',
     excerpt:        '96% of AI Overview citations come from sources with strong E-E-A-T signals. The correlation between traditional domain authority and AI citation has collapsed to 0.18. Trust is now the primary eligibility filter for AI citation, and it works differently from how most teams build it.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>96% of AI Overview citations come from sources with strong E-E-A-T signals, per SatelliteAI's 2026 analysis of 10,000 cited pages. The correlation between traditional domain authority (DA) and AI citation has collapsed to just 0.18. A page ranked positions six through ten with strong E-E-A-T signals gets cited 2.3 times more often than a position-one page with weak authority signals, according to a Wellows analysis of 2,400 AI Overview citations.</p>
@@ -1470,8 +1470,8 @@ Sitemap: https://yourdomain.com/sitemap.xml</code></pre>
     title:          'How Perplexity Selects Sources: The Citation Algorithm Decoded',
     excerpt:        'Perplexity visits about 10 pages per query but only cites 3 to 4. It runs a six-stage RAG pipeline that most brands are not building for. This is what actually happens between your URL and a Perplexity citation.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Two websites publish nearly identical articles about the same topic on the same day. Same domain authority, similar writing quality, comparable backlink profiles. Three weeks later, one gets cited in Perplexity answers every few days. The other has zero citations.</p>
@@ -1536,8 +1536,8 @@ Allow: /</code></pre>
     title:          'ChatGPT Search AEO: How to Get Your Brand Cited in 2026',
     excerpt:        'ChatGPT retrieves pages for 85% of queries but only cites 15% of those pages. 32.9% of all cited pages were found through fan-out sub-queries with zero traditional search volume. Here is what that means for your content strategy.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>ChatGPT does not present a list of ranked pages. It retrieves candidates, evaluates them, and generates a synthesised answer citing only the pages that passed its selection criteria. An AirOps study analysing 548,534 pages across 15,000 prompts found that ChatGPT cites only 15% of the pages it retrieves. The other 85% are pulled into the process, scored, and discarded without ever appearing in the answer.</p>
@@ -1603,8 +1603,8 @@ Allow: /</code></pre>
     title:          'AEO for B2B SaaS: The Complete Guide to Winning AI Citations When Buyers Are Evaluating You',
     excerpt:        '51% of B2B software buyers now begin their research with an AI chatbot more often than with Google. That number was 29% in April 2025. If your brand is absent from those AI answers, you are invisible to the majority of your potential pipeline before they ever reach your website.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>51% of B2B software buyers now begin vendor research with an AI chatbot more often than with Google. That number was 29% in April 2025, a 22-point jump in twelve months, per G2's 2026 AI Search Insight Report covering 1,076 decision-makers across North America, EMEA, and APAC.</p>
@@ -1664,8 +1664,8 @@ Allow: /</code></pre>
     title:          'AEO Measurement: How to Track AI Visibility When Standard Analytics Shows Nothing',
     excerpt:        'Google Analytics still does not show which AI engine sent a visitor. GSC does not separate AI Mode from organic clicks. Most teams are flying blind on a channel that converts at 4x the rate of standard search. Here is how to actually measure AEO performance.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>AI-referred traffic converts at 4.4 times the rate of standard organic traffic, per Discovered Labs 2026 data. HubSpot reports 3x better conversion from leads coming from AEO. Cubitrek's 2026 client data puts the figure at 3 to 4 times standard search conversion rates across a six-month tracked sample.</p>
@@ -1731,8 +1731,8 @@ Allow: /</code></pre>
     title:          'What Is Answer Engine Optimisation (AEO)? The Complete 2026 Guide',
     excerpt:        '60% of US and EU searches now end without a click. ChatGPT processes 2.5 billion daily prompts. If you are still measuring search success only through rankings and organic traffic, you are measuring the wrong channel. This is what AEO is, how it works, and where to start.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>60% of US and EU searches now end without a click, driven by AI answers that satisfy the query before a user reaches any website. ChatGPT processes 2.5 billion daily prompts. Google AI Overviews appear in nearly 55% of all Google searches. Gartner predicts traditional search volume will drop 25% by 2026 as buyers shift to AI chatbots and voice assistants.</p>
@@ -1810,8 +1810,8 @@ Allow: /</code></pre>
     title:          'GEO vs AEO vs SEO: What Each Term Means and Which One Actually Matters',
     excerpt:        'Three terms. One goal. The industry cannot agree on what to call the practice of getting cited in AI-generated answers. Here is exactly what each term means, where they overlap, and which lens actually helps you build a better programme.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>If you have spent time in the AI search space in 2026, you have seen three terms used interchangeably, sometimes contradictorily, and occasionally as marketing vehicles: SEO, AEO, and GEO. Practitioners cannot agree on which one is correct. Vendors use whichever one fits their positioning. Job listings mix them in the same bullet point.</p>
@@ -1879,8 +1879,8 @@ Allow: /</code></pre>
     title:          'The AEO Audit Checklist: 27 Checks That Tell You Exactly Why AI Is Not Citing You',
     excerpt:        'Most AEO problems are not content problems. They are access problems, structure problems, or entity signal problems. This 27-point audit finds them in priority order, crawl issues first, content issues second, entity issues third.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Most AEO problems are not content problems. The team writes good content. They add FAQs. They research what competitors are ranking for. Months later, citation rate has not moved.</p>
@@ -1949,8 +1949,8 @@ Allow: /</code></pre>
     title:          'BLUF Writing for AI Citations: Why the First Sentence of Every Section Is Your Entire AEO Strategy',
     excerpt:        '44.2% of all AI citations come from the first 30% of a piece of content. The single highest-impact structural change in AEO is also the simplest: put the answer first. Here is exactly how to do it across every content type you publish.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>44.2% of all AI citations come from the first 30% of a piece of content, per SparkToro's 2026 citation analysis. The middle section produces 31.1%. The conclusion produces 24.7%.</p>
@@ -2015,8 +2015,8 @@ Allow: /</code></pre>
     title:          'AI Visibility Score: What It Measures, What a Good Score Looks Like, and How to Raise It',
     excerpt:        'The average brand appears in fewer than 1 in 5 AI answers on relevant queries. AI visibility score is the metric that tells you exactly where you sit, and the four levers that move it.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>The average brand appears in fewer than one in five AI answers on queries relevant to its category. That is the 17.2% average brand mention rate across all industries documented by AthenaHQ's State of AI Search 2026 report.</p>
@@ -2088,8 +2088,8 @@ Allow: /</code></pre>
     title:          'AEO for Ecommerce: How to Get Your Products Cited in AI Shopping Answers',
     excerpt:        'AI Overviews appear on 57% of long-tail, high-intent shopping queries. Over 60% of consumers now begin product research with an AI assistant. Traditional SEO got you to the category page. AEO gets you into the answer when a buyer asks which product to buy.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>AI Overviews appear on 57% of long-tail, high-intent ecommerce queries, exactly the queries where your product pages used to dominate. Over 60% of consumers now begin product research with an AI assistant before visiting any brand website. Shopify brands that built strong organic traffic on queries like "best collagen powder for women over 40" are watching that traffic collapse as AI answers the question directly, without sending the user anywhere.</p>
@@ -2156,8 +2156,8 @@ Allow: /</code></pre>
     title:          'Gemini AEO: How to Get Cited in Google AI Overviews and AI Mode in 2026',
     excerpt:        'Gemini powers both AI Overviews and AI Mode, the two surfaces that together appear on over 55% of all Google searches. Getting cited by Gemini is different from getting cited by ChatGPT or Perplexity. Here is exactly what Gemini prioritises and what you need to change.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Gemini powers two separate Google AI surfaces that most brands are tracking as one thing. AI Overviews appear above traditional organic results and still show blue links below. AI Mode replaces the results page entirely with a Gemini-powered conversation. They use the same underlying model but retrieve differently, surface in different query contexts, and require slightly different optimisation approaches.</p>
@@ -2225,8 +2225,8 @@ Allow: /</code></pre>
     title:          'AEO Keyword Research: How to Find the Prompts That Actually Drive AI Citations',
     excerpt:        '95% of the sub-queries that trigger AI citations have zero traditional search volume. Standard keyword research tools do not find them. Here is a different research method built specifically for AI search, and the prompt types that earn the most citations.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>95% of the sub-queries that trigger AI citations have zero traditional search volume, per AirOps' analysis of 548,534 pages across 15,000 prompts. Keyword research tools built for Google cannot find them. They do not exist in any keyword database because they are generated by AI retrieval systems during query fan-out, not typed into search boxes by humans.</p>
@@ -2283,8 +2283,8 @@ Allow: /</code></pre>
     title:          'The Zero-Click Economy: What AI Search Means for Your Brand When Nobody Clicks',
     excerpt:        '60% of searches now end without a click. AI Mode has a 93% zero-click rate. Traffic is not disappearing, it is being absorbed inside AI answers. The brands that thrive in a zero-click environment are not fighting it. They are building for it.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>60% of US and EU searches now end without a click. Google AI Mode's zero-click rate sits at approximately 93%. AI Overviews, which appear on 55% of all Google searches, drop the click-through rate on affected queries by roughly 47% compared to the same queries without AI summaries, per Pew Research tracking of 68,879 real searches.</p>
@@ -2348,8 +2348,8 @@ Allow: /</code></pre>
     title:          'AEO ROI: How to Prove the Value of AI Search Optimisation to Your Boss',
     excerpt:        'Enterprise teams that invested in AEO early saw 2 to 3x improvement in AI share of voice within 12 months, per McKinsey 2026 data. HubSpot\'s own AEO programme produced a 1,850% increase in qualified leads. The ROI is real. The problem is proving it with data your current analytics setup cannot easily produce.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Enterprise teams that invested in AEO early saw 2 to 3x improvement in AI share of voice within 12 months, per McKinsey's 2026 AI search analysis. HubSpot's own AEO programme produced a 1,850% increase in qualified leads. A SaaS brand tracked by AthenaHQ moved from 2% to 12.6% AI share of voice in 60 days through content restructuring and weekly prompt iteration.</p>
@@ -2418,8 +2418,8 @@ Allow: /</code></pre>
     title:          'Voice Search AEO: How to Get Your Brand Spoken by Siri, Alexa, and Google Assistant',
     excerpt:        'Voice queries now account for 27% of all searches. There are more voice assistants active globally than there are people on Earth, 8.4 billion devices. Voice returns exactly one answer. If it is not you, it is a competitor. Here is how to become the spoken answer.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Voice queries now account for 27% of all searches, more than double the rate of three years ago. There are 8.4 billion voice assistants active globally, more than the total human population. Around half of all US adults use voice search daily. Voice commerce is on pace to hit $80 billion globally by year-end 2026.</p>
@@ -2492,8 +2492,8 @@ Allow: /</code></pre>
     title:          'AEO for YMYL: Healthcare, Legal, and Finance Sites Face a Higher Citation Bar',
     excerpt:        '77.67% of legal queries trigger a Google AI Overview, the highest rate of any industry. Healthcare queries trigger AI Overviews 88% of the time. But the citation bar in YMYL sectors is significantly higher. Generic content gets blocked. Authoritative, credential-anchored content earns citations at a premium.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>YMYL stands for Your Money, Your Life, Google's classification for content that can materially affect a reader's health, finances, legal rights, or safety. Healthcare, legal, and finance are the three highest-volume YMYL verticals, and they also have the highest AI Overview trigger rates of any industry.</p>
@@ -2561,8 +2561,8 @@ Allow: /</code></pre>
     title:          'Best AEO Tools in 2026: An Independent Comparison for Practitioners',
     excerpt:        'The AEO tool market matured fast. Enterprise platforms like Profound, Conductor, and BrightEdge offer broad coverage but start at thousands per month. Lighter tools fill specific gaps. Here is how to match tool to use case without overspending on features you will not use.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>The AEO tool market did not exist three years ago. Today it has enterprise platforms backed by Sequoia Capital, bootstrapped monitoring tools, and a growing number of niche verticals players, all competing on engine coverage, attribution quality, and execution depth. Choosing between them is genuinely difficult because the features that matter depend heavily on your team size, budget, and what part of the AEO workflow you need most help with.</p>
@@ -2622,8 +2622,8 @@ Allow: /</code></pre>
     title:          'Speakable Schema: The Complete Implementation Guide for Voice Search and AI Citations',
     excerpt:        'Speakable schema is the only structured data type that explicitly tells Google which page sections to extract for text-to-speech. Most sites implement FAQPage and Article schema but skip Speakable entirely. Here is how to implement it correctly and why it matters beyond just voice search.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Speakable schema is the only structured data type that explicitly tells AI systems which sections of a page are suitable for text-to-speech reading. Every other schema type describes what a page is or what it contains. Speakable schema points to specific CSS selectors on the page and says: these sections are ready to be spoken aloud.</p>
@@ -2732,8 +2732,8 @@ Allow: /</code></pre>
     title:          'AEO for Agencies: How to Build a Multi-Client AI Search Programme That Scales',
     excerpt:        'Most agencies are being asked about AEO before they have a repeatable process for it. The brands winning the AI citation conversation with clients are not the ones with the most complex workflows, they are the ones with the clearest measurement framework and a consistent execution sequence.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Agency clients are asking about AEO before most agencies have a repeatable process for delivering it. The pressure is real: a client reads that 51% of B2B buyers start vendor research with AI, or that ChatGPT processes 2.5 billion daily prompts, and they want to know what their agency is doing about it.</p>
@@ -2797,8 +2797,8 @@ Allow: /</code></pre>
     title:          'HowTo Schema for AEO: Why Step-by-Step Content Gets Cited Differently',
     excerpt:        'Triple-schema stacking, FAQPage plus Article plus HowTo on one page, produces 1.8x more AI citations than Article schema alone. HowTo schema makes each step independently extractable. Here is the complete implementation with copy-paste JSON-LD.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Pages with three or more schema types are 13% more likely to earn AI citations than pages with no schema at all, per AirOps 2026 research. The highest-leverage combination is FAQPage plus Article plus HowTo, what practitioners call triple-schema stacking. This combination produces 1.8 times more citations than Article schema alone.</p>
@@ -2866,7 +2866,7 @@ Allow: /</code></pre>
       "author": {
         "@type": "Person",
         "@id": "https://notioncue.com/about/#person",
-        "name": "Sudhir Singh"
+        "name": "Apurva Mishra"
       },
       "publisher": {
         "@type": "Organization",
@@ -2945,8 +2945,8 @@ Allow: /</code></pre>
     title:          'Internal Linking for AEO: How Link Architecture Affects Which Pages AI Engines Cite',
     excerpt:        'Bidirectional internal linking increases AI citation probability by 2.7 times versus one-way links from pillar to spoke. The anchor text you use on internal links is a topical signal, not a housekeeping task. Here is the complete internal linking framework for AI search.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Bidirectional internal linking, spoke pages linking back to the pillar and to adjacent spokes, increases AI citation probability by 2.7 times compared to one-way links from pillar to spoke only. That figure comes from Yext's 2025 AI Citation Study, and it holds across categories.</p>
@@ -3018,8 +3018,8 @@ Allow: /</code></pre>
     title:          'Schema Errors That Kill AEO: How to Find Them and Fix Them Fast',
     excerpt:        'A broken schema block is ignored entirely by AI crawlers, not partially processed. A page with malformed FAQPage schema gets zero schema benefit, the same as a page with no schema. These are the ten errors that appear most often in AEO audits, with exact fixes.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Broken schema fails silently. You implement FAQPage JSON-LD, submit the URL for re-crawl, and wait for citation rate to improve. Four weeks later, nothing has changed. You check Google's Rich Results Test and it shows errors you never noticed. Every AI crawler has been ignoring your schema since day one.</p>
@@ -3062,7 +3062,7 @@ Allow: /</code></pre>
 <pre><code>"author": {
   "@type": "Person",
   "@id": "https://notioncue.com/about/#person",
-  "name": "Sudhir Singh",
+  "name": "Apurva Mishra",
   "url": "https://notioncue.com/about/"
 }</code></pre>
 <p>The <code>@id</code> here must match the <code>@id</code> on your Person schema exactly. Copy and paste it, do not retype it. A single character difference breaks the entity link.</p>
@@ -3109,8 +3109,8 @@ Allow: /</code></pre>
     title:          'AEO for Content Marketing Teams: The Weekly Workflow That Builds AI Citation Authority',
     excerpt:        'Most content teams add AEO to their backlog and treat it like a channel to launch. It does not work that way. AI citation authority is built through weekly iteration, not campaigns. Here is the workflow that fits into an existing content calendar without replacing it.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Most content teams treat AEO as a channel to launch. They run an audit, produce a batch of AEO-optimised content, publish it, and move on. Six weeks later the citation rate has barely moved and nobody knows why.</p>
@@ -3174,8 +3174,8 @@ Allow: /</code></pre>
     title:          'Agentic AI Search: What Happens When AI Agents Make Buying Decisions for Your Customers',
     excerpt:        'Harvard Business Review documented two concurrent revolutions in early 2026: the move from SEO to GEO, and AI agents beginning to act as buyers. Voice commerce is heading for $80 billion globally this year. The brands that appear when an AI agent evaluates a purchase will win customers the brand never directly interacted with.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Harvard Business Review documented two concurrent revolutions in early 2026: the shift from SEO to GEO, and AI agents beginning to act as buyers. The second one is moving faster than most marketers realise.</p>
@@ -3235,8 +3235,8 @@ Allow: /</code></pre>
     title:          'Microsoft Copilot AEO: How to Get Your Brand Cited in Bing\'s AI Engine',
     excerpt:        'Copilot converts at 17x the rate of direct traffic for subscription conversions, the highest conversion rate of any AI platform measured. It runs entirely on Bing\'s index, not Google\'s. If you have never opened Bing Webmaster Tools, Copilot cannot cite you. Here is the six-step fix.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Microsoft Copilot converts at 17 times the rate of direct traffic for subscription conversions. That is the highest conversion rate of any AI platform measured, per analysis by Austin Heaton across B2B client data from early 2026. AI referral traffic from Copilot grew 357% year-over-year, reaching 1.13 billion visits in June 2025. And Copilot is embedded across Windows, Edge, Bing, Word, Outlook, and Teams, which means a citation in Copilot reaches buyers inside the productivity tools where they actually make purchasing decisions.</p>
@@ -3300,8 +3300,8 @@ Allow: /</code></pre>
     title:          'Claude AEO: How to Get Your Brand Cited in Anthropic\'s AI',
     excerpt:        'Claude is more conservative than ChatGPT about which sources it cites, and more likely to simply decline when evidence feels thin. It uses Brave Search for web retrieval, not Bing or Google. It values original analysis over synthesis. Here is what that means in practice.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Claude is more conservative than ChatGPT about which sources it cites. When evidence feels thin, Claude will say so rather than constructing a confident-sounding answer from weak sources. When a page relies on secondary summaries rather than original analysis, Claude tends to skip it. When claims are not sourced, Claude treats them as unverifiable rather than giving the page the benefit of the doubt.</p>
@@ -3372,8 +3372,8 @@ Disallow: /</code></pre>
     title:          'AEO for News Publishers: How to Keep Your Journalism Cited in AI Search',
     excerpt:        'News publishers expect search traffic to drop 43% within three years, per Reuters Institute. AI Overviews are already cutting first-result CTR by 58%. The publishers maintaining visibility are not fighting AI, they are engineering their content to be the source AI cites. Here is how.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>News publishers expect search traffic to drop 43% within three years, per the Reuters Institute's 2026 survey of media organisations. Ahrefs tracked a 58% reduction in click-through rate to the first organic Google result across 300,000 queries after AI Overviews appeared. Global publisher traffic from Google dropped roughly one-third between November 2024 and November 2025.</p>
@@ -3460,8 +3460,8 @@ Disallow: /</code></pre>
     title:          'AEO for SaaS Documentation: Why Your Product Docs Are Your Best AI Citation Asset',
     excerpt:        'When a developer asks ChatGPT how to integrate with your API, ChatGPT retrieves from documentation, not from your marketing site. When a power user asks Perplexity about your product limits, Perplexity cites your docs. Product documentation is not a support cost, it is an AI citation surface that most SaaS teams have not optimised.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>When a developer asks ChatGPT how to integrate with your API, ChatGPT retrieves from documentation, not your marketing site. When a power user asks Perplexity about your product's rate limits, Perplexity cites your docs. When a prospective customer asks Claude whether your product integrates with their existing stack, Claude reads your integration pages.</p>
@@ -3524,8 +3524,8 @@ Disallow: /</code></pre>
     title:          'Video AEO: How YouTube Became the Highest-Cited Domain in AI Search',
     excerpt:        'YouTube is now cited 200 times more than any other video platform in AI-generated answers. Subscriber count and view count have near-zero correlation with AI citation rate. A 400-view explainer video with a clean transcript and VideoObject schema competes on exactly the same terms as a two-million-view video that has neither.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>YouTube is the most-cited domain in Google AI Overviews as of 2026. It is cited 200 times more than any other video platform in AI-generated answers across ChatGPT, Perplexity, and Google's AI surfaces. In an Ahrefs 2026 analysis of 75,000 brands, YouTube mentions correlated with AI engine visibility at r = 0.737, the strongest predictor in the dataset, stronger than backlinks and domain authority combined.</p>
@@ -3555,7 +3555,7 @@ Disallow: /</code></pre>
       "author": {
         "@type": "Person",
         "@id": "https://notioncue.com/about/#person",
-        "name": "Sudhir Singh"
+        "name": "Apurva Mishra"
       },
       "video": { "@id": "#main-video" }
     },
@@ -3623,8 +3623,8 @@ Disallow: /</code></pre>
     title:          'Reddit and Community AEO: Why 40% of AI Citations Come From Platforms You Don\'t Control',
     excerpt:        'Reddit accounts for roughly 40% of AI citations across ChatGPT, Gemini, and Claude, the single most-cited source in every major engine. Not your website. Not your blog. An anonymous forum. Here is what that means for your brand and what you can actually do about it.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Reddit accounts for roughly 40% of AI citations across ChatGPT, Gemini, and Claude, per the 5W AI Platform Citation Source Index 2026, an analysis of 680 million citations across five AI platforms. Not editorial news. Not Wikipedia. Not brand websites. Reddit, a forum where users argue anonymously, is the most-cited source in AI-generated answers.</p>
@@ -3692,8 +3692,8 @@ Disallow: /</code></pre>
     title:          'AEO for Startups: How to Earn AI Citations With Zero Domain Authority',
     excerpt:        'Traditional SEO requires six to twelve months of authority building before a new domain earns competitive rankings. AEO requires two to three hours of technical setup before you start appearing in AI answers. The overlap between AI citation sources and Google\'s top-ten results is only 12%. You do not need to beat established competitors at SEO to beat them at AEO.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Traditional SEO punishes new domains. A startup with a three-month-old website competes against brands with eight years of accumulated backlinks and domain authority. Getting to page one for a competitive keyword takes six to twelve months on a good trajectory. For most early-stage founders, "invest in SEO content" means waiting a year to know if it worked.</p>
@@ -3764,8 +3764,8 @@ Disallow: /</code></pre>
     title:          'First-Party Research and AEO: Why Original Data Is Your Highest-Value Citation Asset',
     excerpt:        'Adding inline citations to named sources improves AI visibility by up to 40%, per the Princeton GEO research paper. But being cited is even more valuable than citing others. Original data, benchmark studies, proprietary product analytics, customer survey findings, earns citations from AI engines that synthesised content from the same sources simply cannot compete with.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>The Princeton/Georgia Tech/Allen Institute GEO research paper documented that adding inline citations to named sources improves AI visibility by up to 40% for mid-ranked pages. That is a content strategy lever most AEO practitioners now know. What fewer brands have acted on is the flip side: being cited is more valuable than citing others.</p>
@@ -3830,8 +3830,8 @@ Disallow: /</code></pre>
     title:          'AEO for Fintech: Why Financial Content Faces a Higher Citation Bar (and How to Clear It)',
     excerpt:        'AI engines apply their most cautious citation patterns to financial content. A consumer-electronics brand earns citations through review density alone. A fintech brand needs regulatory credentials, named authors with verifiable qualifications, rate disclosures with effective dates, and methodology pages, before a citation is possible. Here is what that means for your content programme.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Financial content is YMYL, Your Money or Your Life. AI engines apply their highest caution to this tier. The training behind ChatGPT, Claude, Gemini, and Perplexity explicitly encodes the principle that financial recommendations carry real-world risk and therefore require a higher evidence bar before citation.</p>
@@ -3917,8 +3917,8 @@ Disallow: /</code></pre>
     title:          'Multilingual AEO: How to Earn AI Citations Across Languages and Markets',
     excerpt:        'AI engines bypass language barriers. Perplexity and Gemini pull facts from English-language sources and synthesise answers in French, German, or Portuguese in real time. Sites that only translate without localising lose 431% in AI citation eligibility against properly localised competitors. Hreflang is necessary but nowhere near sufficient.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>AI engines bypass language barriers in a way traditional search never did. Perplexity and Gemini can pull facts from an English-language source and synthesise a fluent answer in French, German, or Portuguese without the user ever visiting an English page. ChatGPT Search launched multilingual web retrieval on 31 October 2024. Perplexity has always done live multilingual retrieval. Claude added web search with multilingual capability in March 2025.</p>
@@ -3984,8 +3984,8 @@ Disallow: /</code></pre>
     title:          'AggregateRating and Review Schema for AEO: How Star Ratings Enter AI Citations',
     excerpt:        'A 10% increase in G2 reviews correlates with a 2% increase in AI citation rates, social proof signals are being processed directly by citation algorithms. For comparison queries like "best running shoes under £100," AggregateRating schema determines whether your product makes the AI\'s shortlist. Here is the exact implementation with zero common errors.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>A 10% increase in G2 reviews correlates with a 2% increase in AI citation rates for B2B software, per She Innovates AI's 2026 structured data analysis. Product comparison queries, "best CRM for a 10-person sales team," "top running shoes under £100," "highest-rated project management tool", pull directly from AggregateRating schema when generating shortlists. AI engines do not read the star rating on your page and infer a number. They read the machine-declared number in your schema and use it as a filter criterion.</p>
@@ -4082,8 +4082,8 @@ Disallow: /</code></pre>
     title:          'Podcast AEO: Why Your Audio Is Invisible to AI Engines (and the Fix Takes One Week)',
     excerpt:        'AI engines cannot listen to your podcast. They read transcripts, metadata, and schema. A show with 50,000 downloads per episode but no structured transcript earns zero AI citations. A show with 400 listeners and corrected HTML transcripts plus AudioObject schema competes directly for citation in ChatGPT, Perplexity, and Google AI Overviews. The fix installs in one week.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>AI engines cannot listen. They have no audio processing layer for live retrieval. A podcast episode with 50,000 downloads earns zero AI citations if the only thing published alongside it is an embedded audio player and a subscribe link. The audio itself is a closed box to AI retrieval systems, regardless of how good the content is inside it.</p>
@@ -4108,7 +4108,7 @@ Disallow: /</code></pre>
     {
       "@type": "PodcastEpisode",
       "@id": "https://notioncue.com/podcast/ep-12/#episode",
-      "name": "Sudhir Singh on AEO for SaaS: Citation Tracking from Zero",
+      "name": "Apurva Mishra on AEO for SaaS: Citation Tracking from Zero",
       "episodeNumber": 12,
       "partOfSeries": {
         "@type": "PodcastSeries",
@@ -4117,7 +4117,7 @@ Disallow: /</code></pre>
         "url": "https://notioncue.com/podcast/"
       },
       "datePublished": "2026-07-02",
-      "description": "NotionCue founder Sudhir Singh explains how B2B SaaS teams set up AEO citation tracking from scratch: prompt matrix design, Perplexity as the leading indicator, and why weekly tracking compounds faster than monthly sprints.",
+      "description": "NotionCue founder Apurva Mishra explains how B2B SaaS teams set up AEO citation tracking from scratch: prompt matrix design, Perplexity as the leading indicator, and why weekly tracking compounds faster than monthly sprints.",
       "associatedMedia": { "@id": "https://notioncue.com/podcast/ep-12/#audio" }
     },
     {
@@ -4184,8 +4184,8 @@ Disallow: /</code></pre>
     title:          'Image AEO: Alt Text, ImageObject Schema, and Visual AI Citations in 2026',
     excerpt:        'AI engines cannot see images. They read alt text, captions, surrounding paragraphs, and ImageObject schema. A product page with no alt text and no ImageObject schema is invisible in visual AI search, regardless of image quality. Here is the complete implementation that makes images citable.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>AI engines cannot see images. ChatGPT, Perplexity, and Claude do not have visual processing active during retrieval crawls, they read text. When an AI engine retrieves your product page to answer "best lightweight marathon shoes with carbon-fibre plates," it reads your alt text, your surrounding paragraph, and your ImageObject schema. If those are empty, generic, or absent, the image contributes nothing to the citation. The product might still be cited from your text description. The image itself is invisible.</p>
@@ -4285,8 +4285,8 @@ Disallow: /</code></pre>
     title:          'AEO for SaaS Help Centers: How to Turn Your Knowledge Base Into an AI Citation Machine',
     excerpt:        'Help center articles answer the exact questions buyers ask AI engines before making a purchase decision. "Does this tool support Salesforce?" "What is the file size limit?" "How do I migrate from Competitor X?" These are live queries running through ChatGPT and Perplexity right now. Your knowledge base either earns those citations, or your competitor does.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Help center articles answer the exact questions buyers ask AI engines before making a purchase decision. "Does this tool support Salesforce integration?" "What is the file export size limit?" "How do I migrate from Competitor X?" These are live queries running through ChatGPT and Perplexity right now, before the buyer has ever visited your marketing site.</p>
@@ -4354,8 +4354,8 @@ Disallow: /</code></pre>
     title:          'AEO for EdTech and E-Learning: How to Get Your Courses Cited by AI Engines',
     excerpt:        'When a learner asks ChatGPT "best online course for Python machine learning," AI engines pull from schema.org Course data, authoritative course review platforms, and educational institution signals. EdTech brands without Course schema and instructor E-E-A-T credentials are invisible in these answers. Here is the implementation that earns citations.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>When a learner asks ChatGPT "best online course for Python machine learning under $200," the AI engine is evaluating a YMYL-adjacent content type, educational recommendations that affect career and financial decisions. AI engines apply elevated scrutiny to educational content recommendations, similar to the elevated caution applied to healthcare and financial content.</p>
@@ -4377,8 +4377,8 @@ Disallow: /</code></pre>
   },
   "instructor": {
     "@type": "Person",
-    "name": "Sudhir Singh",
-    "jobTitle": "Senior SEO & AEO Specialist",
+    "name": "Apurva Mishra",
+    "jobTitle": "Marketing Manager",
     "url": "https://notioncue.com/about/",
     "sameAs": "https://linkedin.com/in/sudhir-ks"
   },
@@ -4460,8 +4460,8 @@ Disallow: /</code></pre>
     title:          'AEO Prompt Engineering: How to Write Test Prompts That Actually Measure AI Citation Performance',
     excerpt:        'Most AEO prompt sets are built wrong. Teams track branded queries ("What is [product]?") and miss the pre-purchase moments where AI engines are making buying decisions without the buyer ever typing a brand name. The prompts that matter are the ones buyers run before they know you exist. Here is how to build the right prompt set.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Most AEO prompt sets are built wrong. Teams set up citation tracking, fill it with branded queries, "What is NotionCue?" "What does NotionCue do?", and report a high citation rate because branded queries return branded answers. They miss the pre-purchase moments where AI engines are making buying decisions without the buyer ever typing a brand name.</p>
@@ -4529,8 +4529,8 @@ Disallow: /</code></pre>
     title:          'AEO Content Decay: How to Prevent the 13-Week Citation Cliff',
     excerpt:        'Half of all AI-cited content is under 13 weeks old. A page with zero quality change earns 3.2x more citations at day 14 than at day 91, purely because AI retrieval systems structurally favour recent content over older content. This is not a quality problem. It is a maintenance problem, and it has a systematic fix.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Half of all AI-cited content is under 13 weeks old. That figure appears consistently across independent studies, Amsive's analysis of 50,000 URLs, AuthorityTech's 2026 freshness report, and Radiant Elephant's synthesis of 17 million citations all converge on the same 13-week window as the peak AI citation eligibility zone.</p>
@@ -4602,8 +4602,8 @@ Disallow: /</code></pre>
     title:          'AEO for Affiliate and Comparison Sites: How to Stay Cited as AI Bypasses Your Category',
     excerpt:        'AI engines are the new comparison sites. A buyer asking "best CRM for a 10-person sales team" gets a synthesised shortlist directly in the AI answer, bypassing the affiliate roundup entirely. The affiliate and comparison sites still earning AI citations in 2026 are the ones AI engines trust as a source, not the ones they replace.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>AI engines are the new comparison sites. A buyer asking "best CRM for a 10-person sales team" gets a synthesised shortlist directly in the AI answer, bypassing the roundup article entirely. Traditional affiliate SEO built its entire model on that click. In 2026, the click often never happens because the buyer gets their recommendation inside the AI engine's answer.</p>
@@ -4693,8 +4693,8 @@ Disallow: /</code></pre>
     title:          'AEO A/B Testing: How to Measure Whether Content Changes Actually Improve Citation Rate',
     excerpt:        'Most AEO optimisation is based on best-practice implementation, not measured experiments. You add FAQPage schema and hope citations improve. You rewrite your opening paragraph and watch for weeks. Without a structured before-and-after test, you cannot separate improvement from coincidence, or know which specific change moved the number. Here is the AEO testing framework that generates actionable data.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Most AEO optimisation is based on best practice, not measured experiments. You add FAQPage schema because the guides say it improves citations. You rewrite your H2s with question format because the research recommends it. You update your dateModified and IndexNow-ping the page. Then you wait four weeks and look at citation rate, and you cannot tell whether the improvement (if any) came from the schema, the rewrite, the freshness update, or a competitor dropping out of the citation pool that week.</p>
@@ -4760,8 +4760,8 @@ Disallow: /</code></pre>
     title:          'AEO for Product Launches: How to Win the First-Citation Advantage Before Competitors',
     excerpt:        'AI citation patterns for a new product are established within the first 30 to 60 days of launch. The sources AI engines cite first, the announcement page, the press coverage, the community discussion, become the baseline that subsequent retrievals anchor to. Brands that engineer their launch content for AI citation before day one compound that advantage for months.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>AI citation patterns for a new product are established within the first 30 to 60 days of launch. The sources AI engines cite first, the announcement page, the press coverage, the first community discussions, become the baseline that subsequent retrievals anchor to. Press release citations grew fivefold between July and December 2025, with structured releases now accounting for up to 6% of AI citations, per rygr's February 2026 AEO analysis. Freshness is at its peak during a launch. AI engines bias heavily toward new content. The first-citation advantage is real, and most product launches waste it by optimising launch content for media coverage without any consideration for AI retrievability.</p>
@@ -4779,7 +4779,7 @@ Disallow: /</code></pre>
 <p><strong>BLUF opening paragraph.</strong> The first paragraph must directly answer "What is this product, who is it for, and what does it do?", in 40 to 60 words, without marketing language. "NotionCue AI Citation Tracker is a weekly citation monitoring tool for B2B SaaS marketing teams. It tracks brand mentions and citations across ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews, and shows which competitor sources are appearing for your target buyer queries." This paragraph is independently citable for branded queries without reading any other content on the page. The <a href="/blog/bluf-writing-technique-ai-citations-aeo">BLUF guide</a> covers the full writing method.</p>
 <p><strong>FAQPage schema with five launch-day questions.</strong> Before launch day, identify the five questions buyers will immediately ask about the new product. "How much does it cost?" "How does it compare to [main competitor]?" "How long does setup take?" "What AI engines does it track?" "Does it integrate with GA4?" Write direct answers to each in 40 to 60 words and add FAQPage schema. These FAQ entries are the first citable content for specific buyer questions that AI engines begin answering immediately after the page is indexed.</p>
 <p><strong>Product schema with complete fields.</strong> Every field in the Product schema is worth completing on launch day: name, description, offers (with price), aggregateRating if you have pre-launch beta feedback, brand, category. Incomplete Product schema is weaker than complete schema regardless of how good the page content is. AI engines evaluating a new product entity need complete machine-readable data to cite it confidently for product queries.</p>
-<p><strong>Named founder or product lead quote with Person schema.</strong> A launch announcement that includes a named quote from the founder or product lead, with Person schema on the author page connecting that individual to their professional credentials and to the company, earns higher E-E-A-T signals than a company-attributed announcement. "Sudhir Singh, founder of NotionCue, said..." attributed to a Person entity with a verifiable LinkedIn profile earns more citation confidence than "A spokesperson for NotionCue said..."</p>
+<p><strong>Named founder or product lead quote with Person schema.</strong> A launch announcement that includes a named quote from the founder or product lead, with Person schema on the author page connecting that individual to their professional credentials and to the company, earns higher E-E-A-T signals than a company-attributed announcement. "Apurva Mishra, founder of NotionCue, said..." attributed to a Person entity with a verifiable LinkedIn profile earns more citation confidence than "A spokesperson for NotionCue said..."</p>
 <p><strong>Specific outcome claim with named evidence.</strong> A launch announcement that includes one specific, verifiable outcome from beta testing, with a named methodology, a named sample, and a named timeframe, earns citations for outcome queries that generic product benefit claims cannot. "Beta users reported a 42% reduction in time spent manually checking AI citations per week, based on a 30-day survey of 87 users across B2B SaaS marketing teams" is citable. "Users save significant time" is not. The <a href="/blog/first-party-research-aeo-original-data-ai-citations">first-party research guide</a> covers how to structure this type of proprietary claim as a citable asset.</p>
 
 <h2>How Do You Structure Press Coverage for AI Citation?</h2>
@@ -4825,8 +4825,8 @@ Disallow: /</code></pre>
     title:          'How LLMs Choose Which Source to Cite: The RAG Pipeline Every AEO Practitioner Must Understand',
     excerpt:        'Your content does not compete at the level of pages. It competes at the level of 256-token chunks. A RAG system retrieves roughly 20 to 50 candidate passages, scores each against the query using vector similarity, reranks the top ten with a cross-encoder, and feeds the top three to five to the generator. Every AEO decision you make either helps or hurts your content at one of those stages.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Your content does not compete at the level of pages. It competes at the level of 256-token chunks. Understanding that single fact changes every AEO decision you make.</p>
@@ -4904,8 +4904,8 @@ Disallow: /</code></pre>
     title:          'Attention Mechanisms and Position Bias: The LLM Architecture That Explains Why BLUF Works',
     excerpt:        'The finding that 44.2% of AI citations come from the first 30% of a page is not a quirk of editorial preference. It is a structural consequence of how transformer attention accumulates across layers. The earliest tokens in a sequence accumulate computational advantage that grows with model depth. Every BLUF writing rule has a mechanistic explanation in the architecture.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>The finding that 44.2% of AI citations come from the first 30% of a page is not editorial preference. It is not a curating habit. It is a structural consequence of how transformer attention works, documented in peer-reviewed research since 2023 and formally explained in Wu et al.'s 2025 ICML paper using a graph-theoretic model of transformer computation.</p>
@@ -4976,8 +4976,8 @@ Disallow: /</code></pre>
     title:          'Parametric vs Retrieval Memory in LLMs: Why ChatGPT, Perplexity, and Claude Need Different AEO Strategies',
     excerpt:        '79% of ChatGPT responses draw from training weights, not live web search. Perplexity draws from live web retrieval on every query. Claude defaults to training data and uses search as a deliberate tool call. The AEO implication is direct: the same content change produces different citation outcomes on different engines, because each engine is a different kind of memory system.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>79% of ChatGPT responses draw from training weights rather than live web search. That figure, from Metricus's April 2026 analysis of ChatGPT's response patterns, is the most important number in engine-specific AEO strategy, and most practitioners have never heard it.</p>
@@ -5047,8 +5047,8 @@ Disallow: /</code></pre>
     title:          'Entity Disambiguation in LLMs: Why Consistent Naming Is an AEO Technical Requirement',
     excerpt:        'When your product is called "NotionCue Prompt Tracker" on your website, "Prompt Tracking Tool" on G2, and "the tracker" in your blog posts, AI engines are processing three different entity candidates. They may merge them correctly or may not. Inconsistent naming is not a branding problem. It is an entity resolution failure that reduces citation confidence across every engine simultaneously.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>When your product is called "NotionCue Prompt Tracker" on your website, "Prompt Tracking Tool" on G2, "the tracker" in your blog posts, and "NotionCue's citation monitoring feature" in a Reddit thread, AI engines face a genuine computational problem: are these four strings referring to the same entity?</p>
@@ -5120,8 +5120,8 @@ Disallow: /</code></pre>
     title:          'Google AI Overview: How to Get Cited in 2026 (Complete Ranking Factors Guide)',
     excerpt:        'AI Overviews now appear on roughly 25% of all Google searches. Organic click-through rate drops 61% when one appears above your result. But pages cited inside the Overview earn 35% more organic clicks and 91% more paid clicks than competitors left out. Getting cited is no longer optional. Here is exactly what determines whether you make it in.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>AI Overviews now appear on roughly 25% of all Google searches, up from 13% in March 2025, per Conductor's 2026 benchmarks based on 21.9 million queries. Organic click-through rate on the page below an Overview drops 61% on average. But the pages cited inside the Overview itself earn 35% more organic clicks and 91% more paid clicks than competitors who are not cited (Search Engine Land, 2025). The traffic has not disappeared. It has consolidated into a smaller number of winners.</p>
@@ -5190,8 +5190,8 @@ Disallow: /</code></pre>
     title:          'What Is GEO? The Complete Guide to Generative Engine Optimization in 2026',
     excerpt:        'GEO is not a marketing buzzword someone invented to sell a course. It is a peer-reviewed academic discipline, formalised in a 2024 paper by researchers at Princeton, Georgia Tech, the Allen Institute for AI, and IIT Delhi, who tested nine content strategies across 10,000 queries and measured the exact visibility lift each one produced. The headline finding: targeted optimization can improve AI visibility by up to 40%.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>GEO is not a marketing buzzword someone invented to sell a course. It is a peer-reviewed academic discipline. Pranjal Aggarwal, Vishvak Murahari, Tanmay Rajpurohit, Ashwin Kalyan, Karthik Narasimhan, and Ameet Deshpande published "GEO: Generative Engine Optimization" at the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '24) in Barcelona. The authors came from Princeton, Georgia Tech, the Allen Institute for AI, and IIT Delhi. They built a benchmark called GEO-bench, 10,000 queries spanning nine domains, and tested nine distinct content optimisation strategies against it, measuring the exact visibility lift each one produced using a metric called Position-Adjusted Word Count.</p>
@@ -5260,8 +5260,8 @@ Disallow: /</code></pre>
     title:          'ChatGPT SEO: How to Rank, Get Cited, and Drive Traffic From ChatGPT in 2026',
     excerpt:        'ChatGPT handles over 2.5 billion messages a day. There is no position one. There is no SERP. Either your brand is in the generated answer, or it is invisible to that conversation entirely. ChatGPT SEO is the discipline of earning that inclusion, and it runs on different rules from the SEO playbook most marketers already know.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>ChatGPT handles over 2.5 billion messages a day. There is no position one to fight for and no results page to track. When someone asks for a tool recommendation or wants to know who the leading providers are in a category, ChatGPT generates a response, and your brand either appears in it or it does not. A growing share of users who get a recommendation from ChatGPT never go back to Google to verify it, the AI's top pick becomes the user's top pick 74% of the time, per Growth Memo's April 2026 data.</p>
@@ -5324,8 +5324,8 @@ Disallow: /</code></pre>
     title:          'How to Rank in ChatGPT: A Simple Step-by-Step Guide for Any Business',
     excerpt:        'A founder asked a caller where they heard about the company. "ChatGPT," the caller said. The founder had never optimised for it on purpose. That story repeats across thousands of small businesses right now. You do not need an agency or a six-figure budget to start showing up. You need about a week of focused work and a clear understanding of what ChatGPT actually rewards.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>A marketing agency owner ended a sales call and, out of habit, asked the new lead where they had heard about the company. "ChatGPT," the caller said. The owner had never done anything specific to get there. It just happened, because the agency's website happened to have the kind of content that ChatGPT could read and trust.</p>
@@ -5401,8 +5401,8 @@ Disallow: /</code></pre>
     title:          'Brand Mentions in AI Search: Why Unlinked Mentions Now Outweigh Backlinks',
     excerpt:        'Ahrefs studied 75,000 brands and found that web mentions correlate with AI Overview visibility at 0.664. Backlinks correlate at just 0.218. A mention with no hyperlink attached carries roughly three times the predictive weight of a traditional do-follow link. This single finding rewrites two decades of digital PR strategy.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Ahrefs studied 75,000 brands in early 2026 and found that web mentions correlate with AI Overview brand visibility at 0.664 on the Spearman scale. Backlinks correlate at 0.218. A mention with no hyperlink attached carries roughly three times the predictive weight of a traditional do-follow link, and the top three correlating factors in the entire study were all off-site: brand web mentions, brand anchors, and brand search volume.</p>
@@ -5470,8 +5470,8 @@ Disallow: /</code></pre>
     title:          'AI Search vs Traditional Search: Is SEO Dead in 2026, or Just Different?',
     excerpt:        'SparkToro\'s clickstream data shows 68.01% of US Google searches now end without a single click, up from 60.45% just two years ago. Yet brands cited inside an AI-generated answer earn 35% more organic clicks than competitors who are not cited. SEO is not dying. The version built entirely on collecting clicks from ranked links is the part that is dying.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>SparkToro's clickstream analysis, using Similarweb panel data across January through April 2026, found that 68.01% of US Google searches ended without a single click to any website. That figure was 60.45% just two years earlier, a 7.56 percentage point jump in 24 months. Of every 1,000 searches run on Google, only around 360 result in a click to the open web. The rest end on the results page itself, trigger another search, or are abandoned entirely.</p>
@@ -5538,8 +5538,8 @@ Disallow: /</code></pre>
     title:          'Schema Markup for AI Search: The Complete 2026 Guide to Every Type That Matters',
     excerpt:        'Ahrefs studied 863,000 keyword SERPs and four million AI Overview URLs in February 2026 and found that only 38% of cited pages now rank in the traditional top 10, down from 76% in mid-2025. Pages without traditional ranking authority can still win citations if they are structured cleanly enough for AI extraction. Schema markup is the cleanest structuring tool available, and this is the single guide that ties every type together.',
     read:           '12 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Ahrefs studied 863,000 keyword SERPs and four million AI Overview URLs in February 2026. The headline finding: only 38% of cited pages now rank in the traditional top 10, down from 76% in mid-2025. Domain authority alone no longer predicts AI citation the way it once predicted ranking. What increasingly predicts citation is whether a page is structured cleanly enough for an AI system to extract its meaning with confidence, and schema markup is the single most direct, controllable lever for that structuring.</p>
@@ -5607,8 +5607,8 @@ Disallow: /</code></pre>
     title:          'AI Search Referral Traffic: How to Track ChatGPT, Perplexity, and Gemini Visits in GA4',
     excerpt:        'On May 13, 2026, Google quietly shipped a native AI Assistant channel into GA4. Before that date, the overwhelming majority of properties were systematically under-counting AI-originated visits by 30 to 40%, lumping ChatGPT and Perplexity sessions into Direct or generic Referral traffic. The native fix helps. It is not the whole solution, and AI referral traffic converts 4.4 times higher than standard organic, which makes getting this measurement right a budget-allocation problem, not a reporting nicety.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>On May 13, 2026, Google shipped a native "AI Assistant" channel into GA4's Default Channel Group. When an incoming session carries a referrer matching a recognised AI domain, GA4 now automatically tags it with a medium of <code>ai-assistant</code> and routes it into its own row in the standard acquisition reports, no custom configuration required. Before that date, Conductor's November 2025 attribution study found that 89% of brands could not properly attribute their AI referral traffic at all, with the median property under-counting AI-originated sessions by 30 to 40% against the actual volume, according to Trakkr.ai's benchmark across more than 4,025 GA4 properties.</p>
@@ -5673,8 +5673,8 @@ Disallow: /</code></pre>
     title:          'Vector Embeddings for AEO: How Cosine Similarity Decides Whether AI Cites You',
     excerpt:        'ChatGPT Search converts each 128-token chunk into a numerical vector and scores it against the query vector using cosine similarity, completing the entire scoring pass across every candidate chunk in 100 to 200 milliseconds. That single comparison, run at GPU speed across thousands of chunks, is the moment your content either enters the answer or gets discarded. Understanding the math changes how you write.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Rankly's reverse-engineering of ChatGPT Search's internal pipeline documented the exact moment your content lives or dies. Once ChatGPT decides a web search is needed, a specialised orchestrator model fetches candidate pages, splits them into 128-token chunks, and runs each chunk through a GPU-accelerated embedding model. Every chunk becomes a numerical vector. The query becomes a vector too. The system then scores every chunk against the query using cosine similarity, and completes that entire comparison, across every candidate chunk pulled from every fetched source, in roughly 100 to 200 milliseconds.</p>
@@ -5739,8 +5739,8 @@ Disallow: /</code></pre>
     title:          'Canonical Tags for AI Search: Why Your Own Content Might Be Losing Citations to Itself',
     excerpt:        'Microsoft Bing confirmed officially in December 2025 that large language models group near-duplicate URLs and select a single representative page to cite. If your page is not chosen as that representative version, Bing\'s own documentation states plainly that it is unlikely to be cited or summarised in AI-generated answers at all. A canonical tag is your only lever over which version wins, and it is a weaker lever than most teams assume.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Microsoft's Bing Webmaster Blog confirmed officially in December 2025 that large language models group near-duplicate URLs and select a single representative page to cite. The second official fact in that same confirmation is the one that should worry every publisher with syndicated content: if a page is not chosen as the primary version, it is unlikely to be cited or summarised in AI-generated answers at all. Not partially cited. Not cited with reduced weight. Excluded, in binary fashion, in favour of whichever version the clustering system selected instead.</p>
@@ -5803,8 +5803,8 @@ Disallow: /</code></pre>
     title:          'SSR vs CSR for AI Crawlers: Why Your React App Might Be Invisible to Every AI Engine Except Google',
     excerpt:        'Vercel analysed over 500 million GPTBot fetches and found zero evidence of JavaScript execution. None. GPTBot, ClaudeBot, and PerplexityBot download your raw HTML, extract whatever text is already there, and move on immediately. If your content only exists after a client-side JavaScript bundle finishes running, every one of these crawlers sees an empty shell, while Google, using headless Chrome, sees your site perfectly.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Vercel's own infrastructure team analysed AI crawler behaviour across the traffic passing through its network and confirmed a finding independently replicated by Passionfruit's analysis of more than 500 million GPTBot fetches specifically: zero evidence of JavaScript execution. Not partial execution. Not execution with a timeout. None at all, across every major AI crawler measured, GPTBot, ClaudeBot, PerplexityBot, Meta's ExternalAgent, and ByteDance's Bytespider all download the initial HTML response and process only what is already present in it.</p>
@@ -5868,8 +5868,8 @@ Disallow: /</code></pre>
     title:          'Log File Analysis for AI Crawlers: What Your Server Logs Reveal That No Dashboard Can',
     excerpt:        'A 30-day study across twelve production sites found GPTBot revisits high-traffic pages roughly every 2.4 days, ClaudeBot every 6.8 days, and Google-Extended every 14 days on a near-metronomic schedule. Google Analytics shows none of this activity, because AI crawlers do not execute the JavaScript that GA4 depends on to register a visit. The only place this behaviour is visible at all is in your raw server access logs.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>A 30-day log study across twelve production sites, four B2B SaaS properties, three ecommerce stores, three agency sites, and two publishers, ranging from 380 to roughly 48,000 indexed pages, tracked eleven canonical AI user-agents against a Googlebot baseline for a full month. The revisit cadence that emerged was consistent enough across every vertical in the study to be treated as a planning input, not just an observation: GPTBot revisits high-traffic pages roughly every 2.4 days, ClaudeBot every 6.8 days, and Google-Extended on an almost metronomic 14-day cycle. PerplexityBot and ChatGPT-User, by contrast, follow no fixed schedule at all, they fetch a given page only when an actual live user query triggers that specific retrieval.</p>
@@ -5929,8 +5929,8 @@ Disallow: /</code></pre>
     title:          'AI Content Licensing in 2026: Why Most Publishers Will Never See a Deal, and What to Do Instead',
     excerpt:        'News Corp reportedly earns around $50 million per year across its portfolio for licensing content to AI companies. OpenAI has struck at least 18 disclosed publisher deals. But the entire licensing market, by structural necessity, pays only the brand-name corpus with genuine negotiating leverage, and every serious 2026 industry analysis concludes the long tail of small and mid-size publishers will see no meaningful revenue from this at all.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>News Corp's licensing arrangement reportedly averages around $50 million per year across its portfolio of the Wall Street Journal, New York Post, and its global titles. Wiley has disclosed more than $44 million across multiple separate AI licensing agreements. Reddit's combined API licensing revenue from Google and OpenAI sits near $130 million a year. These are the headline numbers that generate coverage every time a new deal is announced, and they create a reasonable but mistaken impression among smaller publishers that a similar deal might eventually be within reach for them too.</p>
@@ -5987,8 +5987,8 @@ Disallow: /</code></pre>
     title:          'Is Your Website Agent-Ready? The Complete Technical Guide for 2026',
     excerpt:        'Agent-readiness audits now score sites from 0 to 100 across five categories and sixteen checks — Discoverability, Content, Bot Access Control, API/Auth/MCP/Skill Discovery, and Commerce. Most sites score under 30. This is the complete tutorial: what each check actually tests, why it matters, and exactly how to fix it, with working code for every single item.',
     read:           '22 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>A new category of website audit emerged in early 2026: the agent-readiness score. Unlike a traditional SEO audit, which checks whether your site ranks well and reads clearly to a human visitor, an agent-readiness audit asks a different question entirely — can an autonomous AI agent discover what your site offers, authenticate against your systems, call your tools, and in some cases transact with you, all without a human clicking through a browser session?</p>
@@ -6238,8 +6238,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Google\'s Generative AI Optimization Guide, Explained: What to Ignore and What Still Matters',
     excerpt:        'On May 15, 2026, Google published its first official, consolidated guide to optimizing for AI Overviews and AI Mode. It tells site owners to stop worrying about llms.txt, content chunking, and AI-specific rewriting. It does not say AEO or GEO work is pointless. Here is exactly what the guide says, section by section, and what it means for a real content programme.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>On May 15, 2026, Google published "Optimizing your website for generative AI features on Google Search" under a brand-new "Generative AI fundamentals" section of Search Central. It is the company's first consolidated, on-record statement about what actually works for visibility inside AI Overviews and AI Mode, consolidating positions that had previously been scattered across conference talks, podcast appearances, and blog posts into one reference document. It has been updated as recently as June 29, 2026, meaning Google is actively treating it as a living document, not a one-time announcement.</p>
@@ -6305,8 +6305,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'How to Vet an AEO Vendor: Google\'s Own Framework for Evaluating Third-Party AI Search Advice',
     excerpt:        'On June 5, 2026, Google updated its Search Central documentation to formally name AEO and GEO as legitimate SEO services, and, in the same set of pages, published a public framework for auditing whether a vendor selling those services is credible. It is a genuinely useful accountability tool, whether you are hiring an agency or evaluating your own internal AEO programme.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>On June 5, 2026, Google did two things in the same documentation update. It published a new page, "Google Search's guidance on using third-party SEO tools, services, and advice," and it updated the long-standing "Do you need an SEO?" page with new questions specifically about evaluating AI-search-focused advice. Together, these amount to Google formally naming AEO and GEO as recognisable categories of SEO service — three weeks after the May 15 guide that some read as dismissing the entire premise of AEO and GEO as distinct disciplines.</p>
@@ -6364,8 +6364,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'FAQ Rich Results Are Gone From Google Search. Is FAQPage Schema Still Worth Implementing?',
     excerpt:        'As of May 7, 2026, FAQ rich results no longer appear anywhere in Google Search, for any site, in any query type or language. This followed the earlier 2023 restriction that had already limited the feature to a narrow set of government and health properties. Yes, this changes the calculation. No, it does not mean you should delete your FAQPage schema.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>As of May 7, 2026, FAQ rich results no longer appear in Google Search at all, for any site, query type, or language, following a deprecation notice added to Google's FAQ rich result documentation. This is the second and final step in a retreat that began in 2023, when Google first restricted the visible FAQ snippet — the expandable question-and-answer accordion that used to appear directly in search results for a huge range of sites — down to a narrow set of government and health properties. That earlier restriction already eliminated most of the SERP real estate FAQPage schema had originally been implemented to capture. The May 2026 update removes it entirely, for every site, everywhere.</p>
@@ -6424,8 +6424,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Query Fan-Out: Google\'s Own Explanation of How AI Overviews Actually Find Your Content',
     excerpt:        'Google\'s own May 2026 documentation confirms, in plain language, that AI Overviews and AI Mode issue multiple related searches across subtopics and data sources before generating a single response. This is why a page that ranks fifth for a broad query, but contains one exceptionally specific paragraph, can still earn a citation the broad-query ranking alone would never predict.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Google's own "AI features and your website" documentation states it directly: "Both AI Overviews and AI Mode may use a 'query fan-out' technique — issuing multiple related searches across subtopics and data sources — to develop a response." This is not third-party speculation about Google's internal architecture. It is Google's own, on-record description of the mechanism that determines whether and how your content gets pulled into a generated answer.</p>
@@ -6484,8 +6484,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Non-Commodity Content: What Google Actually Means by "Content Only You Can Write"',
     excerpt:        'Google\'s May 2026 generative AI guide states directly that unique, compelling, useful content will influence AI search visibility more than any other single recommendation in the document. It calls the opposite of this "commodity content" — and in a world where any competitor can generate a competent generic article in seconds, that distinction has become the entire game.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Buried in the technical detail of Google's May 2026 generative AI optimization guide is a claim the company states with unusual directness: "Creating content that people find unique, compelling, and useful will likely influence your website's presence in generative AI search in the long run more than any of the other suggestions in this guide." That is Google explicitly ranking its own advice, and putting content originality above every technical and structural recommendation elsewhere in the same document — above schema, above crawlability configuration, above anything covered in the rest of this series' technical guides.</p>
@@ -6544,8 +6544,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'The EU AI Act\'s August 2, 2026 Deadline: What Marketing and Content Teams Actually Need to Do',
     excerpt:        'Three separate EU AI Act enforcement mechanisms activate simultaneously on August 2, 2026. This is not primarily a concern for AI model builders. If your team uses generative AI tools to produce marketing content, tracks AI citations, or operates in the EU market at all, several of these obligations reach directly into ordinary content and marketing operations.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>August 2, 2026 is the single most consequential date remaining on the EU AI Act's rollout calendar. Three separate enforcement mechanisms activate simultaneously on that date, and while most coverage of the Act focuses on the obligations facing AI model developers like OpenAI, Anthropic, and Google, a meaningful subset of the provisions reach directly into how ordinary marketing and content teams operate — particularly teams using generative AI tools in their production workflow, or teams whose content touches the EU market at all, regardless of where the company itself is headquartered.</p>
@@ -6604,8 +6604,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'AI Content Labeling in 2026: What the EU, India, and a Growing List of Countries Now Require',
     excerpt:        'The EU\'s Article 50 marking rules take effect August 2, 2026. India\'s IT Rules amendment, defining and regulating "synthetically generated information," has been in force since February 20, 2026, with a strict three-hour takedown window. If your content team publishes AI-assisted material across multiple markets, the labeling rules are no longer the same everywhere, and treating them as one global standard is a mistake.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Two of the world's largest internet markets adopted meaningfully different AI content labeling frameworks within months of each other in early 2026. The European Union's Article 50 transparency obligations, part of the broader AI Act, become enforceable on August 2, 2026. India's Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Amendment Rules, 2026, introducing a formally defined category called Synthetically Generated Information, took effect on February 20, 2026 — already in force for several months by the time the EU's rules activate.</p>
@@ -6664,8 +6664,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Global AI Regulation in 2026: A Practical Guide for Content and Marketing Teams Operating Across Borders',
     excerpt:        'Seventy-two countries now have some form of AI policy, according to OECD tracking. All fifty US states have introduced AI legislation. South Korea and Japan enacted dedicated AI laws in 2025. This is not a single global trend converging on one standard. It is a genuinely fragmented landscape, and a content team operating across three or more major markets is already, in practice, operating under three or more different sets of expectations.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>The era of debating whether AI needs regulation at all is over, and has been for some time. What remains genuinely unsettled, and what actually matters for a content or marketing team operating internationally, is that no single regulatory model has emerged as the global default. The EU AI Act remains the world's only comprehensive, risk-based AI regulation with binding, meaningfully enforced penalties. The United States has no equivalent federal law at all, and instead features a fifty-state legislative patchwork moving at a genuinely rapid pace alongside a deregulation-leaning executive branch. India, China, South Korea, and Japan have each taken structurally distinct approaches reflecting different regulatory philosophies and different priorities entirely.</p>
@@ -6725,8 +6725,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Google\'s Generative AI Optimization Guide, Explained: What to Ignore and What Still Matters',
     excerpt:        'On May 15, 2026, Google published its first official, consolidated guide to optimizing for AI Overviews and AI Mode. It tells site owners to stop worrying about llms.txt, content chunking, and AI-specific rewriting. It does not say AEO or GEO work is pointless. Here is exactly what the guide says, section by section, and what it means for a real content programme.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>On May 15, 2026, Google published "Optimizing your website for generative AI features on Google Search" under a brand-new "Generative AI fundamentals" section of Search Central. It is the company's first consolidated, on-record statement about what actually works for visibility inside AI Overviews and AI Mode, consolidating positions that had previously been scattered across conference talks, podcast appearances, and blog posts into one reference document. It has been updated as recently as June 29, 2026, meaning Google is actively treating it as a living document, not a one-time announcement.</p>
@@ -6792,8 +6792,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'How to Vet an AEO Vendor: Google\'s Own Framework for Evaluating Third-Party AI Search Advice',
     excerpt:        'On June 5, 2026, Google updated its Search Central documentation to formally name AEO and GEO as legitimate SEO services, and, in the same set of pages, published a public framework for auditing whether a vendor selling those services is credible. It is a genuinely useful accountability tool, whether you are hiring an agency or evaluating your own internal AEO programme.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>On June 5, 2026, Google did two things in the same documentation update. It published a new page, "Google Search's guidance on using third-party SEO tools, services, and advice," and it updated the long-standing "Do you need an SEO?" page with new questions specifically about evaluating AI-search-focused advice. Together, these amount to Google formally naming AEO and GEO as recognisable categories of SEO service — three weeks after the May 15 guide that some read as dismissing the entire premise of AEO and GEO as distinct disciplines.</p>
@@ -6851,8 +6851,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'FAQ Rich Results Are Gone From Google Search. Is FAQPage Schema Still Worth Implementing?',
     excerpt:        'As of May 7, 2026, FAQ rich results no longer appear anywhere in Google Search, for any site, in any query type or language. This followed the earlier 2023 restriction that had already limited the feature to a narrow set of government and health properties. Yes, this changes the calculation. No, it does not mean you should delete your FAQPage schema.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>As of May 7, 2026, FAQ rich results no longer appear in Google Search at all, for any site, query type, or language, following a deprecation notice added to Google's FAQ rich result documentation. This is the second and final step in a retreat that began in 2023, when Google first restricted the visible FAQ snippet — the expandable question-and-answer accordion that used to appear directly in search results for a huge range of sites — down to a narrow set of government and health properties. That earlier restriction already eliminated most of the SERP real estate FAQPage schema had originally been implemented to capture. The May 2026 update removes it entirely, for every site, everywhere.</p>
@@ -6911,8 +6911,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Query Fan-Out: Google\'s Own Explanation of How AI Overviews Actually Find Your Content',
     excerpt:        'Google\'s own May 2026 documentation confirms, in plain language, that AI Overviews and AI Mode issue multiple related searches across subtopics and data sources before generating a single response. This is why a page that ranks fifth for a broad query, but contains one exceptionally specific paragraph, can still earn a citation the broad-query ranking alone would never predict.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Google's own "AI features and your website" documentation states it directly: "Both AI Overviews and AI Mode may use a 'query fan-out' technique — issuing multiple related searches across subtopics and data sources — to develop a response." This is not third-party speculation about Google's internal architecture. It is Google's own, on-record description of the mechanism that determines whether and how your content gets pulled into a generated answer.</p>
@@ -6971,8 +6971,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Non-Commodity Content: What Google Actually Means by "Content Only You Can Write"',
     excerpt:        'Google\'s May 2026 generative AI guide states directly that unique, compelling, useful content will influence AI search visibility more than any other single recommendation in the document. It calls the opposite of this "commodity content" — and in a world where any competitor can generate a competent generic article in seconds, that distinction has become the entire game.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Buried in the technical detail of Google's May 2026 generative AI optimization guide is a claim the company states with unusual directness: "Creating content that people find unique, compelling, and useful will likely influence your website's presence in generative AI search in the long run more than any of the other suggestions in this guide." That is Google explicitly ranking its own advice, and putting content originality above every technical and structural recommendation elsewhere in the same document — above schema, above crawlability configuration, above anything covered in the rest of this series' technical guides.</p>
@@ -7031,8 +7031,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'The EU AI Act\'s August 2, 2026 Deadline: What Marketing and Content Teams Actually Need to Do',
     excerpt:        'Three separate EU AI Act enforcement mechanisms activate simultaneously on August 2, 2026. This is not primarily a concern for AI model builders. If your team uses generative AI tools to produce marketing content, tracks AI citations, or operates in the EU market at all, several of these obligations reach directly into ordinary content and marketing operations.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>August 2, 2026 is the single most consequential date remaining on the EU AI Act's rollout calendar. Three separate enforcement mechanisms activate simultaneously on that date, and while most coverage of the Act focuses on the obligations facing AI model developers like OpenAI, Anthropic, and Google, a meaningful subset of the provisions reach directly into how ordinary marketing and content teams operate — particularly teams using generative AI tools in their production workflow, or teams whose content touches the EU market at all, regardless of where the company itself is headquartered.</p>
@@ -7091,8 +7091,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'AI Content Labeling in 2026: What the EU, India, and a Growing List of Countries Now Require',
     excerpt:        'The EU\'s Article 50 marking rules take effect August 2, 2026. India\'s IT Rules amendment, defining and regulating "synthetically generated information," has been in force since February 20, 2026, with a strict three-hour takedown window. If your content team publishes AI-assisted material across multiple markets, the labeling rules are no longer the same everywhere, and treating them as one global standard is a mistake.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Two of the world's largest internet markets adopted meaningfully different AI content labeling frameworks within months of each other in early 2026. The European Union's Article 50 transparency obligations, part of the broader AI Act, become enforceable on August 2, 2026. India's Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Amendment Rules, 2026, introducing a formally defined category called Synthetically Generated Information, took effect on February 20, 2026 — already in force for several months by the time the EU's rules activate.</p>
@@ -7151,8 +7151,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Global AI Regulation in 2026: A Practical Guide for Content and Marketing Teams Operating Across Borders',
     excerpt:        'Seventy-two countries now have some form of AI policy, according to OECD tracking. All fifty US states have introduced AI legislation. South Korea and Japan enacted dedicated AI laws in 2025. This is not a single global trend converging on one standard. It is a genuinely fragmented landscape, and a content team operating across three or more major markets is already, in practice, operating under three or more different sets of expectations.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>The era of debating whether AI needs regulation at all is over, and has been for some time. What remains genuinely unsettled, and what actually matters for a content or marketing team operating internationally, is that no single regulatory model has emerged as the global default. The EU AI Act remains the world's only comprehensive, risk-based AI regulation with binding, meaningfully enforced penalties. The United States has no equivalent federal law at all, and instead features a fifty-state legislative patchwork moving at a genuinely rapid pace alongside a deregulation-leaning executive branch. India, China, South Korea, and Japan have each taken structurally distinct approaches reflecting different regulatory philosophies and different priorities entirely.</p>
@@ -7211,8 +7211,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Google Preferred Sources Is Now Inside AI Overviews and AI Mode. Here Is What That Actually Changes.',
     excerpt:        'On May 27, 2026, Google extended its Preferred Sources feature — previously confined to Top Stories — into AI Overviews and AI Mode. When a reader has personally marked your site as preferred and you get cited in a generated answer, your link now carries a visible badge, and Google has confirmed preferred status is becoming an input into citation frequency itself, not just a display label.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>On May 27, 2026, Duncan Osborn, Product Manager for Google Search, announced that Preferred Sources — a personalization feature that had existed since a June 2025 Labs experiment and reached full global language availability on April 30, 2026 — now extends into AI Overviews and AI Mode. Within days, Google reported more than 345,000 unique sources had already been selected by users, up from roughly 200,000 at the December 2025 global expansion, and stated that users are twice as likely to click through to a source they have personally marked as preferred compared to an unmarked source in the same position.</p>
@@ -7272,8 +7272,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Google\'s Generative UI: What Does "Citation" Even Mean When Search Builds a Custom Dashboard Instead of Text?',
     excerpt:        'At Google I/O 2026 on May 19, Google announced that Search can now build a custom interface on the fly — interactive visuals, tables, graphs, simulations, even persistent "mini apps" for ongoing tasks — assembled in real time using Gemini 3.5 Flash and Google Antigravity. This is a genuinely new frontier for AEO, and the standard question "was my page cited" does not fully apply to it anymore.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>At Google I/O 2026, held May 19 through 20, Google's Search organisation, led by Elizabeth Reid, announced what it described as the biggest upgrade to the Search box in over twenty-five years, alongside a capability it calls generative UI. Rather than returning a ranked list of links or even a synthesised text summary, Search can now assemble a custom interface in real time — interactive visuals, tables, graphs, or simulations — tailored to the specific shape of a user's question. Google's own example: asking how a watch works can now produce an on-the-fly interactive diagram rather than a paragraph of explanatory text.</p>
@@ -7333,8 +7333,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Universal Cart: Google\'s Cross-Surface Shopping Layer, and What It Means for Product Content',
     excerpt:        'At Google I/O 2026, Google announced Universal Cart, a shopping layer spanning Search, Gemini, YouTube, and Gmail, alongside updates to the Universal Commerce Protocol and the Agent Payments Protocol. The strategic bet is explicit: shoppers will increasingly describe full requirements in natural language, and brands will influence AI shopping agents through structured product data, not through on-site merchandising.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>At Google I/O 2026 on May 19, alongside the broader Search overhaul covered in the companion article on generative UI in this series, Google announced Universal Cart — a shopping layer designed to work consistently across Search, the Gemini app, YouTube, and, eventually, Gmail. Google also introduced a new Merchant Center attribute schema called Conversational Attributes and gave concrete status updates on two pieces of agentic commerce infrastructure it had launched earlier in the year: the Universal Commerce Protocol and the Agent Payments Protocol.</p>
@@ -7394,8 +7394,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'E-E-A-T for AI-Assisted Content: The "Who Actually Wrote This" Question Just Got Formalized',
     excerpt:        'At Google I/O 2026, Google announced that OpenAI, Kakao, and ElevenLabs are adopting SynthID, its content-provenance watermarking system, alongside expanded content-transparency and verification tools across Search, Gemini, Chrome, Pixel, and Cloud. This is arriving at the same moment global regulation is formalizing AI-content disclosure requirements. Together, they change what an E-E-A-T-credible authorship signal actually needs to demonstrate.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>At Google I/O 2026, alongside its major Search and Gemini announcements, Google confirmed a specific and previously underappreciated expansion: OpenAI, the Korean technology company Kakao, and the voice AI company ElevenLabs are all adopting SynthID, Google's content-provenance watermarking system, which invisibly embeds a detectable signal into AI-generated media indicating its synthetic origin. Google framed this explicitly as cross-industry collaboration toward a shared transparency standard, alongside a broader expansion of content-transparency and verification tools across Search, Gemini, Chrome, Pixel, and Cloud.</p>
@@ -7448,8 +7448,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'When Does an AI Overview Actually Appear? Google\'s "Additive to Search" Logic, Explained',
     excerpt:        'Google\'s own documentation states plainly that AI Overviews only show when its systems determine the response is genuinely additive to classic search, and that they "often don\'t trigger" as a result. This is a distinct question from citation optimization. Before you can optimize for being cited inside an Overview, it helps enormously to understand which of your queries produce one at all.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Google's own AI features documentation states the principle directly: "AI Overviews are only shown when our systems determine that it is additive to classic Search, and as such, often don't trigger." This single sentence resolves a confusion that shows up constantly in AEO planning conversations — teams optimize a page for citation, see no AI Overview appear at all for their target query, and conclude the optimization failed, when the actual answer may simply be that Google's system determined an Overview would not add value for that specific query, regardless of how well-optimized any competing page is.</p>
@@ -7505,8 +7505,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Perplexity Now Cites CB Insights, PitchBook, and Statista Directly. What That Means for B2B Content.',
     excerpt:        'On March 13, 2026, Perplexity launched Premium Sources, giving its Computer and Finance products direct, built-in access to paywalled data from CB Insights, PitchBook, and Statista. For any brand competing for visibility on market-sizing, funding, or industry-benchmark queries, this changes exactly who you are competing against for the citation.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>On March 13, 2026, Perplexity launched Premium Sources, giving its Computer and Finance products built-in, no-additional-signup access to paywalled professional research data from three specific providers: CB Insights, which makes over 8,000 of its research reports on the startup and innovation landscape available directly within Perplexity; PitchBook, providing its Essentials dataset covering company profiles, deal activity, investors, and funds across the full private-company investment lifecycle; and Statista, contributing expert-verified market sizing, consumer insight data, and industry forecasts.</p>
@@ -7563,8 +7563,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Google-CloudVertexBot and the New AI Crawlers Your robots.txt Was Never Configured For',
     excerpt:        'Google added Google-CloudVertexBot to its official list of crawlers in 2026 — a new user-agent specifically for sites owners that build Vertex AI Agents and want that agent crawling their own site on their behalf. It is one of a growing list of newer, purpose-specific AI crawlers most robots.txt files have simply never been updated to address at all.',
     read:           '7 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Google's own Search Central changelog documents a specific, easy-to-miss addition: Google-CloudVertexBot, a new crawler added to the official list of Google crawlers in 2026. Google's own description is precise about its purpose and scope: it crawls sites on the site owner's own request, specifically when building Vertex AI Agents, and Google introduced it explicitly to help site owners identify this new, distinct crawler traffic in their own server logs, separate from Googlebot's standard search-indexing crawl activity.</p>
@@ -7621,8 +7621,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          '"Explore New Angles": Google\'s May 2026 Push to Send More Clicks Back to the Open Web',
     excerpt:        'On May 6, 2026, Google announced five new features for AI Mode and AI Overviews explicitly aimed at expanding outbound linking — including a new "explore new angles" section that surfaces distinct, in-depth articles beyond the synthesized answer itself. It does not resolve the fundamental tension of a system that answers the query directly, but it is a genuine, concrete structural change worth understanding.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>On May 6, 2026, Hema Budaraju, Google's Vice President of Product Management for Search, announced five new features for AI Mode and AI Overviews, described in the announcement as a deliberate push to make these generative AI search experiences more navigable for users, and, on paper, more beneficial to the publishers and creators whose content the underlying systems draw from. The centrepiece of the announcement is a feature Google calls "explore new angles" — a section appearing at the end of many AI-generated responses that surfaces links to distinct articles or in-depth analyses covering different facets of the original topic, rather than ending the interaction purely on the synthesized answer itself.</p>
@@ -7678,8 +7678,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'AEO for Recruiting: How to Get Your Job Postings and Agency Cited by AI Search',
     excerpt:        'ChatGPT alone handles roughly 2.5 billion prompts a day, and a meaningful share of those touch professional decisions — including which recruiter or job to trust. Most agencies and employer career pages are answering none of it, because the content that wins AI citation in hiring looks nothing like a job board listing.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>When a hiring manager asks an AI assistant to recommend a recruitment agency in their industry, does your firm come up? For most agencies and employer career sites, the honest answer is no — and that invisibility is already showing up in pipeline numbers nobody has connected back to the cause yet.</p>
@@ -7771,8 +7771,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Event Schema for AEO: Why Your Conference or Webinar Needs Structured Data Now',
     excerpt:        'Google\'s own list of schema types still worth investing in after its 2026 rich-result cleanup names Event alongside JobPosting as one of the categories that maps to genuine, ongoing business use rather than SERP-gaming. Most companies running webinars and conferences have never implemented it.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Google has spent 2026 systematically narrowing which schema types still earn rich-result treatment, retiring FAQ display in May, having already deprecated HowTo rich results years earlier, and retiring several other types in a June 2025 cleanup. The pattern across every one of those removals is consistent: Google keeps the schema types that map to a genuine, ongoing business use case and removes the ones that were mostly used to grab search-result real estate. Event schema — the markup for conferences, webinars, and other scheduled gatherings — is explicitly one of the survivors, alongside JobPosting.</p>
@@ -7857,8 +7857,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Content Pruning for AEO: When to Delete a Page vs. When to Refresh It',
     excerpt:        'A page with zero organic clicks and ten ChatGPT citations is not a pruning candidate — but most content audits, run purely from Google Analytics, would flag it for deletion anyway. The freshness guide in this series covers keeping content current. This is the other half: knowing when a page is actively hurting you and should be killed, not refreshed.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>A large, aging home and garden site pruned aggressively in early 2026 — not by adding new content, but by stripping the site down to its core topic and removing nearly everything else. The result, reported by the SEO consultant who ran the project, was a measurable lift in AI mentions and citations for the narrower, more focused site that remained. Nothing was added. A great deal was removed. The removal itself was the strategy.</p>
@@ -7920,8 +7920,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Sitemap Strategy for AI Crawlers: The Technical Layer Most AEO Audits Skip',
     excerpt:        'Server log analysis across a meaningful sample of sites found GPTBot referencing sitemaps on roughly three out of four initial domain visits, compared to just over half for Googlebot. PerplexityBot showed an even stronger dependency, crawling sitemap-listed URLs several times more often than equivalent pages it found only through links. Most sitemaps are still built entirely around Google.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Server log analysis comparing crawler behavior across a meaningful sample of sites found GPTBot referencing a sitemap in roughly three out of every four initial domain discovery visits, compared to just over half for Googlebot on the same measure. PerplexityBot showed the strongest sitemap dependency of the crawlers measured, fetching sitemap-listed URLs several times more frequently than comparable pages it discovered only through internal links. The direction of that finding is consistent with what this series has covered elsewhere about Perplexity's real-time retrieval architecture: because it searches live rather than relying on a periodically refreshed index, a clean sitemap functions as the fastest available roadmap to a site's freshest content.</p>
@@ -7983,8 +7983,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Under the Hood: How NotionCue Tracks Citations Across Five AI Engines Without Getting Rate-Limited',
     excerpt:        'Running the same prompt against ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews every week, at scale, across thousands of tracked queries, sounds simple until you actually try to build it. Here is the real architecture behind it, including the parts that took three rebuilds to get right.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>This is the first post in a new series pulling back the curtain on how NotionCue actually works. Most of what we publish on this blog is about AI search behavior generally. This series is specifically about our own product decisions, including the ones that failed before we found something that held up at scale.</p>
@@ -8043,8 +8043,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'AEO for the Solo Marketer: What to Actually Prioritize When You Have No Team and No Budget',
     excerpt:        'This is the first post in a new series organized by job title rather than industry. If you are the entire marketing department — writing the content, running the socials, occasionally touching the website code, and reporting straight to the founder — most AEO advice was not written with you in mind. This is the version that was.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>This is the first post in a new series organized around who is actually reading, not what industry they're in. Most AEO guidance, including a fair amount of what's on this blog, is written for someone with a content team, a dev team they can file tickets to, and a quarter's worth of runway to execute a plan. If you are a solo marketer — the only person doing marketing at a small company, reporting directly to a founder who wants results now, with no engineering resource you can reliably call on — that guidance is often technically correct and practically useless.</p>
@@ -8107,8 +8107,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'A 90-Day AEO Walkthrough: What Actually Changes Week by Week',
     excerpt:        'This is an illustrative, composite walkthrough built from the mechanics covered throughout this blog, not a single named client engagement. It maps the realistic sequence of changes a mid-size B2B site can expect over a 90-day AEO effort, and just as importantly, what does not move yet at each stage.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>A note on what this post is and isn't: this is an illustrative walkthrough, not a case study describing one specific real company. It's built by combining the realistic timelines and mechanics covered in depth elsewhere on this blog — schema behavior, engine-specific citation half-lives, BLUF restructuring effects — into a single coherent 90-day narrative, because most teams starting an AEO effort ask the same question: what should I actually expect to see, and when. This is that answer, mapped out week by week for a representative mid-size B2B SaaS site with a moderate existing content library and no prior AEO-specific work.</p>
@@ -8168,8 +8168,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'No, ChatGPT Does Not Have a Secret "AI SEO" Ranking Algorithm',
     excerpt:        'This is the first in a series of short posts correcting specific, common misconceptions circulating about AI search. Starting with the most persistent one: the idea that there is a discoverable, gameable ranking algorithm behind ChatGPT citations the way there is behind Google\'s organic search. There isn\'t, and treating it like there is leads to bad decisions.',
     read:           '6 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>This is the first in a short series of posts each addressing one specific, persistent misconception about AI search, in enough depth to actually correct it rather than just asserting the opposite. Starting with the one that shows up most often in vendor pitches and LinkedIn posts: the claim that ChatGPT has a discoverable ranking algorithm, in the way Google's organic search has one, that a sufficiently clever practitioner can reverse-engineer and game.</p>
@@ -8220,8 +8220,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'The AEO Glossary: 25 Terms Every AI Search Practitioner Should Know',
     excerpt:        'This is the first entry in a new reference series. Rather than another explainer, this is a working glossary — short, direct definitions for the terms that come up constantly across AI search, AEO, and GEO discussions, each linked to a deeper guide where one exists on this blog.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>This is the first entry in a new reference series on this blog. Everything else here is written as an explainer or a guide. This is different on purpose: short, direct definitions for the terms that come up constantly in AEO and AI search discussions, organized for quick lookup rather than a single narrative read. Where a term has a full dedicated guide elsewhere on this blog, it's linked below the definition.</p>
@@ -8293,8 +8293,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'NotionCue vs. Building AI Citation Tracking In-House: The Real Cost Comparison',
     excerpt:        'This is the first in a new comparison series. Rather than a head-to-head against a named competitor, this one addresses the comparison most teams actually face first: should we buy a tool, or is this simple enough to build ourselves with a spreadsheet and some API calls.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>This is the first post in a new comparison series on this blog. Rather than starting with a head-to-head against a specific named competitor, which risks being either unfair or quickly outdated as products change, this one addresses the comparison almost every team actually runs into first: is AI citation tracking simple enough to build in-house, and if so, at what real cost compared to buying a purpose-built tool.</p>
@@ -8352,8 +8352,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'What Actually Happens to Your PDFs in AI Search',
     excerpt:        'Your best research is probably a PDF. Your whitepaper, your annual report, your technical spec. AI engines can read some of them and are effectively blind to others, and the difference has almost nothing to do with how good the content is.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Most companies put their best material in PDFs. The annual report, the original research, the technical specification that took three months to write. Then they wonder why an AI engine answering a question about their industry cites a competitor's thin blog post instead.</p>
@@ -8414,8 +8414,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'How to Migrate a Site Without Losing Your AI Citations',
     excerpt:        'Migration checklists were written for Googlebot. They cover redirects and canonical tags and sitemap resubmission. None of them tell you that different AI engines will notice your migration at wildly different speeds, and that the gap between them is where citations quietly disappear.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Every site migration checklist you can find covers the same ground. Map old URLs to new ones. Implement 301s. Update canonical tags. Resubmit the sitemap. Watch Search Console for crawl errors.</p>
@@ -8480,8 +8480,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Data Tables and AI Extraction: Why Comparison Content Gets Cited or Ignored',
     excerpt:        'Comparison tables are the highest value content type you can publish for AI search, because a direct comparison is exactly what a lot of buyer queries are asking for. They are also the content type most often built in a way machines cannot read.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>A comparison table is close to the ideal citation target. Somebody asks which option has the better feature set, or what the pricing difference is, and a well built table answers exactly that in a form that maps cleanly onto the question.</p>
@@ -8562,8 +8562,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title: 'HTTP Status Codes and AI Crawlers: What Each One Actually Signals',
     excerpt:        'Status codes are the only direct conversation your server has with a crawler. Most sites are sending the wrong ones without knowing it, and a soft 404 is worse for AI citation than a hard one.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Every request a crawler makes gets a three digit answer. That number is the most direct signal your server sends about what a URL is and whether it is worth coming back to.</p>
@@ -8624,8 +8624,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Pagination and Infinite Scroll: Where Your Archive Content Goes to Disappear',
     excerpt:        'If your blog has four hundred posts behind an infinite scroll archive, most AI crawlers can see the first ten. The rest may as well not exist. This is one of the few AEO problems where the content is genuinely fine and the delivery mechanism is doing all the damage.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Infinite scroll is a user experience decision that quietly became an indexing decision. The pattern loads a first batch of items, then fetches more as the visitor scrolls. For a person browsing on a phone it feels smooth. For a crawler that does not execute JavaScript, page one is the entire archive.</p>
@@ -8685,8 +8685,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Building an Author Entity That AI Systems Can Actually Verify',
     excerpt:        'A byline is a string of text. An entity is something a machine can connect to other things it already knows. Most sites publish the first and assume they built the second.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Putting a name under a headline does almost nothing on its own. To a parser, "By Sarah Chen" is three words. It is not connected to anything, it cannot be verified against anything, and it carries no weight beyond existing.</p>
@@ -8699,7 +8699,7 @@ app.use('/api/premium-data', paymentMiddleware({
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": "https://notioncue.com/authors/sudhir-singh#person",
-  "name": "Sudhir Singh",
+  "name": "Apurva Mishra",
   "jobTitle": "Senior SEO and AEO Specialist",
   "worksFor": {
     "@type": "Organization",
@@ -8721,7 +8721,7 @@ app.use('/api/premium-data', paymentMiddleware({
 <p>Substantive means specific. "Fifteen years in enterprise SEO, previously at two named companies, speaks at named conferences" gives a machine facts to verify. "Passionate about digital marketing and helping brands grow" gives it nothing, and I would argue it is worse than nothing because it occupies the space where evidence should be. This is the same specificity requirement covered in the <a href="/blog/non-commodity-content-google-ai-search-what-it-actually-means">non-commodity content guide</a>, applied to a bio instead of an article.</p>
 
 <h2>Consistency Is Where This Falls Apart</h2>
-<p>The failure mode I see most often is the same person appearing as three different entities because their name is written three different ways. "Sudhir Singh" on the blog, "Sudhir K. Singh" on LinkedIn, "S. Singh" on a conference bio.</p>
+<p>The failure mode I see most often is the same person appearing as three different entities because their name is written three different ways. "Apurva Mishra" on the blog, "Sudhir K. Singh" on LinkedIn, "S. Singh" on a conference bio.</p>
 <p>A machine has no reliable way to know those are one person unless something explicitly connects them. Each variant accumulates its own thin, separate reputation instead of one strong signal. This is the disambiguation problem from the <a href="/blog/entity-disambiguation-llm-aeo-consistent-naming-strategy">entity disambiguation guide</a>, applied to people rather than brands.</p>
 <p>Pick one canonical form and use it everywhere, including places you do not control if you can influence them. If variants already exist in the wild, the fix is making sure every profile links back to the same author page, which lets the <code>sameAs</code> graph reconcile them.</p>
 
@@ -8763,8 +8763,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Subdomain or Subdirectory: The Architecture Decision That Splits Your AI Authority',
     excerpt:        'Putting your blog on blog.example.com instead of example.com/blog is a decision usually made by whoever set up the CMS. It determines whether your content builds one authority signal or two weaker ones, and it is expensive to reverse.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Most companies end up with a subdomain because it was easier. The marketing team wanted a hosted CMS, the hosted CMS wanted a CNAME, and <code>blog.example.com</code> was the path of least resistance. Nobody made an architecture decision. An architecture decision happened.</p>
@@ -8828,8 +8828,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Breadcrumbs Tell AI Systems Where a Page Sits. Most Sites Skip Them.',
     excerpt:        'A page pulled out of context is just text. Breadcrumb markup is the cheapest way to tell a machine what section that text came from and what it relates to, and it takes about an hour to implement across a whole site.',
     read:           '7 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>When a retrieval system pulls a chunk of your page to answer a question, it gets the text. It does not automatically get the context: which section of your site this came from, what category it belongs to, what sits above it.</p>
@@ -8910,8 +8910,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Your Blog Comments Are Either an Asset or a Liability. There Is No Neutral.',
     excerpt:        'A comment section full of real questions and real answers is some of the most citable content you can host. A comment section full of spam and one word replies is thin content stapled to every page you publish. Most sites have the second and think they have nothing.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Comment sections went out of fashion for good reasons. Moderation is work, spam is relentless, and most of what accumulates is noise. A lot of teams turned them off and never thought about it again.</p>
@@ -8986,8 +8986,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'How to Build Definition Pages That AI Systems Cite Instead of Ignore',
     excerpt:        'Definition content is the most directly citable format there is, because a question starting with what is has exactly one shape of answer. It is also the format with the most competition and the lowest tolerance for padding.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Queries beginning with "what is" are the cleanest match between a question and a citable answer that exists. Somebody wants a definition. A definition is short, self contained, and extractable. There is no ambiguity about what a good answer looks like.</p>
@@ -9063,8 +9063,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'A Video With No Transcript Is a Blank Page to Most AI Systems',
     excerpt:        'You spent a week producing a twenty minute technical walkthrough. To a text based retrieval system, that page contains a title, a thumbnail, and an embed code. Everything you actually said is not there.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>An embedded video is an iframe. The content lives on another server, in a format that most retrieval pipelines do not process, and what remains on your page is an empty container with some metadata around it.</p>
@@ -9135,8 +9135,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Changelogs Are the Most Underrated AEO Asset a Software Company Owns',
     excerpt:        'Nobody writes a changelog for visibility. It exists because users need to know what changed. That accidental honesty is exactly what makes it citable, and most companies bury it behind a login or ship it as a modal that no crawler will ever see.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>A changelog is a dated record of what a product does now versus what it did before. That is a genuinely useful artefact for anyone trying to answer whether a tool supports a specific thing, and it is written without marketing framing because its audience is existing users who would notice exaggeration immediately.</p>
@@ -9197,8 +9197,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Your Pricing Page Is Answering a Question You Never Wrote Down',
     excerpt:        'How much does it cost is one of the highest intent questions anyone can ask, and it is increasingly asked to an AI rather than typed into a search box. If your pricing lives behind a contact form, something else is answering on your behalf.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Pricing questions have a property most queries do not. The person asking has already decided they want the thing. They are working out whether they can afford it, which is the last question before a decision.</p>
@@ -9276,8 +9276,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Most Case Studies Are Unciteable Because They Contain No Facts',
     excerpt:        'A case study saying a client saw significant improvements in efficiency contains zero extractable information. The format is one of the strongest citation opportunities a company has and most of them are written in a way that guarantees nothing can be pulled from them.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Case studies should be the easiest citation win a company has. They contain original information that exists nowhere else, which is the definition of the non commodity content covered in the <a href="/blog/non-commodity-content-google-ai-search-what-it-actually-means">non-commodity content guide</a>. No model can synthesise what happened at your client's company.</p>
@@ -9339,8 +9339,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Does X Work With Y Is a Query Class Your Site Probably Fails',
     excerpt:        'Buyers evaluating software ask compatibility questions before almost anything else, because an integration gap is a hard disqualifier. Most companies answer this with a wall of logos, which is the least extractable format available.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Compatibility is a disqualifying question rather than a persuading one. If your tool does not connect to the system a buyer already runs, nothing else about it matters. So the question gets asked early and it gets asked constantly.</p>
@@ -9402,8 +9402,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Your About Page Is the Anchor for Everything an AI Believes About Your Company',
     excerpt:        'Most About pages are a founding story and a stock photo of a team. The page is doing a structural job nothing else on your site can do, and treating it as brand storytelling wastes the only place your organisation is formally defined.',
     read:           '8 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>When an AI system needs to say what your company is, it needs a source stating what your company is. For most organisations no such page exists in usable form, because the About page was written as narrative rather than as a factual record.</p>
@@ -9476,8 +9476,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Conversational Search Broke Keyword Research, and Most Teams Are Still Tracking the Wrong Prompts',
     excerpt:        'AirOps analysed more than 245,000 prompts that brands were actively monitoring and found they peak at six to seven words. Real AI search queries routinely run past ten. Teams are measuring a part of the curve where the traffic no longer lives.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>AirOps looked at more than 245,000 prompts that brands were paying to track and found something uncomfortable. The prompts teams monitor cluster around six to seven words. The queries people actually type into AI systems routinely run past ten, and the density of real usage sits well beyond where most tracking sets stop.</p>
@@ -9552,8 +9552,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Comparison Queries Trigger an AI Answer 95% of the Time. Most Comparison Pages Are Unusable.',
     excerpt:        'Seer Interactive measured X versus Y queries triggering an AI Overview 95.4 percent of the time, the highest rate of any query class they tested. If you sell software, your comparison pages are your highest leverage AEO asset and they are probably written as sales collateral.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Seer Interactive's April 2026 analysis of 49,353 queries found that comparison queries in the X versus Y format trigger an AI Overview 95.4 percent of the time. Question queries trigger one 85.9 percent of the time, review queries 86.3 percent, best of queries 81.3 percent. Single word queries manage 27.3 percent.</p>
@@ -9625,8 +9625,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Your Paid Landing Pages Are Invisible to AI, and That Is Costing You Twice',
     excerpt:        'Landing pages are usually noindexed, thin by design, and built entirely around a form. Meanwhile Forrester found 94 percent of B2B buyers now use AI during their purchase. The pages carrying your sharpest messaging are excluded from the channel where buyers are shortlisting.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Paid landing pages get built under different rules than the rest of a site. Short, single purpose, one call to action, frequently noindexed so they do not compete with organic pages or leak into search results where the messaging would confuse people arriving from a different context.</p>
@@ -9702,8 +9702,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'AEO for Marketplaces and Directories: Winning When Your Content Is Other People\'s Listings',
     excerpt:        'Directories and marketplaces have thousands of pages they did not write, describing products they do not control, updated by third parties. Almost every AEO principle assumes you own your content. Here is what changes when you do not.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Directories and marketplaces sit in an unusual position. Their inventory is supplied by sellers, vendors, or members. Their page count runs into the tens or hundreds of thousands. And their competitive advantage in AI search is real, because aggregators are exactly the kind of source a system reaches for when constructing a comparison.</p>
@@ -9778,8 +9778,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Your Review Responses Are Content, and AI Systems Read Them',
     excerpt:        'Review queries trigger an AI Overview 86.3 percent of the time according to Seer Interactive. Most companies treat responses as reputation management theatre. They are actually publicly indexed text where you get to state your side of a specific factual claim.',
     read:           '9 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Seer Interactive's April 2026 analysis of 49,353 queries found review queries trigger an AI Overview 86.3 percent of the time. When someone asks whether a product is any good, they are overwhelmingly likely to get a synthesised answer drawing on review content rather than a list of review sites to visit.</p>
@@ -9855,8 +9855,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Gating Content Removes It From the Channel Where Buyers Now Shortlist',
     excerpt:        'Forrester found 94 percent of B2B buyers used AI during their most recent purchase, with 47 percent building internal business cases inside AI tools before contacting a vendor. Your best research is behind a form, which means it contributes nothing to the case they are building.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>The gated content trade was straightforward for a decade. Give away something valuable, capture an email, nurture the contact. The cost was that search engines could not read the asset, which was acceptable because the landing page could rank on its own.</p>
@@ -9932,8 +9932,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'AEO for Law, Accounting, and Consulting Firms: Selling Judgment in a Channel That Summarises It',
     excerpt:        'Professional services sell expertise that AI systems now dispense for free in summary form. That sounds like an existential problem and is closer to a positioning one, because the queries that lead to an engagement are not the queries AI answers well.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Professional services firms have built content strategies on a simple premise for twenty years. Publish authoritative explanation of a complex topic, demonstrate expertise, and some readers will conclude they need help and get in touch.</p>
@@ -10007,8 +10007,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'The Content Refresh Workflow: Turning Decay Theory Into a Process Someone Actually Runs',
     excerpt:        'Knowing content decays is not the same as having a system that catches it. Most refresh programmes fail because they are organised around publication date, which is the least useful signal available.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>The <a href="/blog/aeo-content-decay-freshness-maintenance-ai-citations">content decay guide</a> covers why citation confidence erodes as content ages. This is the operational half: what a team actually does on a Tuesday to catch it, and why most refresh programmes produce activity rather than outcomes.</p>
@@ -10082,8 +10082,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'AEO for Physical Products: When Retailers Own the Answer About Your Own Brand',
     excerpt:        'Adobe measured AI referral traffic to US retail sites rising 693 percent year over year during the 2025 holiday season, with AI referrals converting 31 percent better than other traffic. For most consumer brands, the pages winning those queries belong to retailers rather than the brand itself.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Adobe Digital Insights measured AI driven referral traffic to US retail sites up 693 percent year over year during the 2025 holiday season, and found AI referrals converted 31 percent better than non AI traffic over the same period.</p>
@@ -10160,8 +10160,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Stop Measuring AEO in Traffic. Roughly Three Quarters of the Buyer Journey Does Not Produce a Click.',
     excerpt:        'Traditional attribution captures around a quarter of the B2B buying journey. 6sense found 80 percent of deals go to the vendor already favoured before first contact. If your AEO reporting is a traffic chart, you are measuring the smallest and least decisive part of what is happening.',
     read:           '10 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>The measurement problem in AEO is not that the data is hard to collect. It is that the most consequential thing happening produces no data at all.</p>
@@ -10234,8 +10234,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Technical SEO Audit: The Checklist That Finds What Is Actually Costing You Rankings',
     excerpt:        'Most audits produce fifty pages of findings and no prioritisation. This one runs in dependency order, because crawlability failures make every downstream fix pointless and almost every audit checks them last.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>A technical SEO audit checks whether search engines can crawl your pages, index them, understand them, and trust them. That is the whole job. Everything else in this post is a way of testing one of those four things.</p>
@@ -10315,8 +10315,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Keyword Research: A Process That Starts With Intent Instead of Volume',
     excerpt:        'Most keyword research produces a spreadsheet sorted by search volume, which is the least useful ordering available. Volume tells you how many people search. It says nothing about whether any of them want what you sell.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Keyword research has a default output: a spreadsheet with keywords in one column, monthly search volume in another, difficulty in a third, sorted descending by volume. Someone picks from the top and writes content.</p>
@@ -10399,8 +10399,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'On-Page SEO: Which Elements Still Move Rankings and Which Are Folklore',
     excerpt:        'On-page SEO advice has accumulated twenty years of sediment. Some of it was never true, some was true in 2012, and a small number of elements do most of the work. Here is the separation.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>On-page SEO is everything you control on the page itself: the title, the headings, the copy, the images, the internal links, and the markup describing all of it.</p>
@@ -10490,8 +10490,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Site Architecture for SEO: Why Click Depth Decides What Gets Crawled',
     excerpt:        'Architecture is where large sites hide their cheapest wins. Reorganising internal links moves rankings without writing a single new word, and most sites have hundreds of pages sitting too deep to be crawled properly.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Site architecture is how pages relate to each other through links and URL structure. It determines what search engines find, how often they return, and how authority moves between pages.</p>
@@ -10578,8 +10578,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Local SEO: What Actually Moves Map Pack Rankings, According to the Data',
     excerpt:        'Whitespark and BrightLocal\'s annual survey puts Google Business Profile signals at 32 percent of local pack ranking weight, the largest single category. A controlled study by Sterling Sky found GBP posts moved rankings by zero across 441 keywords. Most local SEO advice has these backwards.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Local SEO has an unusually good evidence base compared to the rest of the discipline, because Whitespark and BrightLocal have run an annual practitioner survey for over a decade and several agencies run controlled tests.</p>
@@ -10665,8 +10665,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'SEO Content Strategy: Planning What to Publish and What to Stop Publishing',
     excerpt:        'Most content strategies are publishing calendars with a keyword column added. A strategy decides what not to write, which is the part that determines whether the work compounds or accumulates.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>A content calendar lists what you will publish and when. A content strategy decides which topics you will own, how the pieces relate to each other, and what you will deliberately not cover.</p>
@@ -10747,8 +10747,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Link Building in 2026: What 518 SEOs Say Works, and What They Have Stopped Doing',
     excerpt:        'Editorial.link surveyed 518 SEO professionals and found digital PR rated most effective by 48.6 percent, three times ahead of guest posting at 16 percent. Meanwhile roughly 96 percent of web pages have no external backlinks at all, which is the actual scale of the opportunity.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Backlinks remain one of Google's primary ranking signals and the tactics for earning them have changed considerably. Editorial.link's 2026 survey of 518 SEO professionals found digital PR rated the most effective tactic by 48.6 percent of respondents, well ahead of guest posting at 16 percent and linkable assets at 12 percent.</p>
@@ -10833,8 +10833,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Ecommerce SEO: Why Category Pages Earn More Than Product Pages',
     excerpt:        'Well optimised category pages typically generate several times more organic revenue than individual product pages, because they rank for head terms and catch buyers earlier. Most stores treat them as a product grid with a heading.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Ecommerce SEO has a distribution problem. Effort concentrates on product pages because they are where the transaction happens, while category pages typically generate three to five times more organic revenue because they rank for high volume head terms and capture buyers before they have chosen a specific item.</p>
@@ -10921,8 +10921,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Google Search Console: The Four Reports Worth Opening and What They Actually Tell You',
     excerpt:        'Search Console is the only source reporting what Google actually did with your site rather than what a tool estimates. Most people open the performance report, look at total clicks, and close it. The useful information is one filter away.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Every third party rank tracker is approximating what Search Console reports directly. It is the only source with actual impression and click data for your own site, and it is free.</p>
@@ -11013,8 +11013,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'International SEO: Choosing a Domain Structure Before You Write a Line of Hreflang',
     excerpt:        'Hreflang gets the attention because it is fiddly and produces visible errors. The decision that actually determines outcomes is the domain structure underneath it, and that one is expensive to reverse.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>International SEO discussions tend to start with hreflang, because hreflang generates errors that show up in tools and errors demand attention. That ordering is backwards. The domain structure decision determines what is possible, and hreflang is implementation detail on top of it.</p>
@@ -11102,8 +11102,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'SEO Reporting: Which Metrics Survive Scrutiny and Which Ones Get You Caught',
     excerpt:        'Most SEO reports lead with keyword rankings, which are the metric least connected to revenue and most easily flattered. Here is what to report instead, and how to handle the awkward conversation when traffic falls while performance improves.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>SEO reporting has a credibility problem that most practitioners are aware of and few address directly. Reports lead with rankings because rankings move, look precise, and can usually be made to look favourable by choosing which keywords to include.</p>
@@ -11194,8 +11194,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'SaaS SEO: Why Most Programmes Build Traffic That Never Converts',
     excerpt:        'The standard SaaS content playbook produces a blog ranking for hundreds of informational terms and a product nobody finds through search. The problem is not execution. It is that the playbook optimises for the wrong part of the funnel.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>The standard SaaS SEO playbook is well known: identify high volume informational keywords adjacent to your product, publish comprehensive guides, build authority, capture top of funnel traffic, nurture toward a trial.</p>
@@ -11274,8 +11274,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Core Web Vitals: Why 43 Percent of Sites Still Fail INP and What Actually Fixes It',
     excerpt:        'Google grades you on the 75th percentile of real Chrome users across a rolling 28 day window. A perfect Lighthouse score means nothing if a quarter of your visitors on mid range phones have a worse experience, which is exactly the situation on most sites.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Core Web Vitals are three field metrics: Largest Contentful Paint for loading, Interaction to Next Paint for responsiveness, and Cumulative Layout Shift for visual stability. INP fully replaced First Input Delay in March 2024, so any guide still listing FID is out of date.</p>
@@ -11364,8 +11364,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Featured Snippets: Still Worth Winning, With a Caveat Nobody Mentions',
     excerpt:        'Winning a featured snippet means Google displays your answer directly on the results page. That is visibility and it is frequently a click you no longer get. The tactics still work and the reason for pursuing them has changed.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>A featured snippet is the boxed answer at the top of a results page, pulled from a page Google already ranks. It has been called position zero for years, which is accurate about placement and misleading about value.</p>
@@ -11454,8 +11454,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'SEO for Small Business: What to Do First When You Cannot Do Everything',
     excerpt:        'Most SEO advice assumes a team, a budget, and a developer. If you are running a business and doing your own marketing, the useful question is not what works but what works first with a few hours a month.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Small business SEO advice tends to be enterprise advice with the word simple attached. Build topic clusters, run technical audits, develop a link acquisition programme. All correct and all assuming resources most small businesses do not have.</p>
@@ -11540,8 +11540,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Duplicate Content: There Is No Penalty, and It Is Still Costing You Rankings',
     excerpt:        'The duplicate content penalty does not exist and never did. What does exist is signal dilution, wasted crawl budget, and Google choosing a different version of your page than the one you wanted ranking.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Duplicate content is one of the most persistently misunderstood topics in SEO, largely because the framing is wrong. There is no duplicate content penalty. Google has said so repeatedly and the evidence supports it.</p>
@@ -11632,8 +11632,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Mobile SEO: Google Indexes What Your Phone Sees, Not What Your Desktop Shows',
     excerpt:        'Mobile first indexing means the mobile version of your page is the version that gets indexed and ranked. Content you hid on mobile for design reasons is content Google may not see at all.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Mobile first indexing is complete. Google uses the mobile version of a page as the primary basis for indexing and ranking for effectively all sites, and has for some time.</p>
@@ -11717,8 +11717,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'SEO Tools: What to Pay For, What Is Free, and What Nobody Needs',
     excerpt:        'The free tools cover more than most people assume, and the expensive ones are worth it for a narrower set of jobs than their marketing suggests. Here is the honest split, including which metrics inside paid tools you should ignore.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>SEO tooling is a large market selling overlapping products, and the buying decision is usually made on feature count rather than on which jobs actually need a tool.</p>
@@ -11796,8 +11796,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Google Core Updates: How to Tell If One Hit You, and What Recovery Actually Involves',
     excerpt:        'Core updates now arrive roughly every three months rather than twice a year. Recovery runs three to six months and often requires the next update to register. Most sites spend that window fixing the wrong thing because they never established what they were hit for.',
     read:           '12 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>A core update recalibrates how Google evaluates content quality across the whole index. It is not a penalty, which matters more than it sounds. Nothing was done to you. Other content was reassessed as better, and your relative position moved as a consequence.</p>
@@ -11879,8 +11879,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'How Long Does SEO Take? An Honest Answer With the Variables That Actually Decide',
     excerpt:        'Anyone giving you a single number is guessing or selling. The realistic answer depends on four variables, and knowing which one is binding on your site tells you more than any average timeline ever will.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>The question usually arrives from someone deciding whether to invest, which makes a vague answer genuinely unhelpful and a confident specific one dishonest.</p>
@@ -11960,8 +11960,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'SEO Copywriting: Writing for Search Without Writing Badly',
     excerpt:        'The phrase SEO copywriting still carries the smell of keyword stuffing and 500 word filler. The actual craft is narrower and harder: making the answer findable without making the prose worse.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>SEO copywriting has a reputation problem earned across two decades of content written for machines. Keyword density targets, exact phrase repetition, and word counts padded to hit an arbitrary number produced a genre of writing nobody wanted to read.</p>
@@ -12043,8 +12043,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'Image SEO: The Optimisation Most Sites Skip Because Nobody Owns It',
     excerpt:        'Images are usually uploaded by whoever wrote the post, named whatever the camera called them, and sized however the design tool exported them. That is why image optimisation remains one of the least contested opportunities available.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>Image SEO covers two separate goals that get conflated. One is ranking in image search, which drives traffic for some categories and almost none for others. The other is images not damaging the page they sit on, which applies universally and matters considerably more.</p>
@@ -12131,8 +12131,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'WordPress SEO: The Settings That Matter and the Plugins You Do Not Need',
     excerpt:        'WordPress is well suited to SEO out of the box and ships with several defaults that actively work against it. Most of the meaningful work is turning things off rather than installing more.',
     read:           '11 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotionCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotionCue',
     authorInitials: 'SS',
     content: `
 <p>WordPress handles the fundamentals well. Clean markup, sensible URL structure available in settings, and a plugin ecosystem covering everything the core does not.</p>
@@ -12225,8 +12225,8 @@ app.use('/api/premium-data', paymentMiddleware({
     title:          'JavaScript SEO: The Rendering Choices That Decide Whether Google Sees Your Content',
     excerpt:        'Crawl delays run roughly 40 percent longer for JavaScript heavy sites, and Search Console data suggests around 80 percent of single page applications have crawl budget waste from pages queued for rendering that never get rendered. The framework you chose is making this decision for you.',
     read:           '12 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotioncCue',
     authorInitials: 'SS',
     content: `
 <p>Google's rendering pipeline handles JavaScript. That statement is true and it creates a false sense of security, because the pipeline has a queue, the queue has delays, and a meaningful share of pages enter the queue and never come out.</p>
@@ -12372,8 +12372,8 @@ function Timestamp() {
     title:          'Programmatic SEO: Building Thousands of Pages Without Building Thousands of Problems',
     excerpt:        'Programmatic SEO generates pages from structured data and templates. When it works it captures long tail demand no hand written page could cover. When it fails it produces the exact scaled thin content Google now penalises explicitly.',
     read:           '12 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotioncCue',
     authorInitials: 'SS',
     content: `
 <p>Programmatic SEO is generating landing pages at scale from structured data rather than writing each one by hand. A directory with a page per city, a tool aggregator with a page per integration, or an ecommerce site with filter combination pages are all programmatic content.</p>
@@ -12535,8 +12535,8 @@ server {
     title:          '301 Redirects: The Mapping Process, the Chain Problem, and Scripts That Actually Help',
     excerpt:        'Every migration, domain change, and URL restructure produces a redirect map. Most are built manually in spreadsheets and most contain errors that cost rankings for months. Here is the process with the scripts that catch what a spreadsheet cannot.',
     read:           '12 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotioncCue',
     authorInitials: 'SS',
     content: `
 <p>A redirect tells a browser and a crawler that a URL has moved. A 301 signals a permanent move and passes most ranking signal to the destination. A 302 signals a temporary move and passes signal inconsistently.</p>
@@ -12729,8 +12729,8 @@ done < redirect_map.csv</code></pre>
     title:          'Crawl Budget: Who Actually Has a Problem, and Log Analysis Scripts to Find Out',
     excerpt:        'Google confirmed the crawl budget threshold at roughly one million unique pages changing weekly or ten thousand changing daily. Below that, crawl budget is not your constraint and optimising it is a waste. Above it, here is how to find where the waste actually is.',
     read:           '12 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotioncCue',
     authorInitials: 'SS',
     content: `
 <p>Crawl budget is the number of pages Googlebot crawls on your site within a given timeframe, determined by your server's capacity and Google's assessment of how often your content is worth revisiting.</p>
@@ -12895,8 +12895,8 @@ Disallow: /api/
     title:          'SEO Testing: How to Know Whether a Change Actually Worked or You Got Lucky',
     excerpt:        'Most SEO changes are evaluated by shipping them and watching traffic. That method cannot distinguish a real effect from a seasonal shift, an algorithm update, or ordinary variance. Here is the testing methodology that can.',
     read:           '12 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotioncCue',
     authorInitials: 'SS',
     content: `
 <p>SEO has a measurement problem that most other marketing channels solved years ago. Paid search runs A/B tests with statistical significance. Email tests subject lines against control groups. SEO ships a change to every page at once and checks whether traffic went up afterward.</p>
@@ -13039,8 +13039,8 @@ def evaluate_test(test_change_pct: list, control_change_pct: list):
     title:          'Enterprise SEO: The Problems That Only Exist at Scale, and Why Governance Solves More Than Tooling',
     excerpt:        'Enterprise SEO is not harder SEO. It is the same SEO with coordination problems on top. Most enterprise failures are governance failures where the right fix existed and nobody had the authority to ship it.',
     read:           '12 min read',
-    author:         'Sudhir Singh',
-    authorRole:     'Senior SEO & AEO Specialist · NotioncCue',
+    author:         'Apurva Mishra',
+    authorRole:     'Marketing Manager · NotioncCue',
     authorInitials: 'SS',
     content: `
 <p>Enterprise SEO advice usually means the same mid market advice with the word enterprise attached, which misses what is actually different. The SEO is the same. The constraints are not.</p>
