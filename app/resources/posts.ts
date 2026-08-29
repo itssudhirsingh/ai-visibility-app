@@ -125,7 +125,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: 'llms.txt: the complete technical guide to AI crawler permissions in 2026',
     excerpt: 'Which bots respect it, which ignore it, what format actually works, and why getting this wrong can silently exclude you from AI training pipelines.',
     read: '10 min read',
-    author: 'Sudhir Singh',
+    author: 'Apurva Mishra',
     authorRole: 'Technical Lead · Notion Cue',
     authorInitials: 'SS',
     content: `
@@ -271,7 +271,7 @@ Disallow: /</code></pre>
     title: 'Core Web Vitals and AI citations: the surprising connection between page speed and LLM visibility',
     excerpt: 'Perplexity and real-time AI crawlers actively penalise slow pages. Our data shows domains with Good CWV scores get cited 2.1x more often.',
     read: '7 min read',
-    author: 'Sudhir Singh',
+    author: 'Apurva Mishra',
     authorRole: 'Technical Lead · Notion Cue',
     authorInitials: 'SS',
     content: `

@@ -23,7 +23,7 @@ export const SITE = {
   email:       'hello@notioncue.com',
   privacyEmail:'privacy@notioncue.com',
   foundingDate:'2026-02',
-  founder:     'Sudhir Singh',
+  founder:     'Apurva Mishra',
   description: 'Track how often your website gets cited by ChatGPT, Gemini, Perplexity, Grok, Copilot, and Claude. Get your AEO score in 30 seconds.',
   keywords:    ['AEO', 'Answer Engine Optimisation', 'AI visibility', 'AI SEO', 'ChatGPT citations', 'llms.txt'],
   sameAs: [
@@ -287,7 +287,7 @@ function wordCount(html: string): number {
  * merges them into a single Person entity.
  */
 const AUTHOR_IDS: Record<string, string> = {
-  'Sudhir Singh':  `${SITE.url}/about#sudhir-singh`,
+  'Apurva Mishra':  `${SITE.url}/about#sudhir-singh`,
   'Arun Mehta':   `${SITE.url}/about#arun-mehta`,
   'Priya Kapoor': `${SITE.url}/about#priya-kapoor`,
 }

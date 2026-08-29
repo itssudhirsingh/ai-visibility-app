@@ -46,13 +46,13 @@ const TIMELINE = [
 
 const TEAM = [
   {
-    initials: 'SS', name: 'Sudhir Singh', role: 'Founder & Technical Lead',
+    initials: 'SS', name: 'Vikas Pandey', role: 'Founder & Technical Lead',
     gradient: 'linear-gradient(135deg, #927cff, #caff45)',
     bio: '12 years in SEO across e-commerce, global education, and healthcare. Built Notion Cue after spending a year watching clients rank on Google but disappear completely from ChatGPT and Perplexity answers. Leads product, engineering, and technical SEO research.',
     links: [{ label: 'LinkedIn', href: 'https://linkedin.com/in/sudhir-ks' }, { label: 'Blog', href: '/blog' }],
   },
   {
-    initials: 'VP', name: 'Vikas Pandey', role: 'Head of Research',
+    initials: 'VP', name: 'Rajesh Tanwar', role: 'Head of Research',
     gradient: 'linear-gradient(135deg, #45e4ff, #927cff)',
     bio: "Former data scientist at a Fortune 500 media group. Leads Notion Cue's LLM citation research, including the structured data correlation study across 50,000 URLs that underpins the AEO scoring model.",
     links: [{ label: 'Research', href: '/blog' }],
