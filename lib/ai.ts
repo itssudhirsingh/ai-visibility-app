@@ -15,7 +15,7 @@
 //      `String(err)` stack traces leaking to the client.
 
 const NVIDIA_ENDPOINT = 'https://integrate.api.nvidia.com/v1/chat/completions'
-const DEFAULT_MODEL = 'meta/llama-3.1-8b-instruct' // ← Changed to the faster Llama model
+const DEFAULT_MODEL = 'openai/gpt-oss-20b' // ← Changed to the faster Llama model
 
 export class AICallError extends Error {
   status: number
@@ -98,7 +98,7 @@ function parseJsonLoose(raw: string): unknown | null {
 async function singleCall(opts: CallOpts): Promise<string> {
   const {
     apiKey, system, user,
-    temperature = 0.3, maxTokens = 4096,
+    temperature = 1, maxTokens = 4096,
     model = DEFAULT_MODEL, timeoutMs = 25000,
   } = opts
 
