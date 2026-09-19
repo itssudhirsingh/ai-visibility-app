@@ -173,13 +173,35 @@ async function callWithWaterfall(
 ): Promise<Record<string, unknown> & { error?: string }> {
   const providers = []
 
-    if (keys.openaiKey) providers.push({
-    name: 'OpenAI',
-    endpoint: 'https://integrate.api.nvidia.com/v1',
-    key: keys.openaiKey,
+   if (keys.nvidiaKey) {
+  providers.push({
+    name: 'NVIDIA',
+    endpoint: 'https://integrate.api.nvidia.com/v1/chat/completions',
+    key: keys.nvidiaKey,
     model: 'openai/gpt-oss-20b',
     maxTokens: 4096,
   })
+}
+
+if (keys.groqKey) {
+  providers.push({
+    name: 'Groq',
+    endpoint: 'https://api.groq.com/openai/v1/chat/completions',
+    key: keys.groqKey,
+    model: 'llama-3.3-70b-versatile',
+    maxTokens: 4096,
+  })
+}
+
+if (keys.openaiKey) {
+  providers.push({
+    name: 'OpenAI',
+    endpoint: 'https://api.openai.com/v1/chat/completions',
+    key: keys.openaiKey,
+    model: 'gpt-4o-mini',
+    maxTokens: 4096,
+  })
+}
 
   if (providers.length === 0) {
     return { error: 'No AI provider configured. Add NVIDIA_API_KEY, GROQ_API_KEY or OPENAI_API_KEY.' }
