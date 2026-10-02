@@ -43,7 +43,7 @@ export default function ReadabilityPage() {
           {/* ── Hero ── */}
           <div style={{ padding: '6rem 0 3rem', borderBottom: '1px solid var(--border)' }}>
             <div style={EYEBROW}>Free AEO Tool</div>
-            <h1 style={H1}>AI Readability<br /><span style={{ color: 'var(--accent)' }}>Score</span></h1>
+            <h1 style={H1}>AI Readability{' '}<span style={{ color: 'var(--accent)' }}>Score</span></h1>
             <p style={LEAD}>
               Paste a URL or raw text and get a scored breakdown across five AI-readability dimensions — plus a BLUF rewrite of your opening sentences, ready to copy in. Find out exactly why AI engines skip your content and what to change first.
             </p>
