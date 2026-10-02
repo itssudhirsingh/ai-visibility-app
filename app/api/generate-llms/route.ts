@@ -50,7 +50,7 @@ Reply with ONLY this JSON object. Keep all values on ONE LINE — no line breaks
       'Authorization': `Bearer ${apiKey}`
     },
     body: JSON.stringify({
-      model: 'meta/llama-3.1-8b-instruct',
+      model: 'openai/gpt-oss-20b',
       messages: [
         {
           role: 'system',
